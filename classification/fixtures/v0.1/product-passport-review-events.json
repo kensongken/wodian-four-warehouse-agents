@@ -1,0 +1,253 @@
+[
+  {
+    "event_id": "49512a6d-2920-5c04-937c-416d4312f1f9",
+    "sku_id": "OPC-FSB-NH-5MM-001",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "柿子红南红身份珠 5mm",
+      "category": "南红",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "7e8b500e-7dbf-5478-a318-31a40cbbb32f",
+    "sku_id": "OPC-FSB-NH-5MM-001",
+    "event_type": "human_confirmed",
+    "product_passport_id": "771c9a4e-8705-5b40-b1be-e5efa658ecb5",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "a47874fb-3bdd-504d-9db0-21b5179f9392",
+    "sku_id": "OPC-FSB-NH-6MM-002",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "柿子红南红身份珠 6mm",
+      "category": "南红",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "7fce2ac5-65a1-5547-b67e-2c4b84c33324",
+    "sku_id": "OPC-FSB-NH-6MM-002",
+    "event_type": "human_confirmed",
+    "product_passport_id": "e879e326-9890-5a6b-b211-8fb9ae0b4b18",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "2663af1e-f56c-5e73-bcf1-faf3366906b1",
+    "sku_id": "OPC-FSB-NH-7MM-003",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "柿子红南红身份珠 7mm",
+      "category": "南红",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "7d577a52-1d54-5e47-bfcb-b40a53398a33",
+    "sku_id": "OPC-FSB-NH-7MM-003",
+    "event_type": "human_confirmed",
+    "product_passport_id": "8675841a-44e5-5ee2-ae88-e90855a1edc4",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "6a63a49d-f52c-5cb9-96b3-667fc31b44dc",
+    "sku_id": "OPC-FSB-NH-8MM-004",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "柿子红南红身份珠 8mm",
+      "category": "南红",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "cd2783cf-7c02-5970-b218-a73b03ff4515",
+    "sku_id": "OPC-FSB-NH-8MM-004",
+    "event_type": "human_confirmed",
+    "product_passport_id": "55c76033-0cce-54a3-802a-432a50a31821",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "fe4c4274-551e-552a-afdc-edbf56db3d86",
+    "sku_id": "OPC-FSB-FC-5MM-005",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "翡翠身份珠 5mm",
+      "category": "翡翠",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "a029f4ff-b85a-5876-bd05-80d9404cd3cd",
+    "sku_id": "OPC-FSB-FC-5MM-005",
+    "event_type": "human_confirmed",
+    "product_passport_id": "5f8a4eb9-f36a-5075-90d5-502b941c7af4",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "902c7d63-cb98-59db-8156-a7df4d7c230e",
+    "sku_id": "OPC-FSB-FC-6MM-006",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "翡翠身份珠 6mm",
+      "category": "翡翠",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "58eae852-6975-5f81-8383-681bb94573a7",
+    "sku_id": "OPC-FSB-FC-6MM-006",
+    "event_type": "human_confirmed",
+    "product_passport_id": "627ecca9-22ae-5301-8060-26e8f5991275",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "ffe40915-14e6-5405-9464-66f88572271e",
+    "sku_id": "OPC-FSB-MT-6MM-007",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "蜜蜡身份珠 6mm",
+      "category": "蜜蜡",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "e6cbcd71-0090-5ce5-aae5-e36aedd27e36",
+    "sku_id": "OPC-FSB-MT-6MM-007",
+    "event_type": "human_confirmed",
+    "product_passport_id": "13ba7a2d-4388-5bfe-b812-430874d6ba7f",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "99b06573-e37e-53b5-959c-97688bee31e7",
+    "sku_id": "OPC-FSB-SS-8MM-008",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "水晶身份珠 8mm",
+      "category": "水晶",
+      "form": "身份珠"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "7db3dd31-420f-522e-a6d9-93e4b1c772f8",
+    "sku_id": "OPC-FSB-SS-8MM-008",
+    "event_type": "human_confirmed",
+    "product_passport_id": "18f4707a-598a-5929-a663-ed273773ba27",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "a9c6533d-559f-5174-84c2-fdb0b1bdd51a",
+    "sku_id": "OPC-RDO-NH-001",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "南红旧珠焕新身份手串",
+      "category": "南红",
+      "form": "改款成品"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "ede7e618-f6e2-5fc8-9138-5357df5cf8b8",
+    "sku_id": "OPC-RDO-NH-001",
+    "event_type": "human_confirmed",
+    "product_passport_id": "216cd150-f5a4-5ec5-970c-c9cd3ebc45d5",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "8057acca-b081-5a7b-9b30-cd07d7d51e98",
+    "sku_id": "OPC-RDO-FC-002",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "翡翠旧珠焕新身份手串",
+      "category": "翡翠",
+      "form": "改款成品"
+    },
+    "created_at": "2026-08-17T09:55:00Z"
+  },
+  {
+    "event_id": "1ffd5070-fd48-565a-969b-ad2b03fa7b1d",
+    "sku_id": "OPC-RDO-FC-002",
+    "event_type": "human_confirmed",
+    "product_passport_id": "e57f9a58-e5fd-5b5d-948b-22927009c703",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:00:00Z"
+  },
+  {
+    "event_id": "a3158e17-a1cd-5fb8-bfd1-deab3d66cb6a",
+    "sku_id": "OPC-WITHDRAWN-DEMO-001",
+    "event_type": "candidate_created",
+    "candidate_source": "ai_candidate",
+    "candidate_attributes": {
+      "title": "撤回流程演示商品"
+    },
+    "created_at": "2026-08-17T10:05:00Z"
+  },
+  {
+    "event_id": "d8d926fc-616a-5503-afcc-3c2149258b97",
+    "sku_id": "OPC-WITHDRAWN-DEMO-001",
+    "event_type": "human_confirmed",
+    "product_passport_id": "ab681039-6f01-5a02-85e8-f014ecc2f422",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 1,
+    "created_at": "2026-08-17T10:06:00Z"
+  },
+  {
+    "event_id": "4e548971-533f-5bd0-be0d-6844ea3e9910",
+    "sku_id": "OPC-WITHDRAWN-DEMO-001",
+    "event_type": "withdrawn",
+    "product_passport_id": "ab681039-6f01-5a02-85e8-f014ecc2f422",
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "version": 2,
+    "reason": "回归演示：人工撤回后不得进入商城资料包",
+    "created_at": "2026-08-17T10:07:00Z"
+  }
+]

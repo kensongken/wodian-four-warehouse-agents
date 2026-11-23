@@ -1,0 +1,250 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "audit_event_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Audit Event Id"
+    },
+    "base_mask_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base Mask Sha256"
+    },
+    "base_subject_seal_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base Subject Seal Id"
+    },
+    "height": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Height"
+    },
+    "manual_confirmation_required": {
+      "default": true,
+      "title": "Manual Confirmation Required",
+      "type": "boolean"
+    },
+    "mask_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Url"
+    },
+    "merchant_id": {
+      "format": "uuid",
+      "title": "Merchant Id",
+      "type": "string"
+    },
+    "normalized_subject_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalized Subject Sha256"
+    },
+    "opc_id": {
+      "format": "uuid",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "original_url": {
+      "title": "Original Url",
+      "type": "string"
+    },
+    "owner_actor_reference": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Owner Actor Reference"
+    },
+    "product_asset_id": {
+      "format": "uuid",
+      "title": "Product Asset Id",
+      "type": "string"
+    },
+    "product_asset_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Product Asset Sha256",
+      "type": "string"
+    },
+    "product_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Product Id",
+      "type": "string"
+    },
+    "proposal_method": {
+      "anyOf": [
+        {
+          "enum": [
+            "automatic",
+            "manual_full_frame"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proposal Method"
+    },
+    "proposal_version": {
+      "anyOf": [
+        {
+          "const": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proposal Version"
+    },
+    "publishable": {
+      "const": false,
+      "default": false,
+      "title": "Publishable",
+      "type": "boolean"
+    },
+    "quality_warning": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quality Warning"
+    },
+    "receipt_id": {
+      "format": "uuid",
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "reviewed_subject_seal_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewed Subject Seal Id"
+    },
+    "rgba_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rgba Url"
+    },
+    "schema_version": {
+      "const": "mall-subject-inspection-v1",
+      "default": "mall-subject-inspection-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "proposal_required",
+        "needs_human_review",
+        "confirmed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "width": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Width"
+    }
+  },
+  "required": [
+    "merchant_id",
+    "opc_id",
+    "receipt_id",
+    "product_id",
+    "product_asset_id",
+    "product_asset_sha256",
+    "status",
+    "original_url"
+  ],
+  "title": "MallSubjectInspectionV1",
+  "type": "object"
+}

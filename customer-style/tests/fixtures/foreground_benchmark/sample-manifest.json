@@ -1,0 +1,20 @@
+{
+  "sample_id": "synthetic-contract-sample",
+  "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "width": 4,
+  "height": 4,
+  "mime_type": "image/png",
+  "category": "bracelet",
+  "difficulty": "hard",
+  "scene_tags": ["glove"],
+  "material_tags": ["fine_chain"],
+  "gold_mask_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "critical_components": [
+    {
+      "name": "clasp",
+      "mask_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "human_reviewed": true,
+  "split": "acceptance"
+}

@@ -1,0 +1,89 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "automatic_customer_contact_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Customer Contact Allowed",
+      "type": "boolean"
+    },
+    "automatic_publication_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Publication Allowed",
+      "type": "boolean"
+    },
+    "automatic_quote_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Quote Allowed",
+      "type": "boolean"
+    },
+    "automatic_wechat_send_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Wechat Send Allowed",
+      "type": "boolean"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "product_code": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Product Code",
+      "type": "string"
+    },
+    "product_data_version": {
+      "minimum": 1,
+      "title": "Product Data Version",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "preview_only",
+      "default": "preview_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "strategy_input_version": {
+      "minimum": 1,
+      "title": "Strategy Input Version",
+      "type": "integer"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "occurred_at",
+    "tenant_id",
+    "product_code",
+    "strategy_input_version",
+    "product_data_version",
+    "content_sha256"
+  ],
+  "title": "SalesStrategyInputUpdatedV1",
+  "type": "object"
+}

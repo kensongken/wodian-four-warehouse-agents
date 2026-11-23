@@ -1,0 +1,22 @@
+{
+  "manifest_version": "1-three-stage-handoff",
+  "synthetic_only": true,
+  "chain": ["photo_organizer", "product_engine", "sales_journey"],
+  "identity_key": ["tenant_id", "product_code"],
+  "candidates": {
+    "photo_organizer": "bb7d00858ac787b2a61190c859c9bfb87894fc2f",
+    "product_engine_baseline": "be476870b9dbb044c8e8b81d855c1e35e6abc2bb",
+    "sales_journey": "00ad33486232935a8329f2175b70b126012cd01d"
+  },
+  "artifacts": [
+    {"path": "contracts/events/product-image-set-ready.v1.schema.json", "sha256": "0503f10d7b0bbd5b4d25bcc12bc9fe5990ddd6da8f3f8fb7709bc77ab2b1f732"},
+    {"path": "contracts/sales-strategy-input.v1.schema.json", "sha256": "473d89412c03d1f8ac49e4549c71bfae535d1e8bff2d6ad96116530f220726fc"},
+    {"path": "contracts/events/sales-strategy-input-updated.v1.schema.json", "sha256": "e9cdfe762999c8b7a3688023c45e5463822337d6ede1183d75c9400a3595e493"},
+    {"path": "fixtures/v0.1/product-image-set-ready.album-95daa.synthetic.json", "sha256": "4f6e785b9c35d288c50dd13a3bb5612aaac698d738ab3dae6e34ce935d05d3b1"},
+    {"path": "fixtures/v0.1/product-image-set-ready.album-v2.synthetic.json", "sha256": "13c141bb1817228a2a8040d4383d93d2757890a859f50f007a4248eb7e8c8248"},
+    {"path": "fixtures/v0.1/sales-strategy-input.three-stage.synthetic.json", "sha256": "c7b45cc8bfadc31ce0d57aa1c30e7f8697dc446bca088e226dede027ae92a5d1"},
+    {"path": "fixtures/v0.1/sales-strategy-input-updated.three-stage.synthetic.json", "sha256": "68dc97db2d62ca30e58fe22c782d6953615fbeecf756155f55dc91a1e4c7b103"}
+  ],
+  "verified": ["schema_compatibility", "synthetic_fixture_generation", "signed_upload_contract", "replay_and_conflict", "sales_notification_and_read_contract", "real_postgresql_process", "real_http_process_chain", "operator_cross_batch_reassociation", "version_2_real_http_process_chain"],
+  "not_verified": ["deployment", "real_data"]
+}

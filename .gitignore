@@ -1,0 +1,16 @@
+
+# Public release: local data and credentials
+.env
+.env.*
+!.env.example
+!.env.production.example
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+*.db
+*.sqlite*
+*.tsbuildinfo
+.local*/
+outputs/
+artifacts/

@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "opc-style-agent"
+version = "0.1.0"
+description = "OpC customer style agent service"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.13",
+    "boto3==1.40.45",
+    "fastapi>=0.115",
+    "httpx>=0.27",
+    "imageio-ffmpeg==0.6.0",
+    "pillow>=11.0",
+    "psycopg[binary]==3.2.13",
+    "pydantic-settings>=2.6",
+    "python-multipart>=0.0.20",
+    "sqlalchemy>=2.0",
+    "tencentcloud-sdk-python>=3.0.1500,<4",
+    "uvicorn[standard]>=0.32",
+]
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.12",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/opc_style"]
+
+[tool.hatch.build.targets.sdist]
+# Keep customer media, local acceptance artifacts, caches, and other workspace
+# projects out of releasable source archives. Production only needs the service
+# package plus its two explicitly versioned migration lineages.
+include = [
+    "/README.md",
+    "/alembic.ini",
+    "/alembic-postgresql.ini",
+    "/alembic",
+    "/alembic_postgresql",
+    "/pyproject.toml",
+    "/src/opc_style",
+    "/uv.lock",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.mypy]
+python_version = "3.12"
+strict = true

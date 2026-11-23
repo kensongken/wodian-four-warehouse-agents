@@ -1,0 +1,63 @@
+{
+  "product_passport_id": "771c9a4e-8705-5b40-b1be-e5efa658ecb5",
+  "sku_id": "OPC-FSB-NH-5MM-001",
+  "approved_attributes": {
+    "product_type": "first_sale_bead",
+    "title": "柿子红南红身份珠 5mm",
+    "category": "南红",
+    "form": "身份珠",
+    "bead_id": "B-2026-000831",
+    "source_bead_id": null,
+    "source_ticket_id": null,
+    "material": {
+      "value": "南红",
+      "source": "merchant_declared",
+      "review_status": "human_confirmed"
+    },
+    "quality": {
+      "value": null,
+      "source": "not_assessed",
+      "review_status": "not_claimed"
+    },
+    "authenticity": {
+      "value": null,
+      "source": "not_assessed",
+      "review_status": "not_claimed"
+    },
+    "price_advisory": {
+      "value": "1200.00-1500.00",
+      "currency": "CNY",
+      "minimum": "1200.00",
+      "maximum": "1500.00",
+      "basis": "商家标准图、5mm规格与当前销售策略",
+      "source": "human_confirmed",
+      "review_status": "human_confirmed"
+    },
+    "selling_points": [
+      "柿子红色调",
+      "5mm日常基础款",
+      "扫码进入身份与服务页面"
+    ],
+    "description": "首售身份珠示例商品；价格为保守建议区间。",
+    "primary_image_url": "https://fixtures.opc.example/products/fsb-001/main.jpg",
+    "service_summary": "购买后可扫码进入身份与服务页面",
+    "lineage_evidence_available": false
+  },
+  "evidence_refs": [
+    {
+      "evidence_id": "4d63c301-f37b-52a1-8454-486c86ec3d85",
+      "evidence_type": "public_product_photo",
+      "status": "approved",
+      "visibility": "public",
+      "ref": "https://fixtures.opc.example/products/fsb-001/main.jpg"
+    }
+  ],
+  "taxonomy_version": "product-taxonomy-v0.1",
+  "availability_status": "available",
+  "reviewer": {
+    "reviewer_type": "human",
+    "reviewer_id": "TRAINER-SYNTHETIC-001",
+    "reviewed_at": "2026-08-17T10:00:00Z"
+  },
+  "version": 1
+}

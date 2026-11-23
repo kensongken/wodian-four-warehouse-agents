@@ -1,0 +1,22 @@
+{
+  "contract_version": "0.1-candidate",
+  "template_code": "LOCAL-GREEN-BRACELET",
+  "source_version": 3,
+  "standard_code": "PRICE-TURQUOISE-BRACELET-001",
+  "category_code": "turquoise",
+  "form": "手串",
+  "currency": "CNY",
+  "minimum": "1200",
+  "maximum": "1500",
+  "basis": "训练员录入的同品类同形态价格标准",
+  "evidence_level": "merchant_declared",
+  "confidence": "low_single_anchor",
+  "sample_size": 1,
+  "anchor_version": 1,
+  "confirmation_source": "trainer_confirmed",
+  "confirmed_by": "synthetic-trainer-001",
+  "confirmed_at": "2026-08-30T12:00:00Z",
+  "recommended_exact_price": null,
+  "candidate_only": true,
+  "automatic_publication_allowed": false
+}

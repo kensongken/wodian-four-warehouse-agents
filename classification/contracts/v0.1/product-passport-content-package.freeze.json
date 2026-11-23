@@ -1,0 +1,96 @@
+{
+  "contract": "ProductPassportContentPackage",
+  "version": "0.1.0",
+  "status": "frozen",
+  "schema": "product-passport.schema.json",
+  "product_types": [
+    "first_sale_bead",
+    "legacy_material",
+    "redesign_output"
+  ],
+  "audiences": {
+    "mall": {
+      "include": [
+        "product_id",
+        "sku",
+        "type",
+        "status",
+        "title",
+        "category",
+        "form",
+        "bead_id",
+        "source_bead_id",
+        "source_ticket_id",
+        "identity_status",
+        "service_rules.customer_summary",
+        "evidence_level",
+        "conservative_price_range",
+        "selling_points",
+        "description",
+        "media.public_url",
+        "lineage_evidence_available",
+        "package_version",
+        "updated_at"
+      ],
+      "exclude": [
+        "media.object_key",
+        "media.private",
+        "customer_id",
+        "warehouse_record_id",
+        "internal_notes"
+      ]
+    },
+    "sales_guidance": {
+      "include": [
+        "product_id",
+        "sku",
+        "type",
+        "title",
+        "category",
+        "form",
+        "bead_id",
+        "source_bead_id",
+        "source_ticket_id",
+        "identity_status",
+        "service_rules.customer_summary",
+        "evidence_level",
+        "conservative_price_range",
+        "selling_points",
+        "description",
+        "media.public_url",
+        "lineage_evidence_available",
+        "package_version"
+      ],
+      "exclude": [
+        "media.object_key",
+        "media.private",
+        "customer_id",
+        "order_amount_history",
+        "warehouse_record_id",
+        "internal_notes"
+      ]
+    }
+  },
+  "price_semantics": {
+    "kind": "advisory_range",
+    "minimum_must_be_less_than_maximum": true,
+    "not_a_fixed_price_or_value_promise": true
+  },
+  "image_content_guardrails": {
+    "allowed": [
+      "visible_color_tone",
+      "visible_form",
+      "visible_size_when_reference_exists",
+      "visible_surface_feature",
+      "merchant_declared_attributes"
+    ],
+    "forbidden_without_external_evidence": [
+      "authenticity",
+      "geographic_origin",
+      "investment_value",
+      "value_retention",
+      "fixed_price"
+    ]
+  },
+  "fixture": "../../fixtures/v0.1/mall-import-10-sku.json"
+}

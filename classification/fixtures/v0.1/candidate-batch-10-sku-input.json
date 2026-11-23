@@ -1,0 +1,141 @@
+{
+  "contract_version": "0.1",
+  "evidence_scope": "synthetic_technical_readiness_only",
+  "label_defaults": {
+    "product_type": "first_sale_bead",
+    "inventory_status": "in_stock",
+    "product_form": "手串",
+    "visual_observations": [
+      "合成图示中可见珠体排列成环"
+    ],
+    "selling_points": [
+      "合成近景用于展示商品整体轮廓"
+    ],
+    "specification_note": "合成规格 5 mm；不代表真实商品测量",
+    "quality_note": "仅记录合成图示中的可见表现",
+    "defect_note": "仅记录合成图示中的可见表面纹理",
+    "price_range": {
+      "currency": "CNY",
+      "minimum": "1200",
+      "maximum": "1500",
+      "basis": "合成人工价格标准，仅供门禁回归"
+    },
+    "service_rules": [
+      {
+        "service_code": "synthetic_scan_demo",
+        "eligibility": "仅限合成测试",
+        "customer_summary": "合成测试展示扫码服务入口，不代表真实服务承诺"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "SYN-PASS-AGARWOOD-001",
+      "template_code": "SYN-AGARWOOD-001",
+      "expected_outcome": "passed",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "沉香",
+        "selling_points": ["合成深色珠体轮廓展示候选"]
+      }
+    },
+    {
+      "case_id": "SYN-PASS-TURQUOISE-001",
+      "template_code": "SYN-TURQUOISE-001",
+      "expected_outcome": "passed",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "绿松",
+        "selling_points": ["合成绿色调珠体近景展示候选"]
+      }
+    },
+    {
+      "case_id": "SYN-PASS-NANHONG-001",
+      "template_code": "SYN-NANHONG-001",
+      "expected_outcome": "passed",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "南红",
+        "selling_points": ["合成红色调珠体轮廓展示候选"]
+      }
+    },
+    {
+      "case_id": "SYN-PASS-HETIAN-001",
+      "template_code": "SYN-HETIAN-001",
+      "expected_outcome": "passed",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "和田玉",
+        "selling_points": ["合成浅色珠体整体展示候选"]
+      }
+    },
+    {
+      "case_id": "SYN-PASS-GEMSTONE-001",
+      "template_code": "SYN-GEMSTONE-001",
+      "expected_outcome": "passed",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "彩宝",
+        "selling_points": ["合成彩色珠体组合展示候选"]
+      }
+    },
+    {
+      "case_id": "SYN-PASS-JADEITE-001",
+      "template_code": "SYN-JADEITE-001",
+      "expected_outcome": "passed",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "翡翠",
+        "selling_points": ["合成绿色珠体排列展示候选"]
+      }
+    },
+    {
+      "case_id": "SYN-REJECT-MAIN-001",
+      "template_code": "SYN-REJECT-MAIN-001",
+      "expected_outcome": "rejected",
+      "expected_error_code": "main_image_missing",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "绿松",
+        "main_image_template_code": null
+      }
+    },
+    {
+      "case_id": "SYN-REJECT-PRICE-001",
+      "template_code": "SYN-REJECT-PRICE-001",
+      "expected_outcome": "rejected",
+      "expected_error_code": "invalid_price_range",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "南红",
+        "price_range": {
+          "currency": "CNY",
+          "minimum": "1200",
+          "maximum": "1199",
+          "basis": "合成固定价格错误样例"
+        }
+      }
+    },
+    {
+      "case_id": "SYN-REJECT-CLAIM-001",
+      "template_code": "SYN-REJECT-CLAIM-001",
+      "expected_outcome": "rejected",
+      "expected_error_code": "forbidden_unsupported_claim",
+      "expected_source_version": 2,
+      "label": {
+        "material_label": "彩宝",
+        "selling_points": ["保证升值"]
+      }
+    },
+    {
+      "case_id": "SYN-REJECT-VERSION-001",
+      "template_code": "SYN-REJECT-VERSION-001",
+      "expected_outcome": "rejected",
+      "expected_error_code": "source_version_mismatch",
+      "expected_source_version": 3,
+      "label": {
+        "material_label": "翡翠"
+      }
+    }
+  ]
+}

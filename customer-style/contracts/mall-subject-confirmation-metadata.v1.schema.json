@@ -1,0 +1,94 @@
+{
+  "additionalProperties": false,
+  "description": "Signed authority metadata accompanying the raw reviewed mask PNG.",
+  "properties": {
+    "actor_role": {
+      "const": "merchant_owner",
+      "title": "Actor Role",
+      "type": "string"
+    },
+    "base_mask_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Base Mask Sha256",
+      "type": "string"
+    },
+    "base_subject_seal_id": {
+      "format": "uuid",
+      "title": "Base Subject Seal Id",
+      "type": "string"
+    },
+    "confirmed": {
+      "const": true,
+      "title": "Confirmed",
+      "type": "boolean"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "mime_type": {
+      "const": "image/png",
+      "title": "Mime Type",
+      "type": "string"
+    },
+    "owner_actor_reference": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Owner Actor Reference",
+      "type": "string"
+    },
+    "product_asset_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Product Asset Sha256",
+      "type": "string"
+    },
+    "product_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Product Id",
+      "type": "string"
+    },
+    "proposal_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Proposal Version",
+      "type": "integer"
+    },
+    "receipt_id": {
+      "format": "uuid",
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "reviewed_mask_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Reviewed Mask Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "mall-subject-confirmation-metadata-v1",
+      "default": "mall-subject-confirmation-metadata-v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "receipt_id",
+    "product_id",
+    "product_asset_sha256",
+    "base_subject_seal_id",
+    "base_mask_sha256",
+    "reviewed_mask_sha256",
+    "owner_actor_reference",
+    "actor_role",
+    "idempotency_key",
+    "mime_type",
+    "confirmed"
+  ],
+  "title": "MallSubjectConfirmationMetadataV1",
+  "type": "object"
+}

@@ -1,0 +1,35 @@
+{
+  "evidence_scope": "synthetic_technical_readiness_only",
+  "positive_chain": {
+    "main_image": {
+      "template_code": "LOCAL-GREEN-BRACELET",
+      "role": "main",
+      "source": "album_classified_image",
+      "review_state": "human_confirmed"
+    },
+    "price_advisory": {
+      "currency": "CNY",
+      "minimum": "1200",
+      "maximum": "1500",
+      "basis": "训练员录入的同品类价格标准",
+      "semantics": "advisory_range_not_fixed_price"
+    },
+    "selling_point_candidates": [
+      "近景实拍展示珠体整体轮廓"
+    ],
+    "candidate_only": true,
+    "automatic_publication_allowed": false,
+    "verification_boundaries": {
+      "authenticity": "not_verified",
+      "origin": "not_verified",
+      "quality": "not_verified",
+      "warehouse": "pending_warehouse_verification"
+    }
+  },
+  "negative_chain": {
+    "remaining_blockers": [
+      "main_image_missing"
+    ],
+    "candidate_import_allowed": false
+  }
+}

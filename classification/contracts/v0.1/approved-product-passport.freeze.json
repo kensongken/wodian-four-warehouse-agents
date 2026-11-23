@@ -1,0 +1,33 @@
+{
+  "contract": "ApprovedProductPassport",
+  "version": "0.1.0",
+  "status": "frozen",
+  "fields": [
+    "product_passport_id",
+    "sku_id",
+    "approved_attributes",
+    "evidence_refs",
+    "taxonomy_version",
+    "availability_status",
+    "reviewer",
+    "version"
+  ],
+  "publication_gate": {
+    "reviewer_type": "human",
+    "availability_status": "available",
+    "evidence_status": "approved",
+    "evidence_visibility": "public",
+    "ai_candidates_are_publishable": false,
+    "withdrawn_versions_are_publishable": false
+  },
+  "sensitive_decision_guardrails": {
+    "fields": ["material", "quality", "authenticity", "price_advisory"],
+    "automatic_decisions_are_publishable": false,
+    "price_semantics": "advisory_range_only"
+  },
+  "schema": "approved-product-passport.schema.json",
+  "fixture": "../../fixtures/v0.1/approved-product-passports-10-sku.json",
+  "mall_sample": "../../fixtures/v0.1/mall-approved-product-passport-sample.json",
+  "review_events": "../../fixtures/v0.1/product-passport-review-events.json",
+  "validator": "../../scripts/validate_approved_product_passports.py"
+}

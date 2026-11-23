@@ -1,0 +1,13 @@
+.worktrees/
+outputs/**/node_modules
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.py[cod]
+.coverage
+htmlcov/
+.local-data/
+.DS_Store

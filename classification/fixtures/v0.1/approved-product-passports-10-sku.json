@@ -1,0 +1,632 @@
+[
+  {
+    "product_passport_id": "771c9a4e-8705-5b40-b1be-e5efa658ecb5",
+    "sku_id": "OPC-FSB-NH-5MM-001",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "柿子红南红身份珠 5mm",
+      "category": "南红",
+      "form": "身份珠",
+      "bead_id": "B-2026-000831",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "南红",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "1200.00-1500.00",
+        "currency": "CNY",
+        "minimum": "1200.00",
+        "maximum": "1500.00",
+        "basis": "商家标准图、5mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "柿子红色调",
+        "5mm日常基础款",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-001/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "4d63c301-f37b-52a1-8454-486c86ec3d85",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-001/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "e879e326-9890-5a6b-b211-8fb9ae0b4b18",
+    "sku_id": "OPC-FSB-NH-6MM-002",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "柿子红南红身份珠 6mm",
+      "category": "南红",
+      "form": "身份珠",
+      "bead_id": "B-2026-000832",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "南红",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "1400.00-1800.00",
+        "currency": "CNY",
+        "minimum": "1400.00",
+        "maximum": "1800.00",
+        "basis": "商家标准图、6mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "柿子红色调",
+        "6mm适中珠径",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-002/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "99b82572-eeb4-52c4-87bd-bdf26f8ed170",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-002/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "8675841a-44e5-5ee2-ae88-e90855a1edc4",
+    "sku_id": "OPC-FSB-NH-7MM-003",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "柿子红南红身份珠 7mm",
+      "category": "南红",
+      "form": "身份珠",
+      "bead_id": "B-2026-000833",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "南红",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "1700.00-2200.00",
+        "currency": "CNY",
+        "minimum": "1700.00",
+        "maximum": "2200.00",
+        "basis": "商家标准图、7mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "柿子红色调",
+        "7mm视觉存在感",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-003/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "a78f5cdf-8725-51c3-b920-9ffc462876e8",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-003/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "55c76033-0cce-54a3-802a-432a50a31821",
+    "sku_id": "OPC-FSB-NH-8MM-004",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "柿子红南红身份珠 8mm",
+      "category": "南红",
+      "form": "身份珠",
+      "bead_id": "B-2026-000834",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "南红",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "2100.00-2800.00",
+        "currency": "CNY",
+        "minimum": "2100.00",
+        "maximum": "2800.00",
+        "basis": "商家标准图、8mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "柿子红色调",
+        "8mm经典珠径",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-004/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "a387d396-d89b-5ba1-a30a-304179c321b0",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-004/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "5f8a4eb9-f36a-5075-90d5-502b941c7af4",
+    "sku_id": "OPC-FSB-FC-5MM-005",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "翡翠身份珠 5mm",
+      "category": "翡翠",
+      "form": "身份珠",
+      "bead_id": "B-2026-000835",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "翡翠",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "1500.00-2100.00",
+        "currency": "CNY",
+        "minimum": "1500.00",
+        "maximum": "2100.00",
+        "basis": "商家标准图、5mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "小珠径轻巧",
+        "适合日常叠戴",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-005/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "e66bcdfe-0015-5bbc-b1e3-9c9b3c3573ae",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-005/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "627ecca9-22ae-5301-8060-26e8f5991275",
+    "sku_id": "OPC-FSB-FC-6MM-006",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "翡翠身份珠 6mm",
+      "category": "翡翠",
+      "form": "身份珠",
+      "bead_id": "B-2026-000836",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "翡翠",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "1900.00-2600.00",
+        "currency": "CNY",
+        "minimum": "1900.00",
+        "maximum": "2600.00",
+        "basis": "商家标准图、6mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "6mm适中珠径",
+        "适合单戴或搭配",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-006/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "46b30b5e-e097-5d58-9627-962281efc5d6",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-006/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "13ba7a2d-4388-5bfe-b812-430874d6ba7f",
+    "sku_id": "OPC-FSB-MT-6MM-007",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "蜜蜡身份珠 6mm",
+      "category": "蜜蜡",
+      "form": "身份珠",
+      "bead_id": "B-2026-000837",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "蜜蜡",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "1000.00-1400.00",
+        "currency": "CNY",
+        "minimum": "1000.00",
+        "maximum": "1400.00",
+        "basis": "商家标准图、6mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "暖色调观感",
+        "6mm日常款",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-007/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "b16df371-7e61-54f7-9799-7a842855624a",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-007/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "18f4707a-598a-5929-a663-ed273773ba27",
+    "sku_id": "OPC-FSB-SS-8MM-008",
+    "approved_attributes": {
+      "product_type": "first_sale_bead",
+      "title": "水晶身份珠 8mm",
+      "category": "水晶",
+      "form": "身份珠",
+      "bead_id": "B-2026-000838",
+      "source_bead_id": null,
+      "source_ticket_id": null,
+      "material": {
+        "value": "水晶",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "800.00-1200.00",
+        "currency": "CNY",
+        "minimum": "800.00",
+        "maximum": "1200.00",
+        "basis": "商家标准图、8mm规格与当前销售策略",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "通透视觉风格",
+        "8mm经典珠径",
+        "扫码进入身份与服务页面"
+      ],
+      "description": "首售身份珠示例商品；价格为保守建议区间。",
+      "primary_image_url": "https://fixtures.opc.example/products/fsb-008/main.jpg",
+      "service_summary": "购买后可扫码进入身份与服务页面",
+      "lineage_evidence_available": false
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "59bf8dde-32e2-5204-88d1-1aae7cbac3ba",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/fsb-008/main.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "216cd150-f5a4-5ec5-970c-c9cd3ebc45d5",
+    "sku_id": "OPC-RDO-NH-001",
+    "approved_attributes": {
+      "product_type": "redesign_output",
+      "title": "南红旧珠焕新身份手串",
+      "category": "南红",
+      "form": "改款成品",
+      "bead_id": "B-2026-001092",
+      "source_bead_id": "B-2026-000831",
+      "source_ticket_id": "40000000-0000-4000-8000-000000000001",
+      "material": {
+        "value": "南红",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "1600.00-2200.00",
+        "currency": "CNY",
+        "minimum": "1600.00",
+        "maximum": "2200.00",
+        "basis": "来源工单、仓验影像、改款工艺与成品状态",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "新 Bead ID",
+        "一对一来源谱系",
+        "成品实拍图"
+      ],
+      "description": "一对一改款成品示例；新旧 Bead ID 通过服务工单和仓验影像关联。",
+      "primary_image_url": "https://fixtures.opc.example/products/rdo-001/output.jpg",
+      "service_summary": "扫码可查看改款服务谱系摘要",
+      "lineage_evidence_available": true
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "3a3a7d41-183e-5b42-879f-2bcb007b9f76",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/rdo-001/output.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  },
+  {
+    "product_passport_id": "e57f9a58-e5fd-5b5d-948b-22927009c703",
+    "sku_id": "OPC-RDO-FC-002",
+    "approved_attributes": {
+      "product_type": "redesign_output",
+      "title": "翡翠旧珠焕新身份手串",
+      "category": "翡翠",
+      "form": "改款成品",
+      "bead_id": "B-2026-001093",
+      "source_bead_id": "B-2026-000835",
+      "source_ticket_id": "40000000-0000-4000-8000-000000000002",
+      "material": {
+        "value": "翡翠",
+        "source": "merchant_declared",
+        "review_status": "human_confirmed"
+      },
+      "quality": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "authenticity": {
+        "value": null,
+        "source": "not_assessed",
+        "review_status": "not_claimed"
+      },
+      "price_advisory": {
+        "value": "2200.00-3000.00",
+        "currency": "CNY",
+        "minimum": "2200.00",
+        "maximum": "3000.00",
+        "basis": "来源工单、仓验影像、改款工艺与成品状态",
+        "source": "human_confirmed",
+        "review_status": "human_confirmed"
+      },
+      "selling_points": [
+        "新 Bead ID",
+        "一对一来源谱系",
+        "成品实拍图"
+      ],
+      "description": "一对一改款成品示例；新旧 Bead ID 通过服务工单和仓验影像关联。",
+      "primary_image_url": "https://fixtures.opc.example/products/rdo-002/output.jpg",
+      "service_summary": "扫码可查看改款服务谱系摘要",
+      "lineage_evidence_available": true
+    },
+    "evidence_refs": [
+      {
+        "evidence_id": "b916ea2e-af42-5171-a0b4-09616a9fa52a",
+        "evidence_type": "public_product_photo",
+        "status": "approved",
+        "visibility": "public",
+        "ref": "https://fixtures.opc.example/products/rdo-002/output.jpg"
+      }
+    ],
+    "taxonomy_version": "product-taxonomy-v0.1",
+    "availability_status": "available",
+    "reviewer": {
+      "reviewer_type": "human",
+      "reviewer_id": "TRAINER-SYNTHETIC-001",
+      "reviewed_at": "2026-08-17T10:00:00Z"
+    },
+    "version": 1
+  }
+]

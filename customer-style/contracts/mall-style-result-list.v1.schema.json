@@ -1,0 +1,328 @@
+{
+  "$defs": {
+    "MallStyleResultCandidateV1": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_version": {
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "approval_state": {
+          "enum": [
+            "pending_review",
+            "approved",
+            "rejected"
+          ],
+          "title": "Approval State",
+          "type": "string"
+        },
+        "asset_id": {
+          "format": "uuid",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "asset_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Asset Version",
+          "type": "integer"
+        },
+        "availability": {
+          "enum": [
+            "available",
+            "revoked",
+            "expired"
+          ],
+          "title": "Availability",
+          "type": "string"
+        },
+        "content_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "content_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content Url"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "generation_approval_reference": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "title": "Generation Approval Reference",
+          "type": "string"
+        },
+        "generation_job_id": {
+          "format": "uuid",
+          "title": "Generation Job Id",
+          "type": "string"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        },
+        "mime_type": {
+          "enum": [
+            "image/jpeg",
+            "image/png"
+          ],
+          "title": "Mime Type",
+          "type": "string"
+        },
+        "publishable": {
+          "const": false,
+          "default": false,
+          "title": "Publishable",
+          "type": "boolean"
+        },
+        "rights_reference": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "title": "Rights Reference",
+          "type": "string"
+        },
+        "scene_style_id": {
+          "format": "uuid",
+          "title": "Scene Style Id",
+          "type": "string"
+        },
+        "sequence_number": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Sequence Number",
+          "type": "integer"
+        },
+        "slot_key": {
+          "title": "Slot Key",
+          "type": "string"
+        },
+        "style_card_version_id": {
+          "format": "uuid",
+          "title": "Style Card Version Id",
+          "type": "string"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "asset_id",
+        "content_sha256",
+        "mime_type",
+        "width",
+        "height",
+        "generation_job_id",
+        "sequence_number",
+        "adapter_version",
+        "style_card_version_id",
+        "scene_style_id",
+        "slot_key",
+        "rights_reference",
+        "generation_approval_reference",
+        "approval_state",
+        "availability",
+        "content_url",
+        "created_at"
+      ],
+      "title": "MallStyleResultCandidateV1",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Tenant-bound Mall projection of one receipt or generation job.",
+  "properties": {
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/MallStyleResultCandidateV1"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "generation_approval_reference": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Generation Approval Reference"
+    },
+    "generation_job_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Generation Job Id"
+    },
+    "generation_request_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Generation Request Id"
+    },
+    "merchant_id": {
+      "format": "uuid",
+      "title": "Merchant Id",
+      "type": "string"
+    },
+    "opc_id": {
+      "format": "uuid",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "product_asset_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Product Asset Id"
+    },
+    "product_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Product Id",
+      "type": "string"
+    },
+    "publishable": {
+      "const": false,
+      "default": false,
+      "title": "Publishable",
+      "type": "boolean"
+    },
+    "receipt_id": {
+      "format": "uuid",
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "rights_reference": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rights Reference"
+    },
+    "scene_style_id": {
+      "format": "uuid",
+      "title": "Scene Style Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "mall-style-result-list-v1",
+      "default": "mall-style-result-list-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "slot_key": {
+      "title": "Slot Key",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "awaiting_product_photo",
+        "awaiting_subject_confirmation",
+        "awaiting_generation_approval",
+        "pending_execution",
+        "generation_in_progress",
+        "awaiting_review",
+        "completed",
+        "failed",
+        "revoked",
+        "expired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "status_reason": {
+      "title": "Status Reason",
+      "type": "string"
+    },
+    "style_card_version_id": {
+      "format": "uuid",
+      "title": "Style Card Version Id",
+      "type": "string"
+    },
+    "subject_seal_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Seal Id"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "merchant_id",
+    "opc_id",
+    "product_id",
+    "receipt_id",
+    "status",
+    "status_reason",
+    "style_card_version_id",
+    "scene_style_id",
+    "slot_key",
+    "candidates",
+    "updated_at"
+  ],
+  "title": "MallStyleResultListV1",
+  "type": "object"
+}

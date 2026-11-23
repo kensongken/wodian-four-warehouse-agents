@@ -1,0 +1,329 @@
+{
+  "$id": "candidate-consumer-views.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "evidence_scope": {
+      "const": "synthetic_technical_readiness_only"
+    },
+    "mall_views": {
+      "items": {
+        "$ref": "#/$defs/base_view"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "operating_results": {
+      "const": 0
+    },
+    "sales_views": {
+      "items": {
+        "$ref": "#/$defs/sales_view"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "0.1"
+    },
+    "source_contract": {
+      "const": "candidate-batch-0.1"
+    },
+    "summary": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "mall_views": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "sales_views": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "mall_views",
+        "sales_views"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "evidence_scope",
+    "operating_results",
+    "source_contract",
+    "summary",
+    "mall_views",
+    "sales_views"
+  ],
+  "type": "object",
+  "$defs": {
+    "base_view": {
+      "additionalProperties": false,
+      "properties": {
+        "automatic_publication_allowed": {
+          "const": false
+        },
+        "candidate_only": {
+          "const": true
+        },
+        "category_candidate": {
+          "$ref": "#/$defs/category_candidate"
+        },
+        "main_image": {
+          "$ref": "#/$defs/main_image"
+        },
+        "price_advisory": {
+          "$ref": "#/$defs/price_advisory"
+        },
+        "selling_point_candidates": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "source_version": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "template_code": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "verification_boundaries": {
+          "$ref": "#/$defs/verification_boundaries"
+        }
+      },
+      "required": [
+        "template_code",
+        "source_version",
+        "main_image",
+        "category_candidate",
+        "price_advisory",
+        "selling_point_candidates",
+        "verification_boundaries",
+        "candidate_only",
+        "automatic_publication_allowed"
+      ],
+      "type": "object"
+    },
+    "category_candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "conclusion_allowed": {
+          "const": false
+        },
+        "human_review_required": {
+          "const": true
+        },
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "semantics": {
+          "const": "catalog_candidate_not_material_conclusion"
+        }
+      },
+      "required": [
+        "code",
+        "label",
+        "semantics",
+        "conclusion_allowed",
+        "human_review_required"
+      ],
+      "type": "object"
+    },
+    "conclusions_allowed": {
+      "additionalProperties": false,
+      "properties": {
+        "authenticity": {
+          "const": false
+        },
+        "final_price": {
+          "const": false
+        },
+        "material": {
+          "const": false
+        },
+        "quality": {
+          "const": false
+        },
+        "warehouse": {
+          "const": false
+        }
+      },
+      "required": [
+        "material",
+        "authenticity",
+        "quality",
+        "final_price",
+        "warehouse"
+      ],
+      "type": "object"
+    },
+    "main_image": {
+      "additionalProperties": false,
+      "properties": {
+        "review_state": {
+          "const": "human_confirmed"
+        },
+        "role": {
+          "const": "main"
+        },
+        "source": {
+          "const": "album_classified_image"
+        },
+        "template_code": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "template_code",
+        "role",
+        "source",
+        "review_state"
+      ],
+      "type": "object"
+    },
+    "price_advisory": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "currency": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "final_price_allowed": {
+          "const": false
+        },
+        "human_review_required": {
+          "const": true
+        },
+        "maximum": {
+          "pattern": "^[0-9]+(?:\\.[0-9]+)?$",
+          "type": "string"
+        },
+        "minimum": {
+          "pattern": "^[0-9]+(?:\\.[0-9]+)?$",
+          "type": "string"
+        },
+        "semantics": {
+          "const": "advisory_range_not_fixed_price"
+        }
+      },
+      "required": [
+        "currency",
+        "minimum",
+        "maximum",
+        "basis",
+        "semantics",
+        "final_price_allowed",
+        "human_review_required"
+      ],
+      "type": "object"
+    },
+    "sales_view": {
+      "additionalProperties": false,
+      "properties": {
+        "automatic_publication_allowed": {
+          "const": false
+        },
+        "candidate_only": {
+          "const": true
+        },
+        "category_candidate": {
+          "$ref": "#/$defs/category_candidate"
+        },
+        "conclusions_allowed": {
+          "$ref": "#/$defs/conclusions_allowed"
+        },
+        "human_review_required": {
+          "const": true
+        },
+        "main_image": {
+          "$ref": "#/$defs/main_image"
+        },
+        "price_advisory": {
+          "$ref": "#/$defs/price_advisory"
+        },
+        "selling_point_candidates": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "source_version": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "template_code": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "usage": {
+          "const": "draft_support_only"
+        },
+        "verification_boundaries": {
+          "$ref": "#/$defs/verification_boundaries"
+        }
+      },
+      "required": [
+        "template_code",
+        "source_version",
+        "main_image",
+        "category_candidate",
+        "price_advisory",
+        "selling_point_candidates",
+        "verification_boundaries",
+        "candidate_only",
+        "automatic_publication_allowed",
+        "usage",
+        "human_review_required",
+        "conclusions_allowed"
+      ],
+      "type": "object"
+    },
+    "verification_boundaries": {
+      "additionalProperties": false,
+      "properties": {
+        "authenticity": {
+          "const": "not_verified"
+        },
+        "origin": {
+          "const": "not_verified"
+        },
+        "quality": {
+          "const": "not_verified"
+        },
+        "warehouse": {
+          "const": "pending_warehouse_verification"
+        }
+      },
+      "required": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "additionalProperties": false,
+  "description": "One explicit, bounded fee approval that may enqueue exactly one request.",
+  "properties": {
+    "actor_role": {
+      "const": "merchant_owner",
+      "title": "Actor Role",
+      "type": "string"
+    },
+    "approval_payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Approval Payload Sha256",
+      "type": "string"
+    },
+    "approval_reference": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Approval Reference",
+      "type": "string"
+    },
+    "approved_at": {
+      "format": "date-time",
+      "title": "Approved At",
+      "type": "string"
+    },
+    "approved_candidate_count": {
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Approved Candidate Count",
+      "type": "integer"
+    },
+    "approved_maximum_cost_usd": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d{0,6}0*$",
+          "type": "string"
+        }
+      ],
+      "title": "Approved Maximum Cost Usd"
+    },
+    "automatic_publication_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Publication Allowed",
+      "type": "boolean"
+    },
+    "automatic_retry_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Retry Allowed",
+      "type": "boolean"
+    },
+    "currency": {
+      "const": "USD",
+      "default": "USD",
+      "title": "Currency",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "model": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Model",
+      "type": "string"
+    },
+    "owner_actor_reference": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Owner Actor Reference",
+      "type": "string"
+    },
+    "product_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Product Id",
+      "type": "string"
+    },
+    "provider": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Provider",
+      "type": "string"
+    },
+    "publishable": {
+      "const": false,
+      "default": false,
+      "title": "Publishable",
+      "type": "boolean"
+    },
+    "receipt_id": {
+      "format": "uuid",
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "mall-style-generation-approval-v1",
+      "default": "mall-style-generation-approval-v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "receipt_id",
+    "product_id",
+    "idempotency_key",
+    "approval_reference",
+    "provider",
+    "model",
+    "owner_actor_reference",
+    "actor_role",
+    "approved_candidate_count",
+    "approved_maximum_cost_usd",
+    "approved_at",
+    "expires_at",
+    "approval_payload_sha256"
+  ],
+  "title": "MallStyleGenerationApprovalV1",
+  "type": "object"
+}

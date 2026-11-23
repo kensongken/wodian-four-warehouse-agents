@@ -1,0 +1,20 @@
+{
+  "publication_date": "2026-11-23",
+  "project": "四仓协同与分门别类",
+  "source_versions": [
+    {
+      "component": "classification",
+      "branch": "main",
+      "head": "764857758e60573c1c7d2c9b971f5c4094c4610a"
+    },
+    {
+      "component": "style",
+      "branch": "main",
+      "head": "f8493776055ca8b85da100ae0c36f9768383ece8"
+    }
+  ],
+  "previous_shared_handoff_commit": "8d88bfecbbf85e34a02754891029c4e7c88498b6",
+  "scope": "Complete first-party source for the selected application versions; runtime/customer data, secrets, vendor binaries and unrelated private applications excluded.",
+  "working_tree_snapshot": true,
+  "note": "Source heads identify originating branches. Published files include the reviewed working-tree content at capture time; they are not asserted to equal HEAD byte-for-byte."
+}

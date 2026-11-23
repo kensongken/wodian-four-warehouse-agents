@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "MaterialAssetRef": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "format": "uuid",
+          "title": "Material Id",
+          "type": "string"
+        },
+        "mime_type": {
+          "enum": [
+            "image/heic",
+            "image/jpeg",
+            "image/png"
+          ],
+          "title": "Mime Type",
+          "type": "string"
+        },
+        "object_key": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Object Key",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "main_candidate",
+            "gallery",
+            "source_original"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "upstream_asset_id": {
+          "format": "uuid",
+          "title": "Upstream Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "material_id",
+        "upstream_asset_id",
+        "object_key",
+        "sha256",
+        "mime_type",
+        "role"
+      ],
+      "title": "MaterialAssetRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "content_status": {
+      "const": "pending",
+      "title": "Content Status",
+      "type": "string"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "generated_assets": {
+      "items": {
+        "$ref": "#/$defs/MaterialAssetRef"
+      },
+      "maxItems": 0,
+      "title": "Generated Assets",
+      "type": "array"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "package_version": {
+      "minimum": 1,
+      "title": "Package Version",
+      "type": "integer"
+    },
+    "price_status": {
+      "const": "pending",
+      "title": "Price Status",
+      "type": "string"
+    },
+    "product_code": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Product Code",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_assets": {
+      "items": {
+        "$ref": "#/$defs/MaterialAssetRef"
+      },
+      "minItems": 1,
+      "title": "Source Assets",
+      "type": "array"
+    },
+    "status": {
+      "const": "source_ready",
+      "title": "Status",
+      "type": "string"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "occurred_at",
+    "tenant_id",
+    "product_code",
+    "package_version",
+    "status",
+    "source_assets",
+    "content_status",
+    "price_status"
+  ],
+  "title": "ProductMaterialsUpdatedV1",
+  "type": "object"
+}

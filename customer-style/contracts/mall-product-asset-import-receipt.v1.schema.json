@@ -1,0 +1,110 @@
+{
+  "additionalProperties": false,
+  "description": "Result of a byte-bearing import that starts no downstream workflow.",
+  "properties": {
+    "authorization_reference": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Authorization Reference",
+      "type": "string"
+    },
+    "disposition": {
+      "enum": [
+        "accepted",
+        "duplicate"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "generation_started": {
+      "const": false,
+      "default": false,
+      "title": "Generation Started",
+      "type": "boolean"
+    },
+    "height": {
+      "exclusiveMinimum": 0,
+      "title": "Height",
+      "type": "integer"
+    },
+    "merchant_id": {
+      "format": "uuid",
+      "title": "Merchant Id",
+      "type": "string"
+    },
+    "mime_type": {
+      "enum": [
+        "image/jpeg",
+        "image/png"
+      ],
+      "title": "Mime Type",
+      "type": "string"
+    },
+    "opc_id": {
+      "format": "uuid",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "product_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Product Id",
+      "type": "string"
+    },
+    "publishable": {
+      "const": false,
+      "default": false,
+      "title": "Publishable",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "mall-product-asset-import-receipt-v1",
+      "default": "mall-product-asset-import-receipt-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_asset_id": {
+      "format": "uuid",
+      "title": "Source Asset Id",
+      "type": "string"
+    },
+    "source_content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Content Sha256",
+      "type": "string"
+    },
+    "style_product_asset_id": {
+      "format": "uuid",
+      "title": "Style Product Asset Id",
+      "type": "string"
+    },
+    "subject_confirmation_required": {
+      "const": true,
+      "default": true,
+      "title": "Subject Confirmation Required",
+      "type": "boolean"
+    },
+    "width": {
+      "exclusiveMinimum": 0,
+      "title": "Width",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "merchant_id",
+    "opc_id",
+    "source_asset_id",
+    "source_content_sha256",
+    "authorization_reference",
+    "product_id",
+    "style_product_asset_id",
+    "mime_type",
+    "width",
+    "height",
+    "disposition"
+  ],
+  "title": "MallProductAssetImportReceiptV1",
+  "type": "object"
+}

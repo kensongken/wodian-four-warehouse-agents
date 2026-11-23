@@ -1,0 +1,513 @@
+{
+  "evidence_scope": "synthetic_technical_readiness_only",
+  "mall_views": [
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "agarwood",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "沉香",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-AGARWOOD-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成深色珠体轮廓展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-AGARWOOD-001",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "turquoise",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "绿松石",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-TURQUOISE-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成绿色调珠体近景展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-TURQUOISE-001",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "nanhong",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "南红",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-NANHONG-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成红色调珠体轮廓展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-NANHONG-001",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "hetian_jade",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "和田玉",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-HETIAN-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成浅色珠体整体展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-HETIAN-001",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "colored_gemstone",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "彩宝",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-GEMSTONE-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成彩色珠体组合展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-GEMSTONE-001",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "jadeite",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "翡翠",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-JADEITE-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成绿色珠体排列展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-JADEITE-001",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    }
+  ],
+  "operating_results": 0,
+  "sales_views": [
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "agarwood",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "沉香",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "conclusions_allowed": {
+        "authenticity": false,
+        "final_price": false,
+        "material": false,
+        "quality": false,
+        "warehouse": false
+      },
+      "human_review_required": true,
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-AGARWOOD-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成深色珠体轮廓展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-AGARWOOD-001",
+      "usage": "draft_support_only",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "turquoise",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "绿松石",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "conclusions_allowed": {
+        "authenticity": false,
+        "final_price": false,
+        "material": false,
+        "quality": false,
+        "warehouse": false
+      },
+      "human_review_required": true,
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-TURQUOISE-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成绿色调珠体近景展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-TURQUOISE-001",
+      "usage": "draft_support_only",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "nanhong",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "南红",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "conclusions_allowed": {
+        "authenticity": false,
+        "final_price": false,
+        "material": false,
+        "quality": false,
+        "warehouse": false
+      },
+      "human_review_required": true,
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-NANHONG-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成红色调珠体轮廓展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-NANHONG-001",
+      "usage": "draft_support_only",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "hetian_jade",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "和田玉",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "conclusions_allowed": {
+        "authenticity": false,
+        "final_price": false,
+        "material": false,
+        "quality": false,
+        "warehouse": false
+      },
+      "human_review_required": true,
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-HETIAN-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成浅色珠体整体展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-HETIAN-001",
+      "usage": "draft_support_only",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "colored_gemstone",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "彩宝",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "conclusions_allowed": {
+        "authenticity": false,
+        "final_price": false,
+        "material": false,
+        "quality": false,
+        "warehouse": false
+      },
+      "human_review_required": true,
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-GEMSTONE-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成彩色珠体组合展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-GEMSTONE-001",
+      "usage": "draft_support_only",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    },
+    {
+      "automatic_publication_allowed": false,
+      "candidate_only": true,
+      "category_candidate": {
+        "code": "jadeite",
+        "conclusion_allowed": false,
+        "human_review_required": true,
+        "label": "翡翠",
+        "semantics": "catalog_candidate_not_material_conclusion"
+      },
+      "conclusions_allowed": {
+        "authenticity": false,
+        "final_price": false,
+        "material": false,
+        "quality": false,
+        "warehouse": false
+      },
+      "human_review_required": true,
+      "main_image": {
+        "review_state": "human_confirmed",
+        "role": "main",
+        "source": "album_classified_image",
+        "template_code": "SYN-JADEITE-001"
+      },
+      "price_advisory": {
+        "basis": "合成人工价格标准，仅供门禁回归",
+        "currency": "CNY",
+        "final_price_allowed": false,
+        "human_review_required": true,
+        "maximum": "1500.00",
+        "minimum": "1200.00",
+        "semantics": "advisory_range_not_fixed_price"
+      },
+      "selling_point_candidates": [
+        "合成绿色珠体排列展示候选"
+      ],
+      "source_version": 2,
+      "template_code": "SYN-JADEITE-001",
+      "usage": "draft_support_only",
+      "verification_boundaries": {
+        "authenticity": "not_verified",
+        "origin": "not_verified",
+        "quality": "not_verified",
+        "warehouse": "pending_warehouse_verification"
+      }
+    }
+  ],
+  "schema_version": "0.1",
+  "source_contract": "candidate-batch-0.1",
+  "summary": {
+    "items": 6,
+    "mall_views": 6,
+    "sales_views": 6
+  }
+}

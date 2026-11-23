@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.opc.example/v0.1/product-passport.schema.json",
+  "title": "OPC ProductPassport v0.1",
+  "description": "商城、SaaS 与销售之旅共同使用的商品内容护照。跨记录谱系规则由 validate_product_passports.py 补充检查。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "product_id",
+    "sku",
+    "type",
+    "status",
+    "title",
+    "category",
+    "form",
+    "bead_id",
+    "source_bead_id",
+    "source_ticket_id",
+    "identity_status",
+    "origin",
+    "service_rules",
+    "evidence_level",
+    "conservative_price_range",
+    "selling_points",
+    "description",
+    "media",
+    "claims",
+    "package_version",
+    "updated_at"
+  ],
+  "properties": {
+    "product_id": {"type": "string", "format": "uuid"},
+    "sku": {"type": "string", "minLength": 1},
+    "type": {
+      "enum": ["first_sale_bead", "legacy_material", "redesign_output"]
+    },
+    "status": {
+      "enum": ["draft", "service_only", "publishable", "published", "retired"]
+    },
+    "title": {"type": "string", "minLength": 1},
+    "category": {"type": "string", "minLength": 1},
+    "form": {"type": "string", "minLength": 1},
+    "bead_id": {
+      "type": ["string", "null"],
+      "pattern": "^B-[0-9]{4}-[0-9]{6}$"
+    },
+    "source_bead_id": {
+      "type": ["string", "null"],
+      "pattern": "^B-[0-9]{4}-[0-9]{6}$"
+    },
+    "source_ticket_id": {"type": ["string", "null"], "format": "uuid"},
+    "identity_status": {
+      "enum": [
+        "issued",
+        "service_active",
+        "return_pending",
+        "warehouse_accepted",
+        "redesigning",
+        "reissued",
+        "suspended",
+        "retired"
+      ]
+    },
+    "origin": {"enum": ["first_sale", "legacy_return", "redesign"]},
+    "service_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/serviceRule"}
+    },
+    "evidence_level": {"$ref": "#/$defs/evidenceLevel"},
+    "conservative_price_range": {"$ref": "#/$defs/priceRange"},
+    "selling_points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "description": {"type": "string", "minLength": 1},
+    "sales_journey_projection": {"$ref": "#/$defs/salesJourneyProjection"},
+    "media": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/media"}
+    },
+    "claims": {"type": "array", "items": {"type": "string"}},
+    "package_version": {"type": "integer", "minimum": 1},
+    "updated_at": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"type": {"const": "first_sale_bead"}}},
+      "then": {
+        "properties": {
+          "bead_id": {"type": "string"},
+          "source_bead_id": {"const": null},
+          "source_ticket_id": {"const": null},
+          "origin": {"const": "first_sale"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "legacy_material"}}},
+      "then": {
+        "properties": {
+          "status": {"const": "service_only"},
+          "source_ticket_id": {"type": "string", "format": "uuid"},
+          "origin": {"const": "legacy_return"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "redesign_output"}}},
+      "then": {
+        "properties": {
+          "bead_id": {"type": "string"},
+          "source_ticket_id": {"type": "string", "format": "uuid"},
+          "identity_status": {"const": "reissued"},
+          "origin": {"const": "redesign"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {"enum": ["first_sale_bead", "redesign_output"]},
+          "status": {"const": "published"}
+        },
+        "required": ["type", "status"]
+      },
+      "then": {
+        "required": ["sales_journey_projection"]
+      }
+    }
+  ],
+  "$defs": {
+    "evidenceLevel": {
+      "enum": [
+        "image_observed",
+        "merchant_declared",
+        "warehouse_verified",
+        "document_verified"
+      ]
+    },
+    "serviceRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["service_code", "eligibility", "customer_summary"],
+      "properties": {
+        "service_code": {"type": "string", "minLength": 1},
+        "eligibility": {"type": "string", "minLength": 1},
+        "customer_summary": {"type": "string", "minLength": 1}
+      }
+    },
+    "salesText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "approval_status"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "approval_status": {"const": "approved"}
+      }
+    },
+    "salesJourneyProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "product_id",
+        "package_version",
+        "sku",
+        "title",
+        "category",
+        "form",
+        "description",
+        "selling_points",
+        "service_summary",
+        "evidence_level",
+        "evidence_ids",
+        "conservative_price_range",
+        "validity",
+        "forbidden_claims",
+        "public_media"
+      ],
+      "properties": {
+        "product_id": {"type": "string", "format": "uuid"},
+        "package_version": {"type": "integer", "minimum": 1},
+        "sku": {"$ref": "#/$defs/salesText"},
+        "title": {"$ref": "#/$defs/salesText"},
+        "category": {"$ref": "#/$defs/salesText"},
+        "form": {"$ref": "#/$defs/salesText"},
+        "description": {"$ref": "#/$defs/salesText"},
+        "selling_points": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/salesText"}
+        },
+        "service_summary": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/salesText"}
+        },
+        "evidence_level": {"$ref": "#/$defs/evidenceLevel"},
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "format": "uuid"}
+        },
+        "conservative_price_range": {"$ref": "#/$defs/salesPriceRange"},
+        "validity": {"$ref": "#/$defs/salesValidity"},
+        "forbidden_claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/salesText"}
+        },
+        "public_media": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/salesPublicMedia"}
+        }
+      }
+    },
+    "salesPublicMedia": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["media_id", "public_url"],
+      "properties": {
+        "media_id": {"type": "string", "format": "uuid"},
+        "public_url": {"$ref": "#/$defs/salesUrl"}
+      }
+    },
+    "salesUrl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "approval_status"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1, "format": "uri"},
+        "approval_status": {"const": "approved"}
+      }
+    },
+    "salesPriceRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "minimum",
+        "maximum",
+        "basis",
+        "evidence_level",
+        "evidence_ids"
+      ],
+      "properties": {
+        "currency": {"const": "CNY"},
+        "minimum": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]{2})$"},
+        "maximum": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]{2})$"},
+        "basis": {"$ref": "#/$defs/salesText"},
+        "evidence_level": {"$ref": "#/$defs/evidenceLevel"},
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "format": "uuid"}
+        }
+      }
+    },
+    "salesValidity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valid_from", "valid_until"],
+      "properties": {
+        "valid_from": {"type": "string", "format": "date-time"},
+        "valid_until": {"type": "string", "format": "date-time"}
+      }
+    },
+    "priceRange": {
+      "type": ["object", "null"],
+      "required": ["currency", "minimum", "maximum", "basis", "evidence_level"],
+      "additionalProperties": false,
+      "properties": {
+        "currency": {"const": "CNY"},
+        "minimum": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]{2})$"},
+        "maximum": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]{2})$"},
+        "basis": {"type": "string", "minLength": 1},
+        "evidence_level": {"$ref": "#/$defs/evidenceLevel"}
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "media_id",
+        "media_kind",
+        "object_key",
+        "public_url",
+        "sha256",
+        "product_id",
+        "bead_id",
+        "ticket_id",
+        "evidence_level",
+        "visibility",
+        "authorization_status",
+        "captured_at"
+      ],
+      "properties": {
+        "media_id": {"type": "string", "format": "uuid"},
+        "media_kind": {
+          "enum": [
+            "product_photo",
+            "customer_return_photo",
+            "warehouse_acceptance_photo",
+            "redesign_output_photo"
+          ]
+        },
+        "object_key": {"type": "string", "minLength": 1},
+        "public_url": {"type": ["string", "null"], "format": "uri"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "product_id": {"type": "string", "format": "uuid"},
+        "bead_id": {
+          "type": ["string", "null"],
+          "pattern": "^B-[0-9]{4}-[0-9]{6}$"
+        },
+        "ticket_id": {"type": ["string", "null"], "format": "uuid"},
+        "evidence_level": {"$ref": "#/$defs/evidenceLevel"},
+        "visibility": {"enum": ["public", "private"]},
+        "authorization_status": {
+          "enum": [
+            "merchant_owned",
+            "customer_authorized",
+            "warehouse_authorized",
+            "ai_generated"
+          ]
+        },
+        "captured_at": {"type": "string", "format": "date-time"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"media_kind": {"const": "customer_return_photo"}}
+          },
+          "then": {
+            "properties": {
+              "visibility": {"const": "private"},
+              "authorization_status": {"const": "customer_authorized"},
+              "ticket_id": {"type": "string", "format": "uuid"}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"media_kind": {"const": "warehouse_acceptance_photo"}}
+          },
+          "then": {
+            "properties": {
+              "visibility": {"const": "private"},
+              "authorization_status": {"const": "warehouse_authorized"},
+              "ticket_id": {"type": "string", "format": "uuid"}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

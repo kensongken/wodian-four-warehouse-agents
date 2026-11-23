@@ -1,0 +1,525 @@
+{
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "TemplateListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateResponse"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "TemplateListResponse",
+        "type": "object"
+      },
+      "TemplateResponse": {
+        "properties": {
+          "byte_size": {
+            "title": "Byte Size",
+            "type": "integer"
+          },
+          "category": {
+            "title": "Category",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "image_type": {
+            "title": "Image Type",
+            "type": "string"
+          },
+          "mime_type": {
+            "title": "Mime Type",
+            "type": "string"
+          },
+          "object_key": {
+            "title": "Object Key",
+            "type": "string"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "template_code": {
+            "title": "Template Code",
+            "type": "string"
+          },
+          "tenant_id": {
+            "format": "uuid",
+            "title": "Tenant Id",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "tenant_id",
+          "template_code",
+          "version",
+          "category",
+          "image_type",
+          "object_key",
+          "sha256",
+          "mime_type",
+          "byte_size",
+          "status"
+        ],
+        "title": "TemplateResponse",
+        "type": "object"
+      },
+      "UploadResponse": {
+        "properties": {
+          "expires_in_seconds": {
+            "title": "Expires In Seconds",
+            "type": "integer"
+          },
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Headers",
+            "type": "object"
+          },
+          "object_key": {
+            "title": "Object Key",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "object_key",
+          "url",
+          "headers",
+          "expires_in_seconds"
+        ],
+        "title": "UploadResponse",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "接收相册整理输出的商品图片编码与素材，形成可追溯的商品内容，并向销售之旅提供稳定的销售素材和反馈入口。",
+    "title": "商品图片内容与销售反馈引擎",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/": {
+      "get": {
+        "description": "返回产品中文名称、服务说明和接口文档地址。",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Root  Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "查看产品入口"
+      }
+    },
+    "/health/live": {
+      "get": {
+        "description": "确认服务进程正常；该检查不访问数据库或图片存储。",
+        "operationId": "live_health_live_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Live Health Live Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "检查服务进程",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "description": "确认数据库、图片存储等依赖服务可用，服务可以接收业务请求。",
+        "operationId": "ready_health_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "检查服务是否可接收请求",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/v0.1/sales-strategy-inputs/{product_code}": {
+      "get": {
+        "description": "仅向已签名的销售之旅返回预览资料，不授权自动对客、发布、报价或发送微信。",
+        "operationId": "read_strategy_input_v0_1_sales_strategy_inputs__product_code__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_code",
+            "required": true,
+            "schema": {
+              "title": "Product Code",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "读取销售策略安全输入",
+        "tags": [
+          "销售策略输入"
+        ]
+      }
+    },
+    "/v1/integrations/album/product-image-sets": {
+      "post": {
+        "description": "验证相册整理签名和商家归属，防重复接收并生成原始销售素材包。",
+        "operationId": "ingest_v1_integrations_album_product_image_sets_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "接收已编码的商品图片集",
+        "tags": [
+          "相册整理"
+        ]
+      }
+    },
+    "/v1/integrations/sales/material-usage": {
+      "post": {
+        "operationId": "record_usage_v1_integrations_sales_material_usage_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Record Usage",
+        "tags": [
+          "销售素材使用"
+        ]
+      }
+    },
+    "/v1/integrations/sales/screenshots/imports": {
+      "post": {
+        "operationId": "finalize_v1_integrations_sales_screenshots_imports_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Finalize",
+        "tags": [
+          "交易截图"
+        ]
+      }
+    },
+    "/v1/integrations/sales/screenshots/uploads": {
+      "post": {
+        "operationId": "create_upload_v1_integrations_sales_screenshots_uploads_post",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Create Upload",
+        "tags": [
+          "交易截图"
+        ]
+      }
+    },
+    "/v1/products/{product_code}/materials/latest": {
+      "get": {
+        "description": "仅向已签名的销售之旅返回当前商家的原始图片素材和待处理状态。",
+        "operationId": "latest_v1_products__product_code__materials_latest_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_code",
+            "required": true,
+            "schema": {
+              "title": "Product Code",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "读取最新原始销售素材包",
+        "tags": [
+          "销售素材包"
+        ]
+      }
+    },
+    "/v1/templates": {
+      "get": {
+        "description": "只返回当前商家、指定品类且已生效的模板版本。",
+        "operationId": "list_templates_v1_templates_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "category",
+            "required": true,
+            "schema": {
+              "title": "Category",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "default": "active",
+              "title": "Status",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateListResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "查询可用实拍模板",
+        "tags": [
+          "实拍模板"
+        ]
+      },
+      "post": {
+        "description": "核对私有存储中的图片信息后发布不可覆盖的模板版本。",
+        "operationId": "finalize_v1_templates_post",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "发布实拍模板版本",
+        "tags": [
+          "实拍模板"
+        ]
+      }
+    },
+    "/v1/templates/uploads": {
+      "post": {
+        "description": "为当前商家和指定模板版本生成私有上传地址。",
+        "operationId": "create_upload_v1_templates_uploads_post",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "领取实拍模板上传地址",
+        "tags": [
+          "实拍模板"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "检查服务进程以及数据库、图片存储等依赖是否可用。",
+      "name": "health"
+    }
+  ]
+}

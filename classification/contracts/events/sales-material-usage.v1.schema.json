@@ -1,0 +1,74 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "material_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "title": "Material Ids",
+      "type": "array"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "package_version": {
+      "minimum": 1,
+      "title": "Package Version",
+      "type": "integer"
+    },
+    "product_code": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Product Code",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "session_id": {
+      "format": "uuid",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "usage_type": {
+      "enum": [
+        "loaded",
+        "copied",
+        "share_initiated"
+      ],
+      "title": "Usage Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "occurred_at",
+    "tenant_id",
+    "session_id",
+    "product_code",
+    "package_version",
+    "usage_type",
+    "material_ids"
+  ],
+  "title": "SalesMaterialUsageV1",
+  "type": "object"
+}

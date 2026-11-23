@@ -1,0 +1,277 @@
+[
+  {
+    "product_id": "10000000-0000-4000-8000-000000000001",
+    "sku": "OPC-FSB-NH-5MM-001",
+    "type": "first_sale_bead",
+    "status": "published",
+    "title": "柿子红南红身份珠 5mm",
+    "category": "南红",
+    "form": "身份珠",
+    "bead_id": "B-2026-000831",
+    "source_bead_id": null,
+    "source_ticket_id": null,
+    "identity_status": "issued",
+    "origin": "first_sale",
+    "service_rules": [
+      {
+        "service_code": "scan_identity",
+        "eligibility": "eligible",
+        "customer_summary": "购买后可扫码进入身份与服务页面"
+      },
+      {
+        "service_code": "legacy_redesign",
+        "eligibility": "conditional",
+        "customer_summary": "可提交旧珠改款申请，最终以仓库验收结果为准"
+      }
+    ],
+    "sales_journey_projection": {
+      "product_id": "10000000-0000-4000-8000-000000000001",
+      "package_version": 1,
+      "sku": {"text": "OPC-FSB-NH-5MM-001", "approval_status": "approved"},
+      "title": {"text": "柿子红南红身份珠 5mm", "approval_status": "approved"},
+      "category": {"text": "南红", "approval_status": "approved"},
+      "form": {"text": "身份珠", "approval_status": "approved"},
+      "description": {"text": "5mm柿子红南红基础款身份珠商品，支持扫码进入身份与服务页面。", "approval_status": "approved"},
+      "selling_points": [
+        {"text": "柿子红色调，5mm日常基础款", "approval_status": "approved"},
+        {"text": "身份珠扫码可进入服务页面", "approval_status": "approved"}
+      ],
+      "service_summary": [
+        {"text": "购买后可扫码进入身份与服务页面", "approval_status": "approved"},
+        {"text": "可提交旧珠改款申请，最终以人工确认结果为准", "approval_status": "approved"}
+      ],
+      "evidence_level": "merchant_declared",
+      "evidence_ids": ["11000000-0000-4000-8000-000000000001"],
+      "conservative_price_range": {
+        "currency": "CNY",
+        "minimum": "1200.00",
+        "maximum": "1500.00",
+        "basis": {"text": "基于已批准的商品规格与销售策略", "approval_status": "approved"},
+        "evidence_level": "merchant_declared",
+        "evidence_ids": ["11000000-0000-4000-8000-000000000001"]
+      },
+      "validity": {
+        "valid_from": "2026-08-15T08:00:00Z",
+        "valid_until": "2099-12-31T23:59:59Z"
+      },
+      "forbidden_claims": [
+        {"text": "不得承诺保值、升值或投资收益", "approval_status": "approved"},
+        {"text": "不得承诺固定回购价格", "approval_status": "approved"}
+      ],
+      "public_media": [
+        {
+          "media_id": "11000000-0000-4000-8000-000000000001",
+          "public_url": {"text": "https://fixtures.opc.example/products/fsb-001/main.jpg", "approval_status": "approved"}
+        }
+      ]
+    },
+    "evidence_level": "merchant_declared",
+    "conservative_price_range": {
+      "currency": "CNY",
+      "minimum": "1200.00",
+      "maximum": "1500.00",
+      "basis": "商家标准图、5mm规格、可见轻微表面特征及当前销售策略",
+      "evidence_level": "merchant_declared"
+    },
+    "selling_points": [
+      "柿子红色调，5mm日常基础款",
+      "身份珠扫码可进入服务页面",
+      "价格区间保留不同客户与成交场景的沟通空间"
+    ],
+    "description": "5mm柿子红南红基础款身份珠商品，图片可见轻微表面特征；支持扫码进入身份与服务页面。价格为保守建议区间，并非材质鉴定或价值承诺。",
+    "media": [
+      {
+        "media_id": "11000000-0000-4000-8000-000000000001",
+        "media_kind": "product_photo",
+        "object_key": "products/10000000/main.jpg",
+        "public_url": "https://fixtures.opc.example/products/fsb-001/main.jpg",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "product_id": "10000000-0000-4000-8000-000000000001",
+        "bead_id": "B-2026-000831",
+        "ticket_id": null,
+        "evidence_level": "image_observed",
+        "visibility": "public",
+        "authorization_status": "merchant_owned",
+        "captured_at": "2026-08-15T08:00:00Z"
+      }
+    ],
+    "claims": [],
+    "package_version": 1,
+    "updated_at": "2026-08-15T08:00:00Z"
+  },
+  {
+    "product_id": "20000000-0000-4000-8000-000000000001",
+    "sku": "OPC-LGM-NH-001",
+    "type": "legacy_material",
+    "status": "service_only",
+    "title": "客户回寄南红旧珠材料",
+    "category": "南红",
+    "form": "旧手串材料",
+    "bead_id": "B-2026-000831",
+    "source_bead_id": "B-2026-000831",
+    "source_ticket_id": "40000000-0000-4000-8000-000000000001",
+    "identity_status": "warehouse_accepted",
+    "origin": "legacy_return",
+    "service_rules": [
+      {
+        "service_code": "legacy_redesign",
+        "eligibility": "warehouse_accepted",
+        "customer_summary": "材料已完成仓库验收，可进入一对一改款流程"
+      }
+    ],
+    "evidence_level": "warehouse_verified",
+    "conservative_price_range": {
+      "currency": "CNY",
+      "minimum": "500.00",
+      "maximum": "1000.00",
+      "basis": "仅作为仓验后材料处理与改款核价参考，不是商城售价",
+      "evidence_level": "warehouse_verified"
+    },
+    "selling_points": [
+      "已保存客户回寄影像与仓库验收影像",
+      "仅用于服务工单和改款来源追溯，不在商城销售"
+    ],
+    "description": "客户回寄的旧珠材料，已完成仓库接收与影像记录。该记录仅供服务与来源追溯，不构成珠宝鉴定、认证资产或公开销售商品。",
+    "media": [
+      {
+        "media_id": "21000000-0000-4000-8000-000000000001",
+        "media_kind": "customer_return_photo",
+        "object_key": "tickets/40000000/customer-return.jpg",
+        "public_url": null,
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "product_id": "20000000-0000-4000-8000-000000000001",
+        "bead_id": "B-2026-000831",
+        "ticket_id": "40000000-0000-4000-8000-000000000001",
+        "evidence_level": "merchant_declared",
+        "visibility": "private",
+        "authorization_status": "customer_authorized",
+        "captured_at": "2026-08-15T08:30:00Z"
+      },
+      {
+        "media_id": "22000000-0000-4000-8000-000000000001",
+        "media_kind": "warehouse_acceptance_photo",
+        "object_key": "tickets/40000000/warehouse-acceptance.jpg",
+        "public_url": null,
+        "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "product_id": "20000000-0000-4000-8000-000000000001",
+        "bead_id": "B-2026-000831",
+        "ticket_id": "40000000-0000-4000-8000-000000000001",
+        "evidence_level": "warehouse_verified",
+        "visibility": "private",
+        "authorization_status": "warehouse_authorized",
+        "captured_at": "2026-08-15T09:00:00Z"
+      }
+    ],
+    "claims": [],
+    "package_version": 1,
+    "updated_at": "2026-08-15T09:05:00Z"
+  },
+  {
+    "product_id": "30000000-0000-4000-8000-000000000001",
+    "sku": "OPC-RDO-NH-001",
+    "type": "redesign_output",
+    "status": "published",
+    "title": "南红旧珠焕新身份手串",
+    "category": "南红",
+    "form": "改款成品",
+    "bead_id": "B-2026-001092",
+    "source_bead_id": "B-2026-000831",
+    "source_ticket_id": "40000000-0000-4000-8000-000000000001",
+    "identity_status": "reissued",
+    "origin": "redesign",
+    "service_rules": [
+      {
+        "service_code": "scan_identity",
+        "eligibility": "eligible",
+        "customer_summary": "扫码可查看本次改款服务谱系摘要"
+      }
+    ],
+    "sales_journey_projection": {
+      "product_id": "30000000-0000-4000-8000-000000000001",
+      "package_version": 1,
+      "sku": {"text": "OPC-RDO-NH-001", "approval_status": "approved"},
+      "title": {"text": "南红旧珠焕新身份手串", "approval_status": "approved"},
+      "category": {"text": "南红", "approval_status": "approved"},
+      "form": {"text": "改款成品", "approval_status": "approved"},
+      "description": {"text": "改款成品签发新的 Bead ID，支持扫码查看服务摘要。", "approval_status": "approved"},
+      "selling_points": [
+        {"text": "改款成品签发新的 Bead ID", "approval_status": "approved"},
+        {"text": "成品图与新商品、新 Bead ID 绑定", "approval_status": "approved"}
+      ],
+      "service_summary": [
+        {"text": "扫码可查看本次改款服务谱系摘要", "approval_status": "approved"}
+      ],
+      "evidence_level": "warehouse_verified",
+      "evidence_ids": ["31000000-0000-4000-8000-000000000001"],
+      "conservative_price_range": {
+        "currency": "CNY",
+        "minimum": "1600.00",
+        "maximum": "2200.00",
+        "basis": {"text": "基于已批准的改款工艺与成品状态", "approval_status": "approved"},
+        "evidence_level": "warehouse_verified",
+        "evidence_ids": ["31000000-0000-4000-8000-000000000001"]
+      },
+      "validity": {
+        "valid_from": "2026-08-15T10:00:00Z",
+        "valid_until": "2099-12-31T23:59:59Z"
+      },
+      "forbidden_claims": [
+        {"text": "不得承诺保值、升值或投资收益", "approval_status": "approved"},
+        {"text": "不得承诺固定回购价格", "approval_status": "approved"}
+      ],
+      "public_media": [
+        {
+          "media_id": "31000000-0000-4000-8000-000000000001",
+          "public_url": {"text": "https://fixtures.opc.example/products/rdo-001/output.jpg", "approval_status": "approved"}
+        }
+      ]
+    },
+    "evidence_level": "warehouse_verified",
+    "conservative_price_range": {
+      "currency": "CNY",
+      "minimum": "1600.00",
+      "maximum": "2200.00",
+      "basis": "来源工单、仓验影像、改款工艺与成品状态",
+      "evidence_level": "warehouse_verified"
+    },
+    "selling_points": [
+      "改款成品签发新的 Bead ID",
+      "通过来源 Bead ID、服务工单和仓验影像保留一对一谱系",
+      "成品图与新商品、新 Bead ID 绑定"
+    ],
+    "description": "旧珠经仓库验收后完成一对一改款，并签发新的 Bead ID；来源通过原 Bead ID、服务工单和私有仓验影像追溯。该谱系不构成材质鉴定或价值承诺。",
+    "media": [
+      {
+        "media_id": "31000000-0000-4000-8000-000000000001",
+        "media_kind": "redesign_output_photo",
+        "object_key": "products/30000000/output.jpg",
+        "public_url": "https://fixtures.opc.example/products/rdo-001/output.jpg",
+        "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "product_id": "30000000-0000-4000-8000-000000000001",
+        "bead_id": "B-2026-001092",
+        "ticket_id": "40000000-0000-4000-8000-000000000001",
+        "evidence_level": "image_observed",
+        "visibility": "public",
+        "authorization_status": "merchant_owned",
+        "captured_at": "2026-08-15T10:00:00Z"
+      },
+      {
+        "media_id": "32000000-0000-4000-8000-000000000001",
+        "media_kind": "warehouse_acceptance_photo",
+        "object_key": "tickets/40000000/warehouse-acceptance.jpg",
+        "public_url": null,
+        "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "product_id": "20000000-0000-4000-8000-000000000001",
+        "bead_id": "B-2026-000831",
+        "ticket_id": "40000000-0000-4000-8000-000000000001",
+        "evidence_level": "warehouse_verified",
+        "visibility": "private",
+        "authorization_status": "warehouse_authorized",
+        "captured_at": "2026-08-15T09:00:00Z"
+      }
+    ],
+    "claims": [],
+    "package_version": 1,
+    "updated_at": "2026-08-15T10:00:00Z"
+  }
+]

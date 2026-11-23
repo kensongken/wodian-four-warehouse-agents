@@ -1,0 +1,97 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "byte_size": {
+      "maximum": 20971520,
+      "minimum": 1,
+      "title": "Byte Size",
+      "type": "integer"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "mime_type": {
+      "enum": [
+        "image/heic",
+        "image/jpeg",
+        "image/png"
+      ],
+      "title": "Mime Type",
+      "type": "string"
+    },
+    "object_key": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "title": "Object Key",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "product_code": {
+      "anyOf": [
+        {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Product Code"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "screenshot_import_id": {
+      "format": "uuid",
+      "title": "Screenshot Import Id",
+      "type": "string"
+    },
+    "session_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Session Id"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "occurred_at",
+    "tenant_id",
+    "screenshot_import_id",
+    "object_key",
+    "sha256",
+    "mime_type",
+    "byte_size"
+  ],
+  "title": "ScreenshotImportedV1",
+  "type": "object"
+}

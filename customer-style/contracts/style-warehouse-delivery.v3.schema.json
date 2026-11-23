@@ -1,0 +1,344 @@
+{
+  "$defs": {
+    "StyleEligibilityFactV4": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "const": "human_confirmed",
+          "title": "Evidence",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "StyleEligibilityFactV4",
+      "type": "object"
+    },
+    "StyleEligibilityImageRefV4": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "format": "uuid",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "mime_type": {
+          "enum": [
+            "image/heic",
+            "image/jpeg",
+            "image/png"
+          ],
+          "title": "Mime Type",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "main_candidate",
+            "gallery",
+            "source_original"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "sha256",
+        "mime_type",
+        "role"
+      ],
+      "title": "StyleEligibilityImageRefV4",
+      "type": "object"
+    },
+    "StyleEligibilityInputV4": {
+      "additionalProperties": false,
+      "properties": {
+        "automatic_customer_send_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Automatic Customer Send Allowed",
+          "type": "boolean"
+        },
+        "automatic_generation_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Automatic Generation Allowed",
+          "type": "boolean"
+        },
+        "automatic_publication_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Automatic Publication Allowed",
+          "type": "boolean"
+        },
+        "content_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "contract_version": {
+          "const": "4-style-eligibility-input",
+          "default": "4-style-eligibility-input",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "eligibility_input_version": {
+          "minimum": 1,
+          "title": "Eligibility Input Version",
+          "type": "integer"
+        },
+        "form": {
+          "$ref": "#/$defs/StyleEligibilityFactV4"
+        },
+        "images": {
+          "items": {
+            "$ref": "#/$defs/StyleEligibilityImageRefV4"
+          },
+          "maxItems": 3000,
+          "minItems": 1,
+          "title": "Images",
+          "type": "array"
+        },
+        "main_image": {
+          "$ref": "#/$defs/StyleEligibilityImageRefV4"
+        },
+        "material": {
+          "$ref": "#/$defs/StyleMaterialFactV4"
+        },
+        "paid_provider_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Paid Provider Allowed",
+          "type": "boolean"
+        },
+        "product_code": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Product Code",
+          "type": "string"
+        },
+        "source_classification_id": {
+          "format": "uuid",
+          "title": "Source Classification Id",
+          "type": "string"
+        },
+        "source_classification_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Classification Sha256",
+          "type": "string"
+        },
+        "source_classification_version": {
+          "minimum": 1,
+          "title": "Source Classification Version",
+          "type": "integer"
+        },
+        "source_image_set_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Image Set Sha256",
+          "type": "string"
+        },
+        "source_material_package_version": {
+          "minimum": 1,
+          "title": "Source Material Package Version",
+          "type": "integer"
+        },
+        "status": {
+          "const": "eligibility_only",
+          "default": "eligibility_only",
+          "title": "Status",
+          "type": "string"
+        },
+        "tenant_id": {
+          "format": "uuid",
+          "title": "Tenant Id",
+          "type": "string"
+        },
+        "transform_authorization_expires_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transform Authorization Expires At"
+        },
+        "transform_authorization_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transform Authorization Id"
+        },
+        "transform_authorization_image_set_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transform Authorization Image Set Sha256"
+        },
+        "transform_authorization_revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transform Authorization Revoked At"
+        },
+        "transform_authorization_scope": {
+          "anyOf": [
+            {
+              "const": "local_style_acceptance_only",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transform Authorization Scope"
+        },
+        "transform_authorization_status": {
+          "enum": [
+            "none",
+            "active",
+            "expired",
+            "revoked"
+          ],
+          "title": "Transform Authorization Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tenant_id",
+        "product_code",
+        "eligibility_input_version",
+        "source_material_package_version",
+        "source_classification_id",
+        "source_classification_version",
+        "source_classification_sha256",
+        "source_image_set_sha256",
+        "main_image",
+        "images",
+        "material",
+        "form",
+        "transform_authorization_status",
+        "created_at",
+        "content_sha256"
+      ],
+      "title": "StyleEligibilityInputV4",
+      "type": "object"
+    },
+    "StyleMaterialFactV4": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_basis": {
+          "enum": [
+            "document_supported",
+            "merchant_declared"
+          ],
+          "title": "Claim Basis",
+          "type": "string"
+        },
+        "evidence_content_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Evidence Content Sha256",
+          "type": "string"
+        },
+        "evidence_record_id": {
+          "format": "uuid",
+          "title": "Evidence Record Id",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "claim_basis",
+        "evidence_record_id",
+        "evidence_content_sha256"
+      ],
+      "title": "StyleMaterialFactV4",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "handoff_id": {
+      "format": "uuid",
+      "title": "Handoff Id",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "#/$defs/StyleEligibilityInputV4"
+    },
+    "payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Payload Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "style-warehouse-delivery-v3",
+      "default": "style-warehouse-delivery-v3",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "handoff_id",
+    "idempotency_key",
+    "payload_sha256",
+    "payload"
+  ],
+  "title": "StyleWarehouseDeliveryV3",
+  "type": "object"
+}

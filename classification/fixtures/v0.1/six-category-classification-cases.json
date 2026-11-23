@@ -1,0 +1,188 @@
+[
+  {
+    "case_id": "album-agarwood-candidate",
+    "input": {
+      "source": "album",
+      "category": "沉香",
+      "classification_confidence": 0.92
+    },
+    "decision": {
+      "category_code": "agarwood",
+      "category_label": "沉香",
+      "decision_status": "candidate",
+      "source": "album_import",
+      "confidence_level": "high",
+      "explanations": [
+        "相册整理将本件标为“沉香”，仅作为待训练员复核的类目候选。",
+        "该候选不代表真伪、产地、品质或价值结论。"
+      ],
+      "evidence_refs": [],
+      "review_required": true,
+      "mall_import_allowed": false
+    }
+  },
+  {
+    "case_id": "trainer-turquoise-confirmed",
+    "input": {
+      "source": "trainer",
+      "material_label": "绿松",
+      "version_id": "20000000-0000-4000-8000-000000000002",
+      "template_code": "TEST-TURQUOISE"
+    },
+    "decision": {
+      "category_code": "turquoise",
+      "category_label": "绿松石",
+      "decision_status": "human_confirmed",
+      "source": "trainer_confirmed",
+      "confidence_level": "high",
+      "explanations": [
+        "训练员依据当前商品图确认材质类目。",
+        "该确认仅用于商品类目，不构成真伪、产地、品质或价值承诺。"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_type": "training_version",
+          "reference_id": "TEST-TURQUOISE:20000000-0000-4000-8000-000000000002"
+        }
+      ],
+      "review_required": false,
+      "mall_import_allowed": true
+    }
+  },
+  {
+    "case_id": "album-nanhong-candidate",
+    "input": {
+      "source": "album",
+      "category": "南红",
+      "classification_confidence": 0.78
+    },
+    "decision": {
+      "category_code": "nanhong",
+      "category_label": "南红",
+      "decision_status": "candidate",
+      "source": "album_import",
+      "confidence_level": "medium",
+      "explanations": [
+        "相册整理将本件标为“南红”，仅作为待训练员复核的类目候选。",
+        "该候选不代表真伪、产地、品质或价值结论。"
+      ],
+      "evidence_refs": [],
+      "review_required": true,
+      "mall_import_allowed": false
+    }
+  },
+  {
+    "case_id": "album-hetian-jade-candidate",
+    "input": {
+      "source": "album",
+      "category": "和田玉",
+      "classification_confidence": 0.88
+    },
+    "decision": {
+      "category_code": "hetian_jade",
+      "category_label": "和田玉",
+      "decision_status": "candidate",
+      "source": "album_import",
+      "confidence_level": "high",
+      "explanations": [
+        "相册整理将本件标为“和田玉”，仅作为待训练员复核的类目候选。",
+        "该候选不代表真伪、产地、品质或价值结论。"
+      ],
+      "evidence_refs": [],
+      "review_required": true,
+      "mall_import_allowed": false
+    }
+  },
+  {
+    "case_id": "trainer-colored-gemstone-confirmed",
+    "input": {
+      "source": "trainer",
+      "material_label": "彩色宝石",
+      "version_id": "50000000-0000-4000-8000-000000000005",
+      "template_code": "TEST-COLORED-GEM"
+    },
+    "decision": {
+      "category_code": "colored_gemstone",
+      "category_label": "彩宝",
+      "decision_status": "human_confirmed",
+      "source": "trainer_confirmed",
+      "confidence_level": "high",
+      "explanations": [
+        "训练员依据当前商品图确认材质类目。",
+        "该确认仅用于商品类目，不构成真伪、产地、品质或价值承诺。"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_type": "training_version",
+          "reference_id": "TEST-COLORED-GEM:50000000-0000-4000-8000-000000000005"
+        }
+      ],
+      "review_required": false,
+      "mall_import_allowed": true
+    }
+  },
+  {
+    "case_id": "album-jadeite-candidate",
+    "input": {
+      "source": "album",
+      "category": "翡翠",
+      "classification_confidence": 0.93
+    },
+    "decision": {
+      "category_code": "jadeite",
+      "category_label": "翡翠",
+      "decision_status": "candidate",
+      "source": "album_import",
+      "confidence_level": "high",
+      "explanations": [
+        "相册整理将本件标为“翡翠”，仅作为待训练员复核的类目候选。",
+        "该候选不代表真伪、产地、品质或价值结论。"
+      ],
+      "evidence_refs": [],
+      "review_required": true,
+      "mall_import_allowed": false
+    }
+  },
+  {
+    "case_id": "album-amber-outside-first-six",
+    "input": {
+      "source": "album",
+      "category": "蜜蜡",
+      "classification_confidence": 0.99
+    },
+    "decision": {
+      "category_code": "information_insufficient",
+      "category_label": "信息不足",
+      "decision_status": "information_insufficient",
+      "source": "none",
+      "confidence_level": null,
+      "explanations": [
+        "相册整理传入的类目不在首批六品类内，需要训练员补充本件证据。"
+      ],
+      "evidence_refs": [],
+      "review_required": true,
+      "mall_import_allowed": false
+    }
+  },
+  {
+    "case_id": "album-green-color-only",
+    "input": {
+      "source": "album",
+      "category": "绿色",
+      "classification_confidence": 0.99
+    },
+    "decision": {
+      "category_code": "information_insufficient",
+      "category_label": "信息不足",
+      "decision_status": "information_insufficient",
+      "source": "none",
+      "confidence_level": null,
+      "explanations": [
+        "相册整理传入的类目不在首批六品类内，需要训练员补充本件证据。"
+      ],
+      "evidence_refs": [],
+      "review_required": true,
+      "mall_import_allowed": false
+    }
+  }
+]

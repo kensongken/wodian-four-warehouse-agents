@@ -1,0 +1,241 @@
+{
+  "$defs": {
+    "MallStyleAssetRefV1": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_role": {
+          "enum": [
+            "label_photo",
+            "product_photo"
+          ],
+          "title": "Asset Role",
+          "type": "string"
+        },
+        "authorized_purposes": {
+          "items": {
+            "enum": [
+              "product_metadata_extraction",
+              "style_subject_transform"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Authorized Purposes",
+          "type": "array"
+        },
+        "mime_type": {
+          "enum": [
+            "image/heic",
+            "image/jpeg",
+            "image/png"
+          ],
+          "title": "Mime Type",
+          "type": "string"
+        },
+        "source_asset_id": {
+          "format": "uuid",
+          "title": "Source Asset Id",
+          "type": "string"
+        },
+        "source_content_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Content Sha256",
+          "type": "string"
+        },
+        "style_product_asset_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Product Asset Id"
+        }
+      },
+      "required": [
+        "source_asset_id",
+        "source_content_sha256",
+        "asset_role",
+        "mime_type",
+        "authorized_purposes"
+      ],
+      "title": "MallStyleAssetRefV1",
+      "type": "object"
+    },
+    "MallStyleSelectionV1": {
+      "additionalProperties": false,
+      "properties": {
+        "scene_style_id": {
+          "format": "uuid",
+          "title": "Scene Style Id",
+          "type": "string"
+        },
+        "slot_key": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$",
+          "title": "Slot Key",
+          "type": "string"
+        },
+        "style_card_version_id": {
+          "format": "uuid",
+          "title": "Style Card Version Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scene_style_id",
+        "style_card_version_id",
+        "slot_key"
+      ],
+      "title": "MallStyleSelectionV1",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/MallStyleAssetRefV1"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Assets",
+      "type": "array"
+    },
+    "authorized_purpose": {
+      "const": "style_candidate_generation_for_merchant_review",
+      "title": "Authorized Purpose",
+      "type": "string"
+    },
+    "automatic_generation_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Generation Allowed",
+      "type": "boolean"
+    },
+    "automatic_publication_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Publication Allowed",
+      "type": "boolean"
+    },
+    "candidate_count": {
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Candidate Count",
+      "type": "integer"
+    },
+    "correlation_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "handoff_id": {
+      "format": "uuid",
+      "title": "Handoff Id",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "merchant_id": {
+      "format": "uuid",
+      "title": "Merchant Id",
+      "type": "string"
+    },
+    "opc_id": {
+      "format": "uuid",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Payload Sha256",
+      "type": "string"
+    },
+    "product_entry_draft_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Product Entry Draft Sha256",
+      "type": "string"
+    },
+    "product_entry_draft_version": {
+      "minimum": 1,
+      "title": "Product Entry Draft Version",
+      "type": "integer"
+    },
+    "product_entry_submission_id": {
+      "format": "uuid",
+      "title": "Product Entry Submission Id",
+      "type": "string"
+    },
+    "product_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Product Id",
+      "type": "string"
+    },
+    "publishable": {
+      "const": false,
+      "default": false,
+      "title": "Publishable",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "mall-style-handoff-v1",
+      "default": "mall-style-handoff-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_product_photo_source_asset_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Product Photo Source Asset Id"
+    },
+    "style_selection": {
+      "$ref": "#/$defs/MallStyleSelectionV1"
+    }
+  },
+  "required": [
+    "handoff_id",
+    "merchant_id",
+    "opc_id",
+    "product_entry_submission_id",
+    "product_entry_draft_version",
+    "product_entry_draft_sha256",
+    "product_id",
+    "correlation_id",
+    "idempotency_key",
+    "payload_sha256",
+    "authorized_purpose",
+    "assets",
+    "style_selection",
+    "candidate_count",
+    "created_at"
+  ],
+  "title": "MallStyleHandoffV1",
+  "type": "object"
+}

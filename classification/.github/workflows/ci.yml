@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend dependencies
+        run: pip install uv && cd services/backend && uv sync --frozen
+      - name: Static checks
+        run: make lint
+      - name: Contract snapshots
+        run: make contracts && git diff --exit-code -- contracts/openapi.json
+      - name: Tests
+        run: make test
+      - name: Local verification gates
+        run: make verify-task7 verify-task9 verify-task10

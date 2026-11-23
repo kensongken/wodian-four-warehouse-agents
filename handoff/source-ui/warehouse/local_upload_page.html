@@ -1,0 +1,2505 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    if (window.location.protocol === 'file:') {
+      window.location.replace('http://127.0.0.1:8124/local/templates');
+    }
+  </script>
+  <title>批量上传商品图片</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #291c1b;
+      --muted: #756764;
+      --paper: #fffdfa;
+      --cream: #f8f1e7;
+      --line: #e7d9cd;
+      --accent: #a43c32;
+      --accent-dark: #7f2a24;
+      --success: #24704a;
+      --warning: #8b5a1f;
+      --shadow: 0 24px 70px rgba(72, 43, 36, .14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 28px 16px 60px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(187, 99, 75, .13), transparent 34%),
+        radial-gradient(circle at 88% 88%, rgba(216, 170, 112, .18), transparent 38%),
+        var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    main { width: min(100%, 980px); margin: 0 auto; }
+    .warehouse-flow { margin: 0 0 20px; padding: 20px; border: 1px solid #d8ddd9; border-radius: 8px; background: #fff; }
+    .warehouse-flow-head { margin-bottom: 10px; }
+    .warehouse-flow-head p { margin: 0 0 5px; color: var(--accent); font-size: 12px; font-weight: 700; }
+    .warehouse-flow-head h2 { font-size: 20px; }
+    .warehouse-route { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .warehouse-route-step { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; align-items: start; gap: 12px; padding: 13px 2px; border-bottom: 1px solid var(--line); }
+    .warehouse-route-number { display: grid; place-items: center; width: 28px; aspect-ratio: 1; border: 1px solid #ad6b45; border-radius: 50%; color: #733c22; background: #fff3e8; font-size: 13px; font-weight: 700; }
+    .warehouse-route-copy { min-width: 0; }
+    .warehouse-route-copy h3 { margin: 0 0 4px; font-size: 14px; }
+    .warehouse-route-copy p { margin: 3px 0; color: var(--muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+    .warehouse-route-facts { display: grid; gap: 5px; margin-top: 9px; }
+    .warehouse-route-fact { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 8px; margin: 0 !important; }
+    .warehouse-route-fact strong { color: var(--ink); }
+    .warehouse-route-state { color: #176b44 !important; font-weight: 700; }
+    .warehouse-route-state.pending { color: #8b5a1f !important; }
+    .warehouse-route-action { width: auto; min-width: 128px; min-height: 40px; margin: 0; padding: 8px 11px; align-self: center; }
+    .warehouse-route-action:focus-visible, .warehouse-target-highlight { outline: 3px solid #d17a43 !important; outline-offset: 3px; }
+    .panel {
+      padding: 36px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 28px;
+      background: rgba(255, 253, 250, .96);
+      box-shadow: var(--shadow);
+    }
+    .panel + .panel { margin-top: 24px; }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 6vw, 42px); line-height: 1.15; }
+    h2 { margin: 0; font-size: 24px; }
+    .intro { margin: 14px 0 26px; color: var(--muted); line-height: 1.7; }
+    .package-panel { margin: 0 0 22px; padding: 18px; border: 1px solid #dce8df; border-radius: 18px; background: #f7fbf8; }
+    .package-panel h2 { font-size: 18px; }
+    .package-panel p { margin: 7px 0 13px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .entry-mode-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 16px 0; }
+    .entry-mode-tab { min-height: 58px; padding: 9px; font-size: 13px; }
+    .entry-mode-tab[aria-selected="true"] { color: white; border-color: var(--accent); background: var(--accent); }
+    .entry-mode-tab small { display: block; margin-top: 3px; font-size: 10px; font-weight: 500; opacity: .85; }
+    .entry-mode-tab[aria-selected="false"] .entry-selected-prefix { display: none; }
+    .entry-mode-panel { padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: white; }
+    .entry-mode-panel[hidden] { display: none; }
+    .entry-mode-panel h3 { margin: 0 0 7px; }
+    .entry-boundary { padding: 10px 12px; border-radius: 12px; background: #fff4df; }
+    #employee-package-result { min-height: 22px; margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .dropzone {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      border: 1.5px dashed #cfb8aa;
+      border-radius: 22px;
+      background: #fffaf5;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .dropzone.dragging { border-color: var(--accent); background: #fff4ed; transform: translateY(-2px); }
+    .drop-content { text-align: center; }
+    .icon {
+      width: 66px;
+      height: 66px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 22px;
+      color: var(--accent);
+      background: #f5e4d8;
+      font-size: 30px;
+    }
+    .drop-content strong { display: block; margin-bottom: 7px; font-size: 18px; }
+    .drop-content span { color: var(--muted); font-size: 14px; }
+    .file-input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    button {
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover { border-color: #c5a99b; }
+    button.primary { color: white; border-color: var(--accent); background: var(--accent); }
+    button.primary:hover { background: var(--accent-dark); }
+    button:disabled { cursor: not-allowed; opacity: .5; }
+    #choose-product-files { width: 100%; min-height: 64px; margin-top: 12px; font-size: 18px; }
+    .secondary-entry-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+    #product-folder-result { color: var(--muted); }
+    #start-upload { width: 100%; margin-top: 12px; min-height: 54px; font-size: 17px; }
+    #selection-summary, #status { margin-top: 14px; color: var(--muted); line-height: 1.6; }
+    #status strong { display: block; color: var(--ink); }
+    #status.success strong { color: var(--success); }
+    #status.error strong { color: var(--accent); }
+    .product-review-status { margin: 8px 0 12px; padding: 10px 12px; border-radius: 12px; color: #7a5d19; background: #fff4df; }
+    .product-review-status.ready { color: #176b44; background: #e8f6ed; }
+    .sales-strategy-preview { margin: 0 0 14px; padding: 12px; border: 1px solid #b9dfc8; border-radius: 12px; background: #f3fbf6; }
+    .sales-strategy-preview p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    .progress-panel { display: none; margin-top: 22px; padding: 20px; border-radius: 18px; background: #f7f4ef; }
+    .progress-panel.visible { display: block; }
+    .progress-head { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+    progress { width: 100%; height: 12px; margin: 15px 0; accent-color: var(--accent); }
+    .counts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .count { padding: 10px 8px; border-radius: 12px; background: white; text-align: center; }
+    .count strong { display: block; font-size: 20px; }
+    .count span { color: var(--muted); font-size: 12px; }
+    .review-panel { display: none; }
+    .review-panel.visible { display: block; }
+    .review-head { position: sticky; z-index: 4; top: 8px; display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; padding: 10px; margin: -10px; border-radius: 16px; background: rgba(255, 253, 251, .94); backdrop-filter: blur(8px); }
+    .review-head-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+    .review-head-actions .badge { align-self: center; }
+    .review-head-actions button { min-height: 36px; padding: 7px 10px; font-size: 12px; }
+    .badge { padding: 7px 10px; border-radius: 999px; color: var(--success); background: #e4f1e8; font-size: 12px; font-weight: 700; }
+    .review-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 18px; }
+    .review-details { display: flex; flex-direction: column; }
+    .review-details > * { order: 20; }
+    .review-details #review-product-code { order: 1; }
+    .review-details #review-product-status { order: 2; }
+    .review-details #edit-form { order: 3; }
+    .review-details #result-meta, .review-details .merchant-summary { order: 4; }
+    .review-details #sales-strategy-preview { order: 5; }
+    .review-details #ai-reference-details { order: 6; }
+    .review-details #advanced-review-tools { order: 7; }
+    .image-stage { position: sticky; z-index: 3; top: 76px; height: clamp(250px, 42vh, 390px); min-height: 0; display: flex; flex-direction: column; justify-content: center; border-radius: 12px; overflow: hidden; background: #f1ece6; }
+    .image-stage > img { width: 100%; min-height: 0; max-height: none; flex: 1; object-fit: contain; }
+    .image-stage p { padding: 24px; color: var(--muted); text-align: center; }
+    .image-quality-warning { margin: 0 !important; padding: 9px 12px !important; color: #744713 !important; background: #fff0d8; font-size: 12px; line-height: 1.45; text-align: left !important; }
+    .product-image-strip { display: flex; gap: 10px; width: 100%; padding: 12px; overflow-x: auto; background: rgba(255, 255, 255, .82); }
+    .product-image-choice { flex: 0 0 82px; min-height: 92px; padding: 5px; border: 2px solid transparent; border-radius: 12px; color: var(--muted); background: white; font-size: 11px; }
+    .product-image-choice.active { border-color: var(--accent); color: var(--accent); }
+    .product-image-choice img { width: 68px; height: 58px; border-radius: 8px; object-fit: cover; }
+    .product-image-choice span { display: block; margin-top: 4px; }
+    .image-overlay-nav { position: absolute; z-index: 2; top: 42%; width: 44px; min-height: 44px; padding: 0; border-radius: 50%; color: white; border-color: rgba(255,255,255,.7); background: rgba(53, 39, 35, .68); box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+    .image-overlay-nav:hover { background: rgba(53, 39, 35, .88); }
+    .image-overlay-nav.previous { left: 12px; }
+    .image-overlay-nav.next { right: 12px; }
+    .result-meta { margin: 0 0 14px; color: var(--muted); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+    .merchant-summary { margin: 0 0 14px; padding: 14px 16px; border-radius: 16px; background: #f7fbf8; border: 1px solid #d9e8de; }
+    .merchant-summary h3 { margin: 0 0 6px; font-size: 18px; }
+    .merchant-summary p { margin: 4px 0; color: var(--muted); line-height: 1.55; }
+    .advanced-review-section { margin: 12px 0; border: 1px solid #e7ddd7; border-radius: 16px; background: #fffaf7; }
+    .advanced-review-section > summary { cursor: pointer; padding: 14px 16px; font-weight: 750; color: var(--ink); }
+    .advanced-review-section > :not(summary) { margin-left: 14px; margin-right: 14px; }
+    .result-summary { padding: 18px; border: 1px solid #dce8df; border-radius: 18px; background: #f7fbf8; }
+    .result-summary h3 { margin: 0 0 10px; font-size: 16px; }
+    .result-summary ul { margin: 0; padding-left: 20px; color: #4e4543; line-height: 1.65; font-size: 14px; }
+    .recognition-layer { margin-bottom: 12px; padding: 14px 16px; border: 1px solid #d8d8ea; border-radius: 16px; background: #f8f7ff; }
+    .recognition-layer[hidden] { display: none; }
+    .recognition-layer h3 { margin: 0 0 7px; font-size: 15px; }
+    .recognition-layer p { margin: 4px 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .recognition-status-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .recognition-state { padding: 5px 8px; border-radius: 999px; color: #8d2f2a; background: #f8dfdc; font-size: 11px; font-weight: 700; }
+    .recognition-state.ready { color: #24704a; background: #e4f1e8; }
+    .recognition-state.pending { color: #70502c; background: #f5e5cc; }
+    #retry-recognition { min-height: 38px; margin-top: 8px; padding: 8px 12px; font-size: 12px; }
+    .recognition-layer.history { border-color: #ead9bd; background: #fff9ed; }
+    .draft-handoff { margin-top: 14px; padding: 18px; border: 1px solid #e5c6a7; border-radius: 18px; background: #fff8ee; }
+    .draft-handoff-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+    .draft-handoff h3 { margin: 0; font-size: 17px; }
+    .pilot-status-card { margin-top: 14px; padding: 18px; border-radius: 18px; border: 1px solid #e5c6a7; background: #fff8ee; }
+    .pilot-status-card[data-signal="green"] { border-color: #8ab79a; background: #f1faf4; }
+    .pilot-status-card[data-signal="yellow"] { border-color: #e5c16f; background: #fff9e9; }
+    .pilot-status-card[data-signal="red"] { border-color: #d99a96; background: #fff2f1; }
+    .pilot-status-card h3 { margin: 0; font-size: 17px; }
+    .draft-status { padding: 6px 9px; border-radius: 999px; color: #8d2f2a; background: #f8dfdc; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .draft-summary { margin: 9px 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .draft-flags { display: flex; flex-wrap: wrap; gap: 7px; margin: 10px 0; }
+    .draft-flag { padding: 5px 8px; border-radius: 999px; color: #70502c; background: #f5e5cc; font-size: 11px; font-weight: 700; }
+    .draft-blockers { display: grid; gap: 8px; margin: 12px 0; padding: 0; list-style: none; }
+    .draft-blocker { padding: 10px 12px; border-radius: 12px; background: white; }
+    .draft-blocker-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+    .draft-blocker strong { font-size: 13px; }
+    .draft-blocker span { padding: 4px 7px; border-radius: 999px; color: #24704a; background: #e4f1e8; font-size: 10px; font-weight: 700; white-space: nowrap; }
+    .draft-blocker span.integration { color: #756764; background: #eee9e3; }
+    .draft-blocker p { margin: 6px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .price-state { margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; color: #70502c; background: #fff4df; font-size: 14px; }
+    .edit-form { display: none; margin-top: 16px; }
+    .edit-form.visible { display: block; }
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    label { display: block; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    input, textarea, select {
+      width: 100%;
+      margin-top: 6px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--ink);
+      background: white;
+      font: inherit;
+    }
+    textarea { min-height: 88px; resize: vertical; }
+    .wide { grid-column: 1 / -1; }
+    .boundary { margin: 14px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+    .form-actions, .review-nav { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+    .review-nav { justify-content: space-between; border-top: 1px solid var(--line); padding-top: 18px; }
+    #review-message { min-height: 24px; margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .recent { margin-top: 22px; padding: 18px; border-radius: 18px; background: #f7fbf8; }
+    .recent h3 { margin: 0 0 8px; }
+    .recent p { margin: 5px 0; color: var(--muted); line-height: 1.55; }
+    .recent .summary-grid { margin-top: 14px; }
+    .recent ul { margin: 7px 0 0; padding-left: 20px; color: #4e4543; line-height: 1.65; }
+    .recent .boundary { margin-top: 12px; }
+    .privacy { margin: 20px 0 0; color: var(--muted); text-align: center; font-size: 12px; }
+    .album-inbox-panel { margin: 22px 0; padding: 18px; border: 1px solid #cddbd5; border-radius: 18px; background: #f4f8f6; }
+    .album-inbox-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .album-connection-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .album-connection-chip { padding: 7px 10px; border-radius: 999px; color: var(--muted); background: white; border: 1px solid #dbe5e0; font-size: 12px; }
+    .album-connection-chip.connected { color: var(--success); border-color: #9fc9ae; background: #edf8f1; font-weight: 700; }
+    .album-connection-chip.error { color: var(--accent); border-color: #d9a29d; background: #fff2f1; font-weight: 700; }
+    .album-inbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 14px; }
+    .album-product-card { padding: 14px; border-radius: 14px; background: white; border: 1px solid #dbe5e0; }
+    .album-product-card h3 { margin: 8px 0 4px; }
+    .album-product-meta { color: var(--muted); font-size: 13px; }
+    .album-image-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+    .album-image-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 9px; background: #e7ece9; }
+    .album-image-frame { min-height: 92px; display: grid; place-items: center; border-radius: 9px; background: #e7ece9; overflow: hidden; }
+    .album-image-frame img { grid-area: 1 / 1; }
+    .album-image-error { grid-area: 1 / 1; padding: 10px; color: var(--muted); font-size: 12px; text-align: center; }
+    .album-image-note { margin: 10px 0 0; color: var(--muted); font-size: 12px; }
+    .album-product-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .album-product-actions > * { width: auto; flex: 1 1 150px; text-align: center; }
+    .voice-panel { margin-top: 24px; }
+    .voice-shell { padding: 22px; border: 1px solid #d8d8ea; border-radius: 20px; background: #f8f7ff; }
+    .voice-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+    .voice-state { padding: 7px 10px; border-radius: 999px; color: #584c82; background: #e9e6f7; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .voice-state.listening { color: #8d2f2a; background: #f8dfdc; }
+    .voice-input-row { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; margin-top: 18px; align-items: end; }
+    #voice-toggle { min-width: 120px; }
+    #voice-toggle.listening { color: white; border-color: var(--accent); background: var(--accent); }
+    .voice-input-row label { margin: 0; }
+    #voice-transcript { min-height: 116px; }
+    .voice-count { display: block; margin-top: 5px; color: var(--muted); text-align: right; font-size: 12px; }
+    #voice-result { min-height: 42px; margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; color: #4e4568; background: white; line-height: 1.6; }
+    .voice-examples { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+    @media (max-width: 760px) {
+      .panel { padding: 26px 20px; border-radius: 22px; }
+      .review-layout { grid-template-columns: minmax(0, 1fr); }
+      .image-stage { top: 68px; height: clamp(210px, 36vh, 300px); }
+      .entry-mode-tabs { grid-template-columns: 1fr; }
+      .counts { grid-template-columns: repeat(2, 1fr); }
+      .field-grid, .summary-grid { grid-template-columns: 1fr; }
+      .wide { grid-column: auto; }
+      .voice-input-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .warehouse-flow { padding: 16px; }
+      .warehouse-route-step { grid-template-columns: 28px minmax(0, 1fr); }
+      .warehouse-route-number { width: 26px; }
+      .warehouse-route-action { grid-column: 2; justify-self: start; }
+      .warehouse-route-fact { grid-template-columns: 68px minmax(0, 1fr); gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="warehouse-flow" id="warehouse-flow" aria-labelledby="warehouse-flow-title">
+      <div class="warehouse-flow-head">
+        <p>四仓流通 · 按这个顺序从上往下走</p>
+        <h2 id="warehouse-flow-title">图片资料的交接路径</h2>
+      </div>
+      <ol class="warehouse-route" aria-label="四仓流通顺序">
+        <li class="warehouse-route-step">
+          <span class="warehouse-route-number">1</span>
+          <div class="warehouse-route-copy">
+            <h3>相册整理仓 · 收图、分组、人工审核后正式交接</h3>
+            <div class="warehouse-route-facts">
+              <p class="warehouse-route-fact"><strong>接收</strong><span>训练员选择的商品图片，并在相册整理中建立商品分组；本次正式图片交接字段不包含 Excel 明细。</span></p>
+              <p class="warehouse-route-fact"><strong>处理</strong><span>整理图片、按商品分组并由人检查，再正式交接。</span></p>
+              <p class="warehouse-route-fact"><strong>产出</strong><span>商品编号、品类/形态、图片清单、图片校验值和资料版本。</span></p>
+              <p class="warehouse-route-fact"><strong>本次结果</strong><span id="warehouse-album-result">正在读取已交接商品…</span></p>
+              <p class="warehouse-route-fact"><strong>交给</strong><span>第 2 仓「分门别类」；这里显示实际送达的商品和图片数。</span></p>
+            </div>
+            <p class="warehouse-route-state" id="warehouse-album-state">正在读取收件状态…</p>
+          </div>
+          <button class="secondary warehouse-route-action" type="button" data-warehouse-target="album">定位收件箱</button>
+        </li>
+        <li class="warehouse-route-step">
+          <span class="warehouse-route-number">2</span>
+          <div class="warehouse-route-copy">
+            <h3>分门别类仓 · 逐张看图、确认材质与商品信息</h3>
+            <div class="warehouse-route-facts">
+              <p class="warehouse-route-fact"><strong>接收</strong><span>正式通路接收第 1 仓交接的商品图；注意：下方 30 张是另一批本机待审图，不是上方 2 件相册演示商品。</span></p>
+              <p class="warehouse-route-fact"><strong>处理</strong><span>逐张查看图片，系统给材质/形态等候选，训练员修改并确认。</span></p>
+              <p class="warehouse-route-fact"><strong>解析结果</strong><span id="warehouse-classification-result">待打开批次读取识别候选；候选不等于人工确认。</span></p>
+              <p class="warehouse-route-fact"><strong>交给</strong><span>训练员保存后形成确认版本；只有门禁允许的资料才可供下游使用，不是收到就自动完成。</span></p>
+            </div>
+            <p class="warehouse-route-state" id="warehouse-classification-state">等待审核批次…</p>
+          </div>
+          <button class="secondary warehouse-route-action" type="button" data-warehouse-target="classification">定位逐张审核</button>
+        </li>
+        <li class="warehouse-route-step">
+          <span class="warehouse-route-number">3</span>
+          <div class="warehouse-route-copy">
+            <h3>照片风格仓 · 生成候选图，再由人审核</h3>
+            <div class="warehouse-route-facts">
+              <p class="warehouse-route-fact"><strong>接收</strong><span>从本机测试批次选择商品和实拍主图；不是自动接收后立即生成。</span></p>
+              <p class="warehouse-route-fact"><strong>处理</strong><span>先确认测试商品、主图和用途授权，再生成风格候选并人工检查。</span></p>
+              <p class="warehouse-route-fact"><strong>当前结果</strong><span id="warehouse-style-result">等待本机测试入口状态；未生成前没有风格图结果。</span></p>
+              <p class="warehouse-route-fact"><strong>交给</strong><span>候选先留在风格审核区；未经审核，不作为销售可用图片。</span></p>
+            </div>
+            <p class="warehouse-route-state">本机测试入口 · 生成前需完成商品选择与授权</p>
+          </div>
+          <button class="secondary warehouse-route-action" type="button" data-warehouse-target="style">定位风格入口</button>
+        </li>
+        <li class="warehouse-route-step">
+          <span class="warehouse-route-number">4</span>
+          <div class="warehouse-route-copy">
+            <h3>销售之旅 · 接收商品资料预览并人工审核</h3>
+            <div class="warehouse-route-facts">
+              <p class="warehouse-route-fact"><strong>接收</strong><span>商品编号、资料版本、图片引用和已形成的商品资料。</span></p>
+              <p class="warehouse-route-fact"><strong>处理</strong><span>整理成销售策略输入预览，由销售人员核对后再决定如何使用。</span></p>
+              <p class="warehouse-route-fact"><strong>解析结果</strong><span>当前为 preview_only（内部预览）；未验证真伪、产地、品质，不代表可报价或发布。</span></p>
+              <p class="warehouse-route-fact"><strong>后续</strong><span>人工审核后才进入销售工作；本链路不会自动联系客户或发送内容。</span></p>
+            </div>
+            <p class="warehouse-route-state" id="warehouse-sales-state">正在核对销售收件状态…</p>
+          </div>
+          <button class="secondary warehouse-route-action" type="button" data-warehouse-target="sales">定位销售入口</button>
+        </li>
+      </ol>
+    </section>
+    <section class="panel">
+      <p class="eyebrow">本地相册整理</p>
+      <h1>批量上传商品图片</h1>
+      <p class="intro">你只需要一次选完图片。系统会自动生成商品编码和商品序号，再给出图片可见信息候选；你只需逐张补充或修改文字内容。</p>
+      <div class="album-connection-strip" aria-label="图片识别 Agent 状态">
+        <span class="album-connection-chip" id="recognition-agent-state">正在连接图片识别 Agent…</span>
+        <span class="album-connection-chip" id="recognition-agent-boundary">识别结果需人工确认</span>
+      </div>
+
+      <section class="album-inbox-panel" aria-labelledby="album-inbox-title">
+        <div class="album-inbox-head">
+          <div>
+            <p class="eyebrow">正式交接入口</p>
+            <h2 id="album-inbox-title">来自相册整理</h2>
+          </div>
+          <button id="refresh-album-inbox" type="button">重新同步</button>
+        </div>
+        <div class="album-connection-strip" aria-label="相册同步状态">
+          <span class="album-connection-chip" id="album-connection-state">正在连接</span>
+          <span class="album-connection-chip" id="album-product-count">商品 0 件</span>
+          <span class="album-connection-chip" id="album-image-count">图片 0 张</span>
+          <span class="album-connection-chip" id="album-last-received">最近送达：暂无</span>
+        </div>
+        <p id="album-inbox-status" role="status" aria-live="polite">正在读取相册整理送达的商品…</p>
+        <div class="album-inbox-grid" id="album-review-inbox"></div>
+        <p class="privacy">这里只读取相册整理已经正式交接的最新版商品；不会重复上传、自动发布或发送给客户。</p>
+      </section>
+
+      <section class="package-panel" id="product-entry-workspace" aria-labelledby="employee-package-title">
+        <h2 id="employee-package-title">商品资料录入</h2>
+        <p>默认上传资料压缩包；没有压缩包时，可展开其他方式直接批量选图。</p>
+        <input class="file-input" id="product-files-input" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,image/jpeg,image/png,image/heic,.heic" multiple>
+        <input class="file-input" id="product-folder-input" type="file" webkitdirectory multiple>
+        <input class="file-input" id="product-archive-input" type="file" accept=".zip,application/zip">
+        <input class="file-input" id="attach-workbook-input" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        <button class="primary" id="choose-product-archive" type="button">上传商品资料压缩包</button>
+        <button id="attach-workbook" type="button" hidden>给当前图片补充 Excel</button>
+        <p id="product-folder-result" role="status">选择后会自动导入并进入商品审核。</p>
+        <details class="advanced-review-section">
+          <summary>其他导入方式</summary>
+          <p>没有 ZIP 时，也可以直接选文件或文件夹。</p>
+          <div class="secondary-entry-actions">
+            <button id="choose-product-files" type="button">选择 Excel 和商品图片</button>
+            <button id="choose-product-folder" type="button">选择商品资料文件夹</button>
+          </div>
+        <div class="entry-mode-tabs" role="tablist" aria-label="商品资料录入方式">
+          <button class="entry-mode-tab" data-entry-mode="workbook" type="button" role="tab" aria-selected="true"><span class="entry-selected-prefix">已选择：</span>Excel + 图片文件夹<small>推荐：编码和多图归组最准确 · 点击开始选择</small></button>
+          <button class="entry-mode-tab" data-entry-mode="package" type="button" role="tab" aria-selected="false"><span class="entry-selected-prefix">已选择：</span>员工压缩包<small>已有完整 ZIP 时使用</small></button>
+          <button class="entry-mode-tab" data-entry-mode="images" type="button" role="tab" aria-selected="false"><span class="entry-selected-prefix">已选择：</span>只有图片<small>只有图片时使用临时编码</small></button>
+        </div>
+
+        <section class="entry-mode-panel" data-entry-panel="workbook">
+          <h3>选择 Excel 表格和图片文件夹</h3>
+          <p>系统按“编码.jpg、编码-2.jpg、编码-3.jpg”归为同一件商品。</p>
+          <input class="file-input" id="direct-workbook-input" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          <input class="file-input" id="direct-images-input" type="file" accept="image/jpeg,image/png,image/heic,.heic" webkitdirectory multiple>
+          <div class="action-row">
+            <button id="choose-direct-workbook" type="button">选择 Excel 表格</button>
+            <button id="choose-direct-images" type="button">选择图片文件夹</button>
+          </div>
+          <button class="primary" id="import-workbook-and-images" type="button" disabled>配对并进入商品审核</button>
+          <p id="direct-import-result" role="status">尚未选择表格和图片文件夹</p>
+        </section>
+
+        <section class="entry-mode-panel" data-entry-panel="package" hidden>
+          <h3>选择员工资料压缩包</h3>
+          <p><a href="/local/api/employee-package/template">下载员工资料包模板</a>：员工填写表格、放入图片并压缩后上传。</p>
+          <input class="file-input" id="employee-package-input" type="file" accept=".zip,application/zip">
+          <button id="choose-employee-package" type="button">选择员工资料压缩包</button>
+          <button class="primary" id="import-employee-package" type="button" disabled>导入并进入商品审核</button>
+          <p id="employee-package-result" role="status">尚未选择资料包</p>
+        </section>
+
+        <section class="entry-mode-panel" data-entry-panel="images" hidden>
+          <h3>只有图片，临时登记</h3>
+          <p class="entry-boundary">没有 Excel 时，系统无法可靠判断多张图片是否属于同一商品，因此会为每张图生成临时编码。</p>
+          <section class="dropzone" id="dropzone" aria-label="批量图片选择区域">
+            <div class="drop-content">
+              <div class="icon" aria-hidden="true">＋</div>
+              <strong>把多张图片拖到这里</strong>
+              <span>支持 JPEG、PNG、HEIC；单张最大 20 MiB</span>
+            </div>
+          </section>
+          <input class="file-input" id="photo-input" type="file" accept="image/jpeg,image/png,image/heic,.heic" multiple>
+          <input class="file-input" id="folder-input" type="file" accept="image/jpeg,image/png,image/heic,.heic" webkitdirectory multiple>
+          <div class="action-row">
+            <button id="choose-images" type="button">批量选择图片</button>
+            <button id="choose-folder" type="button">选择文件夹</button>
+          </div>
+          <p id="selection-summary">尚未选择图片</p>
+          <button class="primary" id="start-upload" type="button" disabled>用临时编码开始上传</button>
+          <div id="status" role="status" aria-live="polite"></div>
+        </section>
+        </details>
+      </section>
+
+      <section class="progress-panel" id="progress-panel" aria-labelledby="progress-title">
+        <div class="progress-head">
+          <strong id="progress-title">批次处理中</strong>
+          <span id="batch-code"></span>
+        </div>
+        <progress id="upload-progress" value="0" max="1"></progress>
+        <div class="counts">
+          <div class="count"><strong id="count-success">0</strong><span>成功</span></div>
+          <div class="count"><strong id="count-duplicate">0</strong><span>重复跳过</span></div>
+          <div class="count"><strong id="count-failed">0</strong><span>失败</span></div>
+          <div class="count"><strong id="count-pending">0</strong><span>待审核</span></div>
+          <div class="count"><strong id="count-reviewed">0</strong><span>已审核</span></div>
+        </div>
+      </section>
+
+      <section class="recent" id="latest-result-card">
+        <p class="eyebrow">最新识别结果</p>
+        <h3 id="latest-material">待确认</h3>
+        <p id="latest-meta">未命中已确认样本</p>
+        <p id="latest-product-form">商品形态：待确认</p>
+        <div class="summary-grid">
+          <div>
+            <strong>图片可见特征</strong>
+            <ul id="latest-visual-observations"><li>等待上传或选择商品图</li></ul>
+          </div>
+          <div>
+            <strong>可用销售卖点</strong>
+            <ul id="latest-selling-points"><li>待训练员确认后生成</li></ul>
+          </div>
+        </div>
+        <p id="latest-main-image-state">主图：待训练员确认</p>
+        <p class="price-state" id="latest-price-state">价格状态：待录入该品类的价格标准</p>
+        <p id="latest-evidence">结果来源：系统初步占位 · 未命中已确认样本</p>
+        <p class="boundary">保存的是人工标准，不代表模型已训练。真伪、产地、品质和仓库验收仍需后续验证。</p>
+      </section>
+      <p class="privacy">图片与批次数据仅保存在这台电脑的本地测试目录。</p>
+    </section>
+
+    <section class="panel review-panel" id="review-panel" aria-labelledby="review-title">
+      <div class="review-head">
+        <div>
+          <p class="eyebrow">逐张审核</p>
+          <h2 id="review-title">商品图识别结果</h2>
+        </div>
+        <div class="review-head-actions">
+          <button id="previous-item-top" type="button">← 上一张</button>
+          <span class="badge" id="review-position">第 1 / 1 张</span>
+          <button id="next-item-top" type="button">下一张 →</button>
+        </div>
+      </div>
+
+      <div class="review-layout">
+        <div class="image-stage" id="image-stage">
+          <button class="image-overlay-nav previous" id="previous-image-overlay" type="button" aria-label="上一张图片">‹</button>
+          <p class="image-quality-warning" id="review-image-quality-warning" role="status" hidden></p>
+          <img id="review-image" alt="当前审核商品图">
+          <button class="image-overlay-nav next" id="next-image-overlay" type="button" aria-label="下一张图片">›</button>
+          <div class="product-image-strip" id="review-product-images" aria-label="本商品的全部图片"></div>
+        </div>
+        <div>
+          <p class="result-meta" id="review-product-code"></p>
+          <p class="product-review-status" id="review-product-status" role="status"></p>
+          <button class="primary" id="confirm-current-product" type="button">确认本商品全部图片</button>
+          <details class="sales-strategy-preview" id="sales-strategy-preview" hidden>
+            <summary>查看销售策略输入预览</summary>
+            <p id="sales-strategy-preview-summary"></p>
+            <p id="sales-strategy-preview-facts"></p>
+            <strong>图片可见特征</strong>
+            <ul id="sales-strategy-preview-observations"></ul>
+            <strong>可用销售卖点</strong>
+            <ul id="sales-strategy-preview-selling-points"></ul>
+            <p><strong>未验证：</strong>真伪、产地、品质和仓库验收。</p>
+            <p><strong>禁止自动动作：</strong>联系客户、公开发布、发送微信和自动报价。</p>
+            <p>当前仅为 preview_only，等待销售之旅验收。</p>
+          </details>
+          <p class="result-meta" id="result-meta"></p>
+          <section class="merchant-summary" aria-labelledby="review-product-name">
+            <h3 id="review-product-name">商品名称待补充</h3>
+            <p id="review-import-source">Excel 资料：未提供，待人工确认</p>
+            <p id="review-excel-price">Excel 建议价格：未提供</p>
+          </section>
+          <details class="advanced-review-section" id="ai-reference-details">
+            <summary>AI 识别参考</summary>
+          <section class="recognition-layer" id="ai-recognition-panel">
+            <div class="recognition-status-head">
+              <h3>系统识别候选</h3>
+              <span class="recognition-state" id="ai-recognition-state">AI识别未启动</span>
+            </div>
+            <p id="ai-recognition-status">正在读取识别结果…</p>
+            <p id="ai-recognition-detail">候选只供训练员复核，不代表真伪、产地、品质或仓验结论。</p>
+            <div id="ai-candidate-details" hidden>
+              <div class="summary-grid">
+                <div><strong>AI 识别出的可见特征</strong><ul id="ai-visual-observations"></ul></div>
+                <div><strong>AI 生成的销售卖点草稿</strong><ul id="ai-selling-point-drafts"></ul></div>
+              </div>
+              <div><strong>规格候选</strong><ul id="ai-specification-candidates"></ul></div>
+              <p class="price-state" id="ai-price-status"></p>
+              <p class="boundary" id="ai-verification-boundary"></p>
+            </div>
+            <button id="retry-recognition" type="button" disabled>视觉服务未配置</button>
+          </section>
+          <section class="recognition-layer history" id="historical-reference-panel" hidden>
+            <h3>历史人工标签参考</h3>
+            <p id="historical-reference-detail"></p>
+          </section>
+          </details>
+          <section class="result-summary" id="result-summary">
+            <h3 id="material-label">待确认</h3>
+            <p class="result-meta" id="product-form"></p>
+            <div class="summary-grid">
+              <div><strong>图片可见特征</strong><ul id="visual-observations"></ul></div>
+              <div><strong>可用销售卖点</strong><ul id="selling-points"></ul></div>
+            </div>
+            <p class="price-state" id="price-state">价格状态：待录入品类标准</p>
+          </section>
+
+          <details class="advanced-review-section" id="advanced-review-tools">
+            <summary>高级审核（发布、验收和价格确认）</summary>
+          <section class="draft-handoff" id="product-passport-draft-panel" aria-labelledby="draft-handoff-title">
+            <div class="draft-handoff-head">
+              <div>
+                <p class="eyebrow">商品资料交接</p>
+                <h3 id="draft-handoff-title">ProductPassport 草稿</h3>
+              </div>
+              <span class="draft-status" id="draft-publication-status">不可发布</span>
+            </div>
+            <p class="draft-summary" id="draft-product-type">商品类型：待选择</p>
+            <p class="draft-summary" id="draft-inventory-status">库存状态：待商家确认</p>
+            <p class="draft-summary" id="draft-summary">等待训练员人工确认后计算商品资料缺项。</p>
+            <div class="draft-flags">
+              <span class="draft-flag" id="draft-mall-label">禁止商城导入</span>
+              <span class="draft-flag" id="draft-sales-label">尚不可交接</span>
+            </div>
+            <ul class="draft-blockers" id="draft-blocker-list"></ul>
+            <button id="continue-completion" type="button">继续补全资料</button>
+          </section>
+
+          <section class="pilot-status-card" id="pilot-release-status-panel" data-signal="yellow" role="status" aria-live="polite" aria-atomic="true" aria-labelledby="pilot-release-status-title">
+            <p class="eyebrow">本地小试门禁</p>
+            <h3 id="pilot-release-status-title">正在检查商品资料…</h3>
+            <p class="draft-summary" id="pilot-release-status-summary">只读取当前人工版本，不修改商品资料。</p>
+            <ul class="draft-blockers" id="pilot-release-reason-list"></ul>
+            <button id="download-pilot-review-package" type="button" disabled>下载本地小试审阅包</button>
+            <p class="boundary">只有绿灯时才能下载；包内含版本指纹，验封时还会与本地权威底账逐项核对。</p>
+            <label class="boundary" for="pilot-review-package-input">选择已下载的审阅包验封</label>
+            <input id="pilot-review-package-input" type="file" accept=".json,application/json">
+            <button id="inspect-pilot-review-package" type="button" disabled>检查封条与版本</button>
+            <div class="pilot-status-card" id="pilot-review-inspection-result" data-signal="yellow" role="status" aria-live="polite" aria-atomic="true">
+              <strong>尚未选择审阅包</strong>
+              <p class="draft-summary">验封只在本地读取，不保存上传的文件。</p>
+            </div>
+            <form id="pilot-acceptance-form">
+              <p class="eyebrow">人工验收回执</p>
+              <label for="pilot-acceptance-decision">验收结论</label>
+              <select id="pilot-acceptance-decision" disabled required>
+                <option value="">请选择</option>
+                <option value="accepted">通过，仅进入脱敏本地小试</option>
+                <option value="needs_follow_up">待补充</option>
+                <option value="rejected">不通过</option>
+              </select>
+              <label for="pilot-acceptance-reviewer">内部验收人编号</label>
+              <input id="pilot-acceptance-reviewer" type="text" disabled required>
+              <label for="pilot-acceptance-note">验收备注</label>
+              <textarea id="pilot-acceptance-note" disabled required></textarea>
+              <button id="submit-pilot-acceptance" type="submit" disabled>记录验收回执</button>
+              <p class="boundary">通过只代表可进入脱敏本地小试，不代表发布、对客或生产许可。</p>
+            </form>
+            <div id="pilot-acceptance-result" role="status" aria-live="polite"></div>
+            <section aria-labelledby="pilot-acceptance-history-title">
+              <h4 id="pilot-acceptance-history-title">验收历史</h4>
+              <div id="pilot-acceptance-history" aria-live="polite">尚无验收记录</div>
+            </section>
+            <p class="boundary">无论显示哪种状态，都禁止真实客户数据和外部动作，也不代表生产发布。</p>
+          </section>
+
+          <section class="draft-handoff" id="price-confirmation-panel" aria-labelledby="price-confirmation-title">
+            <div class="draft-handoff-head">
+              <div>
+                <p class="eyebrow">人工价格复核</p>
+                <h3 id="price-confirmation-title">确认候选价格并生成新版本</h3>
+              </div>
+              <span class="draft-status">不会自动发布</span>
+            </div>
+            <p class="draft-summary">请根据已经人工确认的同品类、同形态价格标准填写。确认后只新增内部版本，不会自动发布到商城或销售系统。</p>
+            <form id="price-confirmation-form">
+              <div class="field-grid">
+                <label>价格标准编号<input data-price-field="standard_code" required placeholder="例如 PRICE-TURQUOISE-001"></label>
+                <label>标准版本<input data-price-field="anchor_version" type="number" min="1" value="1" required></label>
+                <label>候选下限<input data-price-field="minimum" inputmode="decimal" required placeholder="例如 1200"></label>
+                <label>候选上限<input data-price-field="maximum" inputmode="decimal" required placeholder="例如 1500"></label>
+                <label class="wide">价格依据<input data-price-field="basis" required placeholder="例如：同品类同形态人工价格标准"></label>
+                <label>价格标准确认人<input data-price-field="anchor_confirmed_by" required></label>
+                <label>本次商品价格确认人<input data-price-field="confirmed_by" required></label>
+              </div>
+              <p class="boundary">系统会重新核对商品版本、金额和原始标准；候选被修改或页面过期时不会写入。</p>
+              <button class="primary" id="confirm-price-candidate" type="submit">人工确认并生成新版本</button>
+            </form>
+          </section>
+          </details>
+
+          <button id="edit-result" type="button">修改识别结果</button>
+          <form class="edit-form" id="edit-form">
+            <div class="field-grid">
+              <label class="wide">商品类型
+                <select data-field="product_type">
+                  <option value="">请选择</option>
+                  <option value="first_sale_bead">首售身份珠</option>
+                  <option value="legacy_material">旧料</option>
+                  <option value="redesign_output">改款成品</option>
+                </select>
+                <small>旧料仅用于服务与仓验，不作为商城可售商品；改款成品必须使用新 Bead ID，并保留来源工单与原始 Bead ID 谱系。</small>
+              </label>
+              <label class="wide">库存状态
+                <select data-field="inventory_status">
+                  <option value="">请商家确认</option>
+                  <option value="in_stock">现货可售</option>
+                  <option value="reserved">已预留</option>
+                  <option value="out_of_stock">暂无库存</option>
+                </select>
+                <small>库存必须由商家人工确认，系统不会根据图片判断。</small>
+              </label>
+              <label class="wide"><input data-field="main_image_selected" type="checkbox"> 将当前相册商品图设为主图
+                <small>主图只引用当前商品编码下的原图；保存新版本后才视为训练员确认。</small>
+              </label>
+              <label>材质名称<input data-field="material_label" required></label>
+              <label>商品形态<input data-field="product_form" required></label>
+              <label class="wide">图片可见特征（每行一条）<textarea data-field="visual_observations" required></textarea></label>
+              <label class="wide">可用销售卖点（每行一条）<textarea data-field="selling_points" required></textarea></label>
+              <label>规格备注<input data-field="specification_note"></label>
+              <label>品质观察备注<input data-field="quality_note"></label>
+              <label class="wide">瑕疵观察备注<input data-field="defect_note"></label>
+              <label>建议价格下限<input data-field="price_minimum" inputmode="decimal" placeholder="例如 1200"></label>
+              <label>建议价格上限<input data-field="price_maximum" inputmode="decimal" placeholder="例如 1500"></label>
+              <label class="wide">价格依据<input data-field="price_basis" placeholder="例如：训练员录入的同品类成交标准"></label>
+              <label class="wide"><strong>客户可见服务规则</strong><small>只填写商家已经确认的规则；三项全部留空表示暂不提供。</small></label>
+              <label>服务编码<input data-field="service_code" placeholder="例如 scan_identity"></label>
+              <label>适用条件<input data-field="service_eligibility" placeholder="例如 购买后可用"></label>
+              <label class="wide">客户说明<input data-field="service_customer_summary" placeholder="例如：购买后可扫码进入身份与服务页面"></label>
+            </div>
+            <p class="boundary">保存的是人工标准，不代表模型已训练。图片不能替代真伪、产地、品质或仓库验收结论。</p>
+            <p class="boundary">表单或语音修改后，上方会显示“未保存草稿”；只有点击保存才会成为新版本。</p>
+            <div class="form-actions">
+              <button class="primary" id="save-standard" type="submit">保存并作为新标准</button>
+              <button id="cancel-edit" type="button">取消修改</button>
+              <button id="rollback-result" type="button">撤销上一次修改</button>
+            </div>
+          </form>
+          <p id="review-message" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="review-nav">
+        <button id="previous-item" type="button">上一张</button>
+        <button id="skip-item" type="button">跳过</button>
+        <button id="next-item" type="button">下一张</button>
+      </div>
+    </section>
+
+    <section class="panel voice-panel" id="voice-control-bar" aria-labelledby="voice-title">
+      <div class="voice-shell">
+        <div class="voice-head">
+          <div>
+            <p class="eyebrow">训练员助手</p>
+            <h2 id="voice-title">语音控制训练员修改</h2>
+            <p class="intro">说出明确指令，系统只修改当前图片的未保存表单；检查无误后仍需手动保存。</p>
+          </div>
+          <span class="voice-state" id="voice-state">等待指令</span>
+        </div>
+        <div class="voice-input-row">
+          <button id="voice-toggle" type="button">开始语音</button>
+          <label>语音文字或手动指令
+            <textarea id="voice-transcript" maxlength="2000" placeholder="例如：材质改成绿松，卖点增加颜色醒目"></textarea>
+            <span class="voice-count" id="voice-character-count">0 / 2000 字</span>
+          </label>
+          <button class="primary" id="apply-text-command" type="button">应用文字指令</button>
+        </div>
+        <p id="voice-result" role="status" aria-live="polite">可以说“材质改成绿松”“下一张”或“撤销修改”。</p>
+        <p class="voice-examples">录音不会保存；本地服务只接收最终文字。语音不能直接保存、删除或生成真伪、产地、品质认证结论。不支持语音时仍可输入文字指令。</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { partitionImageFiles, partitionProductFolderFiles } from '/local/assets/image-file-selection.mjs?v=20260908-2';
+    import {
+      checkMicrophoneAccess,
+      describeRecognitionError,
+    } from '/local/assets/voice-permissions.mjs';
+    import { createVoiceTranscriptBuffer } from '/local/assets/voice-transcript.mjs';
+    import { candidateToDraft, formToDraft, reviewItemStatusText } from '/local/assets/recognition-preview.mjs?v=20260817-3';
+    import { buildServiceRules } from '/local/assets/service-rule-form.mjs?v=20260818-1';
+    import { buildCandidateDetailView, buildRecognitionStatusView } from '/local/assets/recognition-status-view.mjs?v=20260818-1';
+    import { openAlbumProductReview } from '/local/assets/album-review-open.mjs?v=20260908-1';
+    import { salesDeliveryStatusText, salesJourneyReviewUrl } from '/local/assets/sales-delivery-status.mjs?v=20260908-3';
+    import { buildProductPassportDraftView } from '/local/assets/product-passport-draft-view.mjs?v=20260817-3';
+    import { createPilotReviewRequestGuard } from '/local/assets/pilot-review-request-guard.mjs?v=20260830-1';
+    import { createPilotAcceptanceFormState } from '/local/assets/pilot-acceptance-form.mjs?v=20260830-1';
+    const photoInput = document.querySelector('#photo-input');
+    const folderInput = document.querySelector('#folder-input');
+    const employeePackageInput = document.querySelector('#employee-package-input');
+    const productFilesInput = document.querySelector('#product-files-input');
+    const productFolderInput = document.querySelector('#product-folder-input');
+    const productArchiveInput = document.querySelector('#product-archive-input');
+    const attachWorkbookInput = document.querySelector('#attach-workbook-input');
+    const attachWorkbookButton = document.querySelector('#attach-workbook');
+    const productFolderResult = document.querySelector('#product-folder-result');
+    const importEmployeePackageButton = document.querySelector('#import-employee-package');
+    const directWorkbookInput = document.querySelector('#direct-workbook-input');
+    const directImagesInput = document.querySelector('#direct-images-input');
+    const importWorkbookAndImages = document.querySelector('#import-workbook-and-images');
+    const directImportResult = document.querySelector('#direct-import-result');
+    const dropzone = document.querySelector('#dropzone');
+    const startButton = document.querySelector('#start-upload');
+    const statusBox = document.querySelector('#status');
+    const editForm = document.querySelector('#edit-form');
+    const pilotReviewDownloadButton = document.querySelector('#download-pilot-review-package');
+    const pilotReviewPackageInput = document.querySelector('#pilot-review-package-input');
+    const inspectPilotReviewPackageButton = document.querySelector('#inspect-pilot-review-package');
+    const pilotReviewInspectionResult = document.querySelector('#pilot-review-inspection-result');
+    const pilotAcceptanceForm = document.querySelector('#pilot-acceptance-form');
+    const pilotAcceptanceDecision = document.querySelector('#pilot-acceptance-decision');
+    const pilotAcceptanceReviewer = document.querySelector('#pilot-acceptance-reviewer');
+    const pilotAcceptanceNote = document.querySelector('#pilot-acceptance-note');
+    const submitPilotAcceptance = document.querySelector('#submit-pilot-acceptance');
+    const pilotAcceptanceResult = document.querySelector('#pilot-acceptance-result');
+    const pilotAcceptanceHistory = document.querySelector('#pilot-acceptance-history');
+    const albumInbox = document.querySelector('#album-review-inbox');
+    const albumInboxStatus = document.querySelector('#album-inbox-status');
+    const refreshAlbumInbox = document.querySelector('#refresh-album-inbox');
+    const albumConnectionState = document.querySelector('#album-connection-state');
+    const albumProductCount = document.querySelector('#album-product-count');
+    const albumImageCount = document.querySelector('#album-image-count');
+    const albumLastReceived = document.querySelector('#album-last-received');
+    const recognitionAgentState = document.querySelector('#recognition-agent-state');
+    const recognitionAgentBoundary = document.querySelector('#recognition-agent-boundary');
+    const entryModeTabs = Array.from(document.querySelectorAll('[data-entry-mode]'));
+    const entryModePanels = Array.from(document.querySelectorAll('[data-entry-panel]'));
+    let selectedFiles = [];
+    let employeePackageFile = null;
+    let directWorkbookFile = null;
+    let directImageFiles = [];
+    let currentBatch = null;
+    let reviewItems = [];
+    let reviewIndex = 0;
+    let currentResult = null;
+    let currentPreviewBase = null;
+    let currentRecognitionAggregate = null;
+    let voiceRecognition = null;
+    let voiceListening = false;
+    let voiceRecognitionActive = false;
+    let voiceStopRequested = false;
+    let voiceRestartTimer = null;
+    const voiceTranscriptBuffer = createVoiceTranscriptBuffer(2000);
+    const pilotReviewRequestGuard = createPilotReviewRequestGuard(templateCode => {
+      pilotReviewDownloadButton.disabled = true;
+      pilotReviewDownloadButton.dataset.templateCode = templateCode;
+    });
+    const pilotAcceptanceState = createPilotAcceptanceFormState(() => crypto.randomUUID());
+
+    async function loadRecognitionAgentStatus() {
+      try {
+        const response = await fetch('/local/api/recognition-agent-status');
+        if (!response.ok) throw new Error('recognition_agent_status_unavailable');
+        const payload = await response.json();
+        recognitionAgentState.textContent = payload.label_zh;
+        recognitionAgentState.classList.toggle('ready', payload.status === 'connected');
+        recognitionAgentBoundary.textContent = payload.external_upload
+          ? '使用在线视觉服务 · 结果需人工确认'
+          : (payload.status === 'connected'
+            ? '本机处理，图片不外传 · 结果需人工确认'
+            : '可继续人工录入');
+      } catch (_) {
+        recognitionAgentState.textContent = '图片识别 Agent 状态未知';
+        recognitionAgentBoundary.textContent = '可继续人工录入';
+      }
+    }
+
+    function updatePilotAcceptanceDraft() {
+      pilotAcceptanceState.updateDraft({
+        decision: pilotAcceptanceDecision.value,
+        reviewerId: pilotAcceptanceReviewer.value,
+        note: pilotAcceptanceNote.value,
+      });
+      submitPilotAcceptance.disabled = !pilotAcceptanceState.submission();
+    }
+
+    function applyPilotAcceptanceInspection(inspection, file) {
+      pilotAcceptanceState.applyInspection(inspection, file);
+      const allowed = pilotAcceptanceState.allowedDecisions();
+      for (const option of pilotAcceptanceDecision.options) {
+        option.disabled = Boolean(option.value) && !allowed.includes(option.value);
+      }
+      const enabled = allowed.length > 0;
+      pilotAcceptanceDecision.disabled = !enabled;
+      pilotAcceptanceReviewer.disabled = !enabled;
+      pilotAcceptanceNote.disabled = !enabled;
+      if (!allowed.includes(pilotAcceptanceDecision.value)) pilotAcceptanceDecision.value = '';
+      updatePilotAcceptanceDraft();
+    }
+
+    async function loadPilotAcceptanceHistory(templateCode) {
+      try {
+        const response = await fetch(`/local/api/training-results/${encodeURIComponent(templateCode)}/pilot-acceptances`);
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.message_zh || '读取失败');
+        const rows = payload.history.receipts.map(view => {
+          const row = document.createElement('p');
+          const receipt = view.receipt;
+          row.textContent = `${view.stale ? '已过期' : '当前'} · ${receipt.decision} · ${receipt.reviewer_id} · ${receipt.recorded_at}`;
+          return row;
+        });
+        pilotAcceptanceHistory.replaceChildren(...rows);
+        if (!rows.length) pilotAcceptanceHistory.textContent = '尚无验收记录';
+      } catch (_) {
+        pilotAcceptanceHistory.textContent = '验收历史暂时无法读取；不影响继续审核图片。';
+      }
+    }
+
+    function setStatus(title, detail = '', kind = '') {
+      statusBox.className = kind;
+      statusBox.replaceChildren();
+      const strong = document.createElement('strong');
+      strong.textContent = title;
+      const small = document.createElement('small');
+      small.textContent = detail;
+      statusBox.append(strong, small);
+    }
+
+    function lines(value) {
+      return value.split('\n').map(item => item.trim()).filter(Boolean);
+    }
+
+    function field(name) {
+      return editForm.querySelector(`[data-field="${name}"]`);
+    }
+
+    function fillList(element, values) {
+      element.replaceChildren(...(values || []).map(value => {
+        const item = document.createElement('li');
+        item.textContent = value;
+        return item;
+      }));
+    }
+
+    function renderAlbumReviewProducts(products) {
+      const cards = products.map(product => {
+        const card = document.createElement('article');
+        card.className = 'album-product-card';
+
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = `待审核 · v${product.package_version}`;
+
+        const title = document.createElement('h3');
+        title.textContent = product.product_code;
+
+        const meta = document.createElement('p');
+        meta.className = 'album-product-meta';
+        meta.textContent = `${product.category} · ${product.form} · ${product.images.length} 张图片`;
+
+        const strategy = document.createElement('p');
+        strategy.className = 'album-product-meta';
+        strategy.textContent = salesDeliveryStatusText(product);
+
+        const images = document.createElement('div');
+        images.className = 'album-image-grid';
+        for (const source of product.images.slice(0, 6)) {
+          const frame = document.createElement('div');
+          frame.className = 'album-image-frame';
+          const image = document.createElement('img');
+          image.src = source.image_url;
+          image.alt = `${product.product_code} ${source.role}`;
+          image.loading = 'lazy';
+          const failure = document.createElement('span');
+          failure.className = 'album-image-error';
+          failure.textContent = '图片未随交接包送达';
+          failure.hidden = true;
+          image.addEventListener('error', () => {
+            image.hidden = true;
+            failure.hidden = false;
+          }, { once: true });
+          frame.append(image, failure);
+          images.append(frame);
+        }
+
+        const imageNote = document.createElement('p');
+        imageNote.className = 'album-image-note';
+        imageNote.textContent = product.product_code.startsWith('SYNTHETIC-')
+          ? '合成测试图，不是真实商品照片'
+          : '相册整理交接的商品原图';
+
+        const openReview = document.createElement('button');
+        openReview.type = 'button';
+        openReview.dataset.warehouseAction = 'classification';
+        openReview.textContent = '进入逐张审核';
+        openReview.addEventListener('click', async () => {
+          openReview.disabled = true;
+          openReview.textContent = '正在打开…';
+          try {
+            const payload = await openAlbumProductReview(fetch, product);
+            localStorage.setItem('latestUploadBatchId', payload.batch.batch_id);
+            renderProgress(payload.batch);
+            reviewItems = payload.batch.items.filter(item => ['pending_review', 'reviewed'].includes(item.status));
+            reviewIndex = 0;
+            await renderReview();
+            openReview.textContent = payload.replayed ? '已打开原审核记录' : '已进入逐张审核';
+          } catch (error) {
+            openReview.textContent = error.message_zh || '暂时无法打开，请重新同步';
+            openReview.disabled = false;
+          }
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'album-product-actions';
+        actions.append(openReview);
+        const salesReviewUrl = salesJourneyReviewUrl(product);
+        if (salesReviewUrl) {
+          const openSalesReview = document.createElement('a');
+          openSalesReview.className = 'secondary';
+          openSalesReview.dataset.warehouseAction = 'sales';
+          openSalesReview.href = salesReviewUrl;
+          openSalesReview.textContent = '打开销售审核台';
+          actions.append(openSalesReview);
+        }
+        card.append(badge, title, meta, strategy, images, imageNote, actions);
+        return card;
+      });
+      albumInbox.replaceChildren(...cards);
+    }
+
+    function renderWarehouseFlow(payload = null) {
+      const products = payload?.products || [];
+      const summary = payload?.summary || {};
+      const albumState = document.querySelector('#warehouse-album-state');
+      if (payload?.status === 'error') {
+        albumState.textContent = '收件箱暂时不可读取，请检查连接后重试';
+        albumState.classList.add('pending');
+      } else if (payload) {
+        const syntheticOnly = products.length > 0 && products.every(product =>
+          String(product.product_code || '').startsWith('SYNTHETIC-')
+        );
+        albumState.textContent = `${syntheticOnly ? '合成演示 · ' : ''}${summary.product_count || 0} 件商品 · ${summary.image_count || 0} 张图片已由相册仓正式交接`;
+        albumState.classList.remove('pending');
+      }
+      const albumResult = document.querySelector('#warehouse-album-result');
+      if (payload) {
+        const examples = products.slice(0, 2).map(product =>
+          `${product.product_code}：${product.category} / ${product.form} / ${product.images?.length || 0} 张图`
+        );
+        albumResult.textContent = examples.length
+          ? `${products.every(product => String(product.product_code || '').startsWith('SYNTHETIC-')) ? '合成演示数据：' : ''}${examples.join('；')}${products.length > examples.length ? `；另有 ${products.length - examples.length} 件` : ''}`
+          : '暂无已交接商品';
+      }
+
+      const classificationState = document.querySelector('#warehouse-classification-state');
+      const classificationResult = document.querySelector('#warehouse-classification-result');
+      if (currentBatch?.items?.length) {
+        const reviewed = currentBatch.items.filter(item => item.status === 'reviewed').length;
+        const pending = currentBatch.items.filter(item => item.status === 'pending_review').length;
+        classificationState.textContent = `当前批次：${reviewed} 张已确认 · ${pending} 张待审核`;
+        classificationState.classList.toggle('pending', pending > 0);
+        classificationResult.textContent = currentPreviewBase
+          ? classificationResultText(currentPreviewBase)
+          : `批次有 ${currentBatch.items.length} 张图；打开某张审核后会显示它的材质/形态候选，当前仍须训练员逐张确认。`;
+      } else {
+        classificationState.textContent = products.length
+          ? `${products.length} 件商品可从上方收件箱进入逐张审核`
+          : '等待相册仓交接商品';
+        classificationState.classList.toggle('pending', !products.length);
+        classificationResult.textContent = '待打开审核批次读取候选结果；系统候选不等于人工确认。';
+      }
+
+      const styleStatus = document.querySelector('#style-bridge-status');
+      const styleResult = document.querySelector('#warehouse-style-result');
+      if (styleStatus && styleResult) {
+        const syncStyleStatus = () => {
+          const statusText = styleStatus.textContent.trim();
+          styleResult.textContent = statusText || '等待本机测试入口状态；未生成前没有风格图结果。';
+        };
+        syncStyleStatus();
+        if (!styleResult.dataset.observing) {
+          new MutationObserver(syncStyleStatus).observe(styleStatus, {
+            childList: true,
+            subtree: true,
+            characterData: true,
+          });
+          styleResult.dataset.observing = 'true';
+        }
+      }
+
+      const delivered = products.filter(product => product.sales_delivery_status === 'delivered').length;
+      const syntheticOnly = products.length > 0 && products.every(product =>
+        String(product.product_code || '').startsWith('SYNTHETIC-')
+      );
+      const previewReady = (currentBatch?.product_groups || []).filter(group =>
+        group['销售策略状态'] === 'preview_ready'
+        && group['销售策略输入预览']?.状态 === 'preview_only'
+      ).length;
+      const salesState = document.querySelector('#warehouse-sales-state');
+      salesState.textContent = delivered
+        ? `${syntheticOnly ? '合成演示数据 · ' : ''}相册收件箱中的 ${delivered} 件已送达销售预览；不代表上方分类审核批次已完成`
+        : previewReady
+          ? `本机分类批次已生成 ${previewReady} 件 preview_only 销售预览；独立销售仓接收尚未核验`
+          : '等待分类确认后生成本机销售预览；独立销售仓接收尚未核验';
+      salesState.classList.toggle('pending', !delivered);
+    }
+
+    function classificationResultText(result) {
+      const evidence = evidenceText(result);
+      const observationCount = Array.isArray(result.visual_observations) ? result.visual_observations.length : 0;
+      const sellingPointCount = Array.isArray(result.selling_points) ? result.selling_points.length : 0;
+      return `当前图解析：材质 ${result.material_label || '待补'}；形态 ${result.product_form || '待补'}；图片特征 ${observationCount} 条、销售卖点 ${sellingPointCount} 条。来源：${evidence}。仍需训练员确认，不能据此判断真伪/产地/品质。`;
+    }
+
+    function focusWarehouseTarget(step) {
+      const selectors = {
+        album: ['#refresh-album-inbox'],
+        classification: ['[data-warehouse-action="classification"]', '#edit-result'],
+        style: ['#style-bridge-product'],
+        sales: ['[data-warehouse-action="sales"]'],
+      }[step] || [];
+      let target = null;
+      for (const selector of selectors) {
+        target = Array.from(document.querySelectorAll(selector)).find(element =>
+          element.getClientRects().length > 0
+        );
+        if (target) break;
+      }
+      if (!target) {
+        const fallback = {
+          album: '#album-inbox-title',
+          classification: '#review-title',
+          style: '#style-bridge-title',
+          sales: '#album-inbox-title',
+        }[step];
+        target = document.querySelector(fallback);
+      }
+      if (!target) return;
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.focus({ preventScroll: true });
+      target.classList.add('warehouse-target-highlight');
+      window.setTimeout(() => target.classList.remove('warehouse-target-highlight'), 2400);
+    }
+
+    document.querySelectorAll('[data-warehouse-target]').forEach(button => {
+      button.addEventListener('click', () => focusWarehouseTarget(button.dataset.warehouseTarget));
+    });
+
+    async function loadAlbumReviewInbox() {
+      refreshAlbumInbox.disabled = true;
+      albumConnectionState.className = 'album-connection-chip';
+      albumConnectionState.textContent = '正在连接';
+      albumInboxStatus.textContent = '正在读取相册整理送达的商品…';
+      try {
+        const response = await fetch('/local/api/album-review-inbox');
+        const payload = await response.json();
+        if (!response.ok) throw new Error('album_inbox_unavailable');
+        const products = payload.products || [];
+        const summary = payload.summary || {};
+        renderAlbumReviewProducts(products);
+        renderWarehouseFlow(payload);
+        if (payload.status === 'unconfigured') {
+          albumConnectionState.textContent = '尚未配置';
+          albumInboxStatus.textContent = payload.message_zh;
+        } else if (!products.length) {
+          albumConnectionState.className = 'album-connection-chip connected';
+          albumConnectionState.textContent = '连接正常';
+          albumInboxStatus.textContent = '连接正常，暂时没有相册整理送达的新商品。';
+        } else {
+          albumConnectionState.className = 'album-connection-chip connected';
+          albumConnectionState.textContent = '同步正常';
+          albumInboxStatus.textContent = `已同步 ${products.length} 件商品；展示每件商品的最新资料版本。`;
+        }
+        albumProductCount.textContent = `商品 ${summary.product_count || 0} 件`;
+        albumImageCount.textContent = `图片 ${summary.image_count || 0} 张`;
+        albumLastReceived.textContent = summary.latest_received_at
+          ? `最近送达：${new Date(summary.latest_received_at).toLocaleString('zh-CN')}`
+          : '最近送达：暂无';
+      } catch (_) {
+        albumInbox.replaceChildren();
+        renderWarehouseFlow({ status: 'error' });
+        albumConnectionState.className = 'album-connection-chip error';
+        albumConnectionState.textContent = '连接异常';
+        albumInboxStatus.textContent = '相册收件箱暂时无法读取；本地上传功能仍可继续使用。';
+      } finally {
+        refreshAlbumInbox.disabled = false;
+      }
+    }
+
+    refreshAlbumInbox.addEventListener('click', () => {
+      loadAlbumReviewInbox().catch(() => {});
+    });
+
+    function selectEntryMode(mode, revealPanel = false) {
+      for (const tab of entryModeTabs) {
+        tab.setAttribute('aria-selected', String(tab.dataset.entryMode === mode));
+      }
+      for (const panel of entryModePanels) {
+        panel.hidden = panel.dataset.entryPanel !== mode;
+        if (panel.dataset.entryPanel === mode && revealPanel) {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    function openFilePicker(input) {
+      try {
+        if (typeof input.showPicker === 'function') input.showPicker();
+        else input.click();
+      } catch (_) {
+        input.click();
+      }
+    }
+
+    function openEntryModeChooser(mode) {
+      if (mode === 'workbook') {
+        if (!directWorkbookFile) openFilePicker(directWorkbookInput);
+        else if (!directImageFiles.length) openFilePicker(directImagesInput);
+        return;
+      }
+      if (mode === 'package') {
+        openFilePicker(employeePackageInput);
+        return;
+      }
+      if (mode === 'images') openFilePicker(photoInput);
+    }
+
+    for (const tab of entryModeTabs) {
+      tab.addEventListener('click', () => {
+        selectEntryMode(tab.dataset.entryMode, true);
+        openEntryModeChooser(tab.dataset.entryMode);
+      });
+    }
+
+    function selectFiles(files) {
+      const selection = partitionImageFiles(files);
+      selectedFiles = selection.accepted;
+      const summary = document.querySelector('#selection-summary');
+      if (!selectedFiles.length) {
+        summary.textContent = selection.rejected.length
+          ? `没有找到可上传图片；已忽略 ${selection.rejected.length} 个非图片文件。`
+          : '尚未选择图片';
+        startButton.disabled = true;
+        return;
+      }
+      const examples = selectedFiles.slice(0, 3).map(file => file.name).join('、');
+      const ignored = selection.rejected.length
+        ? `；已忽略 ${selection.rejected.length} 个非图片文件`
+        : '';
+      summary.textContent = `已选择 ${selectedFiles.length} 张：${examples}${selectedFiles.length > 3 ? '…' : ''}${ignored}`;
+      startButton.disabled = false;
+      startButton.textContent = '开始批量上传';
+    }
+
+    async function validateEmployeePackage(file) {
+      const result = document.querySelector('#employee-package-result');
+      result.textContent = '正在检查资料包…';
+      const form = new FormData();
+      form.append('file', file);
+      try {
+        const response = await fetch('/local/api/employee-package/validate', { method: 'POST', body: form });
+        const payload = await response.json();
+        if (!response.ok) throw payload;
+        result.textContent = `资料包检查完成：${payload.product_count} 件商品、${payload.image_count} 张图片。${payload.next_step_zh}${employeePackageWarningText(payload)}`;
+        importEmployeePackageButton.disabled = false;
+      } catch (error) {
+        result.textContent = employeePackageErrorText(error, '资料包暂时无法检查，请重新选择后再试。');
+        importEmployeePackageButton.disabled = true;
+      }
+    }
+
+    document.querySelector('#choose-images').addEventListener('click', () => openFilePicker(photoInput));
+    document.querySelector('#choose-folder').addEventListener('click', () => openFilePicker(folderInput));
+    document.querySelector('#choose-employee-package').addEventListener('click', () => openFilePicker(employeePackageInput));
+    document.querySelector('#choose-direct-workbook').addEventListener('click', () => openFilePicker(directWorkbookInput));
+    document.querySelector('#choose-direct-images').addEventListener('click', () => openFilePicker(directImagesInput));
+    photoInput.addEventListener('change', () => selectFiles(photoInput.files || []));
+    folderInput.addEventListener('change', () => selectFiles(folderInput.files || []));
+    employeePackageInput.addEventListener('change', () => {
+      const file = employeePackageInput.files?.[0];
+      employeePackageFile = file || null;
+      importEmployeePackageButton.disabled = true;
+      if (file) validateEmployeePackage(file);
+    });
+    function updateDirectImportState() {
+      importWorkbookAndImages.disabled = !(directWorkbookFile && directImageFiles.length);
+      const workbookText = directWorkbookFile ? directWorkbookFile.name : '未选择表格';
+      directImportResult.textContent = `${workbookText}；已选择 ${directImageFiles.length} 张图片`;
+    }
+    function employeePackageErrorText(error, fallback) {
+      const unmatched = Array.isArray(error.unmatched_image_files)
+        ? ` 未匹配：${error.unmatched_image_files.join('、')}`
+        : '';
+      const missing = Array.isArray(error.missing_main_image_files)
+        ? ` Excel 中找不到对应图片：${error.missing_main_image_files.join('、')}`
+        : '';
+      return `${error.message_zh || fallback}${missing}${unmatched}`;
+    }
+    function employeePackageWarningText(payload) {
+      const warnings = Array.isArray(payload.filename_warnings) ? payload.filename_warnings : [];
+      const spreadsheetWarning = payload.spreadsheet_warning_zh || '';
+      if (!warnings.length) return spreadsheetWarning;
+      const mappings = warnings
+        .map(warning => `${warning.original_filename} 按 ${warning.interpreted_as} 识别`)
+        .join('；');
+      return `${spreadsheetWarning ? `${spreadsheetWarning} ` : ''}已容错归组：${mappings}。原文件名保持不变。`;
+    }
+    directWorkbookInput.addEventListener('change', () => {
+      directWorkbookFile = directWorkbookInput.files?.[0] || null;
+      updateDirectImportState();
+    });
+    directImagesInput.addEventListener('change', () => {
+      directImageFiles = partitionImageFiles(directImagesInput.files || []).accepted;
+      updateDirectImportState();
+    });
+    async function importWorkbookAndImageFiles(workbook, images, resultElement) {
+      resultElement.textContent = '正在自动匹配商品资料…';
+      const form = new FormData();
+      form.append('workbook', workbook);
+      for (const image of images) form.append('images', image);
+      try {
+        const response = await fetch('/local/api/employee-package/import-parts', { method: 'POST', body: form });
+        const payload = await response.json();
+        if (!response.ok) throw payload;
+        localStorage.setItem('latestUploadBatchId', payload.batch.batch_id);
+        renderProgress(payload.batch);
+        reviewItems = payload.batch.items.filter(item => ['pending_review', 'reviewed'].includes(item.status));
+        reviewIndex = 0;
+        await renderReview();
+        resultElement.textContent = `${payload.message_zh} 共 ${payload.batch.product_count} 件商品、${payload.batch.counts.success} 张图片。${employeePackageWarningText(payload)}`;
+      } catch (error) {
+        resultElement.textContent = employeePackageErrorText(error, '表格和图片暂时无法导入，请检查后重试。');
+      }
+    }
+    document.querySelector('#choose-product-files').addEventListener('click', () => openFilePicker(productFilesInput));
+    document.querySelector('#choose-product-folder').addEventListener('click', () => openFilePicker(productFolderInput));
+    document.querySelector('#choose-product-archive').addEventListener('click', () => openFilePicker(productArchiveInput));
+    attachWorkbookButton.addEventListener('click', () => openFilePicker(attachWorkbookInput));
+    async function importCombinedProductFiles(files) {
+      const selection = partitionProductFolderFiles(files);
+      if (selection.error) {
+        productFolderResult.textContent = selection.error;
+        return;
+      }
+      await importWorkbookAndImageFiles(selection.workbook, selection.images, productFolderResult);
+    }
+    productFilesInput.addEventListener('change', () => importCombinedProductFiles(productFilesInput.files || []));
+    productFolderInput.addEventListener('change', () => importCombinedProductFiles(productFolderInput.files || []));
+    productArchiveInput.addEventListener('change', async () => {
+      const file = productArchiveInput.files?.[0];
+      if (!file) return;
+      await importEmployeePackage(file, productFolderResult);
+    });
+    attachWorkbookInput.addEventListener('change', async () => {
+      const file = attachWorkbookInput.files?.[0];
+      if (!file || !currentBatch) return;
+      productFolderResult.textContent = '正在按商品编码补充 Excel 资料…';
+      const form = new FormData();
+      form.append('file', file);
+      try {
+        const response = await fetch(
+          `/local/api/upload-batches/${currentBatch.batch_id}/workbook`,
+          { method: 'POST', body: form },
+        );
+        const payload = await response.json();
+        if (!response.ok) throw payload;
+        const batchId = payload.batch.batch_id;
+        localStorage.setItem('latestUploadBatchId', batchId);
+        renderProgress(payload.batch);
+        reviewItems = payload.batch.items.filter(item => ['pending_review', 'reviewed'].includes(item.status));
+        reviewIndex = 0;
+        await renderReview();
+        productFolderResult.textContent = `${payload.message_zh} 共 ${payload.batch.product_count} 件商品、${payload.batch.counts.success} 张图片。`;
+      } catch (error) {
+        productFolderResult.textContent = employeePackageErrorText(error, 'Excel 与当前图片编码未对上，原批次没有改动。');
+      } finally {
+        attachWorkbookInput.value = '';
+      }
+    });
+    importWorkbookAndImages.addEventListener('click', async () => {
+      if (!directWorkbookFile || !directImageFiles.length) return;
+      importWorkbookAndImages.disabled = true;
+      await importWorkbookAndImageFiles(directWorkbookFile, directImageFiles, directImportResult);
+      importWorkbookAndImages.disabled = false;
+    });
+    async function importEmployeePackage(file, result) {
+      result.textContent = '正在清点资料包…';
+      let progressTimer = null;
+      try {
+        const validationForm = new FormData();
+        validationForm.append('file', file);
+        const validationResponse = await fetch(
+          '/local/api/employee-package/validate',
+          { method: 'POST', body: validationForm },
+        );
+        const inventory = await validationResponse.json();
+        if (!validationResponse.ok) throw inventory;
+        const currentBatchHasWorkbookData = Boolean(currentBatch?.items?.some(
+          item => item.product_name || item.merchant_price_reference,
+        ));
+        if (inventory.workbook_count === 0) {
+          result.textContent = `这个压缩包“${file.name}”有 ${inventory.image_count} 张图片，但没有 Excel。请选择同时包含 Excel 和图片的商品资料压缩包。`;
+          return;
+        }
+        result.textContent = archiveProgressText(inventory, {
+          success: 0,
+          failed: 0,
+        });
+        const canResumeCurrentBatch = currentBatch
+          && currentBatch.counts.expected === inventory.image_count
+          && currentBatch.counts.uploaded < currentBatch.counts.expected
+          && currentBatchHasWorkbookData === (inventory.workbook_count === 1);
+        let created;
+        if (canResumeCurrentBatch) {
+          created = { batch: currentBatch };
+          result.textContent = `继续未完成导入：已保留 ${currentBatch.counts.success} 张，正在核对并补齐剩余图片…`;
+        } else {
+          const createResponse = await fetch('/local/api/upload-batches', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ expected_count: inventory.image_count }),
+          });
+          created = await createResponse.json();
+          if (!createResponse.ok) throw created;
+        }
+        const batchId = created.batch.batch_id;
+        localStorage.setItem('latestUploadBatchId', batchId);
+        renderProgress(created.batch);
+        progressTimer = setInterval(() => fetchBatch(batchId)
+          .then(batch => { result.textContent = archiveProgressText(inventory, batch.counts); })
+          .catch(() => {}), 500);
+        const form = new FormData();
+        form.append('file', file);
+        form.append('batch_id', batchId);
+        const response = await fetch('/local/api/employee-package/import', { method: 'POST', body: form });
+        const payload = await response.json();
+        if (!response.ok) throw payload;
+        localStorage.setItem('latestUploadBatchId', payload.batch.batch_id);
+        renderProgress(payload.batch);
+        reviewItems = payload.batch.items.filter(item => ['pending_review', 'reviewed'].includes(item.status));
+        reviewIndex = 0;
+        await renderReview();
+        const counts = payload.batch.counts;
+        result.textContent = `处理完成：Excel ${payload.workbook_count} 份｜商品 ${payload.batch.product_count} 件｜图片成功 ${counts.success} 张｜视频 ${payload.video_count} 个｜失败 ${counts.failed} 张。${employeePackageWarningText(payload)}`;
+      } catch (error) {
+        result.textContent = employeePackageErrorText(error, '资料包导入失败，请重新选择后再试。');
+      } finally {
+        if (progressTimer !== null) clearInterval(progressTimer);
+      }
+    }
+
+    function archiveProgressText(inventory, counts) {
+      return `正在处理：Excel ${inventory.workbook_count} 份｜图片 ${inventory.image_count} 张｜视频 ${inventory.video_count} 个｜已成功 ${counts.success} 张｜失败 ${counts.failed} 张`;
+    }
+    importEmployeePackageButton.addEventListener('click', async () => {
+      if (!employeePackageFile) return;
+      const result = document.querySelector('#employee-package-result');
+      importEmployeePackageButton.disabled = true;
+      await importEmployeePackage(employeePackageFile, result);
+      importEmployeePackageButton.disabled = false;
+    });
+    for (const eventName of ['dragenter', 'dragover']) {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        dropzone.classList.add('dragging');
+      });
+    }
+    for (const eventName of ['dragleave', 'drop']) {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        dropzone.classList.remove('dragging');
+      });
+    }
+    dropzone.addEventListener('drop', event => selectFiles(event.dataTransfer.files));
+    dropzone.addEventListener('click', () => openFilePicker(photoInput));
+
+    function renderProgress(batch) {
+      currentBatch = batch;
+      const reviewableItems = batch.items.filter(item => ['pending_review', 'reviewed'].includes(item.status));
+      attachWorkbookButton.hidden = !reviewableItems.length || reviewableItems.some(
+        item => item.product_name || item.merchant_price_reference,
+      );
+      window.dispatchEvent(new CustomEvent('style-bridge-batch-changed', { detail: { batchId: batch.batch_id } }));
+      const counts = batch.counts;
+      renderWarehouseFlow();
+      const isComplete = counts.uploaded >= counts.expected && counts.expected > 0;
+      document.querySelector('#progress-panel').classList.add('visible');
+      const progressTitle = document.querySelector('#progress-title');
+      progressTitle.textContent = isComplete ? '导入完成' : '批次处理中';
+      document.querySelector('#batch-code').textContent = batch.batch_id;
+      const progress = document.querySelector('#upload-progress');
+      progress.max = Math.max(1, counts.expected);
+      progress.value = counts.uploaded;
+      document.querySelector('#count-success').textContent = counts.success;
+      document.querySelector('#count-duplicate').textContent = counts.duplicate;
+      document.querySelector('#count-failed').textContent = counts.failed;
+      document.querySelector('#count-pending').textContent = counts.pending_review;
+      document.querySelector('#count-reviewed').textContent = counts.reviewed;
+    }
+
+    async function fetchBatch(batchId) {
+      const response = await fetch(`/local/api/upload-batches/${batchId}`);
+      const payload = await response.json();
+      if (!response.ok) throw payload;
+      renderProgress(payload.batch);
+      reviewItems = payload.batch.items.filter(item => ['pending_review', 'reviewed'].includes(item.status));
+      return payload.batch;
+    }
+
+    async function uploadOne(batchId, file, position) {
+      const form = new FormData();
+      form.append('position', position);
+      form.append('file', file);
+      const response = await fetch(`/local/api/upload-batches/${batchId}/images`, { method: 'POST', body: form });
+      const payload = await response.json();
+      await fetchBatch(batchId);
+      return { response, payload };
+    }
+
+    async function uploadWithThreeWorkers(batchId, files) {
+      let cursor = 0;
+      const failures = [];
+      async function worker() {
+        while (cursor < files.length) {
+          const position = cursor++;
+          try {
+            const { response, payload } = await uploadOne(batchId, files[position], position);
+            if (!response.ok) failures.push({ position, payload });
+          } catch (error) {
+            failures.push({ position, payload: error });
+          }
+        }
+      }
+      await Promise.all(Array.from({ length: Math.min(3, files.length) }, worker));
+      return failures;
+    }
+
+    startButton.addEventListener('click', async () => {
+      if (!selectedFiles.length) return;
+      startButton.disabled = true;
+      startButton.textContent = '正在逐张处理…';
+      setStatus('正在建立上传批次', '每次同时处理 3 张，单张失败不会影响其他图片。');
+      try {
+        const response = await fetch('/local/api/upload-batches', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ expected_count: selectedFiles.length }),
+        });
+        const payload = await response.json();
+        if (!response.ok) throw payload;
+        const batchId = payload.batch.batch_id;
+        localStorage.setItem('latestUploadBatchId', batchId);
+        renderProgress(payload.batch);
+        const failures = await uploadWithThreeWorkers(batchId, selectedFiles);
+        await fetchBatch(batchId);
+        if (failures.length) {
+          setStatus('批次已处理，部分图片需要重试', `失败 ${failures.length} 张；已成功的图片不会重复上传。`, 'error');
+        } else {
+          setStatus('批量上传完成', '现在可以在下方一张张审核并修改。', 'success');
+        }
+        reviewIndex = Math.max(0, reviewItems.findIndex(item => item.status === 'pending_review'));
+        await renderReview();
+        startButton.textContent = '重新选择一批图片';
+      } catch (error) {
+        setStatus(error.message_zh || '批量上传暂时无法继续。', error.next_step_zh || '请刷新后重试。', 'error');
+        startButton.textContent = '重新开始批量上传';
+      } finally {
+        startButton.disabled = false;
+      }
+    });
+
+    function populateForm(result) {
+      field('main_image_selected').checked = Boolean(result.main_image_template_code);
+      field('product_type').value = result.product_type || '';
+      field('inventory_status').value = result.inventory_status || '';
+      field('material_label').value = result.material_label || '待确认';
+      field('product_form').value = result.product_form || '待确认';
+      field('visual_observations').value = (result.visual_observations || []).join('\n');
+      field('selling_points').value = (result.selling_points || []).join('\n');
+      field('specification_note').value = result.specification_note || '';
+      field('quality_note').value = result.quality_note || '';
+      field('defect_note').value = result.defect_note || '';
+      field('price_minimum').value = result.price_range?.minimum || '';
+      field('price_maximum').value = result.price_range?.maximum || '';
+      field('price_basis').value = result.price_range?.basis || '';
+      const serviceRule = result.service_rules?.[0] || {};
+      field('service_code').value = serviceRule.service_code || '';
+      field('service_eligibility').value = serviceRule.eligibility || '';
+      field('service_customer_summary').value = serviceRule.customer_summary || '';
+    }
+
+    function evidenceText(result) {
+      if (result?.preview_source === 'draft_unsaved') return '未保存草稿 · 等待训练员保存';
+      if (result?.preview_source === 'ai_candidate') return '系统识别候选 · 等待训练员确认';
+      if (result?.preview_source === 'historical_reference') return '历史人工标签参考 · 相同图片匹配';
+      if (result?.match_method === 'exact_sha256') return '历史人工确认 · 相同图片匹配';
+      const evidence = result?.material_evidence || result?.label_source;
+      if (evidence === 'trainer_confirmed') return '训练员确认';
+      if (evidence === 'merchant_declared') return '商家提供';
+      return '系统初步占位 · 未命中已确认样本';
+    }
+
+    function renderLatestResult(result) {
+      const safeResult = result || {
+        material_label: '待确认',
+        product_form: '待确认',
+        visual_observations: ['等待上传或选择商品图'],
+        selling_points: ['待训练员确认后生成'],
+        price_range: null,
+        template_code: '',
+        version: 1,
+        material_evidence: 'system_initial',
+      };
+      document.querySelector('#latest-material').textContent = safeResult.material_label || '待确认';
+      document.querySelector('#latest-meta').textContent = safeResult.template_code
+        ? `图片编码：${safeResult.template_code} · 版本 ${safeResult.version || 1}`
+        : '未命中已确认样本';
+      document.querySelector('#latest-product-form').textContent = `商品形态：${safeResult.product_form || '待确认'}`;
+      document.querySelector('#latest-main-image-state').textContent = safeResult.main_image_template_code
+        ? `主图：当前相册商品图（${safeResult.main_image_template_code}）`
+        : '主图：待训练员确认';
+      fillList(document.querySelector('#latest-visual-observations'), safeResult.visual_observations);
+      fillList(document.querySelector('#latest-selling-points'), safeResult.selling_points);
+      document.querySelector('#latest-price-state').textContent = safeResult.price_range
+        ? `建议价格：¥${safeResult.price_range.minimum}–¥${safeResult.price_range.maximum}（${safeResult.price_range.basis}）`
+        : `价格状态：${safeResult.price_reason || '待录入该品类的价格标准'}`;
+      document.querySelector('#latest-evidence').textContent = `结果来源：${evidenceText(safeResult)} · 真伪/产地/品质未验证 · 仓验待完成`;
+    }
+
+    function renderResult(result) {
+      currentResult = result;
+      document.querySelector('#material-label').textContent = result.material_label || '待确认';
+      document.querySelector('#product-form').textContent = `商品形态：${result.product_form || '待确认'} · 版本 ${result.version || 1}`;
+      fillList(document.querySelector('#visual-observations'), result.visual_observations);
+      fillList(document.querySelector('#selling-points'), result.selling_points);
+      document.querySelector('#price-state').textContent = result.price_range
+        ? `建议价格：¥${result.price_range.minimum}–¥${result.price_range.maximum}（${result.price_range.basis}）`
+        : '价格状态：待录入该品类的价格标准';
+      populateForm(result);
+      document.querySelector('#rollback-result').disabled = !result.can_rollback;
+      document.querySelector('#price-confirmation-panel').hidden = Boolean(result.price_range);
+      renderLatestResult(result);
+    }
+
+    function historicalReferenceToDraft(reference, templateCode) {
+      return {
+        template_code: templateCode,
+        main_image_template_code: templateCode,
+        version: '历史参考',
+        material_label: reference.material_label || '待确认',
+        product_form: reference.product_form || '待确认',
+        visual_observations: reference.visual_observations || [],
+        selling_points: reference.selling_points || [],
+        specification_note: reference.specification_note || '',
+        quality_note: '',
+        defect_note: '',
+        price_range: null,
+        service_rules: [],
+        price_reason: '待录入该品类的价格标准',
+        preview_source: 'historical_reference',
+      };
+    }
+
+    function formValues() {
+      const values = {};
+      for (const name of [
+        'product_type', 'inventory_status', 'material_label', 'product_form', 'visual_observations', 'selling_points',
+        'specification_note', 'quality_note', 'defect_note', 'price_minimum',
+        'price_maximum', 'price_basis', 'service_code', 'service_eligibility',
+        'service_customer_summary',
+      ]) values[name] = field(name).value;
+      values.main_image_selected = field('main_image_selected').checked;
+      return values;
+    }
+
+    function renderDraftPreview() {
+      if (!currentPreviewBase) return;
+      renderLatestResult(formToDraft(currentPreviewBase, formValues()));
+    }
+
+    function renderItemMeta(item) {
+      const context = currentReviewProductContext();
+      const reviewedImageCount = context.items.filter(entry => entry.status === 'reviewed').length;
+      const productReady = reviewedImageCount === context.items.length;
+      document.querySelector('#review-product-code').textContent =
+        `商品序号：${item['商品序号'] || item.position + 1} · 商品编码：${item['商品编码'] || item.template_code} · 本商品共 ${context.items.length} 张图`;
+      const productStatus = document.querySelector('#review-product-status');
+      productStatus.classList.toggle('ready', productReady);
+      productStatus.textContent = productReady
+        ? `本商品 ${context.items.length} 张图片已全部确认 · 可进入销售策略预览`
+        : `本商品已确认 ${reviewedImageCount} / ${context.items.length} 张 · 全部确认后进入销售策略预览`;
+      const confirmProduct = document.querySelector('#confirm-current-product');
+      confirmProduct.disabled = productReady;
+      confirmProduct.textContent = productReady ? '本商品已确认' : `确认本商品全部 ${context.items.length} 张图片`;
+      const salesPreview = document.querySelector('#sales-strategy-preview');
+      salesPreview.hidden = !productReady;
+      const mainImages = context.items.filter(entry => entry['图片角色'] === '主图').length;
+      const detailImages = context.items.length - mainImages;
+      document.querySelector('#sales-strategy-preview-summary').textContent =
+        `商品编码 ${item['商品编码'] || item.template_code} · ${context.items.length} 张可用图片（主图 ${mainImages}、附图 ${detailImages}）· 等待销售之旅验收`;
+      const previewSource = context.items[0].initial_result || {};
+      document.querySelector('#sales-strategy-preview-facts').textContent =
+        `材质：${previewSource.material_label || '待确认'} · 形态：${previewSource.product_form || '待确认'} · 价格：${item['Excel建议价格'] ? `¥${item['Excel建议价格']}（待确认）` : '待录入'}`;
+      fillList(
+        document.querySelector('#sales-strategy-preview-observations'),
+        [...new Set(context.items.flatMap(entry => entry.initial_result?.visual_observations || []))],
+      );
+      fillList(
+        document.querySelector('#sales-strategy-preview-selling-points'),
+        [...new Set(context.items.flatMap(entry => entry.initial_result?.selling_points || []))],
+      );
+      document.querySelector('#result-meta').textContent =
+        `${item['图片角色'] || '待确认'} · 图片编码：${item.template_code} · 文件：${item.filename} · ${reviewItemStatusText(item)}。下方文字均可由你修改。`;
+      document.querySelector('#review-product-name').textContent =
+        item['商品名称'] || '商品名称待补充';
+      const imported = item.initial_result || {};
+      const importedParts = [
+        imported.material_label && imported.material_label !== '待确认' ? `材质：${imported.material_label}` : '',
+        imported.product_form && imported.product_form !== '待确认' ? `形态：${imported.product_form}` : '',
+      ].filter(Boolean);
+      const sourceLabel = item.source_system === 'album_organizer'
+        ? '相册整理提供'
+        : (item['商品编码'] ? '员工表格提供' : '本地上传');
+      document.querySelector('#review-import-source').textContent = importedParts.length
+        ? `${sourceLabel} · ${importedParts.join(' · ')} · 待人工确认`
+        : `${sourceLabel}：未提供材质或形态，待人工确认`;
+      document.querySelector('#review-excel-price').textContent = item['Excel建议价格']
+        ? `Excel 建议价格：¥${item['Excel建议价格']}（参考值，尚未确认价格区间）`
+        : 'Excel 建议价格：未提供';
+    }
+
+    function groupedReviewItems() {
+      const groups = [];
+      const byProduct = new Map();
+      for (const item of reviewItems) {
+        const key = `${item['商品序号'] || item.position + 1}\u0000${item['商品编码'] || item.template_code}`;
+        let group = byProduct.get(key);
+        if (!group) {
+          group = { key, items: [] };
+          byProduct.set(key, group);
+          groups.push(group);
+        }
+        group.items.push(item);
+      }
+      return groups;
+    }
+
+    function currentReviewProductContext() {
+      const groups = groupedReviewItems();
+      const current = reviewItems[reviewIndex];
+      let groupIndex = groups.findIndex(group => group.items.some(item => item.item_id === current?.item_id));
+      if (groupIndex < 0) groupIndex = 0;
+      const items = groups[groupIndex]?.items || (current ? [current] : []);
+      let imageIndex = items.findIndex(item => item.item_id === current?.item_id);
+      if (imageIndex < 0) imageIndex = 0;
+      return { groups, groupIndex, items, imageIndex };
+    }
+
+    function renderProductImageChoices(context, selectedItem) {
+      const strip = document.querySelector('#review-product-images');
+      strip.replaceChildren();
+      context.items.forEach((item, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `product-image-choice${item.item_id === selectedItem.item_id ? ' active' : ''}`;
+        button.setAttribute('aria-label', `查看本商品第 ${index + 1} 张，${item['图片角色'] || '图片'}`);
+        const image = document.createElement('img');
+        image.alt = '';
+        image.src = `/local/api/upload-batches/${currentBatch.batch_id}/items/${item.item_id}/image`;
+        const label = document.createElement('span');
+        label.textContent = `${item['图片角色'] || '图片'} ${index + 1}/${context.items.length}`;
+        button.append(image, label);
+        button.addEventListener('click', async () => {
+          reviewIndex = reviewItems.findIndex(entry => entry.item_id === item.item_id);
+          await renderReview();
+        });
+        strip.append(button);
+      });
+    }
+
+    function renderRecognitionLayers(aggregate) {
+      currentRecognitionAggregate = aggregate;
+      const candidate = aggregate.ai_candidate;
+      const view = buildRecognitionStatusView(candidate, aggregate.recognition_runtime);
+      const status = document.querySelector('#ai-recognition-status');
+      const detail = document.querySelector('#ai-recognition-detail');
+      status.textContent = view.statusText;
+      detail.textContent = view.detailText;
+      const state = document.querySelector('#ai-recognition-state');
+      state.textContent = view.stateLabel;
+      state.className = `recognition-state ${view.state}`;
+      const retry = document.querySelector('#retry-recognition');
+      retry.disabled = !view.retryEnabled;
+      retry.textContent = view.retryLabel;
+
+      const candidateDetails = buildCandidateDetailView(candidate);
+      const detailPanel = document.querySelector('#ai-candidate-details');
+      detailPanel.hidden = !candidateDetails.visible;
+      fillList(
+        document.querySelector('#ai-visual-observations'),
+        candidateDetails.visualObservations,
+      );
+      fillList(
+        document.querySelector('#ai-selling-point-drafts'),
+        candidateDetails.sellingPointDrafts,
+      );
+      fillList(
+        document.querySelector('#ai-specification-candidates'),
+        candidateDetails.specificationCandidates,
+      );
+      document.querySelector('#ai-price-status').textContent = candidateDetails.priceStatusText;
+      document.querySelector('#ai-verification-boundary').textContent = candidateDetails.verificationText;
+
+      const historyPanel = document.querySelector('#historical-reference-panel');
+      const history = aggregate.historical_reference || (
+        candidate?.status === 'fallback_exact_match'
+          ? {
+              material_label: candidate.material_candidates?.[0]?.label,
+              product_form: candidate.product_form_candidate,
+            }
+          : null
+      );
+      if (history) {
+        historyPanel.hidden = false;
+        document.querySelector('#historical-reference-detail').textContent =
+          `材质：${history.material_label || '待确认'}；形态：${history.product_form || '待确认'}。来源：相同图片的人工确认版本。`;
+      } else {
+        historyPanel.hidden = true;
+        document.querySelector('#historical-reference-detail').textContent = '';
+      }
+    }
+
+    document.querySelector('#retry-recognition').addEventListener('click', async () => {
+      const item = reviewItems[reviewIndex];
+      if (!item) return;
+      const button = document.querySelector('#retry-recognition');
+      button.disabled = true;
+      button.textContent = '正在识别…';
+      try {
+        const response = await fetch(`/local/api/recognitions/${item.template_code}/retry`, { method: 'POST' });
+        const payload = await response.json();
+        if (!response.ok) {
+          document.querySelector('#review-message').textContent = payload.message_zh || '重新识别失败。';
+          renderRecognitionLayers(currentRecognitionAggregate || {});
+          return;
+        }
+        renderRecognitionLayers(payload);
+        if (!payload.current_human_version && payload.ai_candidate?.status === 'succeeded') {
+          currentPreviewBase = candidateToDraft(payload.ai_candidate);
+          populateForm(currentPreviewBase);
+          renderLatestResult(currentPreviewBase);
+        }
+        document.querySelector('#review-message').textContent =
+          payload.ai_candidate?.status === 'succeeded'
+            ? '新的系统候选已生成，请训练员复核。'
+            : '重新检测完成，当前仍未生成系统候选。';
+      } catch (_) {
+        document.querySelector('#review-message').textContent = '重新识别暂时无法连接，请稍后再试。';
+        renderRecognitionLayers(currentRecognitionAggregate || {});
+      }
+    });
+
+    function renderProductPassportDraft(draft, message = '') {
+      const view = buildProductPassportDraftView(draft);
+      document.querySelector('#draft-publication-status').textContent = view.statusLabel;
+      document.querySelector('#draft-product-type').textContent = `商品类型：${view.productTypeLabel}`;
+      document.querySelector('#draft-inventory-status').textContent = `库存状态：${view.inventoryStatusLabel}`;
+      document.querySelector('#draft-mall-label').textContent = view.mallLabel;
+      document.querySelector('#draft-sales-label').textContent = view.salesLabel;
+      document.querySelector('#draft-summary').textContent = message || (
+        `当前共 ${view.totalCount} 个缺项：${view.editableCount} 个本页可补，${view.integrationCount} 个待系统接入。`
+      );
+      const blockerItems = view.items.map(item => {
+        const entry = document.createElement('li');
+        entry.className = 'draft-blocker';
+        const head = document.createElement('div');
+        head.className = 'draft-blocker-head';
+        const title = document.createElement('strong');
+        title.textContent = item.message_zh;
+        const group = document.createElement('span');
+        group.textContent = item.groupLabel;
+        group.classList.toggle('integration', item.group === 'system_integration');
+        const action = document.createElement('p');
+        action.textContent = item.required_action_zh;
+        head.append(title, group);
+        entry.append(head, action);
+        return entry;
+      });
+      document.querySelector('#draft-blocker-list').replaceChildren(...blockerItems);
+      document.querySelector('#continue-completion').disabled = view.editableCount === 0;
+    }
+
+    async function loadProductPassportDraft(templateCode) {
+      try {
+        const response = await fetch(`/local/api/product-passport-drafts/${templateCode}`);
+        const payload = await response.json();
+        if (response.ok) {
+          renderProductPassportDraft(payload.draft);
+          return;
+        }
+        renderProductPassportDraft(null, payload.message_zh || '请先保存人工确认版本。');
+      } catch (_) {
+        renderProductPassportDraft(null, '商品资料缺项暂时无法读取；图片审核和保存仍可继续。');
+      }
+    }
+
+    function renderPilotReleaseStatus(status) {
+      const panel = document.querySelector('#pilot-release-status-panel');
+      panel.dataset.signal = status.signal;
+      document.querySelector('#pilot-release-status-title').textContent = status.title_zh;
+      document.querySelector('#pilot-release-status-summary').textContent = status.summary_zh;
+      const reasons = status.reasons.map(reason => {
+        const item = document.createElement('li');
+        const title = document.createElement('strong');
+        title.textContent = reason.message_zh;
+        const action = document.createElement('p');
+        action.textContent = reason.required_action_zh;
+        item.append(title, action);
+        return item;
+      });
+      document.querySelector('#pilot-release-reason-list').replaceChildren(...reasons);
+      pilotReviewDownloadButton.disabled = status.signal !== 'green';
+    }
+
+    pilotReviewDownloadButton.addEventListener('click', () => {
+      const item = reviewItems[reviewIndex];
+      if (!item || pilotReviewDownloadButton.disabled
+        || pilotReviewDownloadButton.dataset.templateCode !== item.template_code) return;
+      window.location.assign(`/local/api/training-results/${encodeURIComponent(item.template_code)}/pilot-review-package`);
+    });
+
+    pilotReviewPackageInput.addEventListener('change', () => {
+      inspectPilotReviewPackageButton.disabled = !pilotReviewPackageInput.files?.[0];
+      pilotAcceptanceState.reset();
+      applyPilotAcceptanceInspection({ signal: 'red', code: 'not_inspected' }, null);
+      pilotAcceptanceResult.textContent = '';
+    });
+
+    inspectPilotReviewPackageButton.addEventListener('click', async () => {
+      const file = pilotReviewPackageInput.files?.[0];
+      if (!file) return;
+      inspectPilotReviewPackageButton.disabled = true;
+      pilotReviewInspectionResult.dataset.signal = 'yellow';
+      pilotReviewInspectionResult.replaceChildren();
+      const checking = document.createElement('strong');
+      checking.textContent = '正在检查封条…';
+      pilotReviewInspectionResult.append(checking);
+      const form = new FormData();
+      form.append('file', file);
+      try {
+        const response = await fetch('/local/api/pilot-review-package/inspect', {
+          method: 'POST',
+          body: form,
+        });
+        const payload = await response.json();
+        const inspection = payload.inspection || {
+          signal: 'red',
+          title_zh: '审阅包无法验证',
+          summary_zh: payload.message_zh || '请重新从本地页面下载。',
+        };
+        pilotReviewInspectionResult.dataset.signal = inspection.signal;
+        const title = document.createElement('strong');
+        title.textContent = inspection.title_zh;
+        const summary = document.createElement('p');
+        summary.className = 'draft-summary';
+        summary.textContent = inspection.summary_zh;
+        pilotReviewInspectionResult.replaceChildren(title, summary);
+        applyPilotAcceptanceInspection(inspection, file);
+        if (inspection.template_code) loadPilotAcceptanceHistory(inspection.template_code);
+      } catch (_) {
+        pilotReviewInspectionResult.dataset.signal = 'red';
+        const title = document.createElement('strong');
+        title.textContent = '审阅包暂时无法验证';
+        pilotReviewInspectionResult.replaceChildren(title);
+        applyPilotAcceptanceInspection({ signal: 'red', code: 'inspection_failed' }, null);
+      } finally {
+        inspectPilotReviewPackageButton.disabled = false;
+      }
+    });
+
+    for (const control of [pilotAcceptanceDecision, pilotAcceptanceReviewer, pilotAcceptanceNote]) {
+      control.addEventListener('input', updatePilotAcceptanceDraft);
+      control.addEventListener('change', updatePilotAcceptanceDraft);
+    }
+
+    pilotAcceptanceForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const submission = pilotAcceptanceState.submission();
+      if (!submission) return;
+      submitPilotAcceptance.disabled = true;
+      const form = new FormData();
+      form.append('file', submission.file);
+      form.append('request_id', submission.requestId);
+      form.append('decision', submission.decision);
+      form.append('reviewer_id', submission.reviewerId);
+      form.append('note', submission.note);
+      try {
+        const response = await fetch('/local/api/pilot-review-package/acceptances', {
+          method: 'POST',
+          body: form,
+        });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.message_zh || '验收回执未记录');
+        const receipt = payload.receipt;
+        pilotAcceptanceResult.textContent = `回执 ${receipt.receipt_id} · ${receipt.decision} · ${receipt.reviewer_id} · ${receipt.recorded_at}。仅限脱敏本地小试。`;
+        pilotAcceptanceState.markSubmitted();
+        await loadPilotAcceptanceHistory(receipt.template_code);
+      } catch (error) {
+        pilotAcceptanceResult.textContent = error.message || '验收回执暂时无法记录，请重试。';
+      } finally {
+        updatePilotAcceptanceDraft();
+      }
+    });
+
+    async function loadPilotReleaseStatus(templateCode, existingTicket = null) {
+      const ticket = existingTicket || pilotReviewRequestGuard.begin(templateCode);
+      try {
+        const response = await fetch(`/local/api/training-results/${encodeURIComponent(templateCode)}/pilot-release-status`);
+        const payload = await response.json();
+        const currentTemplateCode = reviewItems[reviewIndex]?.template_code;
+        if (!pilotReviewRequestGuard.isCurrent(ticket, currentTemplateCode)) return;
+        if (response.ok) {
+          renderPilotReleaseStatus(payload.status);
+          return;
+        }
+        renderPilotReleaseStatus({
+          signal: 'yellow',
+          title_zh: '还需人工补充',
+          summary_zh: payload.message_zh || '请先保存人工确认版本。',
+          reasons: [],
+        });
+      } catch (_) {
+        const currentTemplateCode = reviewItems[reviewIndex]?.template_code;
+        if (!pilotReviewRequestGuard.isCurrent(ticket, currentTemplateCode)) return;
+        renderPilotReleaseStatus({
+          signal: 'yellow',
+          title_zh: '状态暂时无法读取',
+          summary_zh: '图片审核仍可继续，稍后重新检查本地小试状态。',
+          reasons: [],
+        });
+      }
+    }
+
+    async function renderReview({ revealPanel = true } = {}) {
+      const panel = document.querySelector('#review-panel');
+      if (!currentBatch || !reviewItems.length) {
+        panel.classList.remove('visible');
+        return;
+      }
+      reviewIndex = Math.min(Math.max(reviewIndex, 0), reviewItems.length - 1);
+      const item = reviewItems[reviewIndex];
+      const productContext = currentReviewProductContext();
+      const pilotReleaseTicket = pilotReviewRequestGuard.begin(item.template_code);
+      panel.classList.add('visible');
+      document.querySelector('#review-position').textContent = `第 ${productContext.groupIndex + 1} / ${productContext.groups.length} 件商品 · 本商品第 ${productContext.imageIndex + 1} / ${productContext.items.length} 张`;
+      renderItemMeta(item);
+      const reviewImage = document.querySelector('#review-image');
+      const imageQualityWarning = document.querySelector('#review-image-quality-warning');
+      imageQualityWarning.hidden = true;
+      reviewImage.onload = () => {
+        const width = reviewImage.naturalWidth;
+        const height = reviewImage.naturalHeight;
+        if (width < 256 || height < 256) {
+          imageQualityWarning.textContent = `这是低分辨率测试占位图（${width}×${height}），只能检查图片交接，不能确认商品材质、形态或品质。`;
+          imageQualityWarning.hidden = false;
+        }
+      };
+      reviewImage.onerror = () => {
+        imageQualityWarning.textContent = '图片无法显示，不能据此确认商品信息。请检查原图后再继续。';
+        imageQualityWarning.hidden = false;
+      };
+      reviewImage.src = `/local/api/upload-batches/${currentBatch.batch_id}/items/${item.item_id}/image`;
+      renderProductImageChoices(productContext, item);
+      for (const id of ['previous-item', 'previous-item-top', 'previous-image-overlay']) {
+        document.querySelector(`#${id}`).disabled = reviewIndex === 0;
+      }
+      for (const id of ['next-item', 'next-item-top', 'next-image-overlay']) {
+        document.querySelector(`#${id}`).disabled = reviewIndex === reviewItems.length - 1;
+      }
+      editForm.classList.remove('visible');
+      document.querySelector('#review-message').textContent = '';
+      const response = await fetch(`/local/api/training-results/${item.template_code}`);
+      const payload = await response.json();
+      const savedResult = payload.result || item.initial_result;
+      renderResult(savedResult);
+
+      let recognitionResponse = await fetch(`/local/api/recognitions/${item.template_code}`);
+      let recognition = await recognitionResponse.json();
+      if (!recognition.ai_candidate) {
+        recognitionResponse = await fetch(`/local/api/recognitions/${item.template_code}/retry`, { method: 'POST' });
+        recognition = await recognitionResponse.json();
+      }
+      renderRecognitionLayers(recognition);
+      if (recognition.current_human_version) {
+        currentPreviewBase = recognition.current_human_version;
+      } else if (recognition.ai_candidate?.status === 'succeeded') {
+        currentPreviewBase = candidateToDraft(recognition.ai_candidate);
+      } else if (recognition.historical_reference) {
+        currentPreviewBase = historicalReferenceToDraft(recognition.historical_reference, item.template_code);
+      } else {
+        currentPreviewBase = savedResult;
+      }
+      populateForm(currentPreviewBase);
+      renderLatestResult(currentPreviewBase);
+      renderWarehouseFlow();
+      await loadProductPassportDraft(item.template_code);
+      await loadPilotReleaseStatus(item.template_code, pilotReleaseTicket);
+      if (revealPanel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.querySelector('#edit-result').addEventListener('click', () => editForm.classList.add('visible'));
+    document.querySelector('#confirm-current-product').addEventListener('click', async () => {
+      const context = currentReviewProductContext();
+      const item = context.items[0];
+      const productCode = item?.['商品编码'] || item?.product_code;
+      if (!currentBatch || !productCode) return;
+      const button = document.querySelector('#confirm-current-product');
+      button.disabled = true;
+      const response = await fetch(
+        `/local/api/upload-batches/${currentBatch.batch_id}/products/${encodeURIComponent(productCode)}/reviewed`,
+        { method: 'POST' },
+      );
+      const payload = await response.json();
+      document.querySelector('#review-message').textContent = payload.message_zh || '商品确认失败，请重试。';
+      await fetchBatch(currentBatch.batch_id);
+      await renderReview({ revealPanel: false });
+    });
+    document.querySelector('#continue-completion').addEventListener('click', () => {
+      editForm.classList.add('visible');
+      editForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    document.querySelector('#cancel-edit').addEventListener('click', () => {
+      populateForm(currentPreviewBase || currentResult);
+      renderLatestResult(currentPreviewBase || currentResult);
+      editForm.classList.remove('visible');
+    });
+
+    editForm.addEventListener('input', renderDraftPreview);
+
+    editForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const item = reviewItems[reviewIndex];
+      const minimum = field('price_minimum').value.trim();
+      const maximum = field('price_maximum').value.trim();
+      const basis = field('price_basis').value.trim();
+      const serviceRules = buildServiceRules({
+        serviceCode: field('service_code').value,
+        serviceEligibility: field('service_eligibility').value,
+        serviceCustomerSummary: field('service_customer_summary').value,
+      });
+      const body = {
+        base_version: currentResult.version || 1,
+        sha256: item.sha256,
+        main_image_template_code: field('main_image_selected').checked ? item.template_code : null,
+        product_type: field('product_type').value || null,
+        inventory_status: field('inventory_status').value || null,
+        material_label: field('material_label').value,
+        product_form: field('product_form').value,
+        visual_observations: lines(field('visual_observations').value),
+        selling_points: lines(field('selling_points').value),
+        specification_note: field('specification_note').value,
+        quality_note: field('quality_note').value,
+        defect_note: field('defect_note').value,
+        price_range: minimum || maximum || basis ? { currency: 'CNY', minimum, maximum, basis } : null,
+        service_rules: serviceRules,
+      };
+      const message = document.querySelector('#review-message');
+      message.textContent = '正在保存新版本…';
+      const response = await fetch(`/local/api/training-results/${item.template_code}/versions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        message.textContent = `${payload.message_zh || '保存失败'} ${payload.next_step_zh || ''}`;
+        return;
+      }
+      await fetch(`/local/api/upload-batches/${currentBatch.batch_id}/items/${item.item_id}/reviewed`, { method: 'POST' });
+      renderResult(payload.result);
+      currentPreviewBase = payload.result;
+      editForm.classList.remove('visible');
+      await fetchBatch(currentBatch.batch_id);
+      const refreshedItem = reviewItems.find(entry => entry.item_id === item.item_id);
+      if (refreshedItem) renderItemMeta(refreshedItem);
+      await loadProductPassportDraft(item.template_code);
+      await loadPilotReleaseStatus(item.template_code);
+      message.textContent = payload.message_zh;
+      await loadRecentResult();
+    });
+
+    document.querySelector('#price-confirmation-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const item = reviewItems[reviewIndex];
+      const control = name => document.querySelector(`[data-price-field="${name}"]`);
+      const button = document.querySelector('#confirm-price-candidate');
+      const message = document.querySelector('#review-message');
+      button.disabled = true;
+      message.textContent = '正在核对并生成价格确认版本…';
+      try {
+        const response = await fetch(`/local/api/training-results/${item.template_code}/confirm-price-candidate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            base_version: currentResult.version,
+            standard_code: control('standard_code').value,
+            anchor_version: Number(control('anchor_version').value),
+            minimum: control('minimum').value,
+            maximum: control('maximum').value,
+            basis: control('basis').value,
+            anchor_confirmed_by: control('anchor_confirmed_by').value,
+            confirmed_by: control('confirmed_by').value,
+          }),
+        });
+        const payload = await response.json();
+        if (!response.ok) {
+          message.textContent = `${payload.message_zh || '确认失败'} ${payload.next_step_zh || ''}`;
+          return;
+        }
+        renderResult(payload.result);
+        currentPreviewBase = payload.result;
+        await loadProductPassportDraft(item.template_code);
+        await loadPilotReleaseStatus(item.template_code);
+        message.textContent = payload.content_package
+          ? `${payload.message_zh} 内部资料包状态：价格已人工确认，仍禁止自动发布。`
+          : payload.message_zh;
+        await loadRecentResult();
+      } catch (_) {
+        message.textContent = '确认结果状态未知，请刷新当前商品版本后再决定是否重试。';
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.querySelector('#rollback-result').addEventListener('click', async () => {
+      const item = reviewItems[reviewIndex];
+      const response = await fetch(`/local/api/training-results/${item.template_code}/rollback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ base_version: currentResult.version }),
+      });
+      const payload = await response.json();
+      document.querySelector('#review-message').textContent = payload.message_zh || payload.next_step_zh;
+      if (response.ok) {
+        renderResult(payload.result);
+        currentPreviewBase = payload.result;
+        await loadProductPassportDraft(item.template_code);
+        await loadPilotReleaseStatus(item.template_code);
+      }
+    });
+
+    async function showPreviousReviewImage() {
+      if (reviewIndex > 0) reviewIndex -= 1;
+      await renderReview();
+    }
+
+    async function showNextReviewImage() {
+      if (reviewIndex < reviewItems.length - 1) reviewIndex += 1;
+      await renderReview();
+    }
+
+    for (const id of ['previous-item', 'previous-item-top', 'previous-image-overlay']) {
+      document.querySelector(`#${id}`).addEventListener('click', showPreviousReviewImage);
+    }
+    for (const id of ['next-item', 'next-item-top', 'next-image-overlay']) {
+      document.querySelector(`#${id}`).addEventListener('click', showNextReviewImage);
+    }
+    document.querySelector('#skip-item').addEventListener('click', async () => {
+      if (reviewIndex < reviewItems.length - 1) reviewIndex += 1;
+      await renderReview();
+    });
+
+    function voiceMessage(message, state = '等待指令') {
+      document.querySelector('#voice-result').textContent = message;
+      const stateElement = document.querySelector('#voice-state');
+      stateElement.textContent = state;
+      stateElement.classList.toggle('listening', state === '正在聆听');
+    }
+
+    function renderVoiceTranscript(interim = '') {
+      const transcript = voiceTranscriptBuffer.preview(interim);
+      document.querySelector('#voice-transcript').value = transcript;
+      document.querySelector('#voice-character-count').textContent = `${transcript.length} / 2000 字`;
+    }
+
+    function appendDraftLines(fieldName, additions) {
+      const control = field(fieldName);
+      const current = lines(control.value);
+      for (const addition of additions || []) {
+        if (!current.includes(addition)) current.push(addition);
+      }
+      control.value = current.join('\n');
+    }
+
+    async function applyVoiceCommand(transcript) {
+      const cleaned = transcript.trim();
+      document.querySelector('#voice-transcript').value = cleaned;
+      if (!currentBatch || !reviewItems.length || !currentResult) {
+        voiceMessage('请先上传图片并进入逐张审核，再使用语音修改。', '尚无审核图片');
+        return;
+      }
+      voiceMessage('正在解析指令…', '正在处理');
+      try {
+        const response = await fetch('/local/api/voice-commands/parse', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transcript: cleaned }),
+        });
+        const payload = await response.json();
+        if (!response.ok) {
+          voiceMessage(`${payload.message_zh || '指令无法解析'} ${payload.next_step_zh || ''}`, '需要重说');
+          return;
+        }
+
+        if (payload.action === 'previous') {
+          if (reviewIndex > 0) {
+            reviewIndex -= 1;
+            await renderReview();
+            voiceMessage('已切换到上一张图片。', '已执行');
+          } else {
+            voiceMessage('当前已经是第一张图片。', '未切换');
+          }
+          return;
+        }
+        if (payload.action === 'next') {
+          if (reviewIndex < reviewItems.length - 1) {
+            reviewIndex += 1;
+            await renderReview();
+            voiceMessage('已切换到下一张图片。', '已执行');
+          } else {
+            voiceMessage('当前已经是最后一张图片。', '未切换');
+          }
+          return;
+        }
+        if (payload.action === 'reset_draft') {
+          populateForm(currentPreviewBase || currentResult);
+          renderLatestResult(currentPreviewBase || currentResult);
+          editForm.classList.add('visible');
+          voiceMessage('已撤销当前未保存修改，已保存版本没有变化。', '已执行');
+          return;
+        }
+
+        const allowedFields = [
+          'material_label',
+          'product_form',
+          'specification_note',
+          'quality_note',
+          'defect_note',
+          'price_minimum',
+          'price_maximum',
+          'price_basis',
+        ];
+        let applied = 0;
+        for (const fieldName of allowedFields) {
+          if (payload.field_updates[fieldName] === undefined) continue;
+          field(fieldName).value = payload.field_updates[fieldName];
+          applied += 1;
+        }
+        for (const fieldName of ['visual_observations', 'selling_points']) {
+          const additions = payload.append_updates[fieldName] || [];
+          if (!additions.length) continue;
+          appendDraftLines(fieldName, additions);
+          applied += additions.length;
+        }
+        if (applied) {
+          renderDraftPreview();
+          editForm.classList.add('visible');
+          editForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        voiceMessage(payload.summary_zh, applied ? '草稿已修改' : '没有修改');
+      } catch (_) {
+        voiceMessage('语音文字暂时无法解析，请使用文字框重试。', '连接失败');
+      }
+    }
+
+    document.querySelector('#apply-text-command').addEventListener('click', async () => {
+      await applyVoiceCommand(document.querySelector('#voice-transcript').value);
+    });
+    document.querySelector('#voice-transcript').addEventListener('keydown', async event => {
+      if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        await applyVoiceCommand(event.currentTarget.value);
+      }
+    });
+    document.querySelector('#voice-transcript').addEventListener('input', event => {
+      document.querySelector('#voice-character-count').textContent = `${event.currentTarget.value.length} / 2000 字`;
+    });
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    function stopVoiceListening() {
+      voiceListening = false;
+      voiceRecognitionActive = false;
+      if (voiceRestartTimer) clearTimeout(voiceRestartTimer);
+      voiceRestartTimer = null;
+      const toggle = document.querySelector('#voice-toggle');
+      toggle.textContent = '开始语音';
+      toggle.classList.remove('listening');
+    }
+
+    document.querySelector('#voice-toggle').addEventListener('click', async () => {
+      if (voiceListening && voiceRecognition) {
+        voiceStopRequested = true;
+        if (voiceRecognitionActive) {
+          voiceRecognition.stop();
+        } else {
+          const completeTranscript = voiceTranscriptBuffer.value;
+          stopVoiceListening();
+          voiceStopRequested = false;
+          if (completeTranscript.trim()) await applyVoiceCommand(completeTranscript);
+        }
+        return;
+      }
+
+      const toggle = document.querySelector('#voice-toggle');
+      toggle.disabled = true;
+      toggle.textContent = '正在检测…';
+      voiceMessage('正在检测麦克风和语音识别能力…', '正在检测麦克风');
+      const microphoneStatus = await checkMicrophoneAccess({
+        mediaDevices: navigator.mediaDevices,
+        speechRecognitionAvailable: Boolean(SpeechRecognition),
+      });
+      toggle.disabled = false;
+      if (microphoneStatus.state !== 'ready') {
+        stopVoiceListening();
+        voiceMessage(microphoneStatus.message, '语音不可用');
+        document.querySelector('#voice-transcript').focus();
+        return;
+      }
+
+      if (!voiceRecognition) {
+        voiceRecognition = new SpeechRecognition();
+        voiceRecognition.lang = 'zh-CN';
+        voiceRecognition.interimResults = true;
+        voiceRecognition.continuous = true;
+        voiceRecognition.onresult = event => {
+          let interim = '';
+          for (let index = event.resultIndex; index < event.results.length; index += 1) {
+            const fragment = event.results[index][0].transcript;
+            if (event.results[index].isFinal) voiceTranscriptBuffer.appendFinal(fragment);
+            else interim += fragment;
+          }
+          renderVoiceTranscript(interim);
+          voiceMessage(
+            `正在连续识别，已输入 ${voiceTranscriptBuffer.preview(interim).length} 字；说完请点击“停止语音”。`,
+            '正在聆听',
+          );
+          if (voiceTranscriptBuffer.isFull) {
+            voiceStopRequested = true;
+            if (voiceRecognitionActive) voiceRecognition.stop();
+          }
+        };
+        voiceRecognition.onerror = event => {
+          voiceRecognitionActive = false;
+          const failure = describeRecognitionError(event.error);
+          voiceMessage(failure.message, '语音未完成');
+          stopVoiceListening();
+        };
+        voiceRecognition.onend = async () => {
+          voiceRecognitionActive = false;
+          if (voiceListening && !voiceStopRequested && !voiceTranscriptBuffer.isFull) {
+            voiceRestartTimer = setTimeout(() => {
+              if (!voiceListening || voiceStopRequested) return;
+              try {
+                voiceRecognition.start();
+                voiceRecognitionActive = true;
+              } catch (_) {
+                voiceMessage('连续语音暂时无法恢复，请点击开始语音重试。', '语音已暂停');
+                stopVoiceListening();
+              }
+            }, 200);
+            return;
+          }
+          const completeTranscript = voiceTranscriptBuffer.value;
+          const shouldApply = voiceStopRequested || voiceTranscriptBuffer.isFull;
+          stopVoiceListening();
+          voiceStopRequested = false;
+          if (shouldApply && completeTranscript.trim()) {
+            await applyVoiceCommand(completeTranscript);
+          }
+        };
+      }
+      voiceTranscriptBuffer.reset();
+      renderVoiceTranscript();
+      voiceStopRequested = false;
+      voiceListening = true;
+      document.querySelector('#voice-toggle').textContent = '停止语音';
+      document.querySelector('#voice-toggle').classList.add('listening');
+      voiceMessage('请连续说出修改内容，说完点击“停止语音”。', '正在聆听');
+      try {
+        voiceRecognition.start();
+        voiceRecognitionActive = true;
+      } catch (_) {
+        voiceMessage('语音启动失败，请刷新页面后重试。', '语音未启动');
+        stopVoiceListening();
+      }
+    });
+
+    async function loadRecentResult() {
+      const response = await fetch('/local/api/training-results/latest');
+      const payload = await response.json();
+      renderLatestResult(payload.result);
+    }
+
+    async function fetchLatestServerBatchId() {
+      const response = await fetch('/local/api/upload-batches/latest');
+      if (!response.ok) return null;
+      const payload = await response.json();
+      return payload.batch.batch_id;
+    }
+
+    async function revealRestoredBatch(batchId) {
+      await fetchBatch(batchId);
+      reviewIndex = Math.max(0, reviewItems.findIndex(item => item.status === 'pending_review'));
+      await renderReview({ revealPanel: false });
+      setStatus('已恢复最近批次', '可以继续逐张审核；已上传图片不会重复处理。', 'success');
+    }
+
+    async function restoreLatestBatch() {
+      const browserBatchId = localStorage.getItem('latestUploadBatchId');
+      if (browserBatchId) {
+        try {
+          await revealRestoredBatch(browserBatchId);
+          return;
+        } catch (_) {
+          localStorage.removeItem('latestUploadBatchId');
+        }
+      }
+      const batchId = await fetchLatestServerBatchId().catch(() => null);
+      if (batchId) {
+        try {
+          localStorage.setItem('latestUploadBatchId', batchId);
+          await revealRestoredBatch(batchId);
+        } catch (_) {
+          localStorage.removeItem('latestUploadBatchId');
+        }
+      }
+    }
+
+    loadRecentResult().catch(() => {});
+    restoreLatestBatch().catch(() => {});
+    loadAlbumReviewInbox().catch(() => {});
+    loadRecognitionAgentStatus().catch(() => {});
+  </script>
+</body>
+</html>

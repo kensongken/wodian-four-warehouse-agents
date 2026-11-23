@@ -1,0 +1,7 @@
+{
+  "manifest_version": "0.1",
+  "data_classification": "synthetic",
+  "catalog": "fixtures/v0.1/product-passports.json",
+  "tenant_id": "tenant-a",
+  "sha256": "49ed0f9a58b230df642a30259994ed72b3a6cc805d24d2d94f072fa9434ad7f5"
+}

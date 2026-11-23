@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "candidate-batch-output.schema.json",
+  "title": "Synthetic Candidate Batch Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_scope",
+    "operating_results",
+    "summary",
+    "results"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "evidence_scope": {"const": "synthetic_technical_readiness_only"},
+    "operating_results": {"const": 0},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "passed", "rejected"],
+      "properties": {
+        "total": {"const": 10},
+        "passed": {"const": 6},
+        "rejected": {"const": 4}
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "outcome"],
+        "properties": {
+          "case_id": {"type": "string", "pattern": "^SYN-"},
+          "outcome": {"enum": ["passed", "rejected"]},
+          "candidate": {"type": "object"},
+          "error_code": {"type": "string"}
+        }
+      }
+    }
+  }
+}

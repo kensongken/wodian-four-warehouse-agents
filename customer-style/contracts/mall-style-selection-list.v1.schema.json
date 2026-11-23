@@ -1,0 +1,178 @@
+{
+  "$defs": {
+    "MallStyleAvailableSelectionV1": {
+      "additionalProperties": false,
+      "description": "One current customer-confirmed style/slot the Mall may select.",
+      "properties": {
+        "is_default": {
+          "title": "Is Default",
+          "type": "boolean"
+        },
+        "main_style_card_version_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Main Style Card Version Id"
+        },
+        "scene_name": {
+          "title": "Scene Name",
+          "type": "string"
+        },
+        "scene_style_card_id": {
+          "format": "uuid",
+          "title": "Scene Style Card Id",
+          "type": "string"
+        },
+        "scene_style_id": {
+          "format": "uuid",
+          "title": "Scene Style Id",
+          "type": "string"
+        },
+        "slot_id": {
+          "format": "uuid",
+          "title": "Slot Id",
+          "type": "string"
+        },
+        "slot_key": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$",
+          "title": "Slot Key",
+          "type": "string"
+        },
+        "slot_label": {
+          "title": "Slot Label",
+          "type": "string"
+        },
+        "slot_rules": {
+          "additionalProperties": true,
+          "title": "Slot Rules",
+          "type": "object"
+        },
+        "style_card_version_id": {
+          "format": "uuid",
+          "title": "Style Card Version Id",
+          "type": "string"
+        },
+        "style_version": {
+          "minimum": 1,
+          "title": "Style Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "scene_style_id",
+        "style_card_version_id",
+        "slot_key",
+        "scene_style_card_id",
+        "scene_name",
+        "style_version",
+        "slot_id",
+        "slot_label",
+        "slot_rules",
+        "is_default"
+      ],
+      "title": "MallStyleAvailableSelectionV1",
+      "type": "object"
+    },
+    "MallStyleSelectionV1": {
+      "additionalProperties": false,
+      "properties": {
+        "scene_style_id": {
+          "format": "uuid",
+          "title": "Scene Style Id",
+          "type": "string"
+        },
+        "slot_key": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$",
+          "title": "Slot Key",
+          "type": "string"
+        },
+        "style_card_version_id": {
+          "format": "uuid",
+          "title": "Style Card Version Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scene_style_id",
+        "style_card_version_id",
+        "slot_key"
+      ],
+      "title": "MallStyleSelectionV1",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Read-only selection catalogue with an explicit ambiguity state.",
+  "properties": {
+    "default_selection": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MallStyleSelectionV1"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "merchant_id": {
+      "format": "uuid",
+      "title": "Merchant Id",
+      "type": "string"
+    },
+    "opc_id": {
+      "format": "uuid",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "mall-style-selection-list-v1",
+      "default": "mall-style-selection-list-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selection_reason": {
+      "enum": [
+        "sole_selection",
+        "explicit_default",
+        "multiple_without_default",
+        "multiple_defaults",
+        "no_confirmed_style"
+      ],
+      "title": "Selection Reason",
+      "type": "string"
+    },
+    "selection_status": {
+      "enum": [
+        "ready",
+        "selection_required",
+        "unavailable"
+      ],
+      "title": "Selection Status",
+      "type": "string"
+    },
+    "selections": {
+      "items": {
+        "$ref": "#/$defs/MallStyleAvailableSelectionV1"
+      },
+      "title": "Selections",
+      "type": "array"
+    }
+  },
+  "required": [
+    "merchant_id",
+    "opc_id",
+    "selection_status",
+    "selection_reason",
+    "default_selection",
+    "selections"
+  ],
+  "title": "MallStyleSelectionListV1",
+  "type": "object"
+}

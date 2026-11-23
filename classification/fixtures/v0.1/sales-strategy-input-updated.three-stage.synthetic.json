@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "77777777-7777-4777-8777-777777777778",
+  "occurred_at": "2026-08-31T08:02:01Z",
+  "tenant_id": "22222222-2222-4222-8222-222222222222",
+  "product_code": "SYNTHETIC-001",
+  "strategy_input_version": 1,
+  "product_data_version": 1,
+  "status": "preview_only",
+  "content_sha256": "4063af754ae0b89bc4da370031808501187e87d913ccaf7b2bb6d0cb6827c44f",
+  "automatic_customer_contact_allowed": false,
+  "automatic_publication_allowed": false,
+  "automatic_wechat_send_allowed": false,
+  "automatic_quote_allowed": false
+}

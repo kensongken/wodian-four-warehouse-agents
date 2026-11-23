@@ -1,0 +1,164 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "actor_role": {
+      "const": "merchant_owner",
+      "title": "Actor Role",
+      "type": "string"
+    },
+    "approval_expires_at": {
+      "format": "date-time",
+      "title": "Approval Expires At",
+      "type": "string"
+    },
+    "approval_reference": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Approval Reference",
+      "type": "string"
+    },
+    "automatic_retry_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Retry Allowed",
+      "type": "boolean"
+    },
+    "candidate_count": {
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Candidate Count",
+      "type": "integer"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "disposition": {
+      "enum": [
+        "accepted",
+        "duplicate"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "generation_job_id": {
+      "default": null,
+      "title": "Generation Job Id",
+      "type": "null"
+    },
+    "generation_request_id": {
+      "format": "uuid",
+      "title": "Generation Request Id",
+      "type": "string"
+    },
+    "maximum_cost_usd": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d{0,6}0*$",
+          "type": "string"
+        }
+      ],
+      "title": "Maximum Cost Usd"
+    },
+    "merchant_id": {
+      "format": "uuid",
+      "title": "Merchant Id",
+      "type": "string"
+    },
+    "model": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Model",
+      "type": "string"
+    },
+    "opc_id": {
+      "format": "uuid",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "owner_actor_reference": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Owner Actor Reference",
+      "type": "string"
+    },
+    "product_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Product Id",
+      "type": "string"
+    },
+    "provider": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Provider",
+      "type": "string"
+    },
+    "publishable": {
+      "const": false,
+      "default": false,
+      "title": "Publishable",
+      "type": "boolean"
+    },
+    "receipt_id": {
+      "format": "uuid",
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "rights_reference": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Rights Reference",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "mall-style-generation-queue-receipt-v1",
+      "default": "mall-style-generation-queue-receipt-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "pending_execution",
+      "title": "Status",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "generation_request_id",
+    "receipt_id",
+    "merchant_id",
+    "opc_id",
+    "product_id",
+    "approval_reference",
+    "rights_reference",
+    "provider",
+    "model",
+    "owner_actor_reference",
+    "actor_role",
+    "approval_expires_at",
+    "candidate_count",
+    "maximum_cost_usd",
+    "status",
+    "disposition",
+    "created_at",
+    "updated_at"
+  ],
+  "title": "MallStyleGenerationQueueReceiptV1",
+  "type": "object"
+}
