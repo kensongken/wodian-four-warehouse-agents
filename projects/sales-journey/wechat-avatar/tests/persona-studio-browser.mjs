@@ -1,0 +1,47 @@
+// Isolated synthetic UI QA. Never connects to the user's workbench or WeChat.
+import assert from 'node:assert/strict';
+import {mkdtempSync,mkdirSync,rmSync,writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {randomUUID} from 'node:crypto';
+import {createApp} from '../server.mjs';
+import {LocalQwen} from '../lib/qwen-model.mjs';
+const {chromium}=await import(pathToFileURL(process.env.AVATAR_PLAYWRIGHT_MODULE||'/path/to/developer/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs').href);
+const directory=mkdtempSync(join(tmpdir(),'studio-browser-')),out=resolve(process.env.AVATAR_QA_OUTPUT||'.acceptance/persona-studio');mkdirSync(out,{recursive:true});
+let payload,calls=0;const real=process.env.AVATAR_STUDIO_REAL_QWEN==='1',native=real?new LocalQwen():null;
+const app=createApp({directory,worker:false,localQwen:{close(){native?.close();},async complete(p){payload=p;calls++;if(real)return native.complete(p);return{choices:[{message:{content:JSON.stringify({reply:JSON.parse(p.messages[1].content).ownerFeedback?.some(x=>x.rating==='unlike')?'你先慢慢挑，有想法就跟我说。':'好呀，不急，你慢慢挑，我陪你看看。'})}}]};}}});
+await new Promise(done=>app.server.listen(0,'127.0.0.1',done));const origin=`http://127.0.0.1:${app.server.address().port}`;
+const browser=await chromium.launch({headless:true}),page=await browser.newPage({viewport:{width:1512,height:1080}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+page.setDefaultTimeout(real?150000:30000);
+const checks=[];
+try{
+ await page.goto(origin);await page.getByLabel('你的称呼').fill('合成口吻演练店主');await page.getByLabel('账号',{exact:true}).fill('synthetic-owner');await page.getByLabel('密码',{exact:true}).fill(randomUUID());await page.getByRole('button',{name:'创建本机工作空间',exact:true}).click();
+ await page.locator('[data-action=nav][data-view=studio]').click();
+ const profile=page.locator('[data-form=studio-profile]');await profile.getByLabel('分身称呼').fill('合成温柔口吻');await profile.getByLabel('常挂在嘴边的话').fill('不急，慢慢看');await profile.getByLabel('你不会用的说法').fill('竭诚为您服务');
+ await profile.locator('[name=question-0]').fill('我先看看');await profile.locator('[name=answer-0]').fill('好呀，不急，你慢慢挑，我陪你看看。');await profile.getByRole('checkbox').check();await profile.getByRole('button',{name:'保存口吻与本人表达',exact:true}).click();
+ await page.getByText('口吻资料 V1',{exact:true}).waitFor();checks.push('save and reload owner examples');
+ await page.locator('[data-form=studio-preview] textarea').fill('我先看看');await page.getByRole('button',{name:'生成两种说法，对比看看',exact:true}).click();await page.locator('.studio-personal blockquote').waitFor();
+ if(!real)assert.equal(await page.locator('.studio-personal blockquote').textContent(),'好呀，不急，你慢慢挑，我陪你看看。');else assert.ok((await page.locator('.studio-personal blockquote').textContent()).trim());assert.equal(calls,1);checks.push('compare baseline and personalized draft');
+ await page.getByRole('button',{name:'这句不像我',exact:true}).click();await page.getByRole('button',{name:'已记下：不像我',exact:true}).waitFor();checks.push('owner rating persists');
+ await page.getByRole('button',{name:'生成两种说法，对比看看',exact:true}).click();
+ await page.getByText('本轮参考了 1 条本人评价。',{exact:true}).waitFor();
+ assert.equal(JSON.parse(payload.messages[1].content).ownerFeedback[0].rating,'unlike');
+ if(!real)assert.equal(await page.locator('.studio-personal blockquote').textContent(),'你先慢慢挑，有想法就跟我说。');checks.push('unlike influences next prompt and feedback sources are visible');
+ const correction=page.locator('[data-form=studio-correction]');await correction.getByLabel('如果是你，会怎么说？').fill('你先看着，喜欢哪种感觉就告诉我。');await correction.getByRole('checkbox').check();await correction.getByRole('button',{name:'这句才像我，记住',exact:true}).click();await page.getByText('口吻资料 V2',{exact:true}).waitFor();checks.push('correction creates next version');
+ await page.locator('[data-form=studio-preview] textarea').fill('我先看看');await page.getByRole('button',{name:'生成两种说法，对比看看',exact:true}).click();await page.locator('.studio-personal blockquote').waitFor();
+ assert.equal(JSON.parse(payload.messages[1].content).styleExamplesOnly[0].answer,'你先看着，喜欢哪种感觉就告诉我。');checks.push('next generation uses owner correction');
+ const preview=page.locator('[data-form=studio-preview]');
+ assert.equal(await preview.locator('[name=continueConversation]').isChecked(),false);
+ await preview.locator('[name=continueConversation]').check();await preview.locator('textarea').fill('我继续看看');
+ await page.getByRole('button',{name:'生成两种说法，对比看看',exact:true}).click();
+ await page.getByText('本轮参考了前 1 轮对话。',{exact:true}).waitFor();
+ const carried=JSON.parse(payload.messages[1].content);assert.deepEqual(carried.recentConversation?.map(t=>t.question)||carried.recentCustomerStatements,['我先看看']);
+ assert.equal(await page.locator('[name=continueConversation]').isChecked(),false);checks.push('optional continuation carries stored context through actual form and HTTP');
+ await page.locator('[data-form=studio-profile] [name=phrases]').fill('我陪你慢慢挑');await page.getByRole('button',{name:'生成两种说法，对比看看',exact:true}).click();await page.getByText('请先保存左侧修改，再试聊，避免使用旧口吻。',{exact:true}).waitFor();assert.equal(calls,4);checks.push('unsaved style edit does not silently use stale profile');
+ await page.reload();await page.locator('[data-action=nav][data-view=studio]').click();await page.getByText('口吻资料 V2',{exact:true}).waitFor();
+ await page.screenshot({path:join(out,'studio-desktop.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});await page.screenshot({path:join(out,'studio-mobile.png'),fullPage:true});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));checks.push('390px mobile has no horizontal overflow');
+ assert.deepEqual(errors,[]);assert.equal(app.store.read().tasks.length,0);checks.push('no JS errors or send tasks');
+ const result={status:'passed',checks,syntheticModelCalls:real?0:calls,realModelCalls:real?calls:0,realWechatCalls:0,fixture:real?'isolated synthetic owner with actual local Qwen, not actual owner likeness acceptance':'isolated synthetic owner and mock model only'};writeFileSync(join(out,'results.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+}catch(error){await page.screenshot({path:join(out,'failure.png'),fullPage:true});console.error(JSON.stringify({pageErrors:errors}));throw error;}finally{await browser.close();await app.close();rmSync(directory,{recursive:true,force:true});}

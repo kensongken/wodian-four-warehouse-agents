@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "MallDraftItemResult": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt_generation": {
+          "minimum": 1,
+          "title": "Attempt Generation",
+          "type": "integer"
+        },
+        "draft_request_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Draft Request Id",
+          "type": "string"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "enum": [
+                "gateway_unavailable",
+                "gateway_protocol_error"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Error Code"
+        },
+        "mall_product_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mall Product Id"
+        },
+        "status": {
+          "enum": [
+            "prepared",
+            "created",
+            "change_proposal_required",
+            "retryable_failed",
+            "permanently_blocked"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "draft_request_id",
+        "attempt_generation",
+        "status",
+        "mall_product_id",
+        "error_code"
+      ],
+      "title": "MallDraftItemResult",
+      "type": "object"
+    }
+  },
+  "$id": "urn:photo-organizer:opc-mall-draft-import-receipt:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "execution_status": {
+      "enum": [
+        "prepared",
+        "in_progress",
+        "completed"
+      ],
+      "title": "Execution Status",
+      "type": "string"
+    },
+    "item_count": {
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Item Count",
+      "type": "integer"
+    },
+    "opc_id": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "plan_id": {
+      "pattern": "^mall-draft-import-plan:[0-9a-f]{64}$",
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/MallDraftItemResult"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Results",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "opc-mall-draft-import-receipt/1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "plan_id",
+    "opc_id",
+    "execution_status",
+    "item_count",
+    "results"
+  ],
+  "title": "MallDraftImportReceipt",
+  "type": "object",
+  "x-semantic-validation": {
+    "command": "python scripts/prepare_opc_mall_draft_import.py --package <package.zip> --package-acceptance <acceptance.json> --batch <batch.json> --plan-output <plan.json> --receipt-output <receipt.json> --check",
+    "required": true,
+    "stable_error": "import_artifact_stale"
+  }
+}

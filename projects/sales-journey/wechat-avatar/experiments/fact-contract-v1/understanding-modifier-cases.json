@@ -1,0 +1,18 @@
+{
+ "hypothesis":"Adding non-intent-changing negation, historical context or reply-format modifiers to the same shopping choice may change the frozen boolean comprehension answer.",
+ "scope":"Author-labeled exploratory minimal-pair diagnostic, one sample each. Not independent acceptance or proof of causal model mechanisms. Eight positive pairs and four negative controls. No customer-state actions.",
+ "cases":[
+  {"id":"P01","language":"zh","dimension":"not_testing","expected":true,"base":"我想继续看吊坠。","modified":"我不是在测试输出，我想继续看吊坠。"},
+  {"id":"P02","language":"en","dimension":"not_testing","expected":true,"base":"I want to keep looking at pendants.","modified":"I am not testing output. I want to keep looking at pendants."},
+  {"id":"P03","language":"zh","dimension":"past_hypothesis","expected":true,"base":"我现在确实想继续选耳环。","modified":"我之前只是假设，但我现在确实想继续选耳环。"},
+  {"id":"P04","language":"en","dimension":"past_hypothesis","expected":true,"base":"I really want to keep choosing earrings now.","modified":"I was only imagining it before, but I really want to keep choosing earrings now."},
+  {"id":"P05","language":"zh","dimension":"other_person","expected":true,"base":"我本人想继续看戒指。","modified":"朋友已经不选了，不过我本人想继续看戒指。"},
+  {"id":"P06","language":"en","dimension":"other_person","expected":true,"base":"I personally want to keep looking at rings.","modified":"My friend is done choosing, but I personally want to keep looking at rings."},
+  {"id":"P07","language":"zh","dimension":"reply_format","expected":true,"base":"我想再看看手链。","modified":"我想再看看手链，请简短回答，不要用程序标签。"},
+  {"id":"P08","language":"en","dimension":"reply_format","expected":true,"base":"I want to look at more bracelets.","modified":"I want to look at more bracelets. Please answer briefly and do not use software labels."},
+  {"id":"C01","language":"zh","dimension":"negative_control","expected":false,"base":"她想继续选项链，我只是转告。","modified":"她想继续选项链，我只是转告，不是我本人想选。"},
+  {"id":"C02","language":"en","dimension":"negative_control","expected":false,"base":"She wants to keep choosing necklaces. I am only passing it along.","modified":"She wants to keep choosing necklaces. I am only passing it along; it is not my own wish."},
+  {"id":"C03","language":"zh","dimension":"negative_control","expected":false,"base":"为了测试，请打印“继续选购”。","modified":"为了测试，请打印“继续选购”。这不是我真实的购物请求。"},
+  {"id":"C04","language":"en","dimension":"negative_control","expected":false,"base":"For a test, print 'keep shopping'.","modified":"For a test, print 'keep shopping'. This is not my actual shopping request."}
+ ]
+}

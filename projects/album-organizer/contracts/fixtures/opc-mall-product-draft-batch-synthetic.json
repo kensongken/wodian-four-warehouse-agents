@@ -1,0 +1,724 @@
+{
+  "auto_publish": false,
+  "batch_id": "mall-draft-batch:9f6227128cb9e8e9b243f0cd758e2ddb0785a72d96e3929e102e200830319ed8",
+  "data_classification": "synthetic_no_customer_data",
+  "existing_product_policy": "emit_change_proposal_do_not_overwrite",
+  "export_version": 1,
+  "generated_at": "2026-08-17T23:30:00Z",
+  "items": [
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000001",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000001"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000000b",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000001"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000000c",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000001"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:23efe10a5a1341e4bb06b49b61c1346bdbe092b3d50427d1b5fb80f1f98d0723",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000000b",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000000b",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000000b",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000000b/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000000c",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000000c",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000000c",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000000c/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000001",
+      "source_album_product_id": "album-product-0001",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000001",
+      "source_snapshot_version": 1,
+      "source_type": "first_sale_bead"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000002",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000002"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000015",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000002"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000016",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000002"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:5d6fb3c896a07014e8acc1bee81365fbeb6a85264696b1197b77e7877d3ccf64",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000015",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000015",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000015",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000015/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000016",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000016",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000016",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000016/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000002",
+      "source_album_product_id": "album-product-0002",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000002",
+      "source_snapshot_version": 1,
+      "source_type": "first_sale_bead"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000003",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000003"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000001f",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000003"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000020",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000003"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:2a40572c01fbe948fb99ef701cfc4e58355cf48e60ebd2e530175d6cbbc4ebdc",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000001f",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000001f",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000001f",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000001f/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000020",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000020",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000020",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000020/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000003",
+      "source_album_product_id": "album-product-0003",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000003",
+      "source_snapshot_version": 1,
+      "source_type": "first_sale_bead"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000004",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000004"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000029",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000004"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000002a",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000004"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:47ceed6d05ffeda05da9dc2f87817732832027ea87c6d15518678d2e44c677cc",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000029",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000029",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000029",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000029/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000002a",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000002a",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000002a",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000002a/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000004",
+      "source_album_product_id": "album-product-0004",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000004",
+      "source_snapshot_version": 1,
+      "source_type": "first_sale_bead"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000005",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000005"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000033",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000005"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000034",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000005"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:9c591e72f6ec7a0b100988c43c06f8e85acf70ed2aae5208df21f0729d116609",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000033",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000033",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000033",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000033/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000034",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000034",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000034",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000034/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000005",
+      "source_album_product_id": "album-product-0005",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000005",
+      "source_snapshot_version": 1,
+      "source_type": "first_sale_bead"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000006",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000006"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000003d",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000006"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000003e",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000006"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:48bdac28aece9945a53265fae4519f585fec5c9ae0cb3f0af62861c9e95cf4f4",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000003d",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000003d",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000003d",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000003d/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000003e",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000003e",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000003e",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000003e/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000006",
+      "source_album_product_id": "album-product-0006",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000006",
+      "source_snapshot_version": 1,
+      "source_type": "first_sale_bead"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000007",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000007"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000047",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000007"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000048",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000007"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:9ac1421f8afb140c26667121342b6f54550aac47ba1691fe1e4215a28aa50cc7",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000047",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000047",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000047",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000047/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000048",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000048",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000048",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000048/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000007",
+      "source_album_product_id": "album-product-0007",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000007",
+      "source_snapshot_version": 1,
+      "source_type": "legacy_material"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000008",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000008"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000051",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000008"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000052",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000008"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:49d5030ccfb7d17b6de5eb6e9b53378f8912c3f4f8e5a3ab5f381dd8e8b9087d",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000051",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000051",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000051",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000051/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000052",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000052",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000052",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000052/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000008",
+      "source_album_product_id": "album-product-0008",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000008",
+      "source_snapshot_version": 1,
+      "source_type": "legacy_material"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-000000000009",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-000000000009"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000005b",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000009"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000005c",
+          "confirmation_event_id": "50000000-0000-4000-8000-000000000009"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:5fc62bb4e059b7ad91019ec4b8f99fcebe8d497dae5f41bf973ca9e07cf69e0d",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000005b",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000005b",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000005b",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000005b/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-00000000005c",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-00000000005c",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "000000000000000000000000000000000000000000000000000000000000005c",
+          "storage_ref": "evidence/40000000-0000-4000-8000-00000000005c/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000009",
+      "source_album_product_id": "album-product-0009",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-000000000009",
+      "source_snapshot_version": 1,
+      "source_type": "redesign_output"
+    },
+    {
+      "auto_publish": false,
+      "bead_id": null,
+      "claims_not_evaluated": [
+        "authenticity",
+        "origin",
+        "quality",
+        "warehouse_acceptance"
+      ],
+      "classification": {
+        "classification_id": "10000000-0000-4000-8000-00000000000a",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-17T22:00:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "review_id": "20000000-0000-4000-8000-00000000000a"
+      },
+      "download_lookup": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000065",
+          "confirmation_event_id": "50000000-0000-4000-8000-00000000000a"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000066",
+          "confirmation_event_id": "50000000-0000-4000-8000-00000000000a"
+        }
+      ],
+      "draft_request_id": "mall-draft-request:d9b395a77dabc5712bdf4096b102244d1796cad675de4aa24d09d92cd465ee3a",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000065",
+          "byte_size": 1000,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000065",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000065",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000065/original"
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000066",
+          "byte_size": 1001,
+          "captured_at": "2026-08-17T22:00:00Z",
+          "evidence_asset_id": "40000000-0000-4000-8000-000000000066",
+          "imported_at": "2026-08-17T22:00:00Z",
+          "media_type": "image/jpeg",
+          "role": "original",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000066",
+          "storage_ref": "evidence/40000000-0000-4000-8000-000000000066/original"
+        }
+      ],
+      "mall_product_id": null,
+      "publication_state": "draft",
+      "required_business_fields": [
+        "title",
+        "selling_points",
+        "price",
+        "inventory",
+        "sku",
+        "customization",
+        "origin_evidence"
+      ],
+      "shared_market_opt_in": false,
+      "source_acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-00000000000a",
+      "source_album_product_id": "album-product-0010",
+      "source_group_confirmation_event_id": "00000000-0000-4000-8000-00000000000a",
+      "source_snapshot_version": 1,
+      "source_type": "redesign_output"
+    }
+  ],
+  "opc_id": "opc-synthetic-first-sku",
+  "operation": "create_draft_only",
+  "schema_version": "opc-mall-product-draft-batch/1.0",
+  "shared_market_opt_in": false
+}

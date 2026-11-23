@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "SourceImageRef": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "format": "uuid",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "original",
+            "crop"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "mime_type": {
+          "enum": [
+            "image/heic",
+            "image/jpeg",
+            "image/png"
+          ],
+          "title": "Mime Type",
+          "type": "string"
+        },
+        "object_key": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Object Key",
+          "type": "string"
+        },
+        "quality_confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Quality Confidence",
+          "type": "number"
+        },
+        "role": {
+          "enum": [
+            "main_candidate",
+            "gallery",
+            "source_original"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "object_key",
+        "sha256",
+        "mime_type",
+        "kind",
+        "role",
+        "quality_confidence"
+      ],
+      "title": "SourceImageRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "category": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Category",
+      "type": "string"
+    },
+    "classification_confidence": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Classification Confidence",
+      "type": "number"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "form": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Form",
+      "type": "string"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/SourceImageRef"
+      },
+      "maxItems": 3000,
+      "minItems": 1,
+      "title": "Images",
+      "type": "array"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "product_code": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Product Code",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_task_id": {
+      "format": "uuid",
+      "title": "Source Task Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "occurred_at",
+    "tenant_id",
+    "source_task_id",
+    "product_code",
+    "category",
+    "form",
+    "classification_confidence",
+    "images"
+  ],
+  "title": "ProductImageSetReadyV1",
+  "type": "object"
+}

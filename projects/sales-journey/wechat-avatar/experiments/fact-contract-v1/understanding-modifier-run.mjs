@@ -1,0 +1,18 @@
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';import {createHash} from 'node:crypto';import {LocalQwen,localOllamaJSON} from '../../lib/qwen-model.mjs';import {probeRequest,parseProbe,PROBE_SCHEMA} from './understanding-probe.mjs';
+const plan=JSON.parse(readFileSync(new URL('./understanding-modifier-cases.json',import.meta.url))),dir=new URL('./evidence/understanding-modifier-'+new Date().toISOString().replaceAll(':','-')+'/',import.meta.url);mkdirSync(dir);
+const hashes=Object.fromEntries(['understanding-modifier-cases.json','understanding-modifier-run.mjs','understanding-probe.mjs'].map(name=>[name,createHash('sha256').update(readFileSync(new URL('./'+name,import.meta.url))).digest('hex')]));
+const client=new LocalQwen({keepAlive:'120s',timeout:120000,post:(path,body,options)=>localOllamaJSON(path,path==='/api/chat'?{...body,format:PROBE_SCHEMA,options:{...body.options,num_ctx:4096}}:body,options)});
+const result={createdAt:new Date().toISOString(),model:client.modelName,plan,hashes,method:'Frozen question, schema/model/options; base and modifier preserve expected intent. Pair order alternates. One sample per variant, no retries; raw saved before parsing. No state mutation or release approval.',rows:[]};
+const save=()=>writeFileSync(new URL('results.json',dir),JSON.stringify(result,null,2));save();
+function score(rows,key){return{total:rows.length,correct:rows.filter(r=>r[key].answer===r.expected).length,invalid:rows.filter(r=>typeof r[key].answer!=='boolean').length,falsePositive:rows.filter(r=>!r.expected&&r[key].answer===true).length,falseNegative:rows.filter(r=>r.expected&&r[key].answer===false).length,failedIds:rows.filter(r=>r[key].answer!==r.expected).map(r=>r.id)};}
+function summarize(rows){return{base:score(rows,'base'),modified:score(rows,'modified'),bothCorrect:rows.filter(r=>r.base.answer===r.expected&&r.modified.answer===r.expected).length,harmfulFlips:rows.filter(r=>r.base.answer===r.expected&&typeof r.modified.answer==='boolean'&&r.modified.answer!==r.expected).map(r=>r.id),helpfulFlips:rows.filter(r=>typeof r.base.answer==='boolean'&&r.base.answer!==r.expected&&r.modified.answer===r.expected).map(r=>r.id),bothWrong:rows.filter(r=>typeof r.base.answer==='boolean'&&typeof r.modified.answer==='boolean'&&r.base.answer!==r.expected&&r.modified.answer!==r.expected).map(r=>r.id)};}
+try{
+ const ps=await fetch('http://127.0.0.1:11434/api/ps',{signal:AbortSignal.timeout(5000)}).then(r=>r.json());if(ps.models.some(m=>m.name!==client.modelName))throw Error('Another model is resident; stopped without disturbing it');
+ for(const [index,c]of plan.cases.entries()){
+  const row={...c,texts:{base:c.base,modified:c.modified},base:{},modified:{}};result.rows.push(row);save();
+  for(const key of index%2?['modified','base']:['base','modified']){const started=Date.now();try{row[key].raw=await client.complete(probeRequest(client.modelName,row.texts[key],true));save();row[key].answer=parseProbe(row[key].raw,true);}catch(error){row[key].error=error.message;}row[key].wallMs=Date.now()-started;save();}
+  process.stdout.write(JSON.stringify({id:c.id,expected:c.expected,base:row.base.answer??'invalid',modified:row.modified.answer??'invalid'})+'\n');
+ }
+ result.summary={all:summarize(result.rows),positive:summarize(result.rows.filter(r=>r.expected)),negative:summarize(result.rows.filter(r=>!r.expected))};
+ result.dimensions=Object.fromEntries([...new Set(result.rows.map(r=>r.dimension))].map(d=>[d,summarize(result.rows.filter(r=>r.dimension===d))]));result.productionAccepted=false;save();process.stdout.write(JSON.stringify({summary:result.summary,dimensions:result.dimensions,evidence:dir.href})+'\n');
+}catch(error){result.runError=error.message;save();throw error;}finally{client.close();}

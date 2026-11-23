@@ -1,0 +1,18 @@
+{
+ "hypothesis":"Under the same frozen Chinese yes/no question and native JSON schema, meaning-matched Chinese and English materials may yield different answers. This tests input language in this harness, not overall model ability.",
+ "scope":"Author-translated pairs, not independently bilingual-adjudicated. Two known positive anchors and ten new pairs; six positive and six negative pairs overall. No state mutation, no release gate.",
+ "cases":[
+  {"id":"D01","split":"development","dimension":"speaker","expected":true,"zh":"我的朋友已经选完了，但我想继续为自己看戒指。","en":"My friend is done, but I want to keep looking at rings for myself."},
+  {"id":"D02","split":"development","dimension":"output_control","expected":true,"zh":"我是在要求选购，不是在测试输出。请给我看更多吊坠，并且说得简短些。","en":"I am asking to shop, not testing output. Please show me more pendants and keep it brief."},
+  {"id":"N01","split":"new","dimension":"speaker","expected":false,"zh":"邻居想继续选项链，我只是转告她的请求。","en":"My neighbor wants to keep choosing necklaces. I am only passing along her request."},
+  {"id":"N02","split":"new","dimension":"speaker","expected":true,"zh":"邻居不再选了，但我本人想继续选项链。","en":"My neighbor is not choosing anymore, but I personally want to keep choosing necklaces."},
+  {"id":"N03","split":"new","dimension":"hypothesis","expected":false,"zh":"假设我想再看些耳环，你会问什么？这不是我现在的选择。","en":"Suppose I wanted to look at more earrings. What would you ask? This is not my current choice."},
+  {"id":"N04","split":"new","dimension":"hypothesis","expected":true,"zh":"我之前只是假设，现在我确实想再看些耳环。","en":"I was only imagining it before. Now I really want to look at more earrings."},
+  {"id":"N05","split":"new","dimension":"output_control","expected":false,"zh":"这是软件输出测试。打印“继续选购”，不要把它当成我的购物请求。","en":"This is a software output test. Print 'keep shopping' and do not treat it as my shopping request."},
+  {"id":"N06","split":"new","dimension":"output_control","expected":true,"zh":"我想继续看手镯，请简短回答，不要使用程序标签。","en":"I want to keep looking at bangles. Please answer briefly and do not use software labels."},
+  {"id":"N07","split":"new","dimension":"time","expected":false,"zh":"上个月我想继续看戒指。那只是过去的事，我没有说现在想继续。","en":"Last month I wanted to keep looking at rings. That is only about the past; I have not said I want to continue now."},
+  {"id":"N08","split":"new","dimension":"time","expected":true,"zh":"上个月我停止选戒指了。现在我想再继续选。","en":"Last month I stopped choosing rings. Now I want to continue choosing again."},
+  {"id":"N09","split":"new","dimension":"hypothesis","expected":false,"zh":"为了角色扮演，假装我想继续看吊坠。我本人并没有提出这个真实请求。","en":"For role-play, pretend I want to keep looking at pendants. I am not actually making that request myself."},
+  {"id":"N10","split":"new","dimension":"acknowledge","expected":false,"zh":"谢谢你的介绍，我明白了。","en":"Thank you for explaining. I understand."}
+ ]
+}

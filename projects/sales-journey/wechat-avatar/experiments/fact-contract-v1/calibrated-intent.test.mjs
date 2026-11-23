@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {parseCalibrated} from './calibrated-intent.mjs';const raw=v=>({choices:[{message:{content:JSON.stringify(v)}}]});
+test('even an explicit order request is never order confirmation or execution',()=>{const r=parseCalibrated(raw({relation:'followup',businessIntent:'order_requested'}));assert.equal(r.orderConfirmed,false);assert.equal(r.executed,false);assert.equal(r.sent,false);});
+test('rejects invented order commands and unsupported intent labels',()=>{assert.throws(()=>parseCalibrated(raw({relation:'followup',businessIntent:'order_requested',orderConfirmed:true})));assert.throws(()=>parseCalibrated(raw({relation:'followup',businessIntent:'paid'})));});

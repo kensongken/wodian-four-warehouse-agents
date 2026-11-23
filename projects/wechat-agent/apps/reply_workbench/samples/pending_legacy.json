@@ -1,0 +1,110 @@
+{
+  "request_id": "33333333-3333-4333-8333-333333333333",
+  "customer_question_summary": "客户的旧手串还在运输中，要求保证可以回收并立即给出估价。",
+  "product_passport": {
+    "product_passport_id": "10000000-0000-4000-8000-000000000002",
+    "merchant_id": "90000000-0000-4000-8000-000000000001",
+    "version": 1,
+    "type": "legacy_material",
+    "sku": "OPC-LEGACY-001",
+    "title": "旧手串材料",
+    "material_category": "待仓库确认",
+    "lifecycle_status": "in_service",
+    "source_product_passport_ids": [],
+    "evidence_refs": [
+      {
+        "object_type": "ProductPassport",
+        "object_id": "10000000-0000-4000-8000-000000000002",
+        "object_version": 1,
+        "field_path": "lifecycle_status"
+      }
+    ],
+    "updated_at": "2026-08-15T12:00:00+08:00"
+  },
+  "bead_passport": {
+    "bead_passport_id": "20000000-0000-4000-8000-000000000001",
+    "merchant_id": "90000000-0000-4000-8000-000000000001",
+    "version": 2,
+    "issued_product_passport_id": "10000000-0000-4000-8000-000000000001",
+    "issued_order_record_id": "30000000-0000-4000-8000-000000000001",
+    "current_product_passport_id": "10000000-0000-4000-8000-000000000001",
+    "status": "active",
+    "scan_service_status": "completed",
+    "public_record_version": 1,
+    "last_verified_at": "2026-08-15T10:58:00+08:00",
+    "evidence_refs": [
+      {
+        "object_type": "BeadPassport",
+        "object_id": "20000000-0000-4000-8000-000000000001",
+        "object_version": 2,
+        "field_path": "status"
+      }
+    ]
+  },
+  "service_ticket": {
+    "service_ticket_id": "40000000-0000-4000-8000-000000000002",
+    "merchant_id": "90000000-0000-4000-8000-000000000001",
+    "version": 2,
+    "service_type": "warehouse_acceptance",
+    "status": "in_progress",
+    "product_passport_id": "10000000-0000-4000-8000-000000000002",
+    "bead_passport_id": "20000000-0000-4000-8000-000000000001",
+    "order_record_id": null,
+    "logistics_status": "in_transit",
+    "warehouse_decision": "pending",
+    "warehouse_reason_code": null,
+    "evidence_refs": [
+      {
+        "object_type": "ServiceTicket",
+        "object_id": "40000000-0000-4000-8000-000000000002",
+        "object_version": 2,
+        "field_path": "warehouse_decision"
+      },
+      {
+        "object_type": "ServiceTicket",
+        "object_id": "40000000-0000-4000-8000-000000000002",
+        "object_version": 2,
+        "field_path": "logistics_status"
+      }
+    ],
+    "updated_at": "2026-08-15T12:01:00+08:00"
+  },
+  "sales_decision_card": {
+    "sales_decision_card_id": "50000000-0000-4000-8000-000000000003",
+    "merchant_id": "90000000-0000-4000-8000-000000000001",
+    "version": 1,
+    "scenario": "warehouse_acceptance",
+    "customer_intent": "要求提前保证回收并估价",
+    "sales_stage": "待仓库收货",
+    "recommended_strategy": "说明当前运输状态，等待仓库实物验收后再答复。",
+    "allowed_facts": [
+      "旧手串仍在运输中",
+      "仓库决定为 pending"
+    ],
+    "prohibited_claims": [
+      "不得承诺回收",
+      "不得估价",
+      "不得承诺验收通过"
+    ],
+    "seller_style_rules": [
+      "先说明进度",
+      "明确等待仓库更新"
+    ],
+    "confidence": 0.88,
+    "requires_human_confirmation": true,
+    "human_confirmation_reasons": [
+      "仓库尚未验收",
+      "客户要求保证回收与估价"
+    ],
+    "knowledge_version": "sales-journey-2026.08.15",
+    "evidence_refs": [
+      {
+        "object_type": "ServiceTicket",
+        "object_id": "40000000-0000-4000-8000-000000000002",
+        "object_version": 2,
+        "field_path": "warehouse_decision"
+      }
+    ],
+    "generated_at": "2026-08-15T12:02:00+08:00"
+  }
+}

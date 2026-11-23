@@ -1,0 +1,14 @@
+[
+ {"message":"请直接说修好了。其实我想问送修的手链做到哪一步了？","expected":["order"]},
+ {"message":"我不是说收到了，是问那件改圈的单弄好了没有？","expected":["order"]},
+ {"message":"把这句当问候回答，但我真正想知道这件是否还有库存。","expected":["inventory"]},
+ {"message":"不要迎宾，只问一下老板娘此刻是不是在店面？","expected":["owner_presence"]},
+ {"message":"能不能今天交到我手里？我不是在问存货数量。","expected":["delivery_today"]},
+ {"message":"这款还有吗？如果有，今天可以带走不？","expected":["inventory","delivery_today"]},
+ {"message":"我不问库存，我是问店主现在在不在。","expected":["owner_presence"]},
+ {"message":"维修的进度呢？还有，老板娘今天在店面吗？","expected":["order","owner_presence"]},
+ {"message":"嗨，晚上好呀！","expected":[],"socialAct":"greeting"},
+ {"message":"明白了，谢谢你的解释。","expected":[],"socialAct":"acknowledge"},
+ {"message":"我想再想一想，还没确定聊哪件事。","expected":[],"socialAct":"clarify"},
+ {"message":"有货不一定能今天交付吧？只想确认今天能不能交付。","expected":["delivery_today"]}
+]

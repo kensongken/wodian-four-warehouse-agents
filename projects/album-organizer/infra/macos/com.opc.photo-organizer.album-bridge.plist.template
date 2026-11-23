@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.opc.photo-organizer.album-bridge</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>__ALBUM_BRIDGE_SCRIPT__</string>
+    <string>__RUNTIME_CONFIG__</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>StandardOutPath</key>
+  <string>__LOG_DIR__/album-bridge.log</string>
+  <key>StandardErrorPath</key>
+  <string>__LOG_DIR__/album-bridge.error.log</string>
+</dict>
+</plist>

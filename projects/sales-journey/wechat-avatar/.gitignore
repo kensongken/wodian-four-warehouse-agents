@@ -1,0 +1,5 @@
+.data/
+.acceptance/
+*.log
+*.env
+native/bin/

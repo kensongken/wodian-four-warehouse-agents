@@ -1,0 +1,236 @@
+{
+  "$defs": {
+    "CandidateProductFact": {
+      "additionalProperties": false,
+      "properties": {
+        "confirmation_status": {
+          "const": "candidate",
+          "default": "candidate",
+          "title": "Confirmation Status",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "CandidateProductFact",
+      "type": "object"
+    },
+    "SalesStrategyImageRef": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "format": "uuid",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "mime_type": {
+          "enum": [
+            "image/heic",
+            "image/jpeg",
+            "image/png"
+          ],
+          "title": "Mime Type",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "main_candidate",
+            "gallery",
+            "source_original"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "sha256",
+        "mime_type",
+        "role"
+      ],
+      "title": "SalesStrategyImageRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "automatic_customer_contact_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Customer Contact Allowed",
+      "type": "boolean"
+    },
+    "automatic_publication_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Publication Allowed",
+      "type": "boolean"
+    },
+    "automatic_quote_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Quote Allowed",
+      "type": "boolean"
+    },
+    "automatic_wechat_send_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Wechat Send Allowed",
+      "type": "boolean"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "contract_version": {
+      "const": "1-sales-strategy-input",
+      "default": "1-sales-strategy-input",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "forbidden_expressions": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Forbidden Expressions",
+      "type": "array"
+    },
+    "form": {
+      "$ref": "#/$defs/CandidateProductFact"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/SalesStrategyImageRef"
+      },
+      "maxItems": 3000,
+      "minItems": 1,
+      "title": "Images",
+      "type": "array"
+    },
+    "inventory_status": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Inventory Status",
+      "type": "string"
+    },
+    "material": {
+      "$ref": "#/$defs/CandidateProductFact"
+    },
+    "price_status": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Price Status",
+      "type": "string"
+    },
+    "product_code": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "title": "Product Code",
+      "type": "string"
+    },
+    "product_data_version": {
+      "minimum": 1,
+      "title": "Product Data Version",
+      "type": "integer"
+    },
+    "selling_point_candidates": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Selling Point Candidates",
+      "type": "array"
+    },
+    "service_rule_summaries": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Service Rule Summaries",
+      "type": "array"
+    },
+    "source_album_event_id": {
+      "format": "uuid",
+      "title": "Source Album Event Id",
+      "type": "string"
+    },
+    "source_image_set_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Image Set Sha256",
+      "type": "string"
+    },
+    "source_material_package_version": {
+      "minimum": 1,
+      "title": "Source Material Package Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "preview_only",
+      "default": "preview_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "strategy_input_version": {
+      "minimum": 1,
+      "title": "Strategy Input Version",
+      "type": "integer"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "unverified_items": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Unverified Items",
+      "type": "array"
+    },
+    "visual_observations": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Visual Observations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "product_code",
+    "strategy_input_version",
+    "product_data_version",
+    "source_album_event_id",
+    "source_material_package_version",
+    "source_image_set_sha256",
+    "images",
+    "material",
+    "form",
+    "created_at",
+    "content_sha256"
+  ],
+  "title": "SalesStrategyInputV1",
+  "type": "object"
+}

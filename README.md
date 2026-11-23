@@ -6,12 +6,12 @@
 
 ## 下载源码
 
-- [下载完整源码 ZIP](https://github.com/kensongken/wodian-four-warehouse-agents/archive/refs/heads/main.zip)
+- [下载完整源码 ZIP](https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-four-warehouse-agents-source-20261123.zip)
 - Git：`git clone https://github.com/kensongken/wodian-four-warehouse-agents.git`
 
 ## 启动与开发
 
-本仓库包含两个完整服务目录：`classification/`（分门别类）与 `customer-style/`（客户照片风格仓）。另外两仓分别在 [相册整理](https://github.com/kensongken/wodian-album-organizer) 和 [销售之旅](https://github.com/kensongken/wodian-sales-journey)。商城不属于四仓。
+本仓库包含两个完整服务目录：`classification/`（分门别类）与 `customer-style/`（客户照片风格仓）。另外两仓分别在 [相册整理](https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/album-organizer) 和 [销售之旅](https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/sales-journey)。商城不属于四仓。
 
 分门别类使用 Python 3.12、uv、PostgreSQL 与 S3 兼容存储；先查看 `classification/.env.example`、`classification/infra/`。
 
@@ -47,3 +47,17 @@ uv run uvicorn opc_style.main:app --host 127.0.0.1 --port 18119
 ## 协作
 
 参阅 CONTRIBUTING.md。fengcaneric 与 zbbio 可通过 Fork 和 Pull Request 参与；原私有仓库中已有的协作权限不受这次发布影响。
+
+## 本仓库同时公开的其他四项 Agent
+
+仓库名称、原有分类与照片风格服务目录保留不变。根据用户选择，以下四项以独立完整工程目录追加；商城 SaaS 与客户的世界应用源码仍不公开。
+
+| 项目 | 代码入口 | 单独源码 ZIP |
+| --- | --- | --- |
+| 四仓协同与分门别类 | [代码](https://github.com/kensongken/wodian-four-warehouse-agents) | [下载](https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-four-warehouse-agents-source-20261123.zip) |
+| 相册整理 | [代码](https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/album-organizer) | [下载](https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-album-organizer-source-20261123.zip) |
+| 销售之旅 | [代码](https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/sales-journey) | [下载](https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-sales-journey-source-20261123.zip) |
+| 微信大盗 | [代码](https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/wechat-agent) | [下载](https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-wechat-agent-source-20261123.zip) |
+| 自动剪辑 | [代码](https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/auto-editor) | [下载](https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-auto-editor-source-20261123.zip) |
+
+仓库页面的 Code → Download ZIP 可下载上述五项全部源码。每个工程独立安装依赖并启动；下载不包含真实数据、密钥和第三方模型权重。完整源码不代表全部需求完成或生产验收通过。

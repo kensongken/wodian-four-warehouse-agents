@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: photo_organizer
+      POSTGRES_USER: photo_organizer
+      POSTGRES_PASSWORD: photo_organizer
+    ports:
+      - "127.0.0.1:25432:5432"
+    volumes:
+      - handoff-publisher-test-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U photo_organizer -d photo_organizer"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  handoff-publisher-test-postgres-data:

@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {frameRequest,parseFrame} from './topic-frame.mjs';
+import {frameProposal} from './topic-frame.mjs';import {createSandbox} from './sandbox-server.mjs';
+const raw=x=>({choices:[{message:{content:JSON.stringify(x)}}]});
+test('chat content can exist without changing shopping intent; explicit pause projects independently',()=>{const base={topic:'chat',topicQuote:'有点累',shoppingIntent:'unspecified',intentQuote:null};assert.equal(parseFrame('有点累',raw(base)).projectedTopic,'chat');assert.equal(parseFrame('有点累，今天先不买',raw({...base,shoppingIntent:'pause',intentQuote:'今天先不买'})).projectedTopic,'pause');});
+test('frame rejects fabricated evidence, absent fields and invented execution fields',()=>{const v={topic:'chat',topicQuote:'累',shoppingIntent:'unspecified',intentQuote:null};assert.throws(()=>parseFrame('你好',raw(v)));assert.throws(()=>parseFrame('累',raw({...v,action:'refund'})));assert.throws(()=>parseFrame('累',raw({...v,shoppingIntent:'pause'})));assert.throws(()=>frameRequest('test','x',Array(5).fill('old')));});
+test('frame endpoint keeps content and intent distinct, requires review and rejects injected approval',async t=>{
+ const v={topic:'chat',topicQuote:'累',shoppingIntent:'unspecified',intentQuote:null};assert.equal(frameProposal(parseFrame('累',raw(v))).suggestedScenario,'chat_general');
+ let calls=0;const app=createSandbox({completeTopicFrame:async()=>{calls++;return raw(v);}});await new Promise(r=>app.server.listen(0,'127.0.0.1',r));t.after(()=>app.close());const origin=`http://127.0.0.1:${app.server.address().port}`,post=body=>fetch(origin+'/api/service-topic-frame',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Sandbox':'1'},body:JSON.stringify(body)});
+ assert.equal((await post({message:'累',confirmed:true})).status,400);assert.equal(calls,0);const d=await(await post({message:'累'})).json();assert.equal(d.topic,'chat');assert.equal(d.shoppingIntent,'unspecified');assert.equal(d.requiresHumanReview,true);assert.equal(d.sent,false);assert.equal(d.profileChanged,false);assert.equal((await fetch(origin+'/topic-frame')).status,200);
+});

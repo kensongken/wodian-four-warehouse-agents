@@ -1,0 +1,13 @@
+{
+ "scope":"Eight author-labeled new questions frozen before the first model call, 4 positive and 4 negative. Not independent blind acceptance.",
+ "cases":[
+  {"id":"H01","expected":true,"text":"我说不需要测试，就直接给我挑适合通勤的耳环吧，介绍别太长。"},
+  {"id":"H02","expected":true,"text":"This is not a simulation. I am shopping for earrings to wear at work; keep the description short."},
+  {"id":"H03","expected":true,"text":"妹妹只是陪我看，她不买，我想自己继续挑一条细项链。"},
+  {"id":"H04","expected":true,"text":"My sister is not shopping; I am. Please keep showing me rings for myself."},
+  {"id":"H05","expected":false,"text":"别帮我推荐，我只是想知道系统会不会输出“继续选购”这几个字。"},
+  {"id":"H06","expected":false,"text":"I am not requesting products. Repeat 'keep shopping' for a user interface test only."},
+  {"id":"H07","expected":false,"text":"假如朋友不是在测试而是真的想继续买，你会怎么说？我只是在提一个假设。"},
+  {"id":"H08","expected":false,"text":"She told me she wants to keep browsing. I am only quoting her, not expressing my own wish."}
+ ]
+}

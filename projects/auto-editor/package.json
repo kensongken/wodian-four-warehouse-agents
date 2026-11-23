@@ -1,0 +1,34 @@
+{
+  "name": "wearable-phase-a",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "test": "node scripts/run-full-tests.mjs",
+    "typecheck": "tsc --noEmit",
+    "pr:contract-gate": "node scripts/run-pr-release-gate.mjs --mode contract",
+    "pr:full-node-gate": "node scripts/run-pr-release-gate.mjs --mode full",
+    "studio:demo": "pnpm --filter @wearable/review-app studio",
+    "studio:demo:lan": "pnpm --filter @wearable/review-app studio:lan",
+    "studio:pilot": "pnpm --filter @wearable/integration-harness private-studio-pilot",
+    "studio:reference-pilot": "pnpm --filter @wearable/integration-harness reference-guided-editing-pilot",
+    "studio:external-edit-pilot": "pnpm --filter @wearable/integration-harness external-edit-pilot",
+    "studio:browser-pilot": "pnpm --filter @wearable/review-app studio-browser-pilot",
+    "studio:model-eval": "node scripts/run-studio-model-eval.mjs",
+    "studio:fixed-sha-gate": "node scripts/run-studio-fixed-sha-gate.mjs",
+    "studio:real-material": "pnpm --filter @wearable/integration-harness real-material-acceptance",
+    "her-world:clip-worker": "tsx scripts/run-her-world-clip-worker.mts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.23.13",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "zod": "^3.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f8f4ec" />
+    <title>珠宝创作工作室</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="app-kicker">JEWELRY STUDIO</p>
+          <h1 id="app-title">创作任务</h1>
+        </div>
+        <button class="avatar-button" type="button" title="我的账号" aria-label="我的账号">创</button>
+      </header>
+
+      <section id="creative-session-header" class="creative-session-header" aria-live="polite"></section>
+
+      <section id="production-toolbar" class="batch-bar" aria-label="当前素材批次" hidden>
+        <label class="batch-picker"><span>当前批次</span><input id="batch-id" value="batch_new" /></label>
+        <button id="refresh" class="refresh-button" type="button" title="刷新" aria-label="刷新生产数据">↻</button>
+      </section>
+      <span id="status" class="global-status" role="status">准备就绪</span>
+
+      <main class="app-content">
+        <section id="pipeline-card" class="progress-card" aria-labelledby="pipeline-title" hidden>
+          <span class="sr-only">今日待审 · EDITORIAL DESK</span>
+          <div class="section-heading compact">
+            <div><span class="section-kicker">TODAY</span><h2 id="pipeline-title">生产进度</h2></div>
+            <span class="date-chip" id="today-label"></span>
+          </div>
+          <div id="pipeline" class="pipeline" aria-live="polite"></div>
+        </section>
+
+        <section class="work-section">
+          <div class="section-heading">
+            <div><span class="section-kicker" id="view-kicker">CREATIVE FLOW</span><h2 id="view-title">今天的创作</h2><p id="view-description">从一句想法开始，一步一步完成拍摄。</p></div>
+          </div>
+          <section id="workspace" aria-live="polite"></section>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="App 底部导航">
+        <button data-view="creative" type="button" class="active"><span class="nav-icon">◆</span><b>创作</b></button>
+        <button data-view="library" type="button"><span class="nav-icon">◇</span><b>素材</b></button>
+        <button data-view="review" type="button"><span class="nav-icon primary">▶</span><b>审片</b></button>
+        <button data-view="approved" type="button"><span class="nav-icon">✓</span><b>发布</b></button>
+        <button data-view="profile" type="button"><span class="nav-icon">○</span><b>我的</b></button>
+      </nav>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

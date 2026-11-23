@@ -1,0 +1,29 @@
+{
+  "schemaVersions": [
+    { "label": "integer one", "valueJson": "1", "valid": true },
+    { "label": "decimal one", "valueJson": "1.0", "valid": true },
+    { "label": "exponent one", "valueJson": "1e0", "valid": true },
+    { "label": "boolean true", "valueJson": "true", "valid": false },
+    { "label": "fraction", "valueJson": "1.5", "valid": false },
+    { "label": "nonfinite overflow", "valueJson": "1e999", "valid": false },
+    { "label": "null", "valueJson": "null", "valid": false },
+    { "label": "list", "valueJson": "[]", "valid": false },
+    { "label": "object", "valueJson": "{}", "valid": false }
+  ],
+  "metadataScalars": [
+    { "label": "printable ASCII with interior space", "target": "packages.0.licenseExpression", "valueJson": "\"Apache 2.0\"", "valid": true },
+    { "label": "nullable Python build", "target": "python.build", "valueJson": "null", "valid": true },
+    { "label": "U+0085 in Python version", "target": "python.version", "valueJson": "\"3.12.\\u0085\"", "valid": false },
+    { "label": "U+FEFF in Python name", "target": "python.name", "valueJson": "\"cpy\\ufeffthon\"", "valid": false },
+    { "label": "NBSP in package name", "target": "packages.0.name", "valueJson": "\"fixture\\u00a0package\"", "valid": false },
+    { "label": "leading ASCII whitespace", "target": "packages.0.version", "valueJson": "\" 1.0.0\"", "valid": false },
+    { "label": "trailing ASCII whitespace", "target": "packages.0.licenseExpression", "valueJson": "\"MIT \"", "valid": false },
+    { "label": "non-ASCII visible material identifier", "target": "python.sourceMaterialId", "valueJson": "\"python-runtime:caf\\u00e9\"", "valid": false },
+    { "label": "boolean Python build", "target": "python.build", "valueJson": "true", "valid": false },
+    { "label": "integer package name", "target": "packages.0.name", "valueJson": "1", "valid": false },
+    { "label": "null package version", "target": "packages.0.version", "valueJson": "null", "valid": false },
+    { "label": "list license expression", "target": "packages.0.licenseExpression", "valueJson": "[]", "valid": false },
+    { "label": "object material identifier", "target": "packages.0.sourceMaterialId", "valueJson": "{}", "valid": false },
+    { "label": "empty Python name", "target": "python.name", "valueJson": "\"\"", "valid": false }
+  ]
+}

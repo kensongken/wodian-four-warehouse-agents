@@ -1,0 +1,91 @@
+name: PR release gates
+
+on:
+  pull_request:
+    branches: [stage-a]
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-release-gates-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pr-contract-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Verify candidate SHA
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm pr:contract-gate
+      - name: Check PR diff whitespace
+        env:
+          EVENT_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          BASE_SHA="$EVENT_BASE_SHA"
+          if [ -z "$BASE_SHA" ]; then
+            git fetch --no-tags origin stage-a
+            BASE_SHA="$(git rev-parse origin/stage-a)"
+          fi
+          git cat-file -e "$BASE_SHA^{commit}"
+          git diff --check "$BASE_SHA"...HEAD
+
+  pr-full-node-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Verify candidate SHA
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pnpm install --frozen-lockfile
+      - name: Prepare lightweight Python worker shell
+        run: |
+          python -m venv tools/media-model-worker/.venv
+          tools/media-model-worker/.venv/bin/python -m pip install --requirement tools/media-model-worker/requirements-ci.txt
+          tools/media-model-worker/.venv/bin/python -m pip install --no-deps scenedetect==0.7.1
+          echo "STUDIO_TEST_PYTHON=$GITHUB_WORKSPACE/tools/media-model-worker/.venv/bin/python" >> "$GITHUB_ENV"
+      - name: Locate supported browser
+        run: |
+          BROWSER=""
+          for candidate in /usr/bin/google-chrome /usr/bin/chromium /usr/bin/chromium-browser; do
+            if [ -x "$candidate" ]; then BROWSER="$candidate"; break; fi
+          done
+          if [ -z "$BROWSER" ]; then
+            echo "studio-browser-executable-unavailable" >&2
+            exit 1
+          fi
+          echo "STUDIO_BROWSER_EXECUTABLE=$BROWSER" >> "$GITHUB_ENV"
+      - run: pnpm pr:full-node-gate

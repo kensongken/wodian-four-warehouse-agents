@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "providerEvidence": "fixture/synthetic",
+  "synthetic": true,
+  "customerId": "synthetic-customer-a",
+  "crossCustomerExposureCount": 0,
+  "networkModelRequestCount": 0,
+  "peakWorkerMemoryBytes": 0,
+  "originalMutationCount": 0,
+  "actions": {
+    "delete": 0,
+    "upload": 0,
+    "publish": 0
+  },
+  "confirmedFacts": [],
+  "layers": {
+    "technical": {
+      "status": "succeeded",
+      "runtimeMs": 0,
+      "error": null
+    },
+    "scene": {
+      "status": "succeeded",
+      "runtimeMs": 0,
+      "error": null,
+      "scenes": [
+        {
+          "startMs": 0,
+          "endMs": 1000
+        },
+        {
+          "startMs": 1000,
+          "endMs": 2500
+        }
+      ]
+    },
+    "transcript": {
+      "status": "succeeded",
+      "runtimeMs": 0,
+      "error": null,
+      "spans": [
+        {
+          "startMs": 100,
+          "endMs": 900,
+          "text": "合成设计讲解"
+        }
+      ]
+    },
+    "embedding": {
+      "status": "succeeded",
+      "runtimeMs": 0,
+      "error": null,
+      "exactDuplicateGroups": [
+        "exact-a"
+      ],
+      "nearDuplicateGroups": [
+        "near-a"
+      ]
+    },
+    "vision": {
+      "status": "succeeded",
+      "runtimeMs": 0,
+      "error": null,
+      "suggestedTags": [
+        "合成商品特写"
+      ],
+      "demandEvidence": [
+        "画面包含合成商品"
+      ]
+    }
+  }
+}

@@ -1,0 +1,195 @@
+name: Phase 1 CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main, "codex/mini-night-*"]
+
+permissions:
+  contents: read
+
+env:
+  UV_VERSION: "0.12.3"
+  PYTHON_VERSION: "3.12"
+  FLUTTER_VERSION: "3.47.0"
+  TEST_DATABASE_URL: postgresql://photo_organizer:photo_organizer@127.0.0.1:5432/photo_organizer_test
+
+jobs:
+  backend:
+    name: Backend lint, type, and unit tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: photo_organizer_test
+          POSTGRES_USER: photo_organizer
+          POSTGRES_PASSWORD: photo_organizer
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U photo_organizer -d photo_organizer_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+          enable-cache: true
+      - run: uv sync --frozen
+        working-directory: services/backend
+      - run: uv run alembic upgrade head
+        working-directory: services/backend
+        env:
+          DATABASE_URL: ${{ env.TEST_DATABASE_URL }}
+      - run: uv run ruff check .
+        working-directory: services/backend
+      - run: uv run ruff format --check .
+        working-directory: services/backend
+      - run: uv run mypy src
+        working-directory: services/backend
+      - run: uv run pytest -m "not integration" -q
+        working-directory: services/backend
+        env:
+          PHOTO_ORGANIZER_TEST_DATABASE_URL: ${{ env.TEST_DATABASE_URL }}
+
+  integration:
+    name: PostgreSQL, migration, and MinIO integration
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: photo_organizer_test
+          POSTGRES_USER: photo_organizer
+          POSTGRES_PASSWORD: photo_organizer
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U photo_organizer -d photo_organizer_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+          enable-cache: true
+      - run: uv sync --frozen
+        working-directory: services/backend
+      - name: Start MinIO
+        run: >-
+          docker run -d --name phase1-minio -p 9000:9000
+          -e MINIO_ROOT_USER=test-access
+          -e MINIO_ROOT_PASSWORD=test-secret-key
+          minio/minio:RELEASE.2025-04-22T22-12-26Z server /data
+      - name: Wait for MinIO and create test bucket
+        run: |
+          curl --fail --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:9000/minio/health/live
+          uv run python -c "import boto3; boto3.client('s3', endpoint_url='http://127.0.0.1:9000', aws_access_key_id='test-access', aws_secret_access_key='test-secret-key').create_bucket(Bucket='photo-organizer-test')"
+        working-directory: services/backend
+      - name: Verify reversible migrations
+        run: |
+          uv run alembic downgrade base
+          uv run alembic upgrade head
+          uv run alembic check
+        working-directory: services/backend
+        env:
+          DATABASE_URL: ${{ env.TEST_DATABASE_URL }}
+      - run: uv run pytest tests/integration -q
+        working-directory: services/backend
+        env:
+          PHOTO_ORGANIZER_TEST_DATABASE_URL: ${{ env.TEST_DATABASE_URL }}
+          MINIO_TEST_ENDPOINT: http://127.0.0.1:9000
+          MINIO_TEST_BUCKET: photo-organizer-test
+          MINIO_TEST_ACCESS_KEY: test-access
+          MINIO_TEST_SECRET_KEY: test-secret-key
+
+  offline-synthetic:
+    name: Synthetic upload handoff gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+          enable-cache: true
+      - run: uv sync --frozen
+        working-directory: services/backend
+      - run: sh scripts/mini_night_handoff_gate.sh
+        env:
+          PHOTO_ORGANIZER_PYTHON: services/backend/.venv/bin/python
+
+  flutter:
+    name: Flutter format, analyze, and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+        working-directory: apps/mobile
+      - run: dart format --output=none --set-exit-if-changed lib test
+        working-directory: apps/mobile
+      - run: flutter analyze
+        working-directory: apps/mobile
+      - run: flutter test
+        working-directory: apps/mobile
+
+  android:
+    name: Android native unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+        working-directory: apps/mobile
+      - run: ./gradlew :app:testDebugUnitTest --no-daemon
+        working-directory: apps/mobile/android
+
+  openapi:
+    name: Deterministic OpenAPI contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+          enable-cache: true
+      - run: uv sync --frozen
+        working-directory: services/backend
+      - run: uv run --project services/backend python scripts/export_openapi.py
+        env:
+          APP_ENV: test
+          S3_ACCESS_KEY_ID: test-access-key
+          S3_SECRET_ACCESS_KEY: test-secret-key
+          JWT_SIGNING_KEY: test-jwt-signing-key-7fd964c916c831c5
+          OTP_PEPPER: test-otp-pepper-6938d445ba25e6af
+          OTP_SENDER: tencent
+          TENCENT_SECRET_ID: test-id
+          TENCENT_SECRET_KEY: test-key
+          TENCENT_SMS_SDK_APP_ID: test-app
+          TENCENT_SMS_SIGN_NAME: test-sign
+          TENCENT_SMS_TEMPLATE_ID: test-template
+      - run: git diff --exit-code -- contracts/openapi.json
+      - run: uv run --project services/backend python scripts/export_classification_contract.py --check

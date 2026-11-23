@@ -1,0 +1,1 @@
+{"category":"synthetic-category","confidence":1.0,"confirmed_facts":[{"evidence_ref":"catalog/synthetic-product-1/original","fact":"synthetic-authorized-fact"}],"evidence_refs":["catalog/synthetic-product-1/original"],"image_summary":"authorized_exact_hash_match","product_id":"synthetic-product-1","request_id":"smoke-match","schema_version":"1.0","status":"matched"}

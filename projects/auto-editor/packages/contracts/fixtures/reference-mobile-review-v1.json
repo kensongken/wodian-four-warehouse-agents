@@ -1,0 +1,45 @@
+{
+  "id": "mobile_review_1",
+  "customerId": "customer_a",
+  "sessionId": "session_a",
+  "version": 1,
+  "bindings": {
+    "sample": { "id": "reference_1", "version": 1, "customerId": "customer_a", "sessionId": "session_a", "sourceAssetId": "reference_asset_1", "sourceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceKind": "external-style-only", "collectionMode": "dedicated-upload", "candidateScope": "reference-only" },
+    "rights": { "id": "rights_1", "version": 1, "customerId": "customer_a", "sessionId": "session_a", "referenceSampleId": "reference_1", "referenceSampleVersion": 1, "referenceSampleDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceKind": "external-style-only", "reusableElements": [], "contentDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" },
+    "analysis": { "id": "analysis_1", "version": 1, "customerId": "customer_a", "sessionId": "session_a", "contentDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" },
+    "styleSelection": { "id": "selection_1", "version": 1, "customerId": "customer_a", "sessionId": "session_a", "contentDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "status": "confirmed", "confirmation": { "receiptId": "selection_confirmation_1", "actorId": "designer_1", "confirmedAt": "2026-09-19T00:00:00.000Z" } },
+    "mappingPlan": { "id": "mapping_1", "version": 1, "customerId": "customer_a", "sessionId": "session_a", "contentDigest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "permissionSetDigest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "permissions": [{ "id": "permission_1", "version": 3, "epoch": 7, "customerId": "customer_a", "sessionId": "session_a", "sourceAssetId": "asset_1", "sourceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }], "status": "confirmed", "confirmation": { "receiptId": "mapping_confirmation_1", "actorId": "designer_1", "confirmedAt": "2026-09-19T00:00:00.000Z" } },
+    "executionReport": { "id": "report_1", "version": 1, "customerId": "customer_a", "sessionId": "session_a" }
+  },
+  "styleSummary": { "status": "complete", "ruleKinds": ["rhythm"], "capability": { "mode": "offline-fallback", "label": "离线/模拟分析", "version": 1, "provider": null }, "warningCodes": [] },
+  "artifacts": [
+    { "kind": "editorial-master", "variantPlanId": "variant_1", "variantPlanVersion": 1, "draftId": "draft_1", "draftVersion": 1, "outputDigest": "1111111111111111111111111111111111111111111111111111111111111111", "mediaRoute": { "kind": "reference-draft-media", "version": 1, "draftId": "draft_1" }, "status": "reviewable" },
+    { "kind": "xiaohongshu", "variantPlanId": "variant_2", "variantPlanVersion": 1, "draftId": "draft_2", "draftVersion": 1, "outputDigest": "2222222222222222222222222222222222222222222222222222222222222222", "mediaRoute": { "kind": "reference-draft-media", "version": 1, "draftId": "draft_2" }, "status": "reviewable" },
+    { "kind": "douyin", "variantPlanId": "variant_3", "variantPlanVersion": 1, "draftId": "draft_3", "draftVersion": 1, "outputDigest": "3333333333333333333333333333333333333333333333333333333333333333", "mediaRoute": { "kind": "reference-draft-media", "version": 1, "draftId": "draft_3" }, "status": "reviewable" },
+    { "kind": "wechat-channels", "variantPlanId": "variant_4", "variantPlanVersion": 1, "draftId": "draft_4", "draftVersion": 1, "outputDigest": "4444444444444444444444444444444444444444444444444444444444444444", "mediaRoute": { "kind": "reference-draft-media", "version": 1, "draftId": "draft_4" }, "status": "reviewable" }
+  ],
+  "executionReport": {
+    "id": "report_1",
+    "version": 1,
+    "artifacts": [
+      { "kind": "editorial-master", "variantPlanId": "variant_1", "variantPlanVersion": 1, "draftId": "draft_1", "draftVersion": 1, "outputDigest": "1111111111111111111111111111111111111111111111111111111111111111" },
+      { "kind": "xiaohongshu", "variantPlanId": "variant_2", "variantPlanVersion": 1, "draftId": "draft_2", "draftVersion": 1, "outputDigest": "2222222222222222222222222222222222222222222222222222222222222222" },
+      { "kind": "douyin", "variantPlanId": "variant_3", "variantPlanVersion": 1, "draftId": "draft_3", "draftVersion": 1, "outputDigest": "3333333333333333333333333333333333333333333333333333333333333333" },
+      { "kind": "wechat-channels", "variantPlanId": "variant_4", "variantPlanVersion": 1, "draftId": "draft_4", "draftVersion": 1, "outputDigest": "4444444444444444444444444444444444444444444444444444444444444444" }
+    ],
+    "rhythm": { "status": "matched", "summaryCode": "rule-followed", "evidenceRefs": ["render_evidence_1"] },
+    "transitions": { "status": "matched", "summaryCode": "rule-followed", "evidenceRefs": ["render_evidence_1"] },
+    "narrative": { "status": "matched", "summaryCode": "rule-followed", "evidenceRefs": ["render_evidence_1"] },
+    "audio": { "status": "matched", "summaryCode": "rule-followed", "evidenceRefs": ["render_evidence_1"] },
+    "mappingCounts": { "matched": 1, "substituted": 0, "unachievable": 0 },
+    "platformChanges": [
+      { "kind": "xiaohongshu", "changeCodes": ["shorter-opening"] },
+      { "kind": "douyin", "changeCodes": ["alternate-cut"] },
+      { "kind": "wechat-channels", "changeCodes": ["longer-context"] }
+    ]
+  },
+  "approval": { "status": "pending", "approvedArtifactKinds": [] },
+  "status": "reviewable",
+  "publishClaimed": false,
+  "createdAt": "2026-09-19T00:00:00.000Z"
+}

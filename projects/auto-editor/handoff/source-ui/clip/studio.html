@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>私人内容工作台</title>
+  <script>if (window.location.protocol === "file:") window.location.replace("http://127.0.0.1:4273/studio");</script>
+  <link rel="stylesheet" href="/studio.css">
+</head>
+<body>
+  <main class="studio-shell" data-active-tab="create" data-current-step="demand">
+    <header class="app-header">
+      <div class="app-brand">
+        <span class="app-mark">AI</span>
+        <div><strong>内容工作台</strong><small>你的内容总编</small></div>
+      </div>
+      <label class="customer-chip" aria-label="当前客户">
+        <select id="studio-customer">
+          <option value="synthetic-customer-a">演示客户 A</option>
+          <option value="synthetic-customer-b">演示客户 B</option>
+        </select>
+      </label>
+    </header>
+
+    <ol class="studio-journey" aria-label="制作进度">
+      <li data-journey-phase="start"><span>1</span><strong>开始整理</strong></li>
+      <li data-journey-phase="confirm"><span>2</span><strong>确认素材</strong></li>
+      <li data-journey-phase="review"><span>3</span><strong>审核作品</strong></li>
+    </ol>
+    <p id="studio-status" class="status app-status" aria-live="polite">正在准备演示素材…</p>
+
+    <section class="studio-hero" data-app-view="create" aria-labelledby="quick-create-title">
+      <p class="eyebrow">开始创作</p>
+      <h1 id="quick-create-title">想做什么？</h1>
+      <p class="hero-copy">写下你想讲什么，我们先从已有素材里找，再一步步做成可审核的内容。</p>
+      <div class="creation-materials" aria-label="创作原料">
+        <p id="create-material-summary" aria-live="polite">正在读取素材…</p>
+        <div class="creation-material-actions">
+          <button type="button" class="secondary-action" data-studio-tab="library">查看视频</button>
+          <button type="button" class="secondary-action" data-studio-tab="library" data-focus-upload>上传视频</button>
+        </div>
+      </div>
+      <form id="studio-quick-demand-form" class="quick-create-form">
+        <label class="quick-prompt">
+          <span class="sr-only">创作需求</span>
+          <textarea name="prompt" maxlength="500" placeholder="说一句你的想法…"></textarea>
+        </label>
+        <div class="quick-actions">
+          <button id="studio-voice-input" class="icon-action" type="button" aria-label="语音输入">语音</button>
+          <button class="primary-action quick-submit" type="submit">开始</button>
+        </div>
+      </form>
+      <div class="studio-home-actions" aria-label="常用功能">
+        <button class="home-action-card" type="button" data-studio-tab="works">
+          <span><strong>查看作品</strong></span>
+          <span class="home-action-arrow" aria-hidden="true">›</span>
+        </button>
+        <button class="home-action-card" type="button" data-studio-tab="library">
+          <span><strong>上传素材</strong></span>
+          <span class="home-action-arrow" aria-hidden="true">›</span>
+        </button>
+      </div>
+      <details class="advanced-tools">
+        <summary>更多</summary>
+        <button id="studio-add-reference" class="reference-shortcut" type="button">
+          <span>+</span><span><strong>添加参考视频</strong><small>可选：参考它的节奏、结构和转场</small></span>
+        </button>
+        <details class="advanced-demand">
+          <summary>补充更多要求（可选）</summary>
+          <form id="studio-demand-form" class="studio-form-grid">
+          <label>内容类型<select name="contentType" required>
+            <option value="single-product">单件商品</option>
+            <option value="jewelry-making-process">珠宝制作过程</option>
+            <option value="designer-viewpoint">设计师观点</option>
+          </select></label>
+          <label>目标内容：这次最想讲清楚什么<textarea name="goal" required maxlength="500"></textarea></label>
+          <label>希望谁看到<input name="targetAudience" required maxlength="200"></label>
+          <label>目标内容效果：希望看完达到什么效果<textarea name="desiredEffect" required maxlength="500"></textarea></label>
+          <label>必须出现的内容<textarea name="mustInclude" maxlength="4019" placeholder="一行一项，最多 20 项，每项 200 字"></textarea></label>
+          <label>避免内容：不能出现什么<textarea name="mustAvoid" maxlength="4019" placeholder="一行一项，最多 20 项，每项 200 字"></textarea></label>
+          <label>填写人<select name="submittedBy"><option value="operator-on-behalf">内部人员代录</option><option value="customer-self-declared">客户本人填写</option></select></label>
+          <button class="primary-action" type="submit">提交这次需求</button>
+          </form>
+        </details>
+      </details>
+      <details class="system-drawer">
+        <summary>查看运行边界</summary>
+        <p id="studio-release" class="release-marker">正在读取本地候选版本…</p>
+        <p>只在本机用合成素材演示，每个判断都会标注 <span class="offline-badge">离线/模拟分析</span>。</p>
+        <div class="boundary" role="note"><strong>人工把关：</strong>只生成初稿和记录审核意见，不会自动发布。</div>
+      </details>
+    </section>
+
+    <section id="reference-workflow" class="reference-terminal" data-app-view="library" aria-labelledby="reference-title">
+      <details class="reference-advanced">
+        <summary>按参考视频做相似风格（进阶）</summary>
+        <div class="reference-advanced-content">
+      <div class="reference-terminal-header">
+        <div>
+          <p class="eyebrow">可选进阶功能</p>
+          <h2 id="reference-title">参考视频制作</h2>
+          <p>选一条参考视频，确认要学习的节奏和画面转换，再用已有素材生成不同版本。不会复制外部内容，也不会自动发布。</p>
+        </div>
+        <div class="reference-terminal-state" aria-label="制作范围">
+          <span>只用本机素材</span><span>你来确认</span><span>生成多个版本</span>
+        </div>
+      </div>
+      <p id="reference-status" class="reference-status" role="status" aria-live="polite">可选流程：先选一条参考样片。</p>
+      <div id="reference-error" class="reference-error" role="alert" hidden></div>
+
+      <ol class="reference-flow" aria-label="参考样片四步工作流">
+        <li class="reference-stage" data-reference-stage="sample">
+          <div class="reference-stage-marker"><span>01</span><small>样片入库</small></div>
+          <div class="reference-stage-body">
+            <div class="reference-stage-heading">
+              <div><p class="step-kicker">第一步</p><h3>添加参考样片</h3></div>
+              <span class="gate-chip" id="reference-sample-gate">待选择</span>
+            </div>
+            <p>上传一条 MP4/MOV，或从这位客户有权查看的历史成片中选择。原片只通过本机安全媒体路由预览。</p>
+            <div class="reference-source-grid">
+              <form id="reference-upload-form" class="reference-source-card">
+                <strong>上传本地视频</strong>
+                <label>文件<input id="reference-file" name="file" type="file" accept="video/mp4,video/quicktime,.mp4,.mov" required></label>
+                <label>样片来源<select name="sourceKind" required>
+                  <option value="external-style-only">外部样片，只学风格</option>
+                  <option value="self-owned">客户自有样片</option>
+                </select></label>
+                <button class="primary-action" type="submit">校验并加入样片库</button>
+              </form>
+              <div class="reference-source-card">
+                <div class="card-heading"><strong>从我的历史成片选择</strong><button id="refresh-reference-history" class="quiet-action" type="button">刷新</button></div>
+                <label>登记来源<select id="reference-history-source-kind">
+                  <option value="self-owned">客户自有样片</option>
+                  <option value="external-style-only">外部样片，只学风格</option>
+                </select></label>
+                <div id="reference-history-list" class="reference-history-list empty-state">尚无可选的授权历史成片。</div>
+              </div>
+            </div>
+            <div id="reference-sample-card" class="reference-sample-card empty-state">样片入库后，这里会显示安全预览和范围标识。</div>
+          </div>
+        </li>
+
+        <li class="reference-stage" data-reference-stage="analysis">
+          <div class="reference-stage-marker"><span>02</span><small>规则拆解</small></div>
+          <div class="reference-stage-body">
+            <div class="reference-stage-heading">
+              <div><p class="step-kicker">第二步</p><h3>声明来源并拆解风格</h3></div>
+              <span class="gate-chip" id="reference-analysis-gate">待声明</span>
+            </div>
+            <p>先确认“可以学什么”。外部样片只学节奏、结构和基础转场；客户自有样片才能逐项允许内容复用。</p>
+            <form id="reference-rights-form" class="reference-rights-form">
+              <label>已登记来源<output id="reference-rights-source-kind" class="reference-source-kind-output">选择样片后显示</output></label>
+              <fieldset id="reference-reuse-elements" disabled><legend>允许复用的自有内容</legend>
+                <label><input type="checkbox" name="reusableElements" value="video-clips"> 视频片段</label>
+                <label><input type="checkbox" name="reusableElements" value="audio-track"> 音乐或音轨</label>
+                <label><input type="checkbox" name="reusableElements" value="spoken-content"> 口播内容</label>
+              </fieldset>
+              <button id="declare-reference-rights" class="primary-action" type="submit" disabled>确认来源与复用范围</button>
+            </form>
+            <div class="reference-action-row">
+              <button id="analyze-reference" class="primary-action" type="button" disabled>运行本地技术检查与风格分析</button>
+              <span>分析能力不足时会原样显示服务端警告。</span>
+            </div>
+            <div id="reference-analysis" class="reference-analysis empty-state">尚未分析样片。</div>
+            <form id="reference-style-form" class="reference-style-form">
+              <fieldset id="reference-style-rules" disabled><legend>选择这次要学习的规则</legend><p class="empty-state">分析后才能选择。</p></fieldset>
+              <p id="reference-generation-state" class="generation-state">尚未开始生成视频</p>
+              <button id="confirm-reference-style" class="primary-action" type="submit" disabled>确认风格并开始匹配素材</button>
+            </form>
+          </div>
+        </li>
+
+        <li class="reference-stage" data-reference-stage="mapping">
+          <div class="reference-stage-marker"><span>03</span><small>素材对位</small></div>
+          <div class="reference-stage-body">
+            <div class="reference-stage-heading">
+              <div><p class="step-kicker">第三步</p><h3>复核素材匹配</h3></div>
+              <span class="gate-chip" id="reference-mapping-gate">待风格确认</span>
+            </div>
+            <p>每条规则必须明确落在“已匹配”、“相近替代”或“无法实现”。页面只说现有素材能做到什么，不派发拍摄任务。</p>
+            <div class="reference-action-row">
+              <button id="create-reference-mapping" class="primary-action" type="button" disabled>建立素材匹配计划</button>
+              <button id="confirm-reference-mapping" class="secondary-action" type="button" disabled>人工确认这份匹配</button>
+            </div>
+            <div id="reference-mapping" class="reference-mapping empty-state">先确认风格规则。</div>
+          </div>
+        </li>
+
+        <li class="reference-stage" data-reference-stage="render">
+          <div class="reference-stage-marker"><span>04</span><small>四版验收</small></div>
+          <div class="reference-stage-body">
+            <div class="reference-stage-heading">
+              <div><p class="step-kicker">第四步</p><h3>生成四版并查看执行报告</h3></div>
+              <span class="gate-chip" id="reference-render-gate">待匹配确认</span>
+            </div>
+            <p>先生成原视频母版，再分别派生小红书、抖音和视频号版本。四版都从安全媒体路由播放，报告分开说明执行结果，不生成不透明的总分。</p>
+            <button id="render-reference-drafts" class="primary-action" type="button" disabled>生成原视频母版、小红书版、抖音版、视频号版</button>
+            <div id="reference-drafts" class="reference-drafts empty-state">匹配计划经人工确认后才能生成。</div>
+            <details id="reference-report-drawer" class="reference-report-drawer">
+              <summary>查看复刻执行报告</summary>
+              <div id="reference-report" class="reference-report empty-state">还没有执行报告。</div>
+            </details>
+            <p class="micro-boundary">四个版本需要逐版改剪、逐版确认精确版本并审批；本页不提供对外发布动作。</p>
+          </div>
+        </li>
+      </ol>
+        </div>
+      </details>
+    </section>
+
+    <ol class="studio-steps">
+      <li class="studio-step" data-studio-step="demand">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <p class="step-kicker">第一步</p>
+          <h2>告诉我这次想讲什么</h2>
+          <p>用一句话说清楚主题，我们先从你已有的素材里找。</p>
+          <div id="current-demand" class="result-zone empty-state">还没有提交这次需求。</div>
+        </div>
+      </li>
+
+      <li class="studio-step" data-studio-step="materials">
+        <div class="step-content">
+          <p class="step-kicker">我的内容</p>
+          <h2>素材库</h2>
+          <p>这些是已经整理好的内容。写下你想讲什么，我会帮你找合适的素材，你再确认是否使用。</p>
+          <div class="library-actions">
+            <span id="library-summary" class="library-summary">正在整理素材…</span>
+            <button class="primary-action" type="button" data-studio-tab="create">开始创作</button>
+          </div>
+          <section class="material-upload-card" aria-labelledby="material-upload-title">
+            <div class="material-upload-heading">
+              <div><h3 id="material-upload-title">添加素材</h3><p>上传后放进素材库</p></div>
+              <button id="connect-hardware" class="secondary-action" type="button">连接硬件</button>
+            </div>
+            <section id="hardware-pairing-card" class="hardware-pairing-card" hidden aria-live="polite"></section>
+            <form id="material-upload-form">
+              <label class="material-file-picker"><input name="file" type="file" accept="video/mp4,video/quicktime,.mp4,.mov" multiple required><span>选择视频</span><small data-material-file-name>可一次选择多条视频</small></label>
+              <button class="primary-action" type="submit">批量检查并入库</button>
+              <details class="material-upload-options"><summary>内容类型（可选）</summary><label><span class="sr-only">内容类型</span><select name="materialContentType" required><option value="single-product">产品展示</option><option value="jewelry-making-process">制作过程</option><option value="designer-viewpoint">人物口播／设计师表达</option></select></label></details>
+            </form>
+            <div id="material-upload-results" class="material-upload-results" aria-live="polite"></div>
+            <small class="material-upload-note">每批最多 20 条 · MP4 / MOV · 单条最长 60 分钟 · 单条最大 256 MB · 不会自动发布</small>
+            <small class="material-upload-note">硬件素材会先到收件箱；你确认后才进入当前客户的素材库。</small>
+          </section>
+          <div class="library-continue"><button id="continue-from-library" class="primary-action" type="button" disabled>用这些素材开始</button></div>
+          <div id="materials" class="result-zone empty-state">选择客户后，这里会显示本机合成素材。</div>
+          <details class="advanced-analysis-drawer">
+            <summary>更多</summary>
+            <p>系统会在本机检查素材；这里的信息不需要逐项操作。</p>
+            <div class="analysis-summary-grid" aria-label="素材检查项目">
+              <div><strong>画面与声音</strong><small>检查素材是否能正常使用</small></div>
+              <div><strong>文字内容</strong><small>只展示有时间位置的识别结果</small></div>
+              <div><strong>内容建议</strong><small>建议仍需人工确认</small></div>
+              <div><strong>素材匹配</strong><small>说明素材和本次想法是否相关</small></div>
+            </div>
+            <button id="refresh-analysis" class="secondary-action" type="button">更新检查情况</button>
+            <div id="model-status" class="result-zone empty-state">正在读取本地模型状态…</div>
+            <div id="analysis-queue" class="result-zone empty-state">尚无分析任务。</div>
+            <div id="analysis-history" class="analysis-history empty-state">从上方某条素材开始检查。</div>
+          </details>
+        </div>
+      </li>
+
+      <li class="studio-step" data-studio-step="match">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <p class="step-kicker">第三步</p>
+          <h2>看看现有素材合不合适</h2>
+          <p>我会先找出能用的内容，也会说明还缺什么；是否继续由你决定。</p>
+          <button id="assess-demand" class="primary-action" type="button" disabled>评估现有素材</button>
+          <div id="match-assessment" class="result-zone empty-state">先提交这次需求。</div>
+          <div class="match-next-actions">
+            <button class="primary-action" type="button" data-studio-tab="library">去素材库补充</button>
+            <button id="adjust-demand" class="secondary-action" type="button">调整想法</button>
+          </div>
+          <details class="supporting-drawer"><summary>查看可讲的方向与证据细节</summary>
+            <div id="opportunities" class="result-zone empty-state">只有匹配结果为“适合继续”时才会整理内容方向。</div>
+          </details>
+        </div>
+      </li>
+
+      <li class="studio-step" data-studio-step="brief">
+          <div class="step-number">02</div>
+        <div class="step-content">
+          <p class="step-kicker">第二步</p>
+          <h2>确认要用的素材</h2>
+          <p>Agent 已经从素材库里选好可用片段。先看原料，再决定是否生成初稿。</p>
+          <div id="brief" class="result-zone empty-state">先选出一个可讲的故事。</div>
+          <section class="material-upload-card music-upload-card" aria-labelledby="music-upload-title">
+            <div class="material-upload-heading"><div><h3 id="music-upload-title">配乐（可选）</h3><p>上传后自动保留原声，并在人声出现时压低音乐</p></div></div>
+            <form id="music-upload-form">
+              <label class="material-file-picker"><input name="file" type="file" accept="audio/mpeg,audio/mp4,audio/wav,audio/aac,.mp3,.m4a,.wav,.aac" required><span>选择音乐</span><small>MP3 / M4A / WAV / AAC</small></label>
+              <label>音乐来源<select name="sourceKind" required><option value="customer-owned">客户自有</option><option value="commercial-license">已购买商业授权</option><option value="public-domain">公共领域</option><option value="local-generated-test">本地测试音乐</option></select></label>
+              <label>授权说明<input name="licenseNote" maxlength="500" required placeholder="例如：客户原创，允许本项目本地预览"></label>
+              <label><input name="publishUseAllowed" type="checkbox"> 授权范围包含对外发布</label>
+              <button class="secondary-action" type="submit">上传并选用</button>
+            </form>
+            <div id="music-selection" class="result-zone empty-state">未选配乐，将保留原视频声音。</div>
+          </section>
+          <div class="material-plan-actions">
+            <button id="confirm-brief" class="primary-action" type="button" disabled>用这些素材生成初稿</button>
+            <button id="brief-adjust-demand" class="secondary-action" type="button">修改想法</button>
+            <button class="secondary-action" type="button" data-studio-tab="library">换素材</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="studio-step" data-studio-step="drafts">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <p class="step-kicker">初稿</p>
+          <h2>我的作品</h2>
+          <p class="works-intro">先播放看看，再决定通过、让 AI 修改，或送到剪映精修。</p>
+          <div class="works-guide" aria-label="审片步骤"><span><b>1</b> 看视频</span><span><b>2</b> 选下一步</span></div>
+          <button id="make-drafts" class="primary-action" type="button" disabled>生成两种初稿</button>
+          <div id="drafts" class="draft-grid empty-state">初稿生成后会显示在这里。</div>
+          <details class="advanced-review-drawer">
+            <summary><span>高级验收</span><small>模型选片测试与人工标注</small></summary>
+            <section class="highlight-evaluation-panel" aria-labelledby="highlight-evaluation-title">
+              <h3 id="highlight-evaluation-title">人工高光基准</h3>
+              <p>请亲自圈出原视频里确实值得保留的时间段。系统只拿它评价模型有没有选对，不会自动训练，也不会发布。</p>
+              <div id="highlight-evaluations" class="highlight-evaluation-list empty-state">正在读取高光验收状态…</div>
+            </section>
+          </details>
+          <details class="history-drawer"><summary>查看过程与历史版本</summary>
+            <div id="studio-history" class="history-list empty-state">尚无历史记录。</div>
+          </details>
+          <p class="micro-boundary">采用仍不是发布；本页没有发布控件，也不会请求发布接口。</p>
+        </div>
+      </li>
+
+      <li class="studio-step" data-studio-step="revision">
+          <div class="step-number">03</div>
+        <div class="step-content">
+          <p class="step-kicker">第七步</p>
+          <h2>按你的意见修改</h2>
+          <p>先确认我理解的修改方向，再生成新版初稿；原来的版本会保留。</p>
+          <div id="revision-proposal" class="result-zone empty-state">客户提出修改后，这里会先显示可确认的提案。</div>
+          <button id="confirm-revision-proposal" class="primary-action" type="button" disabled>内部确认并创建 V2 任务书</button>
+          <button id="make-revision-drafts" class="primary-action" type="button" disabled>生成新版剪辑方向</button>
+        </div>
+      </li>
+    </ol>
+    <nav class="studio-bottom-nav" aria-label="内容终端导航">
+      <button type="button" data-studio-tab="create" aria-selected="true"><span class="nav-icon">✦</span><span>创作</span></button>
+      <button type="button" data-studio-tab="works" aria-selected="false"><span class="nav-icon">▣</span><span>作品</span></button>
+      <button type="button" data-studio-tab="library" aria-selected="false"><span class="nav-icon">◈</span><span>素材库</span></button>
+    </nav>
+  </main>
+  <script src="/studio.js?v=20261025-return-review-1"></script>
+</body>
+</html>

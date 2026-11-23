@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import {readFileSync} from 'node:fs';
+function setup(path=''){const nodes=Object.fromEntries(['message','tone','send','reset','form','status','receipt','conversation','page-title'].map(id=>[id,{value:id==='tone'?'warm':'',disabled:false,textContent:'',children:[],append(p){this.children.push(p);},replaceChildren(){this.children=[];}}]));let session=0,release;const calls=[];
+ vm.runInNewContext(readFileSync(new URL('./service-boundary-ui.mjs',import.meta.url),'utf8'),{location:{pathname:path},document:{getElementById:id=>nodes[id],createElement:()=>({textContent:''})},fetch:async(path,options)=>{calls.push({path,body:JSON.parse(options.body)});if(path==='/api/session')return{ok:true,json:async()=>({sessionId:'s'+(++session)})};return new Promise(resolve=>{release=()=>resolve({ok:true,json:async()=>({reply:'<script>not executable</script>'})});});}});
+ return{nodes,calls,release:()=>release(),submit:()=>nodes.form.onsubmit({preventDefault(){}})};}
+test('draft UI never sends twice while waiting; clear starts a different session and model text stays text',async()=>{
+ const f=setup();assert.equal(f.calls.length,0);f.nodes.message.value='你好';const first=f.submit();await new Promise(r=>setImmediate(r));await f.submit();assert.equal(f.calls.filter(c=>c.path==='/api/service-boundary').length,1);assert.equal(f.nodes.reset.disabled,true);f.release();await first;assert.equal(f.nodes.conversation.children.at(-1).textContent,'分身草稿：<script>not executable</script>');
+ f.nodes.reset.onclick();assert.equal(f.nodes.conversation.children.length,0);f.nodes.message.value='再试一次';const second=f.submit();await new Promise(r=>setImmediate(r));f.release();await second;assert.equal(f.calls.filter(c=>c.path==='/api/service-boundary')[1].body.sessionId,'s2');
+});
+
+test('purchase-help page routes drafts to its own endpoint',async()=>{const f=setup('/purchase-help');f.nodes.message.value='购买资料';const pending=f.submit();await new Promise(r=>setImmediate(r));assert.equal(f.calls[1].path,'/api/purchase-help');f.release();await pending;});

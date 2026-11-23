@@ -1,0 +1,73 @@
+[project]
+name = "wearable-media-model-worker"
+version = "0.1.0"
+description = "Isolated local JSON-lines worker for studio model analysis"
+requires-python = ">=3.11"
+dependencies = [
+  "mlx-vlm==0.6.6",
+  "open_clip_torch==3.3.0",
+  "opencv-python-headless==4.12.0.88",
+  "scenedetect[opencv-headless]==0.7.1",
+]
+
+[tool.uv]
+# This worker is the M4 macOS local runtime. Restrict the universal solver so
+# the lock does not collect unrelated Linux CUDA packages or non-macOS wheels.
+environments = ["sys_platform == 'darwin' and platform_machine == 'arm64'"]
+
+# PySceneDetect 0.7.1 does not publish the requested opencv-headless extra and
+# otherwise installs the GUI wheel beside the explicitly pinned headless wheel.
+# Preserve its remaining upstream requirements while replacing that one wheel.
+[[tool.uv.dependency-metadata]]
+name = "scenedetect"
+version = "0.7.1"
+requires-dist = [
+  "click!=8.3.0,~=8.0",
+  "numpy",
+  "platformdirs",
+  "tqdm",
+]
+
+# mlx-vlm publishes the GUI OpenCV wheel. The worker already pins the headless
+# build and never opens windows, so retain the upstream dependency set while
+# replacing only that conflicting wheel.
+[[tool.uv.dependency-metadata]]
+name = "mlx-vlm"
+version = "0.6.6"
+requires-dist = [
+  "datasets",
+  "fastapi",
+  "llguidance",
+  "miniaudio",
+  "mlx",
+  "mlx-audio",
+  "mlx-lm",
+  "numpy",
+  "opencv-python-headless==4.12.0.88",
+  "pillow",
+  "python-multipart",
+  "requests",
+  "starlette",
+  "tqdm",
+  "transformers",
+  "uvicorn",
+]
+
+# Qwen vision does not use mlx-audio's live sound-device capture. Omitting that
+# optional hardware bridge keeps this Darwin arm64 worker free of universal x86
+# binaries without changing model inference dependencies.
+[[tool.uv.dependency-metadata]]
+name = "mlx-audio"
+version = "0.5.3"
+requires-dist = [
+  "huggingface-hub",
+  "miniaudio",
+  "mlx",
+  "numpy",
+  "scipy",
+  "tqdm",
+  "transformers",
+]
+
+[tool.ruff]
+line-length = 100

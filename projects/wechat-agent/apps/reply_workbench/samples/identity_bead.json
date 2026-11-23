@@ -1,0 +1,71 @@
+{
+  "request_id": "11111111-1111-4111-8111-111111111111",
+  "customer_question_summary": "客户想知道购买这颗身份珠后可以获得什么服务。",
+  "product_passport": {
+    "product_passport_id": "10000000-0000-4000-8000-000000000001",
+    "merchant_id": "90000000-0000-4000-8000-000000000001",
+    "version": 3,
+    "type": "first_sale_bead",
+    "sku": "OPC-BEAD-001",
+    "title": "OPC 身份珠 001",
+    "material_category": "绿松石",
+    "lifecycle_status": "available",
+    "source_product_passport_ids": [],
+    "evidence_refs": [
+      {
+        "object_type": "ProductPassport",
+        "object_id": "10000000-0000-4000-8000-000000000001",
+        "object_version": 3,
+        "field_path": "type"
+      },
+      {
+        "object_type": "ProductPassport",
+        "object_id": "10000000-0000-4000-8000-000000000001",
+        "object_version": 3,
+        "field_path": "material_category"
+      }
+    ],
+    "updated_at": "2026-08-15T10:00:00+08:00"
+  },
+  "bead_passport": null,
+  "service_ticket": null,
+  "sales_decision_card": {
+    "sales_decision_card_id": "50000000-0000-4000-8000-000000000001",
+    "merchant_id": "90000000-0000-4000-8000-000000000001",
+    "version": 1,
+    "scenario": "first_sale",
+    "customer_intent": "了解身份珠服务",
+    "sales_stage": "商品咨询",
+    "recommended_strategy": "先解释身份珠与后续扫码服务，再邀请客户确认商品细节。",
+    "allowed_facts": [
+      "该商品是 OPC 首售身份珠",
+      "材质类目为绿松石",
+      "购买后可进入扫码服务"
+    ],
+    "prohibited_claims": [
+      "不得承诺保值",
+      "不得承诺未经记录的鉴定结果"
+    ],
+    "seller_style_rules": [
+      "先回答问题",
+      "语气自然",
+      "不使用命令式催单"
+    ],
+    "confidence": 0.93,
+    "requires_human_confirmation": true,
+    "human_confirmation_reasons": [
+      "确认当前库存",
+      "确认服务说明未变化"
+    ],
+    "knowledge_version": "sales-journey-2026.08.15",
+    "evidence_refs": [
+      {
+        "object_type": "ProductPassport",
+        "object_id": "10000000-0000-4000-8000-000000000001",
+        "object_version": 3,
+        "field_path": "material_category"
+      }
+    ],
+    "generated_at": "2026-08-15T10:01:00+08:00"
+  }
+}

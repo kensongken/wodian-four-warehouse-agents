@@ -1,0 +1,8 @@
+{
+  "schema_version": "wechat-current-attachment-evidence-adapter/1.0",
+  "input_scope": "current_attachment_only",
+  "full_album_access": false,
+  "output_schema": "PhotoEvidence/1.0",
+  "uncertain_without_guessing": true,
+  "can_send": false
+}

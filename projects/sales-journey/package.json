@@ -1,0 +1,50 @@
+{
+  "name": "sales-decision-card",
+  "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vinext dev",
+    "dev:mini": "next dev --hostname 127.0.0.1 --port 3001",
+    "start:mini": "next start --hostname 127.0.0.1 --port 3001",
+    "build": "vinext build",
+    "build:next": "next build",
+    "test": "vitest run",
+    "test:migration": "vitest run tests/server/supervision-production-migration.test.ts",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test && playwright test --config playwright.supervision.config.ts",
+    "test:e2e:supervision": "playwright test --config playwright.supervision.config.ts",
+    "typecheck": "tsc --noEmit",
+    "verify": "pnpm test && pnpm run test:e2e && pnpm run typecheck && pnpm run build && git diff --check"
+  },
+  "dependencies": {
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@cloudflare/workers-types": "4.20260515.1",
+    "@openai/sites-vite-plugin": "0.2.0",
+    "@playwright/test": "^1.55.0",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "jsdom": "^26.1.0",
+    "react-server-dom-webpack": "19.2.6",
+    "typescript": "^5.9.0",
+    "vinext": "1.0.0-beta.3",
+    "vite": "8.0.13",
+    "vitest": "^3.2.0",
+    "wrangler": "4.92.0"
+  },
+  "type": "module",
+  "license": "MIT"
+}

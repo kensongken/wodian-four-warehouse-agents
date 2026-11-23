@@ -1,0 +1,698 @@
+{
+  "schema_version": "album-product-categorization/1.0",
+  "batch_id": "10000000-0000-4000-8000-000000000010",
+  "generated_at": "2026-08-16T09:00:00Z",
+  "data_classification": "synthetic_no_customer_data",
+  "events": [
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000001",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:01:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-001",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-001",
+      "source_type": "first_sale_bead",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000001",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003e9",
+          "byte_size": 2001000,
+          "media_type": "image/jpeg",
+          "captured_at": "2026-08-16T07:01:00Z",
+          "imported_at": "2026-08-16T07:01:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-01/original-30000000-0000-4000-8000-000000000001",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000002",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003ea",
+          "byte_size": 501000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:01:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-01/crop-30000000-0000-4000-8000-000000000002",
+          "source_asset_id": "30000000-0000-4000-8000-000000000001",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:01:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "南红",
+        "level_2_candidate": "手串",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000002",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:02:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-002",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-002",
+      "source_type": "first_sale_bead",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000003",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003eb",
+          "byte_size": 2002000,
+          "media_type": "image/jpeg",
+          "captured_at": "2026-08-16T07:02:00Z",
+          "imported_at": "2026-08-16T07:02:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-02/original-30000000-0000-4000-8000-000000000003",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000004",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003ec",
+          "byte_size": 502000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:02:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-02/crop-30000000-0000-4000-8000-000000000004",
+          "source_asset_id": "30000000-0000-4000-8000-000000000003",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:02:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "沉香",
+        "level_2_candidate": "手串",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000003",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:03:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-003",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-003",
+      "source_type": "first_sale_bead",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000005",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003ed",
+          "byte_size": 2003000,
+          "media_type": "image/png",
+          "captured_at": "2026-08-16T07:03:00Z",
+          "imported_at": "2026-08-16T07:03:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-03/original-30000000-0000-4000-8000-000000000005",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000006",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003ee",
+          "byte_size": 503000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:03:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-03/crop-30000000-0000-4000-8000-000000000006",
+          "source_asset_id": "30000000-0000-4000-8000-000000000005",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:03:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "翡翠",
+        "level_2_candidate": "吊坠",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000004",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:04:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-004",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-004",
+      "source_type": "first_sale_bead",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000007",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003ef",
+          "byte_size": 2004000,
+          "media_type": "image/heic",
+          "captured_at": "2026-08-16T07:04:00Z",
+          "imported_at": "2026-08-16T07:04:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-04/original-30000000-0000-4000-8000-000000000007",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000008",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f0",
+          "byte_size": 504000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:04:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-04/crop-30000000-0000-4000-8000-000000000008",
+          "source_asset_id": "30000000-0000-4000-8000-000000000007",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:04:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "和田玉",
+        "level_2_candidate": "手镯",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000005",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:05:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-005",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-005",
+      "source_type": "first_sale_bead",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000009",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f1",
+          "byte_size": 2005000,
+          "media_type": "image/jpeg",
+          "captured_at": "2026-08-16T07:05:00Z",
+          "imported_at": "2026-08-16T07:05:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-05/original-30000000-0000-4000-8000-000000000009",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000010",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f2",
+          "byte_size": 505000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:05:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-05/crop-30000000-0000-4000-8000-000000000010",
+          "source_asset_id": "30000000-0000-4000-8000-000000000009",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:05:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "蜜蜡",
+        "level_2_candidate": "项链",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000006",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:06:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-006",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-006",
+      "source_type": "first_sale_bead",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000011",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f3",
+          "byte_size": 2006000,
+          "media_type": "image/png",
+          "captured_at": "2026-08-16T07:06:00Z",
+          "imported_at": "2026-08-16T07:06:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-06/original-30000000-0000-4000-8000-000000000011",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000012",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f4",
+          "byte_size": 506000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:06:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-06/crop-30000000-0000-4000-8000-000000000012",
+          "source_asset_id": "30000000-0000-4000-8000-000000000011",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:06:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "珍珠",
+        "level_2_candidate": "耳饰",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000007",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:07:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-007",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-007",
+      "source_type": "legacy_material",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000013",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f5",
+          "byte_size": 2007000,
+          "media_type": "image/jpeg",
+          "captured_at": "2026-08-16T07:07:00Z",
+          "imported_at": "2026-08-16T07:07:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-07/original-30000000-0000-4000-8000-000000000013",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000014",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f6",
+          "byte_size": 507000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:07:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-07/crop-30000000-0000-4000-8000-000000000014",
+          "source_asset_id": "30000000-0000-4000-8000-000000000013",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:07:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "水晶",
+        "level_2_candidate": "摆件",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000008",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:08:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-008",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-008",
+      "source_type": "legacy_material",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000015",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f7",
+          "byte_size": 2008000,
+          "media_type": "image/heic",
+          "captured_at": "2026-08-16T07:08:00Z",
+          "imported_at": "2026-08-16T07:08:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-08/original-30000000-0000-4000-8000-000000000015",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000016",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f8",
+          "byte_size": 508000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:08:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-08/crop-30000000-0000-4000-8000-000000000016",
+          "source_asset_id": "30000000-0000-4000-8000-000000000015",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:08:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "彩宝",
+        "level_2_candidate": "戒指",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000009",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:09:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-009",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-009",
+      "source_type": "redesign_output",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000017",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003f9",
+          "byte_size": 2009000,
+          "media_type": "image/png",
+          "captured_at": "2026-08-16T07:09:00Z",
+          "imported_at": "2026-08-16T07:09:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-09/original-30000000-0000-4000-8000-000000000017",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000018",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003fa",
+          "byte_size": 509000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:09:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-09/crop-30000000-0000-4000-8000-000000000018",
+          "source_asset_id": "30000000-0000-4000-8000-000000000017",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:09:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "贵金属",
+        "level_2_candidate": "配件",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    },
+    {
+      "schema_version": "album-product-categorization/1.0",
+      "event_id": "20000000-0000-4000-8000-000000000010",
+      "event_type": "album.product.snapshot.confirmed.v1",
+      "occurred_at": "2026-08-16T08:10:00Z",
+      "opc_id": "synthetic-opc-001",
+      "album_product_id": "album-product-synthetic-010",
+      "snapshot_version": 1,
+      "source_import_task_id": "synthetic-import-task-010",
+      "source_type": "redesign_output",
+      "images": [
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000019",
+          "role": "original",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003fb",
+          "byte_size": 2010000,
+          "media_type": "image/jpeg",
+          "captured_at": "2026-08-16T07:10:00Z",
+          "imported_at": "2026-08-16T07:10:30Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-10/original-30000000-0000-4000-8000-000000000019",
+          "source_asset_id": null,
+          "transform": null
+        },
+        {
+          "asset_id": "30000000-0000-4000-8000-000000000020",
+          "role": "crop",
+          "sha256": "00000000000000000000000000000000000000000000000000000000000003fc",
+          "byte_size": 510000,
+          "media_type": "image/jpeg",
+          "captured_at": null,
+          "imported_at": "2026-08-16T07:10:40Z",
+          "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-10/crop-30000000-0000-4000-8000-000000000020",
+          "source_asset_id": "30000000-0000-4000-8000-000000000019",
+          "transform": {
+            "kind": "crop",
+            "crop_box": [
+              0.1,
+              0.1,
+              0.8,
+              0.8
+            ],
+            "tool_version": "fixture-crop-1.0"
+          }
+        }
+      ],
+      "human_confirmation": {
+        "status": "confirmed",
+        "confirmed_by": "synthetic-opc-staff-001",
+        "confirmed_at": "2026-08-16T08:10:00Z",
+        "confirmation_scope": "grouping_membership"
+      },
+      "categorization_input": {
+        "level_1_candidate": "其他",
+        "level_2_candidate": "珠子/散珠",
+        "candidate_source": "operator_seed",
+        "confidence": null,
+        "assertion_scope": "candidate_only"
+      },
+      "consent": {
+        "status": "not_required",
+        "basis": "opc_owned_product_material"
+      },
+      "allowed_consumers": [
+        "categorization",
+        "mall_draft_export"
+      ],
+      "mall_product_id": null,
+      "bead_id": null
+    }
+  ]
+}

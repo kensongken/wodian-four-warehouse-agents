@@ -1,0 +1,58 @@
+{
+  "acceptance_id": "sku-material-acceptance:00000000-0000-4000-8000-000000000101",
+  "acceptance_status": "material_ready_for_mall_draft_not_listed",
+  "album_product_id": "album-product-00000000-0000-4000-8000-000000000101",
+  "auto_publish": false,
+  "bead_id": null,
+  "claims_not_evaluated": [
+    "authenticity",
+    "origin",
+    "quality",
+    "warehouse_acceptance"
+  ],
+  "classification_id": "00000000-0000-4000-8000-000000000102",
+  "classification_version": 1,
+  "confirmed_at": "2026-08-17T22:00:00Z",
+  "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+  "confirmed_level_1": "南红",
+  "confirmed_level_2": "手串",
+  "data_classification": "synthetic_no_customer_data",
+  "download_ttl_seconds": 300,
+  "download_verified_asset_ids": [
+    "00000000-0000-4000-8000-000000000301",
+    "00000000-0000-4000-8000-000000000302"
+  ],
+  "images": [
+    {
+      "asset_id": "00000000-0000-4000-8000-000000000301",
+      "byte_size": 1000,
+      "captured_at": "2026-08-17T22:00:00Z",
+      "evidence_asset_id": "00000000-0000-4000-8000-000000000201",
+      "imported_at": "2026-08-17T22:00:00Z",
+      "media_type": "image/jpeg",
+      "role": "original",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000001",
+      "storage_ref": "evidence/00000000-0000-4000-8000-000000000201/original"
+    },
+    {
+      "asset_id": "00000000-0000-4000-8000-000000000302",
+      "byte_size": 1001,
+      "captured_at": "2026-08-17T22:00:00Z",
+      "evidence_asset_id": "00000000-0000-4000-8000-000000000202",
+      "imported_at": "2026-08-17T22:00:00Z",
+      "media_type": "image/jpeg",
+      "role": "original",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000002",
+      "storage_ref": "evidence/00000000-0000-4000-8000-000000000202/original"
+    }
+  ],
+  "mall_product_id": null,
+  "opc_id": "opc-synthetic-first-sku",
+  "publication_mode": "draft_only",
+  "review_id": "00000000-0000-4000-8000-000000000103",
+  "schema_version": "opc-sku-material-acceptance/1.0",
+  "snapshot_version": 1,
+  "source_event_id": "00000000-0000-4000-8000-000000000101",
+  "source_type": "first_sale_bead",
+  "validated_at": "2026-08-17T22:00:00Z"
+}

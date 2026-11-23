@@ -1,0 +1,15 @@
+{
+  "publication_date": "2026-11-23",
+  "project": "相册整理",
+  "source_versions": [
+    {
+      "component": "album",
+      "branch": "feature/phase-1-ingestion",
+      "head": "13a725570fffeb3d9282f9f989b71a2bce604972"
+    }
+  ],
+  "previous_shared_handoff_commit": "8d88bfecbbf85e34a02754891029c4e7c88498b6",
+  "scope": "Complete first-party source for the selected application versions; runtime/customer data, secrets, vendor binaries and unrelated private applications excluded.",
+  "working_tree_snapshot": true,
+  "note": "Source heads identify originating branches. Published files include the reviewed working-tree content at capture time; they are not asserted to equal HEAD byte-for-byte."
+}

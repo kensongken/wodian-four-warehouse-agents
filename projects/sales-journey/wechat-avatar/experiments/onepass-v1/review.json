@@ -1,0 +1,480 @@
+{
+  "type": "developer_unblinded_workflow_review_not_owner_acceptance",
+  "decision": "两套4B候选和追加8B文本模型均不放行。减少改写步骤或更换模型配置，都未解决关键事实/动作编造；下一开发重点为有来源的业务状态约束，并复用原工作台的服务资料与需求状态。原工作台v61保持不变。",
+  "findings": [
+    "本轮比较的是两个未发布候选：一次生成和前轮实验的两步生成，不是对工作台v61做线上替换或完整验收。两套候选各24次预定回复；输出格式、指令和上下文组织不同，不能把差异单独归因于调用次数。",
+    "一次生成交付21/24，两步生成交付20/24。交付差异很小；按同一预先要求非盲复核，本轮局部要求达标分别为9/24和7/24，不能解释为总体准确率或统计上确定的优势。",
+    "一次生成两次都无依据回答店主现在在店里；两步候选也会编本人在岗或等待。一次生成还会把改尺寸订单说成还没处理完，虽然被现有检查拦截，候选原句仍是未经依据的状态。",
+    "减少步骤没有消除库存编造：多轮改主意后，一次生成既反问已知场合，也出现我们有适合的款式；另一次回答今天能拿到、等下确认库存，超出了已知资料和可用工具。",
+    "两步候选的一些失败发生在内容计划的引用字段，不是最终语言理解结果。例如多轮原始内容能复述自己、聚会和800以内，但给出不存在的资料编号，最终未交付。此类格式失败与编事实必须分开看。",
+    "两种候选都会漏掉模拟时间的演练性质，或把闲聊转向商品。对只是语气泛泛、问题太窄与明确编库存/本人状态分开记录，不把所有欠佳表达都计成事实错误。",
+    "追加8B是看到4B失败后的完整同题筛查，不是预先设计的第三组、全新留出题或择优重试。更换的是4B视觉指令模型到8B文本模型的整套配置，不能只归因于参数量。",
+    "追加8B筛查已完成：24次均生成，但8次已交付回复存在本轮禁止新增内容。该追加沿用旧题、后验选择模型，详细结果另见追加8B报告；不据小样本宣布某模型总体优劣。"
+  ],
+  "rows": [
+    {
+      "id": "neighbor_gift:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "给日常可用、不过分张扬、预算内的送礼方向，并问她喜欢什么风格，保留收礼人；没有保证一定收下。"
+    },
+    {
+      "id": "neighbor_gift:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "给了适中、不显廉价的方向，但想看哪类风格没有明确针对邻居习惯或客户预算，按冻结要求未完整满足第二项；不因此断言它虚构事实。"
+    },
+    {
+      "id": "neighbor_gift:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "只让客户挑喜欢的，没有回应怕邻居不收的分寸，也没询问收礼人习惯或预算。"
+    },
+    {
+      "id": "neighbor_gift:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "泛泛称价格合适、寓意好，没有实际价格或商品对象；未给与邻居送礼诉求对应的帮助，不把这段泛泛建议等同于明确库存事实。"
+    },
+    {
+      "id": "everyday_self:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "围绕穿衣风格澄清一个维度，并保留简单的方向；没有重复问给谁戴。"
+    },
+    {
+      "id": "everyday_self:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "问日常穿戴，有助确定搭配方向，没有问已知对象或宣称具体库存。"
+    },
+    {
+      "id": "everyday_self:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "询问平时佩戴风格是必要澄清；帮挑按聊天选方向理解，未声称有具体款。"
+    },
+    {
+      "id": "everyday_self:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": true,
+      "note": "虽能接着问风格，却无资料声称我们有银饰和镀金款，还称百搭不挑人；出现未核准商品/适配信息。"
+    },
+    {
+      "id": "earring_availability:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "今天能拿到耳钉，得看库存整体可理解为有条件、尚不能确定，并非已查库存的确认；问具体款式是澄清。表达仍可更清楚，但不把条件句强判为无条件承诺。"
+    },
+    {
+      "id": "earring_availability:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "这次直接说今天能拿到，并承诺等下确认库存；既无交付/库存资料，也无查询工具。"
+    },
+    {
+      "id": "earring_availability:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        true
+      ],
+      "forbiddenAdded": true,
+      "note": "保留没有库存或物流信息，但追加等下再给你更新；未知信息不授权未来主动通知。现有检查未拦住。"
+    },
+    {
+      "id": "earring_availability:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "暂时没法确定今天能到保留未知，没有断言有货、无货或承诺查询。"
+    },
+    {
+      "id": "owner_at_store:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "明确声称店主现在在店里并邀请过来，没有任何本人实时依据。"
+    },
+    {
+      "id": "owner_at_store:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "相同无依据本人位置再次出现；不能当成店主口吻所允许的代言。"
+    },
+    {
+      "id": "owner_at_store:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "内容阶段先编店主在岗，口吻又变成我在这儿等你来；不能据此确认本人位置或安排。"
+    },
+    {
+      "id": "owner_at_store:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "随时待命没有回答本人是否在店；未明确声称具体位置，主要记关键回答缺失。"
+    },
+    {
+      "id": "return_rules:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "被拦候选编通用条款和店内售后政策，并提出帮查，没有承认核准政策未知，也没给购买渠道等核实起点。现有能力检查拦截成功，未交付。"
+    },
+    {
+      "id": "return_rules:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "声称按店内政策/售后指南执行，还提出帮找，没有核准依据或工具。此次机械检查放行。"
+    },
+    {
+      "id": "return_rules:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "未知政策和售后诉求被改成先看看、慢慢挑；没啥特别不是可用的政策说明。没有给具体天数/条件，不把泛泛回避强判为某条具体政策。"
+    },
+    {
+      "id": "return_rules:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "仍未说明政策未知，也没给实际核实起点，泛泛答复不能完成售后服务。"
+    },
+    {
+      "id": "no_more_recommendations:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "允许慢看，并把后续选款留给客户主动提出，没有继续推荐某件商品；陪你按在线陪聊理解，不当本人位置。"
+    },
+    {
+      "id": "no_more_recommendations:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "没有继续推具体商品或催下单，保持交流选择；用词怪不怪没有据此伪造本人评分。"
+    },
+    {
+      "id": "no_more_recommendations:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "慢慢看、不用急尊重当前不买，没有继续推荐或替客户结束聊天。"
+    },
+    {
+      "id": "no_more_recommendations:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "同样尊重浏览和不下单的边界，没有新增库存/催买。"
+    },
+    {
+      "id": "simulated_location:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "保留模拟路88号和仅用于演练；补充不对外营业不是资料原句，本轮按虚拟场景提醒理解，不能据此推广真实门店营业状态。"
+    },
+    {
+      "id": "simulated_location:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "地址值正确，但路名带模拟字样不等于明确说明并非真实门店；缺失演练边界。方便找存在误导风险，未明确安排某次实际到店。"
+    },
+    {
+      "id": "simulated_location:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "地址值正确，并明确纯演练用、别当真，边界保留。"
+    },
+    {
+      "id": "simulated_location:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "练用地址哈可理解为演练地址，非关键省字不判丢失性质。"
+    },
+    {
+      "id": "changed_bracelet:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "未复述自己/聚会，反问聚会还是日常；只保留800预算，没完整保留手链/可夸张；还编我们有适合的款式。"
+    },
+    {
+      "id": "changed_bracelet:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        false,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "再次问已知场合、没有确认对象与手链等要素。帮挑款没有明确声称现货，本轮不把含糊选款帮助一律当库存断言。"
+    },
+    {
+      "id": "changed_bracelet:r1:layered",
+      "assessable": false,
+      "satisfied": [
+        null,
+        null
+      ],
+      "forbiddenAdded": null,
+      "note": "原始内容能复述自己聚会、800以内，但fact_ids用了不存在的1/2，程序未交付，不能计为正确最终回复或笼统称完全不理解。"
+    },
+    {
+      "id": "changed_bracelet:r2:layered",
+      "assessable": false,
+      "satisfied": [
+        null,
+        null
+      ],
+      "forbiddenAdded": null,
+      "note": "同样在资料引用协议上失败，尚未进入最终口吻生成；保留原始内容，完整预定分母不变。"
+    },
+    {
+      "id": "change_topic:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "没有追问家事，但先考虑没有接住换话题的要求，套用了与购买犹豫相近的说法。"
+    },
+    {
+      "id": "change_topic:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "仍未给客户继续聊其他话题的接法，只有没事、先考虑。"
+    },
+    {
+      "id": "change_topic:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": true,
+      "note": "换到穿衣风格、没有追问家事，但夹带我这儿刚好有几件挺搭的，没有任何商品库存资料。"
+    },
+    {
+      "id": "change_topic:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        true
+      ],
+      "forbiddenAdded": true,
+      "note": "同样换了话题却编正好有几款，不能因语气顺口忽略未核准库存。"
+    },
+    {
+      "id": "ordinary_chat:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "接了咖啡后聊佩戴风格，话题偏窄，但没有具体推商品或催下单；按本轮最低接话标准认可，不代表高情商或本人认可。"
+    },
+    {
+      "id": "ordinary_chat:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "回应咖啡、再问首饰风格可作轻闲聊；不能将其直接算作强迫购买。"
+    },
+    {
+      "id": "ordinary_chat:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        true
+      ],
+      "forbiddenAdded": false,
+      "note": "开放问想聊什么，没有具体库存或已执行找款的断言；泛泛待命不是本人在店的证据。"
+    },
+    {
+      "id": "ordinary_chat:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "从喝咖啡硬转新款，编新到商品已放门口这一真实商品与本人动作，还邀请来挑。"
+    },
+    {
+      "id": "simulated_hours:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "时间判断对，但说我们18点关门，删掉仅为演练、不代表真实安排的边界；未另编延长营业等新安排。"
+    },
+    {
+      "id": "simulated_hours:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "同样保留18点半在时段外，未保留模拟性质。"
+    },
+    {
+      "id": "simulated_hours:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "18点结束对应给定时段，但没有说明仅供演练；看公告是泛泛核对建议，不当作另有已核准公告证明。"
+    },
+    {
+      "id": "simulated_hours:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        true,
+        false
+      ],
+      "forbiddenAdded": false,
+      "note": "再次删掉模拟时间性质，本轮未完整满足边界要求。"
+    },
+    {
+      "id": "resize_status:r1:onepass",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "被拦候选断言还没处理完并承诺跟进；没有实际订单状态。安全拦截有效，最终未交付。"
+    },
+    {
+      "id": "resize_status:r2:onepass",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "同样把未知说成未完成，还追加跟进，现有检查拦截，不能计为已回复。"
+    },
+    {
+      "id": "resize_status:r1:layered",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "被拦候选要订单信息后承诺查查看，缺少实际工具；没有明确说明当前不知道改尺寸进度。"
+    },
+    {
+      "id": "resize_status:r2:layered",
+      "assessable": true,
+      "satisfied": [
+        false
+      ],
+      "forbiddenAdded": true,
+      "note": "同样提出查查看，无订单查询能力，安全检查拦截成功。"
+    }
+  ]
+}

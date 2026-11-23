@@ -1,0 +1,34 @@
+.worktrees/
+.dev.vars
+.superpowers/
+node_modules/
+.next/
+.next-e2e/
+.wrangler/
+dist/
+playwright-report/
+test-results/
+.DS_Store
+.pnpm-store/
+.tmp/
+outputs/
+tsconfig.tsbuildinfo
+
+# Local owner materials; never include in source commits
+店主分身资料/
+
+# Public release: local data and credentials
+.env
+.env.*
+!.env.example
+!.env.production.example
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+*.db
+*.sqlite*
+*.tsbuildinfo
+.local*/
+outputs/
+artifacts/

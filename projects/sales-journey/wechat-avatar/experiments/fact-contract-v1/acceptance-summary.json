@@ -1,0 +1,488 @@
+{
+  "generatedAt": "2026-11-03T14:39:13.213Z",
+  "scope": "仅本机模拟实验；不同题集不能横向排名或合并成准确率。没有本人相似度、真实微信、真实服务或销售转化验收。",
+  "entries": [
+    {
+      "title": "先分清人物和语境",
+      "method": "真实模型对照；18道当轮新题",
+      "source": "intent-comparison-2026-11-03T04-03-31.636Z/results.json",
+      "sourceSha256": "03aaa77a0dacedb82f74d8b89d38e8d52e493cfcb3a3ba0bff0c4464f8224e64",
+      "createdAt": "2026-11-03T04:03:31.638Z",
+      "A": {
+        "total": 18,
+        "correct": 9,
+        "invalid": 5,
+        "falseResume": 0,
+        "missedPause": 2,
+        "falsePause": 3,
+        "medianMs": 2343,
+        "failedIds": [
+          "N01",
+          "N02",
+          "N03",
+          "N04",
+          "N06",
+          "N07",
+          "N11",
+          "N12",
+          "N14"
+        ]
+      },
+      "B": {
+        "total": 18,
+        "correct": 15,
+        "invalid": 2,
+        "falseResume": 0,
+        "missedPause": 2,
+        "falsePause": 0,
+        "medianMs": 3410,
+        "failedIds": [
+          "N11",
+          "N12",
+          "N14"
+        ]
+      },
+      "passed": false
+    },
+    {
+      "title": "约束返回格式",
+      "method": "真实模型对照；12道当轮新题",
+      "source": "intent-schema-2026-11-03T04-13-22.113Z/results.json",
+      "sourceSha256": "3ebf01f9d261e2a7844b0333b730c95b11982d1627a44572186af6dd0cd68ef6",
+      "createdAt": "2026-11-03T04:13:22.126Z",
+      "A": {
+        "total": 12,
+        "correct": 9,
+        "invalidRoute": 5,
+        "invalidFinal": 2,
+        "nullQuoteWithDefiniteIntent": 5,
+        "falseResume": 0,
+        "falsePause": 0,
+        "missedStop": 2,
+        "wrongStopType": 0,
+        "medianMs": 5557,
+        "failedIds": [
+          "N03",
+          "N04",
+          "N09"
+        ]
+      },
+      "B": {
+        "total": 12,
+        "correct": 10,
+        "invalidRoute": 0,
+        "invalidFinal": 0,
+        "nullQuoteWithDefiniteIntent": 0,
+        "falseResume": 1,
+        "falsePause": 0,
+        "missedStop": 1,
+        "wrongStopType": 0,
+        "medianMs": 5883,
+        "failedIds": [
+          "N03",
+          "N09"
+        ]
+      },
+      "passed": false
+    },
+    {
+      "title": "核对真实选择与输出指令",
+      "method": "真实模型对照；12道当轮新题",
+      "source": "intent-choice-2026-11-03T04-21-58.499Z/results.json",
+      "sourceSha256": "252bad5ca783bee52af2f82e953dd6514a23e80caff1a92303e909f983dc185c",
+      "createdAt": "2026-11-03T04:21:58.500Z",
+      "A": {
+        "total": 12,
+        "correct": 8,
+        "invalid": 0,
+        "falseResume": 3,
+        "falsePause": 1,
+        "missedStop": 0,
+        "wrongStopType": 0,
+        "medianMs": 2882,
+        "failedIds": [
+          "N01",
+          "N02",
+          "N03",
+          "N04"
+        ]
+      },
+      "B": {
+        "total": 12,
+        "correct": 10,
+        "invalid": 0,
+        "falseResume": 2,
+        "falsePause": 0,
+        "missedStop": 0,
+        "wrongStopType": 0,
+        "medianMs": 3521,
+        "failedIds": [
+          "N03",
+          "N09"
+        ]
+      },
+      "passed": false
+    },
+    {
+      "title": "同时满足两项检查",
+      "method": "历史结果回放；复用上一轮全部16题，无新模型调用",
+      "source": "intent-combined-preflight.json",
+      "sourceSha256": "0894b9fdf9fe805d3c4b682f3c9d5be2de69ed7ecfb86028ea6e82a6fa6ecb09",
+      "createdAt": "2026-11-03T04:26:59.519Z",
+      "A": {
+        "total": 16,
+        "correct": 12,
+        "invalid": 1,
+        "falseResume": 2,
+        "failedIds": [
+          "D01",
+          "D04",
+          "N03",
+          "N09"
+        ]
+      },
+      "B": {
+        "total": 16,
+        "correct": 12,
+        "invalid": 1,
+        "falseResume": 1,
+        "failedIds": [
+          "D01",
+          "D03",
+          "D04",
+          "N03"
+        ]
+      },
+      "passed": false
+    },
+    {
+      "title": "先说明谁、什么情境、想做什么",
+      "method": "真实模型方案对照；8道当轮新题；A三次调用、B一次调用",
+      "source": "intent-frame-2026-11-03T04-34-46.863Z/results.json",
+      "sourceSha256": "8ccbebfeb92ac8dd6b3ee75e9b939406f8a32bc7fa0bccf841dccf7ea3444af6",
+      "createdAt": "2026-11-03T04:34:46.870Z",
+      "A": {
+        "total": 8,
+        "correct": 7,
+        "invalid": 0,
+        "falseResume": 0,
+        "falsePause": 1,
+        "missedStop": 0,
+        "wrongStopType": 0,
+        "medianMs": 6515,
+        "failedIds": [
+          "N05"
+        ]
+      },
+      "B": {
+        "total": 8,
+        "correct": 7,
+        "invalid": 0,
+        "falseResume": 1,
+        "falsePause": 0,
+        "missedStop": 0,
+        "wrongStopType": 0,
+        "medianMs": 5745,
+        "failedIds": [
+          "N01"
+        ]
+      },
+      "passed": false
+    }
+  ],
+  "diagnostics": [
+    {
+      "title": "基础理解：直接是/否与固定格式",
+      "source": "understanding-probe-2026-11-03T04-42-20.654Z/results.json",
+      "sourceSha256": "b25383f7399bdaed4ab3befe85313cad91d0f55b9d92f45a879f5988c975a073",
+      "scope": "只测是否真实想继续选购，不改变客户状态，不代表完整接待通过。",
+      "summary": {
+        "A": {
+          "total": 12,
+          "correct": 10,
+          "invalid": 0,
+          "falsePositive": 0,
+          "falseNegative": 2,
+          "failedIds": [
+            "N04",
+            "N12"
+          ]
+        },
+        "B": {
+          "total": 12,
+          "correct": 10,
+          "invalid": 0,
+          "falsePositive": 0,
+          "falseNegative": 2,
+          "failedIds": [
+            "N04",
+            "N12"
+          ]
+        }
+      },
+      "dimensions": {
+        "speaker": {
+          "A": {
+            "total": 4,
+            "correct": 3,
+            "invalid": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "failedIds": [
+              "N04"
+            ]
+          },
+          "B": {
+            "total": 4,
+            "correct": 3,
+            "invalid": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "failedIds": [
+              "N04"
+            ]
+          }
+        },
+        "hypothesis": {
+          "A": {
+            "total": 4,
+            "correct": 4,
+            "invalid": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "failedIds": []
+          },
+          "B": {
+            "total": 4,
+            "correct": 4,
+            "invalid": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "failedIds": []
+          }
+        },
+        "output_control": {
+          "A": {
+            "total": 4,
+            "correct": 3,
+            "invalid": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "failedIds": [
+              "N12"
+            ]
+          },
+          "B": {
+            "total": 4,
+            "correct": 3,
+            "invalid": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "failedIds": [
+              "N12"
+            ]
+          }
+        }
+      },
+      "pairs": {
+        "speaker-zh": {
+          "A": true,
+          "B": true
+        },
+        "speaker-en": {
+          "A": false,
+          "B": false
+        },
+        "hypothesis-zh": {
+          "A": true,
+          "B": true
+        },
+        "hypothesis-en": {
+          "A": true,
+          "B": true
+        },
+        "output-zh": {
+          "A": true,
+          "B": true
+        },
+        "output-en": {
+          "A": false,
+          "B": false
+        }
+      }
+    },
+    {
+      "title": "逐句等义的中英文理解诊断",
+      "source": "understanding-bilingual-2026-11-03T04-53-29.969Z/results.json",
+      "sourceSha256": "c2c4a5a366c3a626d479fb5c299e59af70b3f4deddef88d4656a054a4551ebe2",
+      "scope": "12对开发者翻译句，含2对历史题；没有独立双语审校。仅诊断，不改变客户状态。",
+      "labels": {
+        "A": "中文",
+        "B": "英文"
+      },
+      "summary": {
+        "A": {
+          "total": 12,
+          "correct": 10,
+          "invalid": 0,
+          "falsePositive": 0,
+          "falseNegative": 2,
+          "failedIds": [
+            "D02",
+            "N04"
+          ]
+        },
+        "B": {
+          "total": 12,
+          "correct": 10,
+          "invalid": 0,
+          "falsePositive": 0,
+          "falseNegative": 2,
+          "failedIds": [
+            "D01",
+            "D02"
+          ]
+        }
+      },
+      "note": "同对均正确 9/12；答案不一致 2对；同对均错误 1对。10对新题：中文9/10、英文10/10。不是整体准确率或上线验收。"
+    },
+    {
+      "title": "不改变选购意愿的修饰语对照",
+      "source": "understanding-modifier-2026-11-03T04-58-45.099Z/results.json",
+      "sourceSha256": "2db3f61df11aaf3fb4c6af4bc21859ffe5b4e9041214242934f2807366fea0b4",
+      "scope": "8组真实选购、4组否定对照。原句与修饰句意愿标签相同；一次采样，仅诊断。",
+      "labels": {
+        "A": "原句",
+        "B": "加修饰语"
+      },
+      "summary": {
+        "A": {
+          "total": 12,
+          "correct": 12,
+          "invalid": 0,
+          "falsePositive": 0,
+          "falseNegative": 0,
+          "failedIds": []
+        },
+        "B": {
+          "total": 12,
+          "correct": 10,
+          "invalid": 0,
+          "falsePositive": 0,
+          "falseNegative": 2,
+          "failedIds": [
+            "P02",
+            "P07"
+          ]
+        }
+      },
+      "note": "从正确变错 2组；真实选购修饰句 6/8。未连接接待状态。"
+    },
+    {
+      "title": "否定作用范围的单次判断修正",
+      "source": "understanding-scope-2026-11-03T05-00-23.835Z/results.json",
+      "sourceSha256": "faa518d3af5bcb9a27471c787c2aa34e05cb149ad3bce249523a78ca779a56e4",
+      "scope": "同题、同模型、同格式，每方案一次调用；仅替换问题说明。4道历史题和8道新题，不是接待上线验收。",
+      "labels": {
+        "A": "原问题",
+        "B": "否定范围修正"
+      },
+      "summary": {
+        "A": {
+          "total": 12,
+          "correct": 9,
+          "invalid": 0,
+          "falsePositive": 0,
+          "falseNegative": 3,
+          "failedIds": [
+            "D01",
+            "D02",
+            "N04"
+          ]
+        },
+        "B": {
+          "total": 12,
+          "correct": 11,
+          "invalid": 0,
+          "falsePositive": 1,
+          "falseNegative": 0,
+          "failedIds": [
+            "D04"
+          ]
+        },
+        "regressions": [
+          "D04"
+        ]
+      },
+      "note": "新题：原问题 7/8，修正 8/8；历史退步 1题。修正会把英文输出指令误认成真实选购，候选不放行。"
+    },
+    {
+      "title": "本机4B与8B同题对照",
+      "source": "understanding-model-2026-11-03T05-08-50.705Z/results.json",
+      "sourceSha256": "265399a599a3cf20a69a264f4a682bd7b7268fc2300d3696e491122cf61550d9",
+      "scope": "12道已知题加8道新题；同问题、同格式。模型家族不同，8B关闭思考；不能只归因于参数量。没有切换接待模型。",
+      "labels": {
+        "A": "4B",
+        "B": "8B"
+      },
+      "summary": {
+        "A": {
+          "total": 20,
+          "correct": 19,
+          "invalid": 0,
+          "falsePositive": 1,
+          "falseNegative": 0,
+          "failedIds": [
+            "D04"
+          ]
+        },
+        "B": {
+          "total": 20,
+          "correct": 19,
+          "invalid": 0,
+          "falsePositive": 1,
+          "falseNegative": 0,
+          "failedIds": [
+            "N07"
+          ]
+        },
+        "regressions": [
+          "N07"
+        ]
+      },
+      "note": "8道新题两模型均8/8。后续请求响应中位数：4B 0.89秒，8B 1.91秒；均不含首条，非服务承诺。两模型各有一道不同的已知错误，不建议据此直接升级。"
+    }
+  ],
+  "conversationNotebook": {
+    "method": "同一个本机千问、同样设置，5类场景各4轮，A/B共40次请求；每个方案各自生成历史。B的正确需求卡由开发者预先编写，并非模型自动学习结果。",
+    "limits": "开发者CTO自查；按每轮提前固定的两项检查，加上不编造门店事实与执行承诺的底线复核。每句只采样一次，20轮中的比例不是总体准确率；没有独立盲评或真实客户验证。",
+    "verdict": "两边均未放行。正确需求卡改善了本轮部分接话，但两边都有4轮出现未核实的商品或服务说法。不能据此启用自动资料提取或真实接待。",
+    "A": {
+      "total": 20,
+      "turnPassed": 9,
+      "checksPassed": 31,
+      "checksTotal": 40,
+      "unsupportedBusinessClaimTurns": 4,
+      "invalid": 0,
+      "addressedAsFormalYou": 11
+    },
+    "B": {
+      "total": 20,
+      "turnPassed": 13,
+      "checksPassed": 33,
+      "checksTotal": 40,
+      "unsupportedBusinessClaimTurns": 4,
+      "invalid": 0,
+      "addressedAsFormalYou": 17
+    },
+    "examples": [
+      "A 售后串场：客户问扣子松动，却被问“想保留原样还是想换更牢固的款式”“喜欢哪种佩戴方式”。",
+      "B 即使有正确售后需求卡，仍说“我们能帮您调整扣子或加固结构，确保佩戴更安心”，缺门店服务能力依据。",
+      "B 选款时说“预算600内有几种风格可选”，把客户预算当成实际商品证据。"
+    ],
+    "source": "conversation-notebook-2026-11-03T12-57-00.699Z/review.json",
+    "productionAccepted": false,
+    "followUp": "追加新题对照：当前提示＋正确需求卡2/6轮通过，精简通用提示＋同样需求卡3/6轮通过。开发者按提前固定检查项复核，单次小样本，不是总体准确率。两者均未放行；精简方案仍出现不可靠的耳钉临时固定与戒指调圈建议，说明只改提示不足以保证专业服务。原始记录：task-focus-2026-11-03T14-28-16.251Z/results.json。",
+    "serviceMethodsStudy": "服务办法诊断：已形成改款、售后、送礼、家常4类12步骤草稿，均待门店审核。复用6个开发问题、固定历史上下文，重新A/B各采样一次；不加办法3/6轮通过，加人工选定办法4/6轮通过。开发者自查，不是整体准确率。仍有越界查询和不可靠圈号建议，未放行，也未接入自动选步骤。"
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "$comment": "Structural schema only. Consumers MUST verify this receipt against the same package ZIP with the required semantic command.",
+  "$defs": {
+    "AcceptedPackageProductSource": {
+      "additionalProperties": false,
+      "properties": {
+        "album_product_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Album Product Id",
+          "type": "string"
+        },
+        "confirmation_event_id": {
+          "format": "uuid",
+          "title": "Confirmation Event Id",
+          "type": "string"
+        },
+        "snapshot_version": {
+          "minimum": 1,
+          "title": "Snapshot Version",
+          "type": "integer"
+        },
+        "source_type": {
+          "$ref": "#/$defs/ProductSourceType"
+        }
+      },
+      "required": [
+        "album_product_id",
+        "snapshot_version",
+        "source_type",
+        "confirmation_event_id"
+      ],
+      "title": "AcceptedPackageProductSource",
+      "type": "object"
+    },
+    "ProductSourceType": {
+      "enum": [
+        "first_sale_bead",
+        "legacy_material",
+        "redesign_output"
+      ],
+      "title": "ProductSourceType",
+      "type": "string"
+    }
+  },
+  "$id": "urn:photo-organizer:opc-standard-product-package-acceptance:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_id": {
+      "pattern": "^standard-package-acceptance:[0-9a-f]{64}$",
+      "title": "Acceptance Id",
+      "type": "string"
+    },
+    "acceptance_status": {
+      "const": "package_ready_for_mall_draft_import_not_listed",
+      "title": "Acceptance Status",
+      "type": "string"
+    },
+    "album_product_ids": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 3,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+        "type": "string"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Album Product Ids",
+      "type": "array"
+    },
+    "auto_publish": {
+      "const": false,
+      "title": "Auto Publish",
+      "type": "boolean"
+    },
+    "bead_ids": {
+      "maxItems": 0,
+      "minItems": 0,
+      "title": "Bead Ids",
+      "type": "array"
+    },
+    "claims_not_evaluated": {
+      "maxItems": 4,
+      "minItems": 4,
+      "prefixItems": [
+        {
+          "const": "authenticity",
+          "type": "string"
+        },
+        {
+          "const": "origin",
+          "type": "string"
+        },
+        {
+          "const": "quality",
+          "type": "string"
+        },
+        {
+          "const": "warehouse_acceptance",
+          "type": "string"
+        }
+      ],
+      "title": "Claims Not Evaluated",
+      "type": "array"
+    },
+    "data_classification": {
+      "enum": [
+        "synthetic_no_customer_data",
+        "opc_owned_product_material_no_customer_data"
+      ],
+      "title": "Data Classification",
+      "type": "string"
+    },
+    "image_count": {
+      "maximum": 40,
+      "minimum": 2,
+      "title": "Image Count",
+      "type": "integer"
+    },
+    "mall_product_ids": {
+      "maxItems": 0,
+      "minItems": 0,
+      "title": "Mall Product Ids",
+      "type": "array"
+    },
+    "material_authorization": {
+      "const": "opc_human_confirmed_for_draft_material_use",
+      "title": "Material Authorization",
+      "type": "string"
+    },
+    "opc_id": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "operation": {
+      "const": "validate_only",
+      "title": "Operation",
+      "type": "string"
+    },
+    "package_byte_size": {
+      "exclusiveMinimum": 0,
+      "maximum": 4200000000,
+      "title": "Package Byte Size",
+      "type": "integer"
+    },
+    "package_id": {
+      "pattern": "^standard-product-package:[0-9a-f]{64}$",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "package_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "product_count": {
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Product Count",
+      "type": "integer"
+    },
+    "product_sources": {
+      "items": {
+        "$ref": "#/$defs/AcceptedPackageProductSource"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Product Sources",
+      "type": "array"
+    },
+    "publication_state": {
+      "const": "draft",
+      "title": "Publication State",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "opc-standard-product-package-acceptance/1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shared_market_opt_in": {
+      "const": false,
+      "title": "Shared Market Opt In",
+      "type": "boolean"
+    },
+    "source_batch_id": {
+      "pattern": "^mall-draft-batch:[0-9a-f]{64}$",
+      "title": "Source Batch Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "acceptance_id",
+    "acceptance_status",
+    "package_sha256",
+    "package_byte_size",
+    "package_id",
+    "source_batch_id",
+    "opc_id",
+    "data_classification",
+    "product_count",
+    "image_count",
+    "album_product_ids",
+    "product_sources",
+    "material_authorization",
+    "operation",
+    "publication_state",
+    "auto_publish",
+    "shared_market_opt_in",
+    "mall_product_ids",
+    "bead_ids",
+    "claims_not_evaluated"
+  ],
+  "title": "StandardProductPackageAcceptanceReceipt",
+  "type": "object",
+  "x-semantic-validation": {
+    "command": "python scripts/verify_standard_product_package.py --package <package.zip> --output <receipt.json> --check",
+    "required": true,
+    "stable_error": "receipt_stale"
+  }
+}

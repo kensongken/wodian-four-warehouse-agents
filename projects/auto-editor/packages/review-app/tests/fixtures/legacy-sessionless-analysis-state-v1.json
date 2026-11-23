@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "customerId": "__CUSTOMER_ID__",
+  "sessionId": "__WORKFLOW_SESSION_ID__",
+  "jobs": [
+    {
+      "schemaVersion": 1,
+      "id": "__JOB_ID__",
+      "customerId": "__CUSTOMER_ID__",
+      "sessionId": "__WORKFLOW_SESSION_ID__",
+      "actorId": "__ACTOR_ID__",
+      "sourceAssetId": "__SOURCE_ASSET_ID__",
+      "sourceAssetSessionId": "__WORKFLOW_SESSION_ID__",
+      "sourceDigest": "__SOURCE_DIGEST__",
+      "sourcePath": "__SOURCE_PATH__",
+      "sourceStartMs": 0,
+      "sourceEndMs": 10000,
+      "sourceDurationMs": 10000,
+      "sourceAuthorization": "reference-view-authorized",
+      "layers": [
+        "scene",
+        "transcript",
+        "vision"
+      ],
+      "operationKey": "__OPERATION_KEY__",
+      "requestDigest": "__REQUEST_DIGEST__",
+      "status": "cancelled",
+      "attempt": 1,
+      "receiptJobIds": [],
+      "runnerInstanceId": null,
+      "failure": null,
+      "cancellationReason": "studio-analysis-source-changed",
+      "createdAt": "2026-09-20T14:08:07.000Z",
+      "updatedAt": "2026-09-20T14:08:07.000Z"
+    }
+  ],
+  "receipts": []
+}

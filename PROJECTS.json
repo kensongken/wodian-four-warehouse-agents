@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "four-warehouse",
+    "name": "wodian-four-warehouse-agents",
+    "title": "四仓协同与分门别类",
+    "code_url": "https://github.com/kensongken/wodian-four-warehouse-agents",
+    "zip_url": "https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-four-warehouse-agents-source-20261123.zip"
+  },
+  {
+    "slug": "album-organizer",
+    "name": "wodian-album-organizer",
+    "title": "相册整理",
+    "code_url": "https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/album-organizer",
+    "zip_url": "https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-album-organizer-source-20261123.zip"
+  },
+  {
+    "slug": "sales-journey",
+    "name": "wodian-sales-journey",
+    "title": "销售之旅",
+    "code_url": "https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/sales-journey",
+    "zip_url": "https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-sales-journey-source-20261123.zip"
+  },
+  {
+    "slug": "wechat-agent",
+    "name": "wodian-wechat-agent",
+    "title": "微信大盗",
+    "code_url": "https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/wechat-agent",
+    "zip_url": "https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-wechat-agent-source-20261123.zip"
+  },
+  {
+    "slug": "auto-editor",
+    "name": "wodian-auto-editor",
+    "title": "自动剪辑",
+    "code_url": "https://github.com/kensongken/wodian-four-warehouse-agents/tree/main/projects/auto-editor",
+    "zip_url": "https://github.com/kensongken/wodian-four-warehouse-agents/releases/download/v2026.11.23/wodian-auto-editor-source-20261123.zip"
+  }
+]

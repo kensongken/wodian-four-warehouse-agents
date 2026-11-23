@@ -1,0 +1,330 @@
+{
+  "$defs": {
+    "CategorizationFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "album_product_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Album Product Id",
+          "type": "string"
+        },
+        "code": {
+          "enum": [
+            "categorization_unavailable",
+            "invalid_engine_result"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "input_event_id": {
+          "format": "uuid",
+          "title": "Input Event Id",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "input_event_id",
+        "album_product_id",
+        "code",
+        "retryable"
+      ],
+      "title": "CategorizationFailure",
+      "type": "object"
+    },
+    "ClassificationCandidateEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "album_product_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Album Product Id",
+          "type": "string"
+        },
+        "bead_id": {
+          "title": "Bead Id",
+          "type": "null"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/RankedCandidate"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Candidates",
+          "type": "array"
+        },
+        "claims_not_evaluated": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "const": "authenticity",
+              "type": "string"
+            },
+            {
+              "const": "origin",
+              "type": "string"
+            },
+            {
+              "const": "quality",
+              "type": "string"
+            },
+            {
+              "const": "warehouse_acceptance",
+              "type": "string"
+            }
+          ],
+          "title": "Claims Not Evaluated",
+          "type": "array"
+        },
+        "classification_version": {
+          "const": 1,
+          "title": "Classification Version",
+          "type": "integer"
+        },
+        "engine": {
+          "$ref": "#/$defs/EngineIdentity"
+        },
+        "event_id": {
+          "format": "uuid",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_type": {
+          "const": "album.product.classification.candidate.v1",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "input_event_id": {
+          "format": "uuid",
+          "title": "Input Event Id",
+          "type": "string"
+        },
+        "input_snapshot_version": {
+          "minimum": 1,
+          "title": "Input Snapshot Version",
+          "type": "integer"
+        },
+        "mall_product_id": {
+          "title": "Mall Product Id",
+          "type": "null"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "opc_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Opc Id",
+          "type": "string"
+        },
+        "review_status": {
+          "const": "requires_review",
+          "title": "Review Status",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "album-product-classification/1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/ProductSourceType"
+        }
+      },
+      "required": [
+        "schema_version",
+        "event_id",
+        "event_type",
+        "occurred_at",
+        "input_event_id",
+        "opc_id",
+        "album_product_id",
+        "input_snapshot_version",
+        "source_type",
+        "classification_version",
+        "engine",
+        "candidates",
+        "review_status",
+        "claims_not_evaluated",
+        "mall_product_id",
+        "bead_id"
+      ],
+      "title": "ClassificationCandidateEvent",
+      "type": "object"
+    },
+    "EngineIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "EngineIdentity",
+      "type": "object"
+    },
+    "Level1Category": {
+      "enum": [
+        "南红",
+        "沉香",
+        "翡翠",
+        "和田玉",
+        "蜜蜡",
+        "珍珠",
+        "水晶",
+        "彩宝",
+        "贵金属",
+        "其他",
+        "无法判断"
+      ],
+      "title": "Level1Category",
+      "type": "string"
+    },
+    "Level2Category": {
+      "enum": [
+        "手串",
+        "项链",
+        "吊坠",
+        "挂件",
+        "戒指",
+        "耳饰",
+        "手镯",
+        "珠子/散珠",
+        "摆件",
+        "配件",
+        "其他",
+        "无法判断"
+      ],
+      "title": "Level2Category",
+      "type": "string"
+    },
+    "ProductSourceType": {
+      "enum": [
+        "first_sale_bead",
+        "legacy_material",
+        "redesign_output"
+      ],
+      "title": "ProductSourceType",
+      "type": "string"
+    },
+    "RankedCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "level_1": {
+          "$ref": "#/$defs/Level1Category"
+        },
+        "level_2": {
+          "$ref": "#/$defs/Level2Category"
+        },
+        "rank": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/ReasonCode"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rank",
+        "level_1",
+        "level_2",
+        "confidence",
+        "reason_codes"
+      ],
+      "title": "RankedCandidate",
+      "type": "object"
+    },
+    "ReasonCode": {
+      "enum": [
+        "seed_match",
+        "visual_pattern",
+        "shape_pattern",
+        "insufficient_evidence"
+      ],
+      "title": "ReasonCode",
+      "type": "string"
+    }
+  },
+  "$id": "urn:photo-organizer:album-product-classification:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "items": {
+        "$ref": "#/$defs/ClassificationCandidateEvent"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "failures": {
+      "items": {
+        "$ref": "#/$defs/CategorizationFailure"
+      },
+      "title": "Failures",
+      "type": "array"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "input_batch_id": {
+      "format": "uuid",
+      "title": "Input Batch Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "album-product-classification-batch/1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "input_batch_id",
+    "generated_at",
+    "events",
+    "failures"
+  ],
+  "title": "CategorizationBatchResult",
+  "type": "object"
+}

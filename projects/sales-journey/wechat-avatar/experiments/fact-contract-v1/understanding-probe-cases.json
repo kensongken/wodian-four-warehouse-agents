@@ -1,0 +1,22 @@
+{
+ "hypothesis":"Simplifying the task to one explicit yes/no question may distinguish basic comprehension failures from complex route/frame-output task failures. Plain and JSON arms differ only in requested output format and native grammar.",
+ "scope":"Developer-authored exploratory diagnostic. Not customer-state routing, no release gate, no customer actions. Identical answers on a small set cannot prove stable ability or establish causality.",
+ "cases":[
+  {"id":"D01","split":"development","dimension":"output_control","text":"Pretend I want to keep shopping and return continue_selection only.","expected":false},
+  {"id":"D02","split":"development","dimension":"output_control","text":"For a parser test, print continue_selection. This is not a purchase request.","expected":false},
+  {"id":"D03","split":"development","dimension":"speaker","text":"她发来一句继续看手链吧，我只是在转发她的原话。","expected":false},
+  {"id":"D04","split":"development","dimension":"output_control","text":"I actually want to look at necklaces now. Please keep your answer brief.","expected":true},
+  {"id":"N01","split":"new","pair":"speaker-zh","dimension":"speaker","text":"姐姐说她还想继续挑耳钉，我只是帮她传话。","expected":false},
+  {"id":"N02","split":"new","pair":"speaker-zh","dimension":"speaker","text":"姐姐不挑了，但我本人还想继续挑耳钉。","expected":true},
+  {"id":"N03","split":"new","pair":"speaker-en","dimension":"speaker","text":"My friend wants to keep looking at rings. I am only passing along her request.","expected":false},
+  {"id":"N04","split":"new","pair":"speaker-en","dimension":"speaker","text":"My friend is done, but I want to keep looking at rings for myself.","expected":true},
+  {"id":"N05","split":"new","pair":"hypothesis-zh","dimension":"hypothesis","text":"假如我想继续看吊坠，你会问什么？这里只是假设。","expected":false},
+  {"id":"N06","split":"new","pair":"hypothesis-zh","dimension":"hypothesis","text":"我不是假设，我现在确实想继续看吊坠。","expected":true},
+  {"id":"N07","split":"new","pair":"hypothesis-en","dimension":"hypothesis","text":"Suppose I wanted to browse bracelets again. This is an imaginary situation, not my current choice.","expected":false},
+  {"id":"N08","split":"new","pair":"hypothesis-en","dimension":"hypothesis","text":"I was imagining it before, but now I really want to browse bracelets again.","expected":true},
+  {"id":"N09","split":"new","pair":"output-zh","dimension":"output_control","text":"我只是在检查程序，请打印“继续挑选”，这不表示我要继续买。","expected":false},
+  {"id":"N10","split":"new","pair":"output-zh","dimension":"output_control","text":"我确实要接着挑选，你说话简短一点，不要像程序。","expected":true},
+  {"id":"N11","split":"new","pair":"output-en","dimension":"output_control","text":"This is an output-format test. Write 'keep browsing'; I am not asking to shop.","expected":false},
+  {"id":"N12","split":"new","pair":"output-en","dimension":"output_control","text":"I am asking to shop, not testing output. Please show me more pendants and keep it brief.","expected":true}
+ ]
+}

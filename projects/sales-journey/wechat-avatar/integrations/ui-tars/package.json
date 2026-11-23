@@ -1,0 +1,9 @@
+{
+  "name": "sales-avatar-ui-tars-runtime",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@ui-tars/action-parser": "1.2.3"
+  },
+  "license": "MIT"
+}

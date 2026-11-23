@@ -1,0 +1,62 @@
+[project]
+name = "photo-organizer"
+version = "0.1.0"
+description = "API for the AI product photo organizer"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.19.1",
+    "asyncpg>=0.31.0",
+    "boto3>=1.43.70",
+    "cryptography>=50.0.0",
+    "fastapi>=0.141.1",
+    "greenlet>=3.5.5",
+    "httpx>=0.28.1",
+    "pillow>=11.3.0",
+    "pillow-heif>=1.5.0",
+    "pydantic-settings>=2.15.0",
+    "pyjwt>=2.13.0",
+    "redis>=8.1.0",
+    "sqlalchemy>=2.0.52",
+    "tencentcloud-sdk-python>=3.1.156",
+    "uvicorn[standard]>=0.52.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
+
+[project.scripts]
+photo-organizer-enqueue-ready-image-sets = "photo_organizer.cli.enqueue_product_image_sets:entrypoint"
+photo-organizer-publish-pending-image-sets = "photo_organizer.cli.publish_pending_product_image_sets:entrypoint"
+photo-organizer-run-image-set-bridge = "photo_organizer.cli.product_image_set_bridge:entrypoint"
+photo-organizer-provision-opc = "photo_organizer.cli.provision_opc:entrypoint"
+photo-organizer-publish-synthetic-image-set = "photo_organizer.cli.publish_product_image_set:entrypoint"
+photo-organizer-wechat-current-attachment-evidence = "photo_organizer.cli.wechat_current_attachment_evidence:entrypoint"
+
+[[tool.mypy.overrides]]
+module = [
+    "asyncpg",
+    "boto3",
+    "botocore",
+    "botocore.*",
+    "jsonschema",
+    "jsonschema.*",
+    "pillow_heif",
+]
+ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+    "jsonschema>=4.25.1",
+    "mypy>=2.3.0",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.3",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: requires local integration services such as PostgreSQL and, for storage coverage, MinIO",
+]

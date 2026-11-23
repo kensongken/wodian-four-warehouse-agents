@@ -1,0 +1,48 @@
+{
+  "contract_version": "1-sales-strategy-input",
+  "tenant_id": "22222222-2222-4222-8222-222222222222",
+  "product_code": "SYNTHETIC-001",
+  "strategy_input_version": 1,
+  "product_data_version": 1,
+  "source_album_event_id": "fa2ee0c2-d145-5e1b-b304-91a731e145c5",
+  "source_material_package_version": 1,
+  "source_image_set_sha256": "a1222f25287eb94b446058ac45c4ecca0b4dd90606738e3e728b9cb54c9ec528",
+  "images": [
+    {
+      "asset_id": "44444444-4444-4444-8444-444444444444",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "mime_type": "image/png",
+      "role": "main_candidate"
+    }
+  ],
+  "material": {
+    "value": "南红",
+    "confirmation_status": "candidate"
+  },
+  "form": {
+    "value": "手串",
+    "confirmation_status": "candidate"
+  },
+  "inventory_status": "pending",
+  "visual_observations": [],
+  "selling_point_candidates": [],
+  "price_status": "pending",
+  "service_rule_summaries": [],
+  "unverified_items": [
+    "材质待人工确认",
+    "真伪未验证",
+    "产地未验证"
+  ],
+  "forbidden_expressions": [
+    "官方保真",
+    "保证升值",
+    "固定成交价"
+  ],
+  "status": "preview_only",
+  "created_at": "2026-08-31T08:02:00Z",
+  "content_sha256": "72a3f98352a50e9925f5ba1cadb9a31677ef66794912c9b0e67e4f3624eb88fe",
+  "automatic_customer_contact_allowed": false,
+  "automatic_publication_allowed": false,
+  "automatic_wechat_send_allowed": false,
+  "automatic_quote_allowed": false
+}

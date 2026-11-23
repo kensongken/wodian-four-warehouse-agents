@@ -1,0 +1,831 @@
+{
+  "$defs": {
+    "ClassificationCandidateEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "album_product_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Album Product Id",
+          "type": "string"
+        },
+        "bead_id": {
+          "title": "Bead Id",
+          "type": "null"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/RankedCandidate"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Candidates",
+          "type": "array"
+        },
+        "claims_not_evaluated": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "const": "authenticity",
+              "type": "string"
+            },
+            {
+              "const": "origin",
+              "type": "string"
+            },
+            {
+              "const": "quality",
+              "type": "string"
+            },
+            {
+              "const": "warehouse_acceptance",
+              "type": "string"
+            }
+          ],
+          "title": "Claims Not Evaluated",
+          "type": "array"
+        },
+        "classification_version": {
+          "const": 1,
+          "title": "Classification Version",
+          "type": "integer"
+        },
+        "engine": {
+          "$ref": "#/$defs/EngineIdentity"
+        },
+        "event_id": {
+          "format": "uuid",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_type": {
+          "const": "album.product.classification.candidate.v1",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "input_event_id": {
+          "format": "uuid",
+          "title": "Input Event Id",
+          "type": "string"
+        },
+        "input_snapshot_version": {
+          "minimum": 1,
+          "title": "Input Snapshot Version",
+          "type": "integer"
+        },
+        "mall_product_id": {
+          "title": "Mall Product Id",
+          "type": "null"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "opc_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Opc Id",
+          "type": "string"
+        },
+        "review_status": {
+          "const": "requires_review",
+          "title": "Review Status",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "album-product-classification/1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/ProductSourceType"
+        }
+      },
+      "required": [
+        "schema_version",
+        "event_id",
+        "event_type",
+        "occurred_at",
+        "input_event_id",
+        "opc_id",
+        "album_product_id",
+        "input_snapshot_version",
+        "source_type",
+        "classification_version",
+        "engine",
+        "candidates",
+        "review_status",
+        "claims_not_evaluated",
+        "mall_product_id",
+        "bead_id"
+      ],
+      "title": "ClassificationCandidateEvent",
+      "type": "object"
+    },
+    "ClassificationReviewResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "album_product_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Album Product Id",
+          "type": "string"
+        },
+        "bead_id": {
+          "title": "Bead Id",
+          "type": "null"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/RankedCandidate"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Candidates",
+          "type": "array"
+        },
+        "claims_not_evaluated": {
+          "items": {
+            "enum": [
+              "authenticity",
+              "origin",
+              "quality",
+              "warehouse_acceptance"
+            ],
+            "type": "string"
+          },
+          "title": "Claims Not Evaluated",
+          "type": "array"
+        },
+        "classification_id": {
+          "format": "uuid",
+          "title": "Classification Id",
+          "type": "string"
+        },
+        "classification_version": {
+          "minimum": 1,
+          "title": "Classification Version",
+          "type": "integer"
+        },
+        "confirmed_by": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confirmed By"
+        },
+        "confirmed_level_1": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Level1Category"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "confirmed_level_2": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Level2Category"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "decided_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Decided At"
+        },
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "input_snapshot_version": {
+          "minimum": 1,
+          "title": "Input Snapshot Version",
+          "type": "integer"
+        },
+        "mall_product_id": {
+          "title": "Mall Product Id",
+          "type": "null"
+        },
+        "opc_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Opc Id",
+          "type": "string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/ProductSourceType"
+        },
+        "status": {
+          "enum": [
+            "open",
+            "resolved"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "opc_id",
+        "classification_id",
+        "album_product_id",
+        "source_type",
+        "input_snapshot_version",
+        "classification_version",
+        "candidates",
+        "status",
+        "confirmed_level_1",
+        "confirmed_level_2",
+        "confirmed_by",
+        "decided_at",
+        "created_at",
+        "updated_at",
+        "claims_not_evaluated",
+        "mall_product_id",
+        "bead_id"
+      ],
+      "title": "ClassificationReviewResponse",
+      "type": "object"
+    },
+    "ConfirmedClassificationEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "album_product_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Album Product Id",
+          "type": "string"
+        },
+        "bead_id": {
+          "title": "Bead Id",
+          "type": "null"
+        },
+        "claims_not_evaluated": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "const": "authenticity",
+              "type": "string"
+            },
+            {
+              "const": "origin",
+              "type": "string"
+            },
+            {
+              "const": "quality",
+              "type": "string"
+            },
+            {
+              "const": "warehouse_acceptance",
+              "type": "string"
+            }
+          ],
+          "title": "Claims Not Evaluated",
+          "type": "array"
+        },
+        "classification_id": {
+          "format": "uuid",
+          "title": "Classification Id",
+          "type": "string"
+        },
+        "classification_version": {
+          "minimum": 1,
+          "title": "Classification Version",
+          "type": "integer"
+        },
+        "confirmed_at": {
+          "format": "date-time",
+          "title": "Confirmed At",
+          "type": "string"
+        },
+        "confirmed_by": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Confirmed By",
+          "type": "string"
+        },
+        "confirmed_level_1": {
+          "$ref": "#/$defs/Level1Category"
+        },
+        "confirmed_level_2": {
+          "$ref": "#/$defs/Level2Category"
+        },
+        "event_id": {
+          "format": "uuid",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_type": {
+          "const": "album.product.classification.confirmed.v1",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "input_event_id": {
+          "format": "uuid",
+          "title": "Input Event Id",
+          "type": "string"
+        },
+        "input_snapshot_version": {
+          "minimum": 1,
+          "title": "Input Snapshot Version",
+          "type": "integer"
+        },
+        "mall_product_id": {
+          "title": "Mall Product Id",
+          "type": "null"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "opc_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Opc Id",
+          "type": "string"
+        },
+        "review_id": {
+          "format": "uuid",
+          "title": "Review Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "album-product-classification-confirmed/1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/ProductSourceType"
+        }
+      },
+      "required": [
+        "schema_version",
+        "event_id",
+        "event_type",
+        "occurred_at",
+        "opc_id",
+        "album_product_id",
+        "source_type",
+        "classification_id",
+        "review_id",
+        "input_event_id",
+        "input_snapshot_version",
+        "classification_version",
+        "confirmed_level_1",
+        "confirmed_level_2",
+        "confirmed_by",
+        "confirmed_at",
+        "claims_not_evaluated",
+        "mall_product_id",
+        "bead_id"
+      ],
+      "title": "ConfirmedClassificationEvent",
+      "type": "object"
+    },
+    "ControlledSkuEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "format": "uuid",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "candidate_event": {
+          "$ref": "#/$defs/ClassificationCandidateEvent"
+        },
+        "confirmation_event": {
+          "$ref": "#/$defs/ConfirmedClassificationEvent"
+        },
+        "evidence_refs": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "maxLength": 128,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+              "type": "string"
+            },
+            {
+              "maxLength": 128,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+              "type": "string"
+            },
+            {
+              "maxLength": 128,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+              "type": "string"
+            },
+            {
+              "maxLength": 128,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+              "type": "string"
+            }
+          ],
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "image_evidence": {
+          "$ref": "#/$defs/ImageEvidence"
+        },
+        "import_version": {
+          "minimum": 1,
+          "title": "Import Version",
+          "type": "integer"
+        },
+        "opc_workspace_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Opc Workspace Id",
+          "type": "string"
+        },
+        "review_record": {
+          "$ref": "#/$defs/ClassificationReviewResponse"
+        },
+        "sku_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Sku Id",
+          "type": "string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/ProductSourceType"
+        }
+      },
+      "required": [
+        "sku_id",
+        "asset_id",
+        "source_type",
+        "opc_workspace_id",
+        "evidence_refs",
+        "import_version",
+        "image_evidence",
+        "candidate_event",
+        "review_record",
+        "confirmation_event"
+      ],
+      "title": "ControlledSkuEvidence",
+      "type": "object"
+    },
+    "EngineIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "EngineIdentity",
+      "type": "object"
+    },
+    "ImageEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "format": "uuid",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "byte_size": {
+          "exclusiveMinimum": 0,
+          "maximum": 104857600,
+          "title": "Byte Size",
+          "type": "integer"
+        },
+        "captured_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Captured At"
+        },
+        "imported_at": {
+          "format": "date-time",
+          "title": "Imported At",
+          "type": "string"
+        },
+        "media_type": {
+          "enum": [
+            "image/jpeg",
+            "image/png",
+            "image/heic",
+            "image/heif"
+          ],
+          "title": "Media Type",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "original",
+            "crop"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "source_asset_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Asset Id"
+        },
+        "storage_ref": {
+          "maxLength": 512,
+          "minLength": 12,
+          "title": "Storage Ref",
+          "type": "string"
+        },
+        "transform": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ImageTransform"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "asset_id",
+        "role",
+        "sha256",
+        "byte_size",
+        "media_type",
+        "captured_at",
+        "imported_at",
+        "storage_ref",
+        "source_asset_id",
+        "transform"
+      ],
+      "title": "ImageEvidence",
+      "type": "object"
+    },
+    "ImageTransform": {
+      "additionalProperties": false,
+      "properties": {
+        "crop_box": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            }
+          ],
+          "title": "Crop Box",
+          "type": "array"
+        },
+        "kind": {
+          "const": "crop",
+          "title": "Kind",
+          "type": "string"
+        },
+        "tool_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]+$",
+          "title": "Tool Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "crop_box",
+        "tool_version"
+      ],
+      "title": "ImageTransform",
+      "type": "object"
+    },
+    "Level1Category": {
+      "enum": [
+        "南红",
+        "沉香",
+        "翡翠",
+        "和田玉",
+        "蜜蜡",
+        "珍珠",
+        "水晶",
+        "彩宝",
+        "贵金属",
+        "其他",
+        "无法判断"
+      ],
+      "title": "Level1Category",
+      "type": "string"
+    },
+    "Level2Category": {
+      "enum": [
+        "手串",
+        "项链",
+        "吊坠",
+        "挂件",
+        "戒指",
+        "耳饰",
+        "手镯",
+        "珠子/散珠",
+        "摆件",
+        "配件",
+        "其他",
+        "无法判断"
+      ],
+      "title": "Level2Category",
+      "type": "string"
+    },
+    "ProductSourceType": {
+      "enum": [
+        "first_sale_bead",
+        "legacy_material",
+        "redesign_output"
+      ],
+      "title": "ProductSourceType",
+      "type": "string"
+    },
+    "RankedCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "level_1": {
+          "$ref": "#/$defs/Level1Category"
+        },
+        "level_2": {
+          "$ref": "#/$defs/Level2Category"
+        },
+        "rank": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/ReasonCode"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rank",
+        "level_1",
+        "level_2",
+        "confidence",
+        "reason_codes"
+      ],
+      "title": "RankedCandidate",
+      "type": "object"
+    },
+    "ReasonCode": {
+      "enum": [
+        "seed_match",
+        "visual_pattern",
+        "shape_pattern",
+        "insufficient_evidence"
+      ],
+      "title": "ReasonCode",
+      "type": "string"
+    }
+  },
+  "$id": "urn:photo-organizer:wo-tr-008-controlled-import-evidence:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "data_classification": {
+      "const": "synthetic_no_customer_data",
+      "title": "Data Classification",
+      "type": "string"
+    },
+    "delivery_boundary": {
+      "const": "classification_review_only_no_auto_listing",
+      "title": "Delivery Boundary",
+      "type": "string"
+    },
+    "evidence_id": {
+      "const": "WO-TR-008-EV-001",
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "wo-tr-008-controlled-import-evidence/1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "skus": {
+      "items": {
+        "$ref": "#/$defs/ControlledSkuEvidence"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "title": "Skus",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "data_classification",
+    "delivery_boundary",
+    "skus"
+  ],
+  "title": "ControlledImportEvidenceBatch",
+  "type": "object"
+}

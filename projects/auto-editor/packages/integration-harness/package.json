@@ -1,0 +1,25 @@
+{
+  "name": "@wearable/integration-harness",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pilot": "tsx src/run-pilot.ts",
+    "creative-pilot": "tsx src/run-creative-director-pilot.ts",
+    "private-studio-pilot": "tsx src/run-private-studio-pilot.ts",
+    "reference-guided-editing-pilot": "tsx src/run-reference-guided-editing-pilot.ts",
+    "external-edit-pilot": "tsx src/run-external-edit-roundtrip-pilot.ts",
+    "real-material-acceptance": "tsx src/run-real-material-acceptance.ts"
+  },
+  "dependencies": {
+    "@wearable/contracts": "workspace:*",
+    "@wearable/mobile-agent": "workspace:*",
+    "@wearable/recorder-sim": "workspace:*",
+    "ffmpeg-static": "5.2.0",
+    "ffprobe-static": "3.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.0"
+  },
+  "license": "MIT"
+}

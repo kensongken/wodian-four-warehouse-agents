@@ -1,0 +1,178 @@
+{
+  "version": "onepass-text8b-screen-1",
+  "baseResultSha256": "57a80004aba14200bd6ae49b6fe5947b58fc7fed0d34f2f6f9e32aa618fbffe9",
+  "model": "qwen3:8b",
+  "modelDigest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "plannedReplies": 24,
+  "scope": "posthoc full matrix model screening after reviewing 4B failures; not fresh heldout evidence",
+  "jobs": [
+    {
+      "id": "neighbor_gift:r1:onepass",
+      "caseId": "neighbor_gift",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261108
+    },
+    {
+      "id": "everyday_self:r1:onepass",
+      "caseId": "everyday_self",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261107
+    },
+    {
+      "id": "earring_availability:r1:onepass",
+      "caseId": "earring_availability",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261112
+    },
+    {
+      "id": "owner_at_store:r1:onepass",
+      "caseId": "owner_at_store",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261111
+    },
+    {
+      "id": "return_rules:r1:onepass",
+      "caseId": "return_rules",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261109
+    },
+    {
+      "id": "no_more_recommendations:r1:onepass",
+      "caseId": "no_more_recommendations",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261116
+    },
+    {
+      "id": "simulated_location:r1:onepass",
+      "caseId": "simulated_location",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261114
+    },
+    {
+      "id": "changed_bracelet:r1:onepass",
+      "caseId": "changed_bracelet",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261115
+    },
+    {
+      "id": "change_topic:r1:onepass",
+      "caseId": "change_topic",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261106
+    },
+    {
+      "id": "ordinary_chat:r1:onepass",
+      "caseId": "ordinary_chat",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261105
+    },
+    {
+      "id": "simulated_hours:r1:onepass",
+      "caseId": "simulated_hours",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261113
+    },
+    {
+      "id": "resize_status:r1:onepass",
+      "caseId": "resize_status",
+      "repeat": 1,
+      "arm": "onepass",
+      "seed": 20261110
+    },
+    {
+      "id": "neighbor_gift:r2:onepass",
+      "caseId": "neighbor_gift",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262108
+    },
+    {
+      "id": "ordinary_chat:r2:onepass",
+      "caseId": "ordinary_chat",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262105
+    },
+    {
+      "id": "simulated_hours:r2:onepass",
+      "caseId": "simulated_hours",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262113
+    },
+    {
+      "id": "owner_at_store:r2:onepass",
+      "caseId": "owner_at_store",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262111
+    },
+    {
+      "id": "return_rules:r2:onepass",
+      "caseId": "return_rules",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262109
+    },
+    {
+      "id": "everyday_self:r2:onepass",
+      "caseId": "everyday_self",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262107
+    },
+    {
+      "id": "no_more_recommendations:r2:onepass",
+      "caseId": "no_more_recommendations",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262116
+    },
+    {
+      "id": "changed_bracelet:r2:onepass",
+      "caseId": "changed_bracelet",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262115
+    },
+    {
+      "id": "change_topic:r2:onepass",
+      "caseId": "change_topic",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262106
+    },
+    {
+      "id": "earring_availability:r2:onepass",
+      "caseId": "earring_availability",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262112
+    },
+    {
+      "id": "simulated_location:r2:onepass",
+      "caseId": "simulated_location",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262114
+    },
+    {
+      "id": "resize_status:r2:onepass",
+      "caseId": "resize_status",
+      "repeat": 2,
+      "arm": "onepass",
+      "seed": 20262110
+    }
+  ]
+}

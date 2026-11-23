@@ -1,0 +1,34 @@
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {LocalQwen,localOllamaJSON} from '../../lib/qwen-model.mjs';import {intentRequest,parseIntent,INTENT_SCHEMA} from './temporary-intent.mjs';import {attributionRequest,parseAttribution,gateIntent,ATTRIBUTION_SCHEMA} from './intent-attribution.mjs';import {INTENT_SCHEMA_V2} from './intent-schema-v2.mjs';
+const plan=JSON.parse(readFileSync(new URL('./intent-schema-cases.json',import.meta.url)));
+const dir=new URL('./evidence/intent-schema-'+new Date().toISOString().replaceAll(':','-')+'/',import.meta.url);mkdirSync(dir);
+const hashes=Object.fromEntries(['intent-schema-cases.json','temporary-intent.mjs','intent-attribution.mjs','intent-schema-v2.mjs','intent-schema-comparison.mjs'].map(name=>[name,createHash('sha256').update(readFileSync(new URL('./'+name,import.meta.url))).digest('hex')]));
+const clients=[INTENT_SCHEMA,INTENT_SCHEMA_V2,ATTRIBUTION_SCHEMA].map(format=>new LocalQwen({keepAlive:'120s',timeout:120000,post:(path,body,options)=>localOllamaJSON(path,path==='/api/chat'?{...body,format,options:{...body.options,num_ctx:4096}}:body,options)}));
+const result={createdAt:new Date().toISOString(),model:clients[0].modelName,plan,hashes,method:'Only native intent schema differs. Identical prompt/source/options for A and B; one shared native attribution output per case. Three calls per case; order alternates. No retries, raw saved before parsing. Latency sums route call and shared attribution call, not full deployed chat latency.',rows:[]};
+const save=()=>writeFileSync(new URL('results.json',dir),JSON.stringify(result,null,2));save();
+function score(rows,key){const relevant=act=>['pause_sales','change_topic'].includes(act);const times=rows.map(r=>r[key].wallMs).sort((a,b)=>a-b);return{
+ total:rows.length,correct:rows.filter(r=>r[key].parsed?.act===r.expected).length,
+ invalidRoute:rows.filter(r=>!r[key].ungated).length,invalidFinal:rows.filter(r=>!r[key].parsed).length,
+ nullQuoteWithDefiniteIntent:rows.filter(r=>r[key].shape?.act!=='unclear'&&r[key].shape?.quote===null).length,
+ falseResume:rows.filter(r=>r.expected!=='continue_selection'&&r[key].parsed?.act==='continue_selection').length,
+ falsePause:rows.filter(r=>!relevant(r.expected)&&relevant(r[key].parsed?.act)).length,
+ missedStop:rows.filter(r=>relevant(r.expected)&&!relevant(r[key].parsed?.act)).length,
+ wrongStopType:rows.filter(r=>relevant(r.expected)&&relevant(r[key].parsed?.act)&&r.expected!==r[key].parsed.act).length,
+ medianMs:times[Math.floor(times.length/2)],failedIds:rows.filter(r=>r[key].parsed?.act!==r.expected).map(r=>r.id)
+};}
+try{
+ const ps=await fetch('http://127.0.0.1:11434/api/ps',{signal:AbortSignal.timeout(5000)}).then(r=>r.json());if(ps.models.some(m=>m.name!==clients[0].modelName))throw Error('Another model is resident; stopped without disturbing it');
+ for(const [index,c]of plan.cases.entries()){
+  const row={...c,A:{},B:{},attribution:{}};result.rows.push(row);save();
+  for(const key of index%2?['attribution','B','A']:['A','B','attribution']){const n={A:0,B:1,attribution:2}[key],started=Date.now();try{row[key].raw=await clients[n].complete((n===2?attributionRequest:intentRequest)(clients[n].modelName,c.text));}catch(error){row[key].callError=error.message;}row[key].callMs=Date.now()-started;save();}
+  try{row.context=parseAttribution(row.attribution.raw);}catch(error){row.contextError=error.message;}
+  for(const key of ['A','B']){const item=row[key];item.wallMs=item.callMs+row.attribution.callMs;
+   try{item.shape=JSON.parse(item.raw.choices[0].message.content);}catch{}
+   try{item.ungated=parseIntent(c.text,item.raw);}catch(error){item.routeError=error.message;}
+   try{item.parsed=gateIntent(c.text,item.raw,row.attribution.raw);}catch(error){item.finalError=error.message;}
+  }
+  save();process.stdout.write(JSON.stringify({id:c.id,expected:c.expected,context:row.context,A:row.A.parsed?.act||'invalid',B:row.B.parsed?.act||'invalid'})+'\n');
+ }
+ result.summary={};for(const split of ['development','new','all']){const rows=result.rows.filter(r=>split==='all'||r.split===split);result.summary[split]={A:score(rows,'A'),B:score(rows,'B')};}
+ const b=result.summary.all.B;result.candidateMeetsExploratoryGate=b.correct===b.total&&b.falseResume===0&&b.missedStop===0;save();process.stdout.write(JSON.stringify({summary:result.summary,candidateMeetsExploratoryGate:result.candidateMeetsExploratoryGate,evidence:dir.href})+'\n');
+}catch(error){result.runError=error.message;save();throw error;}finally{clients.forEach(c=>c.close());}

@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {linkRequest,parseLink} from './discussion-link.mjs';
+const raw=v=>({choices:[{message:{content:JSON.stringify(v)}}]});
+test('only follow-up proposes prior topic; stopping or uncertainty never inherits it',()=>{for(const relation of ['followup','new_topic','unclear']){const r=parseLink('本轮',raw({relation,quote:'本轮'}),'compare_detail');assert.equal(r.suggestedPreviousTopic,relation==='followup'?'selection':null);assert.equal(r.semanticVerified,false);assert.equal(r.sent,false);}});
+test('rejects stale evidence, business commands and unsupported prior discussion',()=>{assert.throws(()=>parseLink('本轮',raw({relation:'followup',quote:'旧话'}),'repair_limits'));assert.throws(()=>parseLink('本轮',raw({relation:'followup',quote:'本轮',send:true}),'repair_limits'));assert.throws(()=>linkRequest('test','本轮',{previousAction:'close',previousCustomer:'旧话'}));});

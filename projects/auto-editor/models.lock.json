@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "artifacts": [
+    {
+      "id": "pyscenedetect-0.7.1",
+      "version": "0.7.1",
+      "artifactKind": "source-package",
+      "sources": [
+        {
+          "id": "code",
+          "kind": "code",
+          "sourceUrl": "https://github.com/Breakthrough/PySceneDetect",
+          "sourceRevision": null,
+          "inventoryVerified": false,
+          "files": [
+            {
+              "relativePath": "packages/PySceneDetect-0.7.1.tar.gz",
+              "sourceUrl": null,
+              "required": true,
+              "executable": false,
+              "sha256": null,
+              "byteLength": null
+            }
+          ]
+        }
+      ],
+      "licenseEvidence": {
+        "code": {
+          "applies": true,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        },
+        "weights": {
+          "applies": false,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        }
+      },
+      "licenseReview": "pending",
+      "runtimeBackend": "python-opencv-headless",
+      "quantization": null,
+      "enabled": false,
+      "approved": false,
+      "approvedBy": null,
+      "approvedAt": null,
+      "testedDevices": [],
+      "testSetVersion": null
+    },
+    {
+      "id": "whisper.cpp-1.9.2-small-q5_0",
+      "version": "1.9.2-small-q5_0",
+      "artifactKind": "binary-model",
+      "sources": [
+        {
+          "id": "code",
+          "kind": "code",
+          "sourceUrl": "https://github.com/ggerganov/whisper.cpp",
+          "sourceRevision": null,
+          "inventoryVerified": false,
+          "files": [
+            {
+              "relativePath": "packages/whisper.cpp-1.9.2.tar.gz",
+              "sourceUrl": null,
+              "required": true,
+              "executable": false,
+              "sha256": null,
+              "byteLength": null
+            }
+          ]
+        },
+        {
+          "id": "weights-small-q5_0",
+          "kind": "weights",
+          "sourceUrl": "https://huggingface.co/ggerganov/whisper.cpp",
+          "sourceRevision": null,
+          "inventoryVerified": false,
+          "files": [
+            {
+              "relativePath": "whisper/ggml-small-q5_0.bin",
+              "sourceUrl": null,
+              "required": true,
+              "executable": false,
+              "sha256": null,
+              "byteLength": null
+            }
+          ]
+        }
+      ],
+      "licenseEvidence": {
+        "code": {
+          "applies": true,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        },
+        "weights": {
+          "applies": true,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        }
+      },
+      "licenseReview": "pending",
+      "runtimeBackend": "whisper.cpp-metal",
+      "quantization": "q5_0",
+      "enabled": false,
+      "approved": false,
+      "approvedBy": null,
+      "approvedAt": null,
+      "testedDevices": [],
+      "testSetVersion": null
+    },
+    {
+      "id": "whisper.cpp-1.9.2-small-q5_1",
+      "version": "1.9.2-small-q5_1",
+      "artifactKind": "checkpoint",
+      "sources": [
+        {
+          "id": "weights-small-q5_1",
+          "kind": "weights",
+          "sourceUrl": "https://huggingface.co/ggerganov/whisper.cpp",
+          "sourceRevision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+          "inventoryVerified": true,
+          "files": [
+            {
+              "relativePath": "whisper/ggml-small-q5_1.bin",
+              "sourceUrl": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-small-q5_1.bin",
+              "required": true,
+              "executable": false,
+              "sha256": "ae85e4a935d7a567bd102fe55afc16bb595bdb618e11b2fc7591bc08120411bb",
+              "byteLength": 190085487
+            }
+          ]
+        }
+      ],
+      "licenseEvidence": {
+        "code": {
+          "applies": false,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        },
+        "weights": {
+          "applies": true,
+          "sourceId": "weights-small-q5_1",
+          "sourceRevision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+          "spdxExpression": "MIT",
+          "evidenceUrl": "https://huggingface.co/ggerganov/whisper.cpp/raw/5359861c739e955e79d9a303bcbc70fb988958b1/README.md"
+        }
+      },
+      "licenseReview": "approved",
+      "runtimeBackend": "whisper.cpp-metal",
+      "quantization": "q5_1",
+      "enabled": true,
+      "approved": true,
+      "approvedBy": "wumuze",
+      "approvedAt": "2026-09-22T18:12:31Z",
+      "testedDevices": ["Mac16,13 / Apple M4 / 16GB"],
+      "testSetVersion": "local-persona-model-probe-v1"
+    },
+    {
+      "id": "whisper.cpp-1.9.2-cli-darwin-arm64",
+      "version": "1.9.2-darwin-arm64-local-build-1",
+      "artifactKind": "binary-model",
+      "sources": [
+        {
+          "id": "code",
+          "kind": "code",
+          "sourceUrl": "https://codeload.github.com/ggml-org/whisper.cpp",
+          "sourceRevision": "306c88f4d1286aec1bf96e544632897886af5501",
+          "inventoryVerified": true,
+          "files": [
+            {
+              "relativePath": "inputs/whisper.cpp-1.9.2.tar.gz",
+              "sourceUrl": "https://codeload.github.com/ggml-org/whisper.cpp/tar.gz/306c88f4d1286aec1bf96e544632897886af5501",
+              "required": true,
+              "executable": false,
+              "sha256": "f3585ebf64df3e41b26c45d93bdb38b423ca1de0bf40cc4b6d320254867a75df",
+              "byteLength": 9627120
+            }
+          ]
+        }
+      ],
+      "runtimeFiles": [
+        {
+          "relativePath": "whisper/bin/darwin-arm64/whisper-cli",
+          "candidateRelativePath": "whisper/bin/darwin-arm64/whisper-cli",
+          "required": true,
+          "executable": true,
+          "sourceKind": "code",
+          "sha256": "34f164f3407c0f4ae8fc9d83b6d661a5a2cc016323a6ac1c5e581519c5339d27",
+          "byteLength": 3292440
+        }
+      ],
+      "derivationReceipt": {
+        "schemaVersion": 1,
+        "recipeId": "whisper.cpp-v1.9.2-darwin-arm64-cmake-release-metal-v1",
+        "inputSourceIds": ["code"],
+        "outputTreeSha256": "d22576287b04052fbe5b7efdacedf01e47e12ab23cc6fc54500780d56260edfd",
+        "probeReportSha256": "526426a52cb29da3609fc959eca641e0a5b91641effdefec2ed78c65d4ec0a3b",
+        "status": "succeeded",
+        "syntheticInput": true,
+        "realModel": true
+      },
+      "licenseEvidence": {
+        "code": {
+          "applies": true,
+          "sourceId": "code",
+          "sourceRevision": "306c88f4d1286aec1bf96e544632897886af5501",
+          "spdxExpression": "MIT",
+          "evidenceUrl": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/306c88f4d1286aec1bf96e544632897886af5501/LICENSE"
+        },
+        "weights": {
+          "applies": false,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        }
+      },
+      "licenseReview": "approved",
+      "runtimeBackend": "whisper.cpp-metal",
+      "quantization": null,
+      "enabled": true,
+      "approved": true,
+      "approvedBy": "wumuze",
+      "approvedAt": "2026-09-22T18:12:31Z",
+      "testedDevices": ["Mac16,13 / Apple M4 / 16GB"],
+      "testSetVersion": "local-persona-model-probe-v1"
+    },
+    {
+      "id": "openclip-3.3.0-vit-b-32",
+      "version": "3.3.0-vit-b-32",
+      "artifactKind": "checkpoint",
+      "sources": [
+        {
+          "id": "code",
+          "kind": "code",
+          "sourceUrl": "https://github.com/mlfoundations/open_clip",
+          "sourceRevision": null,
+          "inventoryVerified": false,
+          "files": [
+            {
+              "relativePath": "packages/open_clip-3.3.0.tar.gz",
+              "sourceUrl": null,
+              "required": true,
+              "executable": false,
+              "sha256": null,
+              "byteLength": null
+            }
+          ]
+        },
+        {
+          "id": "weights-vit-b-32",
+          "kind": "weights",
+          "sourceUrl": "https://huggingface.co/laion/CLIP-ViT-B-32-laion2B-s34B-b79K",
+          "sourceRevision": null,
+          "inventoryVerified": false,
+          "files": [
+            {
+              "relativePath": "openclip/vit-b-32/open_clip_pytorch_model.bin",
+              "sourceUrl": null,
+              "required": true,
+              "executable": false,
+              "sha256": null,
+              "byteLength": null
+            }
+          ]
+        }
+      ],
+      "licenseEvidence": {
+        "code": {
+          "applies": true,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        },
+        "weights": {
+          "applies": true,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        }
+      },
+      "licenseReview": "pending",
+      "runtimeBackend": "python-pytorch-mps",
+      "quantization": null,
+      "enabled": false,
+      "approved": false,
+      "approvedBy": null,
+      "approvedAt": null,
+      "testedDevices": [],
+      "testSetVersion": null
+    },
+    {
+      "id": "mlx-vlm-0.6.6",
+      "version": "0.6.6",
+      "artifactKind": "source-package",
+      "sources": [
+        {
+          "id": "code",
+          "kind": "code",
+          "sourceUrl": "https://codeload.github.com/Blaizzy/mlx-vlm",
+          "sourceRevision": "c9e27b08311f9c1f38690c46034b04c7598d73ee",
+          "inventoryVerified": true,
+          "files": [
+            {
+              "relativePath": "packages/mlx-vlm-0.6.6.tar.gz",
+              "sourceUrl": "https://codeload.github.com/Blaizzy/mlx-vlm/tar.gz/c9e27b08311f9c1f38690c46034b04c7598d73ee",
+              "required": true,
+              "executable": false,
+              "sha256": "d2f99a0258fa33ef0d15ea731a6893573e5664b84488aa2dc965865b577c8ddb",
+              "byteLength": 46408783
+            }
+          ]
+        }
+      ],
+      "licenseEvidence": {
+        "code": {
+          "applies": true,
+          "sourceId": "code",
+          "sourceRevision": "c9e27b08311f9c1f38690c46034b04c7598d73ee",
+          "spdxExpression": "MIT",
+          "evidenceUrl": "https://raw.githubusercontent.com/Blaizzy/mlx-vlm/c9e27b08311f9c1f38690c46034b04c7598d73ee/LICENSE"
+        },
+        "weights": {
+          "applies": false,
+          "sourceId": null,
+          "sourceRevision": null,
+          "spdxExpression": null,
+          "evidenceUrl": null
+        }
+      },
+      "licenseReview": "approved",
+      "runtimeBackend": "python-mlx-metal",
+      "quantization": null,
+      "enabled": true,
+      "approved": true,
+      "approvedBy": "wumuze",
+      "approvedAt": "2026-09-22T18:12:31Z",
+      "testedDevices": ["Mac16,13 / Apple M4 / 16GB"],
+      "testSetVersion": "local-persona-model-probe-v1"
+    },
+    {
+      "id": "qwen3-vl-2b-instruct-4bit",
+      "version": "2b-instruct-4bit-local-89644892-c9e27b08",
+      "artifactKind": "checkpoint",
+      "sources": [
+        {
+          "id": "mlx-vlm-code",
+          "kind": "code",
+          "sourceUrl": "https://codeload.github.com/Blaizzy/mlx-vlm",
+          "sourceRevision": "c9e27b08311f9c1f38690c46034b04c7598d73ee",
+          "inventoryVerified": true,
+          "files": [
+            {
+              "relativePath": "inputs/mlx-vlm-0.6.6.tar.gz",
+              "sourceUrl": "https://codeload.github.com/Blaizzy/mlx-vlm/tar.gz/c9e27b08311f9c1f38690c46034b04c7598d73ee",
+              "required": true,
+              "executable": false,
+              "sha256": "d2f99a0258fa33ef0d15ea731a6893573e5664b84488aa2dc965865b577c8ddb",
+              "byteLength": 46408783
+            }
+          ]
+        },
+        {
+          "id": "qwen-official-weights",
+          "kind": "weights",
+          "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct",
+          "sourceRevision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "inventoryVerified": true,
+          "files": [
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/.gitattributes",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/.gitattributes",
+              "required": true,
+              "executable": false,
+              "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+              "byteLength": 1519
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/README.md",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/README.md",
+              "required": true,
+              "executable": false,
+              "sha256": "5fc5be1ca9a3910399bd6239ee5086ab5d82a2a59c5d2b00e887a8835cc110e4",
+              "byteLength": 7136
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/chat_template.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/chat_template.json",
+              "required": true,
+              "executable": false,
+              "sha256": "6f8a6a55027e3da5160105556cda5dd69f6423f1c32645f6730d32de7773d0c4",
+              "byteLength": 5502
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/config.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/config.json",
+              "required": true,
+              "executable": false,
+              "sha256": "bec4b3d446efa05807365c9e1cec03ac590836879d02f3a6da879971154bdd3b",
+              "byteLength": 1505
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/generation_config.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/generation_config.json",
+              "required": true,
+              "executable": false,
+              "sha256": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4",
+              "byteLength": 269
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/merges.txt",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/merges.txt",
+              "required": true,
+              "executable": false,
+              "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "byteLength": 1671839
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/model.safetensors",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/model.safetensors",
+              "required": true,
+              "executable": false,
+              "sha256": "7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0",
+              "byteLength": 4255140312
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/preprocessor_config.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/preprocessor_config.json",
+              "required": true,
+              "executable": false,
+              "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+              "byteLength": 390
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/tokenizer.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/tokenizer.json",
+              "required": true,
+              "executable": false,
+              "sha256": "a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7",
+              "byteLength": 7032403
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/tokenizer_config.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/tokenizer_config.json",
+              "required": true,
+              "executable": false,
+              "sha256": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399",
+              "byteLength": 10868
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/video_preprocessor_config.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/video_preprocessor_config.json",
+              "required": true,
+              "executable": false,
+              "sha256": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+              "byteLength": 385
+            },
+            {
+              "relativePath": "inputs/qwen3-vl-2b-instruct/vocab.json",
+              "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/vocab.json",
+              "required": true,
+              "executable": false,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "byteLength": 2776833
+            }
+          ]
+        }
+      ],
+      "runtimeFiles": [
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/README.md", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/README.md", "required": true, "executable": false, "sourceKind": "weights", "sha256": "a986a7db073ba98a2a18e196c2011c2aeba77ff00dd2189e31104d38de5a055a", "byteLength": 84 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/chat_template.jinja", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/chat_template.jinja", "required": true, "executable": false, "sourceKind": "weights", "sha256": "3636d0f0bd6bef02654cdffdc447b79cb2cef8ab02cc75267345946291a489e4", "byteLength": 5292 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/chat_template.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/chat_template.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "6f8a6a55027e3da5160105556cda5dd69f6423f1c32645f6730d32de7773d0c4", "byteLength": 5502 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/config.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/config.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "796513a94301c9266b37b3c970737d3876ab974db742c4d7c50f8637733690c3", "byteLength": 2443 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/generation_config.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/generation_config.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4", "byteLength": 269 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/model.safetensors", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/model.safetensors", "required": true, "executable": false, "sourceKind": "weights", "sha256": "fcab0d97620da9e03cc12a6fc07e6a390ca34aef13c1d7519236096dfd0b839b", "byteLength": 1782040977 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/model.safetensors.index.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/model.safetensors.index.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "30ba24b1c93436450f2e202de402058ecea7417cf66785d4c73e52d1575e6d97", "byteLength": 82780 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/preprocessor_config.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/preprocessor_config.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516", "byteLength": 390 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/processor_config.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/processor_config.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "45fc17c8dd2474af6b493b52483c26c0584b0082d368c480f9fa611e73070040", "byteLength": 991 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/tokenizer.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/tokenizer.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "be75606093db2094d7cd20f3c2f385c212750648bd6ea4fb2bf507a6a4c55506", "byteLength": 11422650 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/tokenizer_config.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/tokenizer_config.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "7ce86d685d3fb775073b9b1c0f576dd89b7943194c771dd2573cc10e5cae4a48", "byteLength": 734 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/video_preprocessor_config.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/video_preprocessor_config.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13", "byteLength": 385 },
+        { "relativePath": "qwen3-vl-2b-instruct-4bit/vocab.json", "candidateRelativePath": "qwen3-vl-2b-instruct-4bit/vocab.json", "required": true, "executable": false, "sourceKind": "weights", "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910", "byteLength": 2776833 }
+      ],
+      "derivationReceipt": {
+        "schemaVersion": 1,
+        "recipeId": "qwen3-vl-2b-instruct-mlx-vlm-0.6.6-4bit-affine-g64-v1",
+        "inputSourceIds": ["mlx-vlm-code", "qwen-official-weights"],
+        "outputTreeSha256": "c6ac1da1181421424c46b06ccbffebbf466e645eb09bb836df42e5266e338f9e",
+        "probeReportSha256": "526426a52cb29da3609fc959eca641e0a5b91641effdefec2ed78c65d4ec0a3b",
+        "status": "succeeded",
+        "syntheticInput": true,
+        "realModel": true
+      },
+      "licenseEvidence": {
+        "code": {
+          "applies": true,
+          "sourceId": "mlx-vlm-code",
+          "sourceRevision": "c9e27b08311f9c1f38690c46034b04c7598d73ee",
+          "spdxExpression": "MIT",
+          "evidenceUrl": "https://raw.githubusercontent.com/Blaizzy/mlx-vlm/c9e27b08311f9c1f38690c46034b04c7598d73ee/LICENSE"
+        },
+        "weights": {
+          "applies": true,
+          "sourceId": "qwen-official-weights",
+          "sourceRevision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "spdxExpression": "Apache-2.0",
+          "evidenceUrl": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/raw/89644892e4d85e24eaac8bacfd4f463576704203/README.md"
+        }
+      },
+      "licenseReview": "approved",
+      "runtimeBackend": "mlx-vlm-metal",
+      "quantization": "4bit",
+      "enabled": true,
+      "approved": true,
+      "approvedBy": "wumuze",
+      "approvedAt": "2026-09-22T18:12:31Z",
+      "testedDevices": ["Mac16,13 / Apple M4 / 16GB"],
+      "testSetVersion": "local-persona-model-probe-v1"
+    }
+  ],
+  "workerRuntimes": [
+    {
+      "schemaVersion": 1,
+      "id": "mlx-vlm-worker-runtime-0.6.6-py312-darwin-arm64",
+      "version": "0.6.6-py312",
+      "pythonVersion": "3.12.14",
+      "platform": "darwin",
+      "architecture": "arm64",
+      "minimumOsVersion": "14.0",
+      "dependencyLockSha256": "774b30f7f04e3d78faf72f75fca0d0b5823f8244d751c6c10f9c97f45fd85521",
+      "workerDependencyLockSha256": "7b395d3286c1ce2012c5fb2507ad2a3ce4accb010dab69d3de2a973ed84b5041",
+      "materialInventorySha256": "8147590c4832c5ad9ac04b2b9a370dc5b55b61832334a745ada538c2b8de4895",
+      "approvalPacketId": "worker-runtime-bundle-v1-sha256-b933487203a9154f56325c22b1cb6fbe5ad83d29ff658e9972335229729256f3",
+      "archive": {
+        "relativePath": "runtime.tar",
+        "sha256": "7e64067c2cef62b2b459be30fffbf06fc8f00f8876554fdafbdf8fd6a58f9570",
+        "byteLength": 830456832
+      },
+      "manifest": {
+        "relativePath": "runtime-manifest.json",
+        "sha256": "0976bace79c44d3bbc30506c1939a3c37944564a6831c37d941b02641a7749f5",
+        "byteLength": 3373243
+      },
+      "packageInventory": {
+        "relativePath": "runtime-packages.json",
+        "sha256": "a49b539ffa9656b5977d0537f971d94315ae7f00b886c35b9c1accd545bd8f29",
+        "byteLength": 38542
+      },
+      "derivationReceipt": {
+        "relativePath": "derivation-receipt.json",
+        "sha256": "025088acdb2d5ab515acc690637330a012578fc61dc543b53e8c7a21c7140bae",
+        "byteLength": 2858
+      },
+      "treeSha256": "0eb1e3d550044b30e949ad3d7d2a43dd490b394bb107a0a9bc4aedf5b314a7c1",
+      "licenseReview": "approved",
+      "enabled": false,
+      "approved": false,
+      "approvedBy": null,
+      "approvedAt": null,
+      "probe": null
+    },
+    {
+      "schemaVersion": 1,
+      "id": "mlx-vlm-worker-runtime-0.6.6-pyscenedetect-0.7.1-py312-darwin-arm64",
+      "version": "0.6.6-pyscenedetect-0.7.1-py312",
+      "pythonVersion": "3.12.14",
+      "platform": "darwin",
+      "architecture": "arm64",
+      "minimumOsVersion": "14.0",
+      "dependencyLockSha256": "774b30f7f04e3d78faf72f75fca0d0b5823f8244d751c6c10f9c97f45fd85521",
+      "workerDependencyLockSha256": "7b395d3286c1ce2012c5fb2507ad2a3ce4accb010dab69d3de2a973ed84b5041",
+      "materialInventorySha256": "505b5f9ad6b9d009bea1c5f4ab8d5b7b5fb6513277a11985d114fcbd2669730f",
+      "approvalPacketId": "worker-runtime-bundle-v1-sha256-7b37714f6dedaf9d6cf50e1a50fbe4806cad683bd1764297ae7f74e0f8c86cbc",
+      "archive": {
+        "relativePath": "runtime.tar",
+        "sha256": "722f685728dda79a7e1ea755d68dc48c9203c478981b85b7002472f34f2f4cd8",
+        "byteLength": 831129600
+      },
+      "manifest": {
+        "relativePath": "runtime-manifest.json",
+        "sha256": "45daf0a137a0a0c139b640059f231149bb0c4d88135d72bb3f2040657200a647",
+        "byteLength": 3387262
+      },
+      "packageInventory": {
+        "relativePath": "runtime-packages.json",
+        "sha256": "8728cde0a41e1a9a2a4362a41f2afe1d7b764421a37fb66746fdb45d8e9b12e0",
+        "byteLength": 39592
+      },
+      "derivationReceipt": {
+        "relativePath": "derivation-receipt.json",
+        "sha256": "00a2fc2157ad1120c48fa03977341b22ee974ac66f0f3f46f548a9fe4c787a52",
+        "byteLength": 2958
+      },
+      "treeSha256": "83e3bf8f96824226f3fd4a65320313472f2e5fb29e39bedb6861ffe45e05fd9f",
+      "licenseReview": "approved",
+      "enabled": true,
+      "approved": true,
+      "approvedBy": "wumuze",
+      "approvedAt": "2026-09-28T07:18:38Z",
+      "probe": {
+        "receiptPath": "runtime/probes/mlx-vlm-worker-runtime-0.6.6-pyscenedetect-0.7.1-py312-darwin-arm64.json",
+        "receiptSha256": "604c008d03f008821cfd174fcb87aa1be3088dc125e8d9dfc42db32b675b146c",
+        "runtimeTreeSha256": "83e3bf8f96824226f3fd4a65320313472f2e5fb29e39bedb6861ffe45e05fd9f",
+        "modelSha256": "fcab0d97620da9e03cc12a6fc07e6a390ca34aef13c1d7519236096dfd0b839b",
+        "promptVersion": "studio-qwen3-vl-zh-json-v5",
+        "inputSha256": "1ca0727bf07eb75b2d54a7060fb06b7e86afca54cdb763f47883d292b89b873a"
+      }
+    }
+  ]
+}

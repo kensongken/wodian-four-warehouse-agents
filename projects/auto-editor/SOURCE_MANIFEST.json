@@ -1,0 +1,15 @@
+{
+  "publication_date": "2026-11-23",
+  "project": "自动剪辑",
+  "source_versions": [
+    {
+      "component": "clip",
+      "branch": "feature/private-content-studio-mvp",
+      "head": "6bec79f0e9d347e2dc2d5d18ff926576804c98f4"
+    }
+  ],
+  "previous_shared_handoff_commit": "8d88bfecbbf85e34a02754891029c4e7c88498b6",
+  "scope": "Complete first-party source for the selected application versions; runtime/customer data, secrets, vendor binaries and unrelated private applications excluded.",
+  "working_tree_snapshot": true,
+  "note": "Source heads identify originating branches. Published files include the reviewed working-tree content at capture time; they are not asserted to equal HEAD byte-for-byte."
+}

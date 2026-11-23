@@ -1,0 +1,204 @@
+{
+  "$comment": "Structural schema only. No real SKU, customer data, image path, Mall Product ID, or Bead ID belongs in this artifact.",
+  "$defs": {
+    "PilotImageIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        },
+        "human_privacy_reviewed": {
+          "const": true,
+          "title": "Human Privacy Reviewed",
+          "type": "boolean"
+        },
+        "local_image_id": {
+          "format": "uuid",
+          "title": "Local Image Id",
+          "type": "string"
+        },
+        "position": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "primary",
+            "detail"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "local_image_id",
+        "role",
+        "position",
+        "captured_at",
+        "human_privacy_reviewed"
+      ],
+      "title": "PilotImageIntent",
+      "type": "object"
+    },
+    "ProductSourceType": {
+      "enum": [
+        "first_sale_bead",
+        "legacy_material",
+        "redesign_output"
+      ],
+      "title": "ProductSourceType",
+      "type": "string"
+    }
+  },
+  "$id": "urn:photo-organizer:opc-real-sku-pilot-intake:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "album_product_id": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+      "title": "Album Product Id",
+      "type": "string"
+    },
+    "authorization_basis": {
+      "const": "opc_self_owned_product_material",
+      "title": "Authorization Basis",
+      "type": "string"
+    },
+    "authorized_at": {
+      "format": "date-time",
+      "title": "Authorized At",
+      "type": "string"
+    },
+    "authorized_by": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+      "title": "Authorized By",
+      "type": "string"
+    },
+    "auto_publish": {
+      "const": false,
+      "title": "Auto Publish",
+      "type": "boolean"
+    },
+    "bead_id": {
+      "title": "Bead Id",
+      "type": "null"
+    },
+    "claims_not_evaluated": {
+      "maxItems": 4,
+      "minItems": 4,
+      "prefixItems": [
+        {
+          "const": "authenticity",
+          "type": "string"
+        },
+        {
+          "const": "origin",
+          "type": "string"
+        },
+        {
+          "const": "quality",
+          "type": "string"
+        },
+        {
+          "const": "warehouse_acceptance",
+          "type": "string"
+        }
+      ],
+      "title": "Claims Not Evaluated",
+      "type": "array"
+    },
+    "customer_data_present": {
+      "const": false,
+      "title": "Customer Data Present",
+      "type": "boolean"
+    },
+    "data_classification": {
+      "const": "opc_owned_product_material_no_customer_data",
+      "title": "Data Classification",
+      "type": "string"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/PilotImageIntent"
+      },
+      "maxItems": 4,
+      "minItems": 2,
+      "title": "Images",
+      "type": "array"
+    },
+    "mall_product_id": {
+      "title": "Mall Product Id",
+      "type": "null"
+    },
+    "material_owner": {
+      "const": "opc",
+      "title": "Material Owner",
+      "type": "string"
+    },
+    "opc_id": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "privacy_review_confirmed": {
+      "const": true,
+      "title": "Privacy Review Confirmed",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "opc-real-sku-pilot-intake/1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shared_market_opt_in": {
+      "const": false,
+      "title": "Shared Market Opt In",
+      "type": "boolean"
+    },
+    "source_type": {
+      "$ref": "#/$defs/ProductSourceType"
+    },
+    "target_chain": {
+      "const": "sellable_product_material",
+      "title": "Target Chain",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "opc_id",
+    "album_product_id",
+    "source_type",
+    "target_chain",
+    "data_classification",
+    "material_owner",
+    "authorization_basis",
+    "authorized_by",
+    "authorized_at",
+    "privacy_review_confirmed",
+    "customer_data_present",
+    "images",
+    "claims_not_evaluated",
+    "mall_product_id",
+    "bead_id",
+    "auto_publish",
+    "shared_market_opt_in"
+  ],
+  "title": "RealSkuPilotIntakeManifest",
+  "type": "object",
+  "x-semantic-validation": {
+    "command": "python scripts/prepare_opc_real_sku_pilot.py --manifest <manifest.json> --image <local_image_id=local_path>... --output <readiness.json> --check",
+    "required": true,
+    "stable_error": "receipt_stale"
+  }
+}

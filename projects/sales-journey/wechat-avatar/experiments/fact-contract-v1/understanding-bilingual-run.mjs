@@ -1,0 +1,17 @@
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';import {createHash} from 'node:crypto';import {LocalQwen,localOllamaJSON} from '../../lib/qwen-model.mjs';import {probeRequest,parseProbe,PROBE_SCHEMA} from './understanding-probe.mjs';
+const plan=JSON.parse(readFileSync(new URL('./understanding-bilingual-cases.json',import.meta.url))),dir=new URL('./evidence/understanding-bilingual-'+new Date().toISOString().replaceAll(':','-')+'/',import.meta.url);mkdirSync(dir);
+const hashes=Object.fromEntries(['understanding-bilingual-cases.json','understanding-bilingual-run.mjs','understanding-probe.mjs'].map(name=>[name,createHash('sha256').update(readFileSync(new URL('./'+name,import.meta.url))).digest('hex')]));
+const client=new LocalQwen({keepAlive:'120s',timeout:120000,post:(path,body,options)=>localOllamaJSON(path,path==='/api/chat'?{...body,format:PROBE_SCHEMA,options:{...body.options,num_ctx:4096}}:body,options)});
+const result={createdAt:new Date().toISOString(),model:client.modelName,plan,hashes,method:'Same frozen Chinese system question, identical native JSON schema and model/options. Only material language changes within author-translated pairs; input lengths differ naturally. One call per language, order alternates, no retries, all raw outputs retained. No customer state or release approval.',rows:[]};
+const save=()=>writeFileSync(new URL('results.json',dir),JSON.stringify(result,null,2));save();
+function score(rows,key){return{total:rows.length,correct:rows.filter(r=>r[key].answer===r.expected).length,invalid:rows.filter(r=>typeof r[key].answer!=='boolean').length,falsePositive:rows.filter(r=>!r.expected&&r[key].answer===true).length,falseNegative:rows.filter(r=>r.expected&&r[key].answer===false).length,failedIds:rows.filter(r=>r[key].answer!==r.expected).map(r=>r.id)};}
+try{
+ const ps=await fetch('http://127.0.0.1:11434/api/ps',{signal:AbortSignal.timeout(5000)}).then(r=>r.json());if(ps.models.some(m=>m.name!==client.modelName))throw Error('Another model is resident; stopped without disturbing it');
+ for(const [index,c]of plan.cases.entries()){
+  const row={...c,zh:{},en:{}};result.rows.push(row);save();
+  for(const language of index%2?['en','zh']:['zh','en']){const started=Date.now();try{row[language].raw=await client.complete(probeRequest(client.modelName,c[language],true));save();row[language].answer=parseProbe(row[language].raw,true);}catch(error){row[language].error=error.message;}row[language].wallMs=Date.now()-started;save();}
+  process.stdout.write(JSON.stringify({id:c.id,expected:c.expected,zh:row.zh.answer??'invalid',en:row.en.answer??'invalid'})+'\n');
+ }
+ result.summary={};for(const split of ['development','new','all']){const rows=result.rows.filter(r=>split==='all'||r.split===split);result.summary[split]={zh:score(rows,'zh'),en:score(rows,'en'),bothCorrect:rows.filter(r=>r.zh.answer===r.expected&&r.en.answer===r.expected).length,bothWrong:rows.filter(r=>typeof r.zh.answer==='boolean'&&typeof r.en.answer==='boolean'&&r.zh.answer!==r.expected&&r.en.answer!==r.expected).map(r=>r.id),disagree:rows.filter(r=>typeof r.zh.answer==='boolean'&&typeof r.en.answer==='boolean'&&r.zh.answer!==r.en.answer).map(r=>r.id)};}
+ result.productionAccepted=false;save();process.stdout.write(JSON.stringify({summary:result.summary,evidence:dir.href})+'\n');
+}catch(error){result.runError=error.message;save();throw error;}finally{client.close();}

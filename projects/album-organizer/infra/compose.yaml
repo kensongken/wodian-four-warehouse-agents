@@ -1,0 +1,137 @@
+x-backend: &backend
+  build:
+    context: ../services/backend
+  image: photo-organizer-backend:dev
+  environment:
+    APP_ENV: development
+    DATABASE_URL: postgresql://photo_organizer:photo_organizer@postgres:5432/photo_organizer
+    REDIS_URL: redis://redis:6379/0
+    S3_ENDPOINT_URL: http://minio:9000
+    S3_REGION: us-east-1
+    S3_BUCKET: photo-organizer-dev
+    S3_ACCESS_KEY_ID: minioadmin
+    S3_SECRET_ACCESS_KEY: minioadmin
+  networks:
+    - private
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: photo_organizer
+      POSTGRES_USER: photo_organizer
+      POSTGRES_PASSWORD: photo_organizer
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U photo_organizer -d photo_organizer"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+      MINIO_API_STALE_UPLOADS_EXPIRY: 24h
+      MINIO_API_STALE_UPLOADS_CLEANUP_INTERVAL: 1h
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio-init:
+    image: minio/mc:RELEASE.2025-04-16T18-13-26Z
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+      MINIO_BUCKET: photo-organizer-dev
+    volumes:
+      - ./minio/create-bucket.sh:/create-bucket.sh:ro
+    entrypoint: ["/bin/sh", "/create-bucket.sh"]
+    networks:
+      - private
+    restart: "no"
+
+  migrate:
+    <<: *backend
+    command: alembic upgrade head
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *backend
+    command: uvicorn photo_organizer.api.main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    ports:
+      - "8000:8000"
+
+  outbox-publisher:
+    <<: *backend
+    command: python -m photo_organizer.cli.outbox
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  classification-review-worker:
+    <<: *backend
+    command: python -m photo_organizer.cli.classification_review
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+networks:
+  private:
+    internal: true
+
+volumes:
+  postgres-data:
+  redis-data:
+  minio-data:

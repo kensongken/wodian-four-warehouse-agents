@@ -1,0 +1,84 @@
+{
+  "cases": [
+    {
+      "category": "regression",
+      "question": "店铺位置和到店时间能告诉我吗？",
+      "expectedIntent": "store_information"
+    },
+    {
+      "category": "regression",
+      "question": "送同事表示感谢，不想让她觉得欠人情。",
+      "expectedIntent": "gift_relationship"
+    },
+    {
+      "category": "regression",
+      "question": "我希望自己决定，你别再劝我买。",
+      "expectedIntent": "pause_sales"
+    },
+    {
+      "category": "regression",
+      "question": "我不想继续谈家里的事情，换个轻松的话题。",
+      "expectedIntent": "privacy"
+    },
+    {
+      "category": "regression",
+      "question": "可以现在替我把单子建好吗？",
+      "expectedIntent": "purchase_steps"
+    },
+    {
+      "category": "regression",
+      "question": "你这会儿是在店里还是外面？",
+      "expectedIntent": "owner_status"
+    },
+    {
+      "category": "regression",
+      "question": "今天心里乱，先听我说一会儿可以吗？",
+      "expectedIntent": "emotional_chat"
+    },
+    {
+      "category": "regression",
+      "question": "好看但不确定日常用不用得上，怎么判断？",
+      "expectedIntent": "idle_concern"
+    },
+    {
+      "category": "new",
+      "question": "能告诉我店铺位置和到店时间吗？",
+      "expectedIntent": "store_information"
+    },
+    {
+      "category": "new",
+      "question": "这回我希望自己决定，先不要推荐。",
+      "expectedIntent": "pause_sales"
+    },
+    {
+      "category": "new",
+      "question": "别再问我的家庭信息了，我不想继续说。",
+      "expectedIntent": "privacy"
+    },
+    {
+      "category": "new",
+      "question": "你女儿最近考试考得怎么样？",
+      "expectedIntent": "owner_status"
+    },
+    {
+      "category": "new",
+      "question": "给姐姐准备礼物怕显得刻意，怎么把握？",
+      "expectedIntent": "gift_relationship"
+    },
+    {
+      "category": "new",
+      "question": "能解释购买步骤吗，先别帮我操作。",
+      "expectedIntent": "purchase_steps"
+    },
+    {
+      "category": "new",
+      "question": "今天心里乱，先听我说一会好吗？",
+      "expectedIntent": "emotional_chat"
+    },
+    {
+      "category": "new",
+      "question": "不确定日常用不用得上，有什么判断方法？",
+      "expectedIntent": "idle_concern"
+    }
+  ]
+}

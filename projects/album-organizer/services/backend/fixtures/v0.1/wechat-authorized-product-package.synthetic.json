@@ -1,0 +1,17 @@
+{
+  "schema_version": "wechat-authorized-product-package/1.0",
+  "product_id": "synthetic-product-1",
+  "category": "synthetic-category",
+  "assets": [
+    {
+      "sha256": "ed71dbcf1633bd2635c7faa17aefdc4b488fce5e9ddd51643e6204ef4b2eef36",
+      "evidence_ref": "catalog/synthetic-product-1/original",
+      "facts": [
+        {
+          "fact": "synthetic-authorized-fact",
+          "evidence_ref": "catalog/synthetic-product-1/original"
+        }
+      ]
+    }
+  ]
+}

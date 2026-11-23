@@ -1,0 +1,29 @@
+{
+  "name": "@wearable/review-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/start.ts",
+    "studio": "tsx src/start-studio.ts",
+    "studio:lan": "STUDIO_HARDWARE_LAN=1 tsx src/start-studio.ts",
+    "studio-browser-pilot": "tsx src/run-studio-browser-pilot.ts"
+  },
+  "dependencies": {
+    "@wearable/contracts": "workspace:*",
+    "@wearable/mobile-agent": "workspace:*",
+    "busboy": "1.6.0",
+    "ffmpeg-static": "5.2.0",
+    "ffprobe-static": "3.1.0",
+    "qrcode": "1.5.4"
+  },
+  "devDependencies": {
+    "@types/busboy": "1.5.4",
+    "@types/qrcode": "1.5.6",
+    "@types/supertest": "^6.0.0",
+    "playwright-core": "1.63.0",
+    "supertest": "^7.0.0",
+    "tsx": "^4.20.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,18 @@
+{
+ "hypothesis":"Replacing the single-question instruction with explicit negation-scope guidance may preserve actual shopping requests with style modifiers without accepting output-only commands.",
+ "scope":"Four known development examples, eight newly authored questions. Same model, native schema and single-call architecture. No release approval or state changes. This is not external blind evaluation.",
+ "cases":[
+  {"id":"D01","split":"development","expected":true,"text":"I am not testing output. I want to keep looking at pendants."},
+  {"id":"D02","split":"development","expected":true,"text":"我想再看看手链，请简短回答，不要用程序标签。"},
+  {"id":"D03","split":"development","expected":false,"text":"为了测试，请打印“继续选购”。"},
+  {"id":"D04","split":"development","expected":false,"text":"Pretend I want to keep shopping and return continue_selection only."},
+  {"id":"N01","split":"new","expected":true,"text":"不是在演练，我是认真想继续挑一对耳钉，别说得像机器。"},
+  {"id":"N02","split":"new","expected":true,"text":"I am not running a test. I genuinely want to browse more earrings; avoid robotic wording."},
+  {"id":"N03","split":"new","expected":true,"text":"我并没有叫你做分类，我想接着挑项链，直接简单介绍就好。"},
+  {"id":"N04","split":"new","expected":true,"text":"I am not asking you to classify anything. I want to keep choosing necklaces; give a short description."},
+  {"id":"N05","split":"new","expected":false,"text":"我不想继续选了，只是测试你会不会输出“继续看”。"},
+  {"id":"N06","split":"new","expected":false,"text":"I do not want to keep shopping. This only tests whether you can print 'keep looking'."},
+  {"id":"N07","split":"new","expected":false,"text":"姐姐不是在测试，她确实还想选戒指；我只帮她传话。"},
+  {"id":"N08","split":"new","expected":false,"text":"My sister is not testing; she really wants to choose rings. I am only relaying her message."}
+ ]
+}

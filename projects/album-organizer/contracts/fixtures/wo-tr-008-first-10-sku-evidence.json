@@ -1,0 +1,1228 @@
+{
+  "data_classification": "synthetic_no_customer_data",
+  "delivery_boundary": "classification_review_only_no_auto_listing",
+  "evidence_id": "WO-TR-008-EV-001",
+  "schema_version": "wo-tr-008-controlled-import-evidence/1.0",
+  "skus": [
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000001",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-001",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "南红",
+            "level_2": "手串",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "a09f4c9f-f2c0-507f-a524-516eaf23549f",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000001",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-001",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "f74485c2-bfe9-5b90-aa05-edb6c2310759",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:01:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "event_id": "25d8e8e4-a984-5fa8-8ba0-c01421b50990",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000001",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:01:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "b8329d3d-ad77-557f-9c46-d7ae131ccbf3",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000001",
+        "candidate:a09f4c9f-f2c0-507f-a524-516eaf23549f",
+        "review:b8329d3d-ad77-557f-9c46-d7ae131ccbf3",
+        "confirmation:25d8e8e4-a984-5fa8-8ba0-c01421b50990"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000001",
+        "byte_size": 2001000,
+        "captured_at": "2026-08-16T07:01:00Z",
+        "imported_at": "2026-08-16T07:01:30Z",
+        "media_type": "image/jpeg",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003e9",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-01/original-30000000-0000-4000-8000-000000000001",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-001",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "南红",
+            "level_2": "手串",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "f74485c2-bfe9-5b90-aa05-edb6c2310759",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "南红",
+        "confirmed_level_2": "手串",
+        "created_at": "2026-08-16T10:31:00Z",
+        "decided_at": "2026-08-16T11:01:00Z",
+        "id": "b8329d3d-ad77-557f-9c46-d7ae131ccbf3",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "first_sale_bead",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:01:00Z"
+      },
+      "sku_id": "synthetic-sku-001",
+      "source_type": "first_sale_bead"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000003",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-002",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "沉香",
+            "level_2": "手串",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "369ee424-05f6-52fe-a86c-584948d6c08e",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000002",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-002",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "653b7e7c-7ccc-5fd6-895d-6bf8b97bb9f5",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:02:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "沉香",
+        "confirmed_level_2": "手串",
+        "event_id": "cbdd0d00-4843-5fd8-bf8c-a3fdfc6db1ef",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000002",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:02:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "92ca895e-9b8d-5224-aba1-dc18f2b33cd9",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000003",
+        "candidate:369ee424-05f6-52fe-a86c-584948d6c08e",
+        "review:92ca895e-9b8d-5224-aba1-dc18f2b33cd9",
+        "confirmation:cbdd0d00-4843-5fd8-bf8c-a3fdfc6db1ef"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000003",
+        "byte_size": 2002000,
+        "captured_at": "2026-08-16T07:02:00Z",
+        "imported_at": "2026-08-16T07:02:30Z",
+        "media_type": "image/jpeg",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003eb",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-02/original-30000000-0000-4000-8000-000000000003",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-002",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "沉香",
+            "level_2": "手串",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "653b7e7c-7ccc-5fd6-895d-6bf8b97bb9f5",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "沉香",
+        "confirmed_level_2": "手串",
+        "created_at": "2026-08-16T10:32:00Z",
+        "decided_at": "2026-08-16T11:02:00Z",
+        "id": "92ca895e-9b8d-5224-aba1-dc18f2b33cd9",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "first_sale_bead",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:02:00Z"
+      },
+      "sku_id": "synthetic-sku-002",
+      "source_type": "first_sale_bead"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000005",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-003",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "翡翠",
+            "level_2": "吊坠",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "f8307d44-8dcc-57b4-b584-7ada61e72f35",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000003",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-003",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "cfe78e03-b1fe-5b5e-b554-3a305db2f343",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:03:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "翡翠",
+        "confirmed_level_2": "吊坠",
+        "event_id": "1c9b08be-c91d-562b-9572-ff5dc8d3d78a",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000003",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:03:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "63904c80-c7c9-5d3a-b062-6d83c0e8cb65",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000005",
+        "candidate:f8307d44-8dcc-57b4-b584-7ada61e72f35",
+        "review:63904c80-c7c9-5d3a-b062-6d83c0e8cb65",
+        "confirmation:1c9b08be-c91d-562b-9572-ff5dc8d3d78a"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000005",
+        "byte_size": 2003000,
+        "captured_at": "2026-08-16T07:03:00Z",
+        "imported_at": "2026-08-16T07:03:30Z",
+        "media_type": "image/png",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003ed",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-03/original-30000000-0000-4000-8000-000000000005",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-003",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "翡翠",
+            "level_2": "吊坠",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "cfe78e03-b1fe-5b5e-b554-3a305db2f343",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "翡翠",
+        "confirmed_level_2": "吊坠",
+        "created_at": "2026-08-16T10:33:00Z",
+        "decided_at": "2026-08-16T11:03:00Z",
+        "id": "63904c80-c7c9-5d3a-b062-6d83c0e8cb65",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "first_sale_bead",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:03:00Z"
+      },
+      "sku_id": "synthetic-sku-003",
+      "source_type": "first_sale_bead"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000007",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-004",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "和田玉",
+            "level_2": "手镯",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "bac31a75-bab9-57ed-93dc-55d7cc34e57b",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000004",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-004",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "f8b09311-9054-5b40-9b70-a99e49581d3f",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:04:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "和田玉",
+        "confirmed_level_2": "手镯",
+        "event_id": "25882984-bf31-5955-adf6-4981b8a166be",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000004",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:04:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "d9b61fc4-3aa1-538a-a5c2-e71b057dd809",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000007",
+        "candidate:bac31a75-bab9-57ed-93dc-55d7cc34e57b",
+        "review:d9b61fc4-3aa1-538a-a5c2-e71b057dd809",
+        "confirmation:25882984-bf31-5955-adf6-4981b8a166be"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000007",
+        "byte_size": 2004000,
+        "captured_at": "2026-08-16T07:04:00Z",
+        "imported_at": "2026-08-16T07:04:30Z",
+        "media_type": "image/heic",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003ef",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-04/original-30000000-0000-4000-8000-000000000007",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-004",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "和田玉",
+            "level_2": "手镯",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "f8b09311-9054-5b40-9b70-a99e49581d3f",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "和田玉",
+        "confirmed_level_2": "手镯",
+        "created_at": "2026-08-16T10:34:00Z",
+        "decided_at": "2026-08-16T11:04:00Z",
+        "id": "d9b61fc4-3aa1-538a-a5c2-e71b057dd809",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "first_sale_bead",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:04:00Z"
+      },
+      "sku_id": "synthetic-sku-004",
+      "source_type": "first_sale_bead"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000009",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-005",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "蜜蜡",
+            "level_2": "项链",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "6aae6e05-2160-5420-ac68-5316c830f47c",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000005",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-005",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "9abbe930-3ee0-5275-9d8a-7558f2de9687",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:05:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "蜜蜡",
+        "confirmed_level_2": "项链",
+        "event_id": "7ef86778-0746-576b-9e92-2ae2f73dcfdd",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000005",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:05:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "0e4f407d-ed61-5421-adad-3ce57ebbd243",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000009",
+        "candidate:6aae6e05-2160-5420-ac68-5316c830f47c",
+        "review:0e4f407d-ed61-5421-adad-3ce57ebbd243",
+        "confirmation:7ef86778-0746-576b-9e92-2ae2f73dcfdd"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000009",
+        "byte_size": 2005000,
+        "captured_at": "2026-08-16T07:05:00Z",
+        "imported_at": "2026-08-16T07:05:30Z",
+        "media_type": "image/jpeg",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003f1",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-05/original-30000000-0000-4000-8000-000000000009",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-005",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "蜜蜡",
+            "level_2": "项链",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "9abbe930-3ee0-5275-9d8a-7558f2de9687",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "蜜蜡",
+        "confirmed_level_2": "项链",
+        "created_at": "2026-08-16T10:35:00Z",
+        "decided_at": "2026-08-16T11:05:00Z",
+        "id": "0e4f407d-ed61-5421-adad-3ce57ebbd243",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "first_sale_bead",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:05:00Z"
+      },
+      "sku_id": "synthetic-sku-005",
+      "source_type": "first_sale_bead"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000011",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-006",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "珍珠",
+            "level_2": "耳饰",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "8a300daa-54f3-56ef-9601-5267b614aaf8",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000006",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-006",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "e30d3eba-41d4-5b2a-8c88-dd9d2f851320",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:06:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "珍珠",
+        "confirmed_level_2": "耳饰",
+        "event_id": "88416513-6322-5b8a-bb4a-2217bb27a391",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000006",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:06:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "0a908c14-2837-56f4-842e-7b5a0dfa6c4d",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "first_sale_bead"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000011",
+        "candidate:8a300daa-54f3-56ef-9601-5267b614aaf8",
+        "review:0a908c14-2837-56f4-842e-7b5a0dfa6c4d",
+        "confirmation:88416513-6322-5b8a-bb4a-2217bb27a391"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000011",
+        "byte_size": 2006000,
+        "captured_at": "2026-08-16T07:06:00Z",
+        "imported_at": "2026-08-16T07:06:30Z",
+        "media_type": "image/png",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003f3",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-06/original-30000000-0000-4000-8000-000000000011",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-006",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "珍珠",
+            "level_2": "耳饰",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "e30d3eba-41d4-5b2a-8c88-dd9d2f851320",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "珍珠",
+        "confirmed_level_2": "耳饰",
+        "created_at": "2026-08-16T10:36:00Z",
+        "decided_at": "2026-08-16T11:06:00Z",
+        "id": "0a908c14-2837-56f4-842e-7b5a0dfa6c4d",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "first_sale_bead",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:06:00Z"
+      },
+      "sku_id": "synthetic-sku-006",
+      "source_type": "first_sale_bead"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000013",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-007",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "水晶",
+            "level_2": "摆件",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "28a41b5f-2cad-5d3b-85ea-4a5971bc665d",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000007",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "legacy_material"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-007",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "cafc2efb-0cf0-563b-a02e-21d48ec50dc0",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:07:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "水晶",
+        "confirmed_level_2": "摆件",
+        "event_id": "c65f1809-09c9-58c9-9bb4-6047e4e72014",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000007",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:07:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "49fb7e1d-90ea-5697-bd98-a2d3dd81fa21",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "legacy_material"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000013",
+        "candidate:28a41b5f-2cad-5d3b-85ea-4a5971bc665d",
+        "review:49fb7e1d-90ea-5697-bd98-a2d3dd81fa21",
+        "confirmation:c65f1809-09c9-58c9-9bb4-6047e4e72014"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000013",
+        "byte_size": 2007000,
+        "captured_at": "2026-08-16T07:07:00Z",
+        "imported_at": "2026-08-16T07:07:30Z",
+        "media_type": "image/jpeg",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003f5",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-07/original-30000000-0000-4000-8000-000000000013",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-007",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "水晶",
+            "level_2": "摆件",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "cafc2efb-0cf0-563b-a02e-21d48ec50dc0",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "水晶",
+        "confirmed_level_2": "摆件",
+        "created_at": "2026-08-16T10:37:00Z",
+        "decided_at": "2026-08-16T11:07:00Z",
+        "id": "49fb7e1d-90ea-5697-bd98-a2d3dd81fa21",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "legacy_material",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:07:00Z"
+      },
+      "sku_id": "synthetic-sku-007",
+      "source_type": "legacy_material"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000015",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-008",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "彩宝",
+            "level_2": "戒指",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "1b9e3fb4-1bf9-5815-8bc3-c954d1d55be6",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000008",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "legacy_material"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-008",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "6c8c0900-9f83-5404-bc78-ad5a2ef8a8bd",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:08:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "彩宝",
+        "confirmed_level_2": "戒指",
+        "event_id": "f3b164f1-9850-5a31-a7a3-cc06d5e4e9df",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000008",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:08:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "e5207295-0f70-5fae-962b-b995324853a4",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "legacy_material"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000015",
+        "candidate:1b9e3fb4-1bf9-5815-8bc3-c954d1d55be6",
+        "review:e5207295-0f70-5fae-962b-b995324853a4",
+        "confirmation:f3b164f1-9850-5a31-a7a3-cc06d5e4e9df"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000015",
+        "byte_size": 2008000,
+        "captured_at": "2026-08-16T07:08:00Z",
+        "imported_at": "2026-08-16T07:08:30Z",
+        "media_type": "image/heic",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003f7",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-08/original-30000000-0000-4000-8000-000000000015",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-008",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "彩宝",
+            "level_2": "戒指",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "6c8c0900-9f83-5404-bc78-ad5a2ef8a8bd",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "彩宝",
+        "confirmed_level_2": "戒指",
+        "created_at": "2026-08-16T10:38:00Z",
+        "decided_at": "2026-08-16T11:08:00Z",
+        "id": "e5207295-0f70-5fae-962b-b995324853a4",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "legacy_material",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:08:00Z"
+      },
+      "sku_id": "synthetic-sku-008",
+      "source_type": "legacy_material"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000017",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-009",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "贵金属",
+            "level_2": "配件",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "d1324b1b-6027-5d04-afd2-6f8345264784",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000009",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "redesign_output"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-009",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "0ff5bec3-3dcb-55d0-962f-b709d97dc7bd",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:09:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "贵金属",
+        "confirmed_level_2": "配件",
+        "event_id": "97122ec7-df0c-5620-91ec-5d4fe671fd27",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000009",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:09:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "19de8039-2d46-53e8-9a56-5a5daff1c829",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "redesign_output"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000017",
+        "candidate:d1324b1b-6027-5d04-afd2-6f8345264784",
+        "review:19de8039-2d46-53e8-9a56-5a5daff1c829",
+        "confirmation:97122ec7-df0c-5620-91ec-5d4fe671fd27"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000017",
+        "byte_size": 2009000,
+        "captured_at": "2026-08-16T07:09:00Z",
+        "imported_at": "2026-08-16T07:09:30Z",
+        "media_type": "image/png",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003f9",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-09/original-30000000-0000-4000-8000-000000000017",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-009",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "贵金属",
+            "level_2": "配件",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "0ff5bec3-3dcb-55d0-962f-b709d97dc7bd",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "贵金属",
+        "confirmed_level_2": "配件",
+        "created_at": "2026-08-16T10:39:00Z",
+        "decided_at": "2026-08-16T11:09:00Z",
+        "id": "19de8039-2d46-53e8-9a56-5a5daff1c829",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "redesign_output",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:09:00Z"
+      },
+      "sku_id": "synthetic-sku-009",
+      "source_type": "redesign_output"
+    },
+    {
+      "asset_id": "30000000-0000-4000-8000-000000000019",
+      "candidate_event": {
+        "album_product_id": "album-product-synthetic-010",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "其他",
+            "level_2": "珠子/散珠",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_version": 1,
+        "engine": {
+          "name": "fixture-categorizer",
+          "version": "1.0"
+        },
+        "event_id": "002ca7a4-6efa-59f3-bb7d-725be3cb37ae",
+        "event_type": "album.product.classification.candidate.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000010",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T10:30:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_status": "requires_review",
+        "schema_version": "album-product-classification/1.0",
+        "source_type": "redesign_output"
+      },
+      "confirmation_event": {
+        "album_product_id": "album-product-synthetic-010",
+        "bead_id": null,
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "a08c903f-ae68-533d-8b30-ec3ecec25223",
+        "classification_version": 1,
+        "confirmed_at": "2026-08-16T11:10:00Z",
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "其他",
+        "confirmed_level_2": "珠子/散珠",
+        "event_id": "50f09108-faa4-5c97-97f3-42b76ad79b9f",
+        "event_type": "album.product.classification.confirmed.v1",
+        "input_event_id": "20000000-0000-4000-8000-000000000010",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "occurred_at": "2026-08-16T11:10:00Z",
+        "opc_id": "synthetic-opc-001",
+        "review_id": "188aa5c0-b6e9-5bce-937a-fe3b8f0a2db5",
+        "schema_version": "album-product-classification-confirmed/1.0",
+        "source_type": "redesign_output"
+      },
+      "evidence_refs": [
+        "asset:30000000-0000-4000-8000-000000000019",
+        "candidate:002ca7a4-6efa-59f3-bb7d-725be3cb37ae",
+        "review:188aa5c0-b6e9-5bce-937a-fe3b8f0a2db5",
+        "confirmation:50f09108-faa4-5c97-97f3-42b76ad79b9f"
+      ],
+      "image_evidence": {
+        "asset_id": "30000000-0000-4000-8000-000000000019",
+        "byte_size": 2010000,
+        "captured_at": "2026-08-16T07:10:00Z",
+        "imported_at": "2026-08-16T07:10:30Z",
+        "media_type": "image/jpeg",
+        "role": "original",
+        "sha256": "00000000000000000000000000000000000000000000000000000000000003fb",
+        "source_asset_id": null,
+        "storage_ref": "evidence/synthetic-opc-001/fixtures/sku-10/original-30000000-0000-4000-8000-000000000019",
+        "transform": null
+      },
+      "import_version": 1,
+      "opc_workspace_id": "synthetic-opc-001",
+      "review_record": {
+        "album_product_id": "album-product-synthetic-010",
+        "bead_id": null,
+        "candidates": [
+          {
+            "confidence": 0.91,
+            "level_1": "其他",
+            "level_2": "珠子/散珠",
+            "rank": 1,
+            "reason_codes": [
+              "seed_match"
+            ]
+          }
+        ],
+        "claims_not_evaluated": [
+          "authenticity",
+          "origin",
+          "quality",
+          "warehouse_acceptance"
+        ],
+        "classification_id": "a08c903f-ae68-533d-8b30-ec3ecec25223",
+        "classification_version": 1,
+        "confirmed_by": "user:00000000-0000-4000-8000-000000000001",
+        "confirmed_level_1": "其他",
+        "confirmed_level_2": "珠子/散珠",
+        "created_at": "2026-08-16T10:40:00Z",
+        "decided_at": "2026-08-16T11:10:00Z",
+        "id": "188aa5c0-b6e9-5bce-937a-fe3b8f0a2db5",
+        "input_snapshot_version": 1,
+        "mall_product_id": null,
+        "opc_id": "synthetic-opc-001",
+        "source_type": "redesign_output",
+        "status": "resolved",
+        "updated_at": "2026-08-16T11:10:00Z"
+      },
+      "sku_id": "synthetic-sku-010",
+      "source_type": "redesign_output"
+    }
+  ]
+}

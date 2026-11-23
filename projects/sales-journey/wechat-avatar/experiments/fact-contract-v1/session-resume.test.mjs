@@ -1,0 +1,30 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createSandbox} from './sandbox-server.mjs';
+async function fixture(t,extract=async()=>({choices:[{message:{content:'{"items":[{"field":"budget","value":1000,"quote":"预算1000以内"}]}'}}]})){
+ let routes=0;const app=createSandbox({completeExtraction:extract,completeIntent:async()=>{routes++;throw Error('Unexpected inference');},completeRouting:async()=>{routes++;throw Error('Unexpected inference');}});await new Promise(r=>app.server.listen(0,'127.0.0.1',r));t.after(()=>app.close());const origin=`http://127.0.0.1:${app.server.address().port}`,post=async(path,body)=>{const r=await fetch(origin+path,{method:'POST',headers:{Origin:origin,'Content-Type':'application/json','X-Sandbox':'1'},body:JSON.stringify(body)});return{status:r.status,data:await r.json()};};const sessionId=(await post('/api/session',{})).data.sessionId;return{post,sessionId,routes:()=>routes};
+}
+async function full(f){await f.post('/api/service',{sessionId:f.sessionId,expectedRevision:0,confirmed:true,patch:{recipient:'mother',category:'necklace',occasion:'birthday',budget:1500,style:'simple'}});await f.post('/api/service-preview',{sessionId:f.sessionId,tone:'professional'});const q=(await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'message',text:'继续'}})).data;return(await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'choice',token:q.clarification.token,action:'continue_selection'}})).data;}
+test('resume preserves confirmed needs, revision and tone, pauses, invalidates review and clears demo stock',async t=>{
+ const f=await fixture(t),done=await full(f);await f.post('/api/stock',{sessionId:f.sessionId,mode:'available'});const r=await f.post('/api/session-resume',{sessionId:f.sessionId});assert.equal(r.status,200);assert.deepEqual(r.data.selection.needs,done.selection.needs);assert.equal(r.data.selection.revision,done.selection.revision);assert.equal(r.data.selection.tone,'professional');assert.equal(r.data.selection.temporaryIntent.paused,true);assert.equal(r.data.selection.temporaryIntent.source,'simulation_resume_guard');assert.equal(r.data.historyRestored,false);assert.equal(r.data.discardedPending,true);assert.equal(r.data.modelCalls,0);
+ assert.equal((await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'edit_start',token:done.review.token,field:'budget'}})).status,400);assert.deepEqual((await f.post('/api/session-resume',{sessionId:f.sessionId})).data.selection.needs,done.selection.needs);assert.equal(f.routes(),0);
+});
+test('partial progress resumes only missing fields and rejects the old answer token',async t=>{
+ const f=await fixture(t);let q=(await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'message',text:'看看'}})).data;q=(await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'choice',token:q.clarification.token,action:'continue_selection'}})).data;q=(await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'need_choice',token:q.clarification.token,field:'recipient',value:'self'}})).data;const old=q.clarification.token;
+ await f.post('/api/session-resume',{sessionId:f.sessionId});assert.equal((await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'need_choice',token:old,field:'category',value:'ring'}})).status,400);
+ q=(await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'message',text:'接着选'}})).data;q=(await f.post('/api/guided-selection',{sessionId:f.sessionId,event:{type:'choice',token:q.clarification.token,action:'continue_selection'}})).data;assert.equal(q.choices[0].field,'category');assert.equal(q.selection.needs.recipient,'self');
+});
+test('resume discards unapproved draft without applying it',async t=>{
+ const f=await fixture(t),done=await full(f),draft=(await f.post('/api/customer-edit',{sessionId:f.sessionId,token:done.review.token,source:'预算1000以内'})).data;
+ const resumed=(await f.post('/api/session-resume',{sessionId:f.sessionId})).data;assert.equal(resumed.selection.needs.budget,1500);assert.equal((await f.post('/api/customer-edit-confirm',{sessionId:f.sessionId,draftId:draft.draft.id,fields:['budget'],confirmed:true})).status,400);
+});
+test('resume revokes retry permits as well as old confirmation context',async t=>{
+ const f=await fixture(t,async()=>{throw Error('offline');}),done=await full(f),failed=(await f.post('/api/customer-edit',{sessionId:f.sessionId,token:done.review.token,source:'预算1000以内'})).data;
+ await f.post('/api/session-resume',{sessionId:f.sessionId});assert.equal((await f.post('/api/customer-edit-retry',{sessionId:f.sessionId,retryToken:failed.retry.token,source:'预算1000以内'})).status,400);
+});
+test('busy resume returns conflict without cancelling pending generation',async t=>{
+ let release,started;const signal=new Promise(r=>started=r),f=await fixture(t,async()=>{started();return new Promise(r=>release=()=>r({choices:[{message:{content:'{"items":[{"field":"budget","value":1000,"quote":"预算1000以内"}]}'}}]}));}),done=await full(f);
+ const pending=f.post('/api/customer-edit',{sessionId:f.sessionId,token:done.review.token,source:'预算1000以内'});await signal;assert.equal((await f.post('/api/session-resume',{sessionId:f.sessionId})).status,409);release();const d=(await pending).data;assert.equal((await f.post('/api/customer-edit-confirm',{sessionId:f.sessionId,draftId:d.draft.id,fields:['budget'],confirmed:true})).status,200);
+});
+test('invalid resume is nonmutating; a fresh backend cannot resurrect an old session',async t=>{
+ const f=await fixture(t),done=await full(f);assert.equal((await f.post('/api/session-resume',{sessionId:f.sessionId,patch:{budget:1}})).status,400);assert.deepEqual((await f.post('/api/service-preview',{sessionId:f.sessionId})).data.needs,done.selection.needs);
+ const other=await fixture(t);assert.equal((await other.post('/api/session-resume',{sessionId:f.sessionId})).status,404);const r=(await other.post('/api/session-resume',{sessionId:other.sessionId})).data;assert.equal(r.selection.needs.budget,null);assert.notEqual(r.sessionId,f.sessionId);
+});

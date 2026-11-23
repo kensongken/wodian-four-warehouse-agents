@@ -1,0 +1,471 @@
+{
+  "$comment": "Structural schema only. Consumers MUST run the required semantic validator to verify derived identities, evidence links, and paths.",
+  "$defs": {
+    "Level1Category": {
+      "enum": [
+        "南红",
+        "沉香",
+        "翡翠",
+        "和田玉",
+        "蜜蜡",
+        "珍珠",
+        "水晶",
+        "彩宝",
+        "贵金属",
+        "其他",
+        "无法判断"
+      ],
+      "title": "Level1Category",
+      "type": "string"
+    },
+    "Level2Category": {
+      "enum": [
+        "手串",
+        "项链",
+        "吊坠",
+        "挂件",
+        "戒指",
+        "耳饰",
+        "手镯",
+        "珠子/散珠",
+        "摆件",
+        "配件",
+        "其他",
+        "无法判断"
+      ],
+      "title": "Level2Category",
+      "type": "string"
+    },
+    "MallDraftClassification": {
+      "additionalProperties": false,
+      "properties": {
+        "classification_id": {
+          "format": "uuid",
+          "title": "Classification Id",
+          "type": "string"
+        },
+        "classification_version": {
+          "minimum": 1,
+          "title": "Classification Version",
+          "type": "integer"
+        },
+        "confirmed_at": {
+          "format": "date-time",
+          "title": "Confirmed At",
+          "type": "string"
+        },
+        "confirmed_by": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Confirmed By",
+          "type": "string"
+        },
+        "confirmed_level_1": {
+          "$ref": "#/$defs/Level1Category"
+        },
+        "confirmed_level_2": {
+          "$ref": "#/$defs/Level2Category"
+        },
+        "review_id": {
+          "format": "uuid",
+          "title": "Review Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "classification_id",
+        "review_id",
+        "classification_version",
+        "confirmed_level_1",
+        "confirmed_level_2",
+        "confirmed_by",
+        "confirmed_at"
+      ],
+      "title": "MallDraftClassification",
+      "type": "object"
+    },
+    "PackageFileDigest": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_size": {
+          "exclusiveMinimum": 0,
+          "title": "Byte Size",
+          "type": "integer"
+        },
+        "media_type": {
+          "const": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "package_path": {
+          "maxLength": 37,
+          "minLength": 37,
+          "pattern": "^export-[0-9a-f]{16}/products\\.xlsx$",
+          "title": "Package Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "package_path",
+        "sha256",
+        "byte_size",
+        "media_type"
+      ],
+      "title": "PackageFileDigest",
+      "type": "object"
+    },
+    "PackagedImageEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "format": "uuid",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "byte_size": {
+          "exclusiveMinimum": 0,
+          "maximum": 104857600,
+          "title": "Byte Size",
+          "type": "integer"
+        },
+        "captured_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Captured At"
+        },
+        "download_confirmation_event_id": {
+          "format": "uuid",
+          "title": "Download Confirmation Event Id",
+          "type": "string"
+        },
+        "evidence_asset_id": {
+          "format": "uuid",
+          "title": "Evidence Asset Id",
+          "type": "string"
+        },
+        "imported_at": {
+          "format": "date-time",
+          "title": "Imported At",
+          "type": "string"
+        },
+        "media_type": {
+          "enum": [
+            "image/jpeg",
+            "image/png",
+            "image/heic",
+            "image/heif"
+          ],
+          "title": "Media Type",
+          "type": "string"
+        },
+        "package_path": {
+          "maxLength": 63,
+          "minLength": 60,
+          "pattern": "^export-[0-9a-f]{16}/images/album-[0-9a-f]{16}/(?:main|0[2-4])\\.(?:jpg|png|heic|heif)$",
+          "title": "Package Path",
+          "type": "string"
+        },
+        "role": {
+          "const": "original",
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "storage_ref": {
+          "maxLength": 54,
+          "minLength": 54,
+          "pattern": "^evidence/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/original$",
+          "title": "Storage Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "package_path",
+        "asset_id",
+        "evidence_asset_id",
+        "role",
+        "sha256",
+        "byte_size",
+        "media_type",
+        "captured_at",
+        "imported_at",
+        "storage_ref",
+        "download_confirmation_event_id"
+      ],
+      "title": "PackagedImageEvidence",
+      "type": "object"
+    },
+    "ProductSourceType": {
+      "enum": [
+        "first_sale_bead",
+        "legacy_material",
+        "redesign_output"
+      ],
+      "title": "ProductSourceType",
+      "type": "string"
+    },
+    "StandardPackageProduct": {
+      "additionalProperties": false,
+      "properties": {
+        "auto_publish": {
+          "const": false,
+          "title": "Auto Publish",
+          "type": "boolean"
+        },
+        "bead_id": {
+          "title": "Bead Id",
+          "type": "null"
+        },
+        "claims_not_evaluated": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "const": "authenticity",
+              "type": "string"
+            },
+            {
+              "const": "origin",
+              "type": "string"
+            },
+            {
+              "const": "quality",
+              "type": "string"
+            },
+            {
+              "const": "warehouse_acceptance",
+              "type": "string"
+            }
+          ],
+          "title": "Claims Not Evaluated",
+          "type": "array"
+        },
+        "classification": {
+          "$ref": "#/$defs/MallDraftClassification"
+        },
+        "draft_request_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Draft Request Id",
+          "type": "string"
+        },
+        "images": {
+          "items": {
+            "$ref": "#/$defs/PackagedImageEvidence"
+          },
+          "maxItems": 4,
+          "minItems": 2,
+          "title": "Images",
+          "type": "array"
+        },
+        "mall_product_id": {
+          "title": "Mall Product Id",
+          "type": "null"
+        },
+        "publication_state": {
+          "const": "draft",
+          "title": "Publication State",
+          "type": "string"
+        },
+        "required_business_fields": {
+          "maxItems": 7,
+          "minItems": 7,
+          "prefixItems": [
+            {
+              "const": "title",
+              "type": "string"
+            },
+            {
+              "const": "selling_points",
+              "type": "string"
+            },
+            {
+              "const": "price",
+              "type": "string"
+            },
+            {
+              "const": "inventory",
+              "type": "string"
+            },
+            {
+              "const": "sku",
+              "type": "string"
+            },
+            {
+              "const": "customization",
+              "type": "string"
+            },
+            {
+              "const": "origin_evidence",
+              "type": "string"
+            }
+          ],
+          "title": "Required Business Fields",
+          "type": "array"
+        },
+        "shared_market_opt_in": {
+          "const": false,
+          "title": "Shared Market Opt In",
+          "type": "boolean"
+        },
+        "source_acceptance_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Source Acceptance Id",
+          "type": "string"
+        },
+        "source_album_product_id": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+          "title": "Source Album Product Id",
+          "type": "string"
+        },
+        "source_group_confirmation_event_id": {
+          "format": "uuid",
+          "title": "Source Group Confirmation Event Id",
+          "type": "string"
+        },
+        "source_snapshot_version": {
+          "minimum": 1,
+          "title": "Source Snapshot Version",
+          "type": "integer"
+        },
+        "source_type": {
+          "$ref": "#/$defs/ProductSourceType"
+        }
+      },
+      "required": [
+        "draft_request_id",
+        "source_acceptance_id",
+        "source_group_confirmation_event_id",
+        "source_album_product_id",
+        "source_snapshot_version",
+        "source_type",
+        "classification",
+        "images",
+        "required_business_fields",
+        "claims_not_evaluated",
+        "mall_product_id",
+        "bead_id",
+        "publication_state",
+        "auto_publish",
+        "shared_market_opt_in"
+      ],
+      "title": "StandardPackageProduct",
+      "type": "object"
+    }
+  },
+  "$id": "urn:photo-organizer:opc-standard-product-package:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "auto_publish": {
+      "const": false,
+      "title": "Auto Publish",
+      "type": "boolean"
+    },
+    "data_classification": {
+      "enum": [
+        "synthetic_no_customer_data",
+        "opc_owned_product_material_no_customer_data"
+      ],
+      "title": "Data Classification",
+      "type": "string"
+    },
+    "existing_product_policy": {
+      "const": "emit_change_proposal_do_not_overwrite",
+      "title": "Existing Product Policy",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/StandardPackageProduct"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    },
+    "opc_id": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]+$",
+      "title": "Opc Id",
+      "type": "string"
+    },
+    "operation": {
+      "const": "create_draft_only",
+      "title": "Operation",
+      "type": "string"
+    },
+    "package_id": {
+      "pattern": "^standard-product-package:[0-9a-f]{64}$",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "products_xlsx": {
+      "$ref": "#/$defs/PackageFileDigest"
+    },
+    "root_directory": {
+      "pattern": "^export-[0-9a-f]{16}$",
+      "title": "Root Directory",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "opc-standard-product-package/1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shared_market_opt_in": {
+      "const": false,
+      "title": "Shared Market Opt In",
+      "type": "boolean"
+    },
+    "source_batch_id": {
+      "pattern": "^mall-draft-batch:[0-9a-f]{64}$",
+      "title": "Source Batch Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "package_id",
+    "source_batch_id",
+    "opc_id",
+    "data_classification",
+    "root_directory",
+    "operation",
+    "existing_product_policy",
+    "auto_publish",
+    "shared_market_opt_in",
+    "products_xlsx",
+    "items"
+  ],
+  "title": "StandardProductPackageManifest",
+  "type": "object",
+  "x-semantic-validation": {
+    "command": "python scripts/export_standard_product_package.py --verify-manifest <manifest.json>",
+    "required": true,
+    "stable_error": "unsafe_manifest"
+  }
+}

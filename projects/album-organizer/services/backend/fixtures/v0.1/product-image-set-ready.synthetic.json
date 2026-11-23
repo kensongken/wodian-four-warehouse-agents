@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "fa2ee0c2-d145-5e1b-b304-91a731e145c5",
+  "occurred_at": "2026-08-30T08:00:00Z",
+  "tenant_id": "22222222-2222-4222-8222-222222222222",
+  "source_task_id": "33333333-3333-4333-8333-333333333333",
+  "product_code": "SYNTHETIC-001",
+  "category": "南红",
+  "form": "手串",
+  "classification_confidence": 0.8,
+  "images": [
+    {
+      "asset_id": "44444444-4444-4444-8444-444444444444",
+      "object_key": "tenants/22222222-2222-4222-8222-222222222222/products/SYNTHETIC-001/main.png",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "mime_type": "image/png",
+      "kind": "original",
+      "role": "main_candidate",
+      "quality_confidence": 0.9
+    }
+  ]
+}

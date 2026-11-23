@@ -1,0 +1,1 @@
+"""Photo Organizer backend package."""

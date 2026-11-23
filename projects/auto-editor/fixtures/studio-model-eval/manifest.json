@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "boundary": "synthetic-desensitized-only",
+  "providerEvidence": "fixture/synthetic",
+  "cases": [
+    {
+      "id": "synthetic-case-a",
+      "sourcePath": "synthetic-case-a.json",
+      "sourceDigest": "7613aec435250a23f8b61b5fc23c28caf3984417fcfb5baf30ae1b17cc0f762a",
+      "authorizationClass": "repository-generated-synthetic",
+      "expectedScenes": [
+        {
+          "startMs": 0,
+          "endMs": 1000
+        },
+        {
+          "startMs": 1000,
+          "endMs": 2500
+        }
+      ],
+      "transcriptReference": [
+        {
+          "startMs": 100,
+          "endMs": 900,
+          "text": "合成设计讲解"
+        }
+      ],
+      "exactDuplicateGroups": [
+        "exact-a"
+      ],
+      "nearDuplicateGroups": [
+        "near-a"
+      ],
+      "suggestedTags": [
+        "合成商品特写"
+      ],
+      "demandEvidence": [
+        "画面包含合成商品"
+      ]
+    }
+  ]
+}
